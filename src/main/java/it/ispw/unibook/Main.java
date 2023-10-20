@@ -1,6 +1,5 @@
 package it.ispw.unibook;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -18,7 +17,7 @@ public class Main {
 
             // Press Maiusc+F9 to start debugging your code. We have set one breakpoint
             // for you, but you can always add more by pressing Ctrl+F8.
-            logger.info("i = " + i);
+            logger.info(String.format("i = %d", i));
         }
     }
 }
