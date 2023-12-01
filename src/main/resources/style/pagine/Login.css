@@ -1,0 +1,19 @@
+.pane {
+    -fx-background-color: #006699;
+}
+
+.login.title {
+    -fx-font-size: 48px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.login.card {
+    -fx-background-color: #eeeeee;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 0px;
+}
+
+.login.button {
+
+}

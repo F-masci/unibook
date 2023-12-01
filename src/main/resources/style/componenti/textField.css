@@ -1,0 +1,74 @@
+.text-field {
+    #006699: -mfx-purple;
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-family: "Open Sans Regular";
+}
+
+.text-field:readonly,
+.text-field:readonly .text-field {
+    -fx-cursor: default;
+}
+
+.text-field .text-field {
+    /* Selected text highlight */
+    -fx-highlight-fill: #ECE0FD;
+    /* Prompt text color */
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.60);
+}
+
+.text-field .text-field .text {
+    -fx-font-smoothing-type: lcd;
+}
+
+.text-field:focus-within {
+    -fx-background-insets: 2;
+    -fx-border-color: #006699;
+    -fx-border-width: 1.5;
+    -fx-border-insets: -0.5;
+}
+
+.text-field .floating-text {
+    -fx-font-family: "Open Sans Regular";
+    -fx-text-fill: rgba(0, 0, 0, 0.87);
+}
+
+.text-field:floating .floating-text {
+    -fx-background-color: white;
+}
+
+.text-field:focus-within .floating-text {
+    -fx-text-fill: #006699;
+}
+
+.text-field .measure-unit {
+    -fx-font-family: "Open Sans Regular";
+    -fx-text-fill: rgba(0, 0, 0, 0.87);
+}
+
+.text-field .text-field {
+    -fx-text-box-border: transparent;
+    -fx-background-color: transparent;
+    -fx-backrgound-insets: 0;
+    -fx-padding: 0;
+}
+
+.text-field .text-field:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.text-field:disabled {
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+}
+
+.text-field:disabled .floating-text {
+    -fx-text-fill: rgba(0, 0, 0, 0.38);
+}
+
+.text-field:disabled .text-field {
+    -fx-text-inner-color: rgba(0, 0, 0, 0.38);
+}

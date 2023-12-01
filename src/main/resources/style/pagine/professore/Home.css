@@ -1,0 +1,10 @@
+.courses-list {
+    -fx-spacing: 10px;
+    -fx-padding: 5px;
+    -fx-background-color: #eeeeee;
+}
+
+.course {
+    -fx-background-color: #006699;
+    -fx-text-fill: white;
+}
