@@ -1,5 +1,4 @@
 .text-field {
-    #006699: -mfx-purple;
     -fx-background-color: white;
     -fx-background-radius: 5;
     -fx-border-color: lightgray;
@@ -8,15 +7,8 @@
     -fx-font-family: "Open Sans Regular";
 }
 
-.text-field:readonly,
-.text-field:readonly .text-field {
-    -fx-cursor: default;
-}
-
 .text-field .text-field {
-    /* Selected text highlight */
     -fx-highlight-fill: #ECE0FD;
-    /* Prompt text color */
     -fx-prompt-text-fill: rgba(0, 0, 0, 0.60);
 }
 

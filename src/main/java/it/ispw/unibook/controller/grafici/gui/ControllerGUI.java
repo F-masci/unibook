@@ -1,6 +1,5 @@
 package it.ispw.unibook.controller.grafici.gui;
 
-import it.ispw.unibook.controller.grafici.ControllerUI;
 import it.ispw.unibook.controller.grafici.cli.Printer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

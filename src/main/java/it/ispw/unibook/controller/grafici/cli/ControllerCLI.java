@@ -1,10 +1,6 @@
 package it.ispw.unibook.controller.grafici.cli;
 
-import it.ispw.unibook.controller.grafici.ControllerUI;
-import it.ispw.unibook.controller.grafici.gui.ControllerGUI;
-import javafx.stage.Stage;
-
-public class ControllerCLI implements ControllerUI {
+public class ControllerCLI {
 
     // Contiene l'unica istanza di ControllerCLI del sistema
     private static ControllerCLI instance = null;

@@ -3,17 +3,9 @@
     -fx-text-fill: rgba(0, 0, 0, 0.87);
 }
 
-.button:armed,
-.button:hover,
-.button:focused,
 .button {
     -fx-background-radius: 3px;
     -fx-background-insets: 0px;
-}
-
-.button,
-.button:armed,
-.button:focused {
     -fx-background-color: #006699;
     -fx-text-fill: white;
     -fx-font-weight: bold;

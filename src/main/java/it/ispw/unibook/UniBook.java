@@ -1,6 +1,5 @@
 package it.ispw.unibook;
 
-import it.ispw.unibook.controller.grafici.ControllerUI;
 import it.ispw.unibook.controller.grafici.cli.Printer;
 import it.ispw.unibook.controller.grafici.gui.ControllerGUI;
 import it.ispw.unibook.controller.grafici.cli.ControllerCLI;
@@ -44,26 +43,21 @@ public class UniBook extends Application {
             }
         } while(selection == 0);
 
-        /*
-        A seconda dell'interfaccia selezionata viene istanziato il controller
-        relativo per poi visualizzare la specifica interfaccia
-         */
-        switch(selection) {
-            case 1:
-                launch(args);
-                break;
-            default:
-                ControllerCLI.getInstance().init();
-        }
+        // Viene avviata l'interfaccia selezionata
+        if(selection == 1) launch(args);
+        else ControllerCLI.getInstance().init();
     }
 
     @Override
     public void start(Stage stage) {
+
         Printer.println("Avvio GUI");
         stage.setTitle("UniBook");
+
         ControllerGUI controllerGUI = ControllerGUI.getInstance();
         controllerGUI.impostaStage(stage);
         controllerGUI.impostaPagina(PagineGUI.LOGIN);
+
     }
 
 }
