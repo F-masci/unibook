@@ -1,11 +1,19 @@
 package it.ispw.unibook.boundary;
 
+import it.ispw.unibook.bean.LoginBean;
+import it.ispw.unibook.controller.applicativi.LoginController;
+
 public class LoginBoundary {
 
-    // Costruttore di default
-    public LoginBoundary() {}
+    private LoginBean bean;
 
+    public LoginBoundary(LoginBean bean) {
+        this.bean = bean;
+    }
 
-    public void accedi() {}
+    public void login() {
+        LoginController controller = new LoginController(bean);
+        controller.login();
+    }
 
 }
