@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" styleClass="pane" stylesheets="@../style/pagine/Login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.unibook.controller.grafici.gui.LoginGUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" styleClass="pane" stylesheets="@../style/pagine/Login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.unibook.controller.grafici.gui.LoginControllerGUI">
    <children>
       <Label alignment="CENTER" layoutX="285.0" layoutY="40.0" prefHeight="91.0" prefWidth="391.0" stylesheets="@../style/pagine/Login.css" text="UniBook" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="285.0" AnchorPane.topAnchor="40.0">
          <styleClass>
