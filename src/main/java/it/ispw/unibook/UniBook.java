@@ -1,9 +1,9 @@
 package it.ispw.unibook;
 
-import it.ispw.unibook.controller.grafici.cli.Printer;
-import it.ispw.unibook.controller.grafici.gui.ControllerGUI;
-import it.ispw.unibook.controller.grafici.cli.ControllerCLI;
-import it.ispw.unibook.controller.grafici.gui.PagineGUI;
+import it.ispw.unibook.controller.graphics.cli.Printer;
+import it.ispw.unibook.controller.graphics.gui.ControllerGUI;
+import it.ispw.unibook.controller.graphics.cli.ControllerCLI;
+import it.ispw.unibook.controller.graphics.gui.PagesGUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -20,6 +20,11 @@ public class UniBook extends Application {
      * @param args Argomenti passati tramite riga di comando quando viene lanciata l'applicazione
      */
     public static void main(String[] args) {
+
+        // FIXME: eliminare la scelta automatica
+        launch(args);
+        System.exit(0);
+
         Printer.println("Seleziona l'interfaccia che vuoi usare");
         Printer.println("\t[1] Interfaccia grafica");
         Printer.println("\t[2] Riga di comando");
@@ -55,8 +60,8 @@ public class UniBook extends Application {
         stage.setTitle("UniBook");
 
         ControllerGUI controllerGUI = ControllerGUI.getInstance();
-        controllerGUI.impostaStage(stage);
-        controllerGUI.impostaPagina(PagineGUI.LOGIN);
+        controllerGUI.setStage(stage);
+        controllerGUI.setPage(PagesGUI.LOGIN);
 
     }
 
