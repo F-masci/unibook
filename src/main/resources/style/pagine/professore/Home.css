@@ -7,4 +7,9 @@
 .course {
     -fx-background-color: #006699;
     -fx-text-fill: white;
+    -fx-padding: 8px;
+    -fx-font-size: 16px;
+    -fx-max-width: Infinity;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
 }

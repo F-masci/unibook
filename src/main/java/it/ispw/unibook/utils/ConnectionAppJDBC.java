@@ -1,7 +1,5 @@
 package it.ispw.unibook.utils;
 
-import it.ispw.unibook.controller.graphics.cli.Printer;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;

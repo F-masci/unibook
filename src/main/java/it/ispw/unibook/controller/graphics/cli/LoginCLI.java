@@ -1,12 +1,37 @@
 package it.ispw.unibook.controller.graphics.cli;
 
+import it.ispw.unibook.bean.LoginBean;
+import it.ispw.unibook.controller.application.LoginController;
+import it.ispw.unibook.exceptions.login.EmailNotFoundException;
+import it.ispw.unibook.exceptions.login.EmailNotValidException;
+import it.ispw.unibook.exceptions.login.IncorrectPasswordException;
+import it.ispw.unibook.utils.SessionManager;
+import it.ispw.unibook.view.cli.PageLoginCLI;
+
 public class LoginCLI {
 
-    public static void main(String[] args) {
-        // TODO document why this method is empty
-        Printer.print("Benevenuti su Unibook!");
-        Printer.print("Eseguite l'accesso per entrare nel sistema");
-        Printer.print("Email: ");
+    private final LoginController controller = new LoginController();
+
+    public void login(String email, String password) throws EmailNotValidException, EmailNotFoundException, IncorrectPasswordException {
+        LoginBean bean = new LoginBean(email, password);
+        controller.login(bean);
+
+        // Se non vengono sollevate eccezioni dal controller applicativo l'utente viene mandato alla home
+        updateView(bean);
+    }
+
+    private void updateView(LoginBean bean) {
+        switch(SessionManager.getAccountTypeBySessionID(bean.getSessionId())) {
+            case STUDENT -> {
+                it.ispw.unibook.view.cli.student.PageHomeCLI home = new it.ispw.unibook.view.cli.student.PageHomeCLI();
+                home.init();
+            }
+            case PROFESSOR -> {
+                it.ispw.unibook.view.cli.professor.PageHomeCLI home = new it.ispw.unibook.view.cli.professor.PageHomeCLI();
+                home.init();
+            }
+            case null -> { break; }
+        }
     }
 
 }

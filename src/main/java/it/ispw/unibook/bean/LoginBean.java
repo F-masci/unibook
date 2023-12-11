@@ -5,7 +5,7 @@ import it.ispw.unibook.exceptions.login.EmailNotValidException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LoginBean {
+public class LoginBean extends Bean {
 
 
     private final String email;

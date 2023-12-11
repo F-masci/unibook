@@ -8,6 +8,6 @@ import java.util.List;
 public interface CourseDao {
 
     public List<CourseEntity> getAllCourses();
-    public List<CourseEntity> getProfessorCourses(AccountEntity professorAccount);
+    public List<CourseEntity> getProfessorCourses(int accountCode);
 
 }

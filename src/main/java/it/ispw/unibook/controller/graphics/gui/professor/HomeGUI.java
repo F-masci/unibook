@@ -1,10 +1,9 @@
 package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.CoursesListBean;
-import it.ispw.unibook.controller.application.InsertBookCourseController;
+import it.ispw.unibook.controller.application.ManageCourseBooksController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -17,15 +16,18 @@ public class HomeGUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        InsertBookCourseController controller = new InsertBookCourseController();
-        CoursesListBean bean = controller.getCourses();
+        ManageCourseBooksController controller = new ManageCourseBooksController();
+        CoursesListBean bean = new CoursesListBean();
+        // controller.getCourses(bean);
 
-        if(bean.first()) {
+        /*if(bean.first()) {
             do {
-                Label label = new Label(bean.getName());
-                coursesList.getChildren().add(label);
+                String text = bean.getName() + " - " + String.valueOf(bean.getStartYear()) + "/" + String.valueOf(bean.getEndYear());
+                Button button = new Button(text);
+                button.getStyleClass().add("course");
+                coursesList.getChildren().add(button);
             } while(bean.next());
-        }
+        }*/
     }
 
 }

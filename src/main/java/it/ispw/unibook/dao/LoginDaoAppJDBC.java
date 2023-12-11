@@ -1,7 +1,8 @@
 package it.ispw.unibook.dao;
 
-import it.ispw.unibook.controller.graphics.cli.Printer;
+import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.entity.AccountEntity;
+import it.ispw.unibook.entity.AccountTypes;
 import it.ispw.unibook.exceptions.login.EmailNotFoundException;
 import it.ispw.unibook.exceptions.login.IncorrectPasswordException;
 import it.ispw.unibook.utils.ConnectionAppJDBC;
@@ -48,9 +49,16 @@ public class LoginDaoAppJDBC implements LoginDao {
 
             }
 
+            AccountTypes type = switch (res.getString("type")) {
+                case "Professore" -> AccountTypes.PROFESSOR;
+                case "Studente" -> AccountTypes.STUDENT;
+                default -> null;
+            };
+
             account = new AccountEntity(
                     res.getInt("code"),
-                    res.getString("email")
+                    res.getString("email"),
+                    type
             );
 
             res.close();

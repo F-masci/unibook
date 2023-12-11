@@ -1,4 +1,4 @@
-package it.ispw.unibook.controller.graphics.cli;
+package it.ispw.unibook.utils;
 
 public class Printer {
 
@@ -21,4 +21,7 @@ public class Printer {
         System.err.println(msg + ": " + e.getMessage());
     }
 
+    public static void clear() {
+        Printer.print("\033[H\033[2J");
+    }
 }

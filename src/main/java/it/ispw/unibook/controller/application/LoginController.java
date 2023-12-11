@@ -1,6 +1,6 @@
 package it.ispw.unibook.controller.application;
 
-import it.ispw.unibook.utils.Session;
+import it.ispw.unibook.bean.Bean;
 import it.ispw.unibook.bean.LoginBean;
 import it.ispw.unibook.dao.LoginDao;
 import it.ispw.unibook.dao.LoginDaoAppJDBC;
@@ -11,20 +11,12 @@ import it.ispw.unibook.utils.SessionManager;
 
 public class LoginController {
 
-    private String email;
-    private String password;
-
-    public LoginController(LoginBean bean) {
-        email = bean.getEmail();
-        password = bean.getPassword();
-    }
-
-    public void login() throws EmailNotFoundException, IncorrectPasswordException {
+    public void login(LoginBean bean) throws EmailNotFoundException, IncorrectPasswordException {
 
         LoginDao dao = new LoginDaoAppJDBC();
-        AccountEntity account = dao.login(email, password);
+        AccountEntity account = dao.login(bean.getEmail(), bean.getPassword());
         SessionManager.addSession(account);
-        Session.setSessionId(account.getCode());
+        Bean.setSessionId(account.getCode());
 
     }
 

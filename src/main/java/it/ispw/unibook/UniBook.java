@@ -1,9 +1,11 @@
 package it.ispw.unibook;
 
-import it.ispw.unibook.controller.graphics.cli.Printer;
+import it.ispw.unibook.controller.graphics.cli.LoginCLI;
+import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
+import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.controller.graphics.gui.ControllerGUI;
-import it.ispw.unibook.controller.graphics.cli.ControllerCLI;
 import it.ispw.unibook.controller.graphics.gui.PagesGUI;
+import it.ispw.unibook.view.cli.PageLoginCLI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -22,8 +24,8 @@ public class UniBook extends Application {
     public static void main(String[] args) {
 
         // FIXME: eliminare la scelta automatica
-        launch(args);
-        System.exit(0);
+        // launch(args);
+        // System.exit(0);
 
         Printer.println("Seleziona l'interfaccia che vuoi usare");
         Printer.println("\t[1] Interfaccia grafica");
@@ -32,25 +34,31 @@ public class UniBook extends Application {
          int selection = 0;
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        do {
+        while(true) {
             Printer.print("\nSelezione: ");
             try {
                 selection = Integer.parseInt(br.readLine());
-                if(selection != 1 && selection != 2) {
-                    Printer.error("Errore: numero non valido");
-                    selection = 0;
-                }
+                if(selection != 1 && selection != 2) throw new SelectionNotValidException();
+                break;
             } catch (IOException e) {
                 Printer.error("Errore durante la lettura dell'input");
                 System.exit(-1);
             } catch (NumberFormatException e) {
-                Printer.error("Errore: l'input inserito non è un numero");
+                Printer.error("L'input inserito non è valido");
+            } catch (SelectionNotValidException e) {
+                Printer.error(e);
             }
-        } while(selection == 0);
+        }
 
         // Viene avviata l'interfaccia selezionata
-        if(selection == 1) launch(args);
-        else ControllerCLI.getInstance().init();
+        if(selection == 1) {
+            launch(args);
+        } else {
+            PageLoginCLI login = new PageLoginCLI();
+            login.init();
+        }
+
+        System.exit(0);
     }
 
     @Override
@@ -59,9 +67,8 @@ public class UniBook extends Application {
         Printer.println("Avvio GUI");
         stage.setTitle("UniBook");
 
-        ControllerGUI controllerGUI = ControllerGUI.getInstance();
-        controllerGUI.setStage(stage);
-        controllerGUI.setPage(PagesGUI.LOGIN);
+        ControllerGUI.setStage(stage);
+        ControllerGUI.setPage(PagesGUI.LOGIN);
 
     }
 

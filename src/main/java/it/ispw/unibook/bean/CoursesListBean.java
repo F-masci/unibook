@@ -1,43 +1,18 @@
 package it.ispw.unibook.bean;
 
-import it.ispw.unibook.entity.CourseEntity;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CoursesListBean {
+public class CoursesListBean extends Bean {
 
-    private final List<CourseEntity> courses;
-    private int pos = 0;
-    private CourseEntity current;
+    private List<CourseBean> courses;
 
-    public CoursesListBean(List<CourseEntity> courses) {
+    public void setList(List<CourseBean> courses) {
         this.courses = courses;
     }
-
-    public boolean first() {
-        if(courses.isEmpty()) return false;
-        pos = 0;
-        current = courses.get(pos);
-        return true;
+    public List<CourseBean> getList() {
+        return courses;
     }
-
-    public boolean hasNext() {
-        return pos < courses.size();
-    }
-
-    public boolean next() {
-        pos++;
-        if(pos == courses.size()) return false;
-        current = courses.get(pos);
-        return true;
-    }
-
-    public String getName() {
-        return current.getName();
-    }
-
-    public String getCode() {
-        return current.getName();
-    }
-
 }

@@ -5,13 +5,12 @@ import it.ispw.unibook.controller.application.LoginController;
 import it.ispw.unibook.exceptions.login.EmailNotFoundException;
 import it.ispw.unibook.exceptions.login.EmailNotValidException;
 import it.ispw.unibook.exceptions.login.IncorrectPasswordException;
+import it.ispw.unibook.utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class LoginGUI {
-
-    final ControllerGUI gui = ControllerGUI.getInstance();
 
     @FXML
     private TextField emailField;
@@ -26,9 +25,13 @@ public class LoginGUI {
     public void login() {
         try {
             LoginBean bean = new LoginBean(emailField.getText(), passwordField.getText());
-            LoginController controller = new LoginController(bean);
-            controller.login();
-            gui.setPage(PagesGUI.HOME_PROFESSOR);
+            LoginController controller = new LoginController();
+            controller.login(bean);
+            switch(SessionManager.getAccountTypeBySessionID(bean.getSessionId())) {
+                case STUDENT -> ControllerGUI.setPage(PagesGUI.HOME_STUDENT);
+                case PROFESSOR -> ControllerGUI.setPage(PagesGUI.HOME_PROFESSOR);
+                case null -> { break; }
+            }
         } catch (EmailNotValidException | EmailNotFoundException | IncorrectPasswordException e) {
             errorLabel.setText(e.getMessage());
         }
