@@ -6,7 +6,6 @@ import it.ispw.unibook.exceptions.login.EmailNotFoundException;
 import it.ispw.unibook.exceptions.login.EmailNotValidException;
 import it.ispw.unibook.exceptions.login.IncorrectPasswordException;
 import it.ispw.unibook.utils.SessionManager;
-import it.ispw.unibook.view.cli.PageLoginCLI;
 
 public class LoginCLI {
 
@@ -28,7 +27,7 @@ public class LoginCLI {
             }
             case PROFESSOR -> {
                 it.ispw.unibook.view.cli.professor.PageHomeCLI home = new it.ispw.unibook.view.cli.professor.PageHomeCLI();
-                home.init();
+                home.display();
             }
             case null -> { break; }
         }

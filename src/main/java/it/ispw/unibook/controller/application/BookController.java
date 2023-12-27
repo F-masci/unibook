@@ -5,6 +5,7 @@ import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.dao.BookDao;
 import it.ispw.unibook.dao.BookDaoAppJDBC;
 import it.ispw.unibook.entity.BookEntity;
+import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +19,13 @@ public class BookController {
         List<BookEntity> books = dao.getCourseBooks(bean.getCourseCode());
         List<BookBean> list = new ArrayList<>();
         for(BookEntity b: books) {
-            BookBean book = new BookBean(
-                    b.getISBN(),
-                    b.getTitle()
-            );
-            list.add(book);
+            try {
+                BookBean book = new BookBean(
+                        b.getISBN(),
+                        b.getTitle()
+                );
+                list.add(book);
+            } catch(ISBNNotValidException ignored) {}
         }
         bean.setList(list);
 

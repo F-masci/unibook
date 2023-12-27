@@ -1,7 +1,7 @@
 package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.CoursesListBean;
-import it.ispw.unibook.controller.application.ManageCourseBooksController;
+import it.ispw.unibook.controller.application.InsertCourseBookController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
@@ -16,7 +16,7 @@ public class HomeGUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ManageCourseBooksController controller = new ManageCourseBooksController();
+        InsertCourseBookController controller = new InsertCourseBookController();
         CoursesListBean bean = new CoursesListBean();
         // controller.getCourses(bean);
 

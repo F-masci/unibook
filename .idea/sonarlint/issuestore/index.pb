@@ -56,8 +56,6 @@ j
 :src/main/java/it/ispw/unibook/utils/ConnectionAppJDBC.java,8\6\86852e6cb1bca41ac6eeef4e5b8b0043f3657128
 j
 :src/main/java/it/ispw/unibook/utils/ConnectionUniJDBC.java,f\5\f5dc4fa7ba06e3bed157b3e04238796be5c27ebe
-„
-Tsrc/main/java/it/ispw/unibook/controller/application/InsertBookCourseController.java,f\3\f3899709a21f0de0099c1160cad8e9d529e08033
 g
 7src/main/java/it/ispw/unibook/bean/CoursesListBean.java,1\2\12a9c1f96a6e1489f70c3bc85db8e5fec77980f1
 s
@@ -74,8 +72,6 @@ q
 Asrc/main/java/it/ispw/unibook/view/cli/professor/PageHomeCLI.java,c\f\cf824febab84c1edeb9dae71d344efb125c8bb59
 o
 ?src/main/java/it/ispw/unibook/view/cli/student/PageHomeCLI.java,7\2\729d37b8cd22dd7c89e1950befc0df8ad315251b
-s
-Csrc/main/java/it/ispw/unibook/view/cli/professor/PageCourseCLI.java,3\1\31bdac4a0c792dc91ea3e92459f83d3d31dcd92d
 e
 5src/main/java/it/ispw/unibook/bean/BooksListBean.java,8\7\872a327cd669e4a79458dbc1a431e2d35e97ad53
 `
@@ -96,8 +92,6 @@ n
 >src/main/java/it/ispw/unibook/exceptions/cli/CliException.java,3\2\3293fbedfb5191eab11bc3a1c63c5170da483671
 |
 Lsrc/main/java/it/ispw/unibook/exceptions/cli/SelectionNotValidException.java,9\4\9407b368f78389624190650c0094a0c60745c0e4
-~
-Nsrc/main/java/it/ispw/unibook/controller/graphics/cli/professor/CourseCLI.java,2\6\26808209c6d5d67fea50d0bc8a8a0892b67cb98b
 |
 Lsrc/main/java/it/ispw/unibook/controller/graphics/cli/professor/HomeCLI.java,f\9\f978cd8c7e415ede619d8f8466c0ac51389919ea
 z

@@ -3,17 +3,17 @@ package it.ispw.unibook.view.cli.professor;
 import it.ispw.unibook.controller.graphics.cli.professor.HomeCLI;
 import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
 import it.ispw.unibook.utils.Printer;
-import it.ispw.unibook.view.cli.GenericPageCLI;
+import it.ispw.unibook.view.cli.GenericProfessorPageCLI;
 import it.ispw.unibook.view.cli.PageCLI;
 
 import java.io.IOException;
 
-public class PageHomeCLI extends GenericPageCLI implements PageCLI {
+public class PageHomeCLI extends GenericProfessorPageCLI implements PageCLI {
 
     private final HomeCLI controller = new HomeCLI();
 
     @Override
-    public void init() {
+    public void display() {
 
         int selection;
 
@@ -25,10 +25,9 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
             Printer.println("Seleziona cosa vuoi fare");
 
             Printer.println("[0] Esci\n" +
-                            "[1] Visualizza corsi\n" +
-                            "[2] Visualizza libri di un corso\n" +
-                            "[3] Inserisci libro ad un corso\n" +
-                            "[4] Elimina libro da un corso");
+                            "[1] Visualizza libri di un corso\n" +
+                            "[2] Inserisci libro ad un corso\n" +
+                            "[3] Elimina libro da un corso");
 
             while (true) {
 
@@ -40,10 +39,9 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
                         case 0 -> {
                             return;
                         }
-                        case 1 -> controller.showCourses();
-                        case 2 -> controller.showBooks();
-                        case 3 -> controller.addBook();
-                        case 4 -> controller.deleteBook();
+                        case 1 -> controller.showBooks();
+                        case 2 -> controller.addBook();
+                        case 3 -> controller.deleteBook();
                         default -> throw new SelectionNotValidException();
                     }
 

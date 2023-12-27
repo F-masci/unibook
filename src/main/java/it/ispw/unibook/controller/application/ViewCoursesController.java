@@ -1,5 +1,6 @@
 package it.ispw.unibook.controller.application;
 
+import it.ispw.unibook.bean.Bean;
 import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.CoursesListBean;
 import it.ispw.unibook.dao.CourseDao;
@@ -11,9 +12,9 @@ import it.ispw.unibook.utils.SessionManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseController {
+public class ViewCoursesController {
 
-    public void retriveCourseBySession(CoursesListBean bean) {
+    public void retriveCoursesBySession(CoursesListBean bean) {
 
         // TODO: usare pattern abstract factory
         CourseDao dao = new CourseDaoUniJDBC();

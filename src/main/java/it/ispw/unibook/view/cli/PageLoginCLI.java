@@ -6,11 +6,7 @@ import it.ispw.unibook.exceptions.login.EmailNotValidException;
 import it.ispw.unibook.exceptions.login.IncorrectPasswordException;
 import it.ispw.unibook.utils.Printer;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-public class PageLoginCLI extends GenericPageCLI {
+public class PageLoginCLI extends GenericProfessorPageCLI {
 
     private final LoginCLI controller = new LoginCLI();
 

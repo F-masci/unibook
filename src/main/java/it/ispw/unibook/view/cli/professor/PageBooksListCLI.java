@@ -3,23 +3,19 @@ package it.ispw.unibook.view.cli.professor;
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.controller.graphics.cli.professor.BooksListCLI;
-import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
 import it.ispw.unibook.utils.Printer;
-import it.ispw.unibook.view.cli.GenericPageCLI;
+import it.ispw.unibook.view.cli.GenericProfessorPageCLI;
 import it.ispw.unibook.view.cli.PageCLI;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
-public class PageBooksListCLI extends GenericPageCLI implements PageCLI {
+public class PageBooksListCLI extends GenericProfessorPageCLI implements PageCLI {
 
     private final BooksListCLI controller = new BooksListCLI();
 
     @Override
-    public void init() {
+    public void display() {
         Printer.clear();
 
         Printer.println("--- LIBRI ---");

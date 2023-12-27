@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface BookDao {
 
-    public List<BookEntity> getCourseBooks(int courseCode);
+    public List<BookEntity> getCourseBooks(int course);
+    public void insertBook(int course, BookEntity book);
+    public void removeBookByISBN(int course, String ISBN);
 
 }
