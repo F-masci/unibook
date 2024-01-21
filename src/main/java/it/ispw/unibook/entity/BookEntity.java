@@ -1,5 +1,7 @@
 package it.ispw.unibook.entity;
 
+import java.util.Objects;
+
 public class BookEntity {
 
     private final String ISBN;
@@ -15,5 +17,17 @@ public class BookEntity {
     }
     public String getTitle() {
         return title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        return Objects.equals( ((BookEntity) o).getISBN(), this.getISBN() );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getISBN());
     }
 }

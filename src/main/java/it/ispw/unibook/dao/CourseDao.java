@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CourseDao {
 
+    public CourseEntity retrieveCourseByCode(int courseCode);
     public List<CourseEntity> getAllCourses();
     public List<CourseEntity> getProfessorCourses(int accountCode);
 

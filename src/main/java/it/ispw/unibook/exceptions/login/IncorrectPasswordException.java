@@ -3,7 +3,7 @@ package it.ispw.unibook.exceptions.login;
 public class IncorrectPasswordException extends LoginException {
 
     public IncorrectPasswordException() {
-        super("Password errata");
+        this("Password errata");
     }
 
     public IncorrectPasswordException(String msg) {

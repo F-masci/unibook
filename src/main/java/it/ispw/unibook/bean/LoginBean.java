@@ -1,6 +1,6 @@
 package it.ispw.unibook.bean;
 
-import it.ispw.unibook.exceptions.login.EmailNotValidException;
+import it.ispw.unibook.exceptions.EmailNotValidException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

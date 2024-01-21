@@ -1,6 +1,6 @@
 package it.ispw.unibook.exceptions.login;
 
-public class SessionNotFoundException extends LoginException{
+public class SessionNotFoundException extends Exception{
 
     public SessionNotFoundException() {
         super("Sessione non valida");

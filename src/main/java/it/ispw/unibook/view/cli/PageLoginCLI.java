@@ -1,16 +1,17 @@
 package it.ispw.unibook.view.cli;
 
+import it.ispw.unibook.bean.LoginBean;
 import it.ispw.unibook.controller.graphics.cli.LoginCLI;
-import it.ispw.unibook.exceptions.login.EmailNotFoundException;
-import it.ispw.unibook.exceptions.login.EmailNotValidException;
-import it.ispw.unibook.exceptions.login.IncorrectPasswordException;
+import it.ispw.unibook.exceptions.EmailNotValidException;
+import it.ispw.unibook.exceptions.login.LoginException;
 import it.ispw.unibook.utils.Printer;
 
-public class PageLoginCLI extends GenericProfessorPageCLI {
+public class PageLoginCLI extends GenericPageCLI implements PageCLI {
 
     private final LoginCLI controller = new LoginCLI();
 
-    public void init() {
+    @Override
+    public void display() {
         Printer.clear();
 
         Printer.println("Benevenuti su Unibook!");
@@ -39,13 +40,14 @@ public class PageLoginCLI extends GenericProfessorPageCLI {
                 password = "professore";
                 Printer.println(password);
 
-                controller.login(email, password);
+                LoginBean bean = new LoginBean(email, password);
+                controller.login(bean);
                 break;
 
             } /* catch (IOException e) {
                     Printer.error(e);
                     System.exit(-1);
-            } */catch (EmailNotValidException | EmailNotFoundException | IncorrectPasswordException e) {
+            } */catch (LoginException | EmailNotValidException e) {
                 showErrorMessage(e);
             }
         }

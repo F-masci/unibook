@@ -1,7 +1,10 @@
 package it.ispw.unibook.view.cli.student;
 
-public class PageHomeCLI {
+import it.ispw.unibook.view.cli.PageCLI;
 
-    public void init() {}
+public class PageHomeCLI implements PageCLI {
+
+    @Override
+    public void display() {}
 
 }

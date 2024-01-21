@@ -20,9 +20,7 @@ public class ConnectionAppJDBC {
     public static Connection getInstance() {
         if(instance == null) {
             try {
-                Properties config = new Properties();
-                FileInputStream fs = new FileInputStream("app.properties");
-                config.load(fs);
+                Properties config = ApplicationProperties.getApplicationProperties();
 
                 String dbms = config.getProperty("jdbc.dbms");
                 String host = config.getProperty("jdbc.host");
@@ -34,9 +32,6 @@ public class ConnectionAppJDBC {
                 String url = "jdbc:" + dbms + "://" + host + ":" + port + "/" + database;
                 instance = DriverManager.getConnection(url, username, password);
 
-            } catch(IOException e) {
-                Printer.error("Errore durante la lettura del file di configurazione", e);
-                System.exit(-1);
             } catch (SQLException e) {
                 Printer.error(e);
                 System.exit(-1);

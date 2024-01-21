@@ -8,11 +8,14 @@ import it.ispw.unibook.controller.application.CourseController;
  * da mostrare all'utente che sono richiesti da più classi. I Controller grafici che gestiscono queste View
  * dovrebbero essere implementati come sottoclasse di questo Controller generale.
  */
-public class GenericControllerCLI {
+public class ManageBookCli {
 
-    public void retriveCourseBySession(CoursesListBean bean) {
-        CourseController controller = new CourseController();
-        controller.retriveCourseBySession(bean);
+    private final CourseController _courseController = new CourseController();
+
+    protected ManageBookCli() {}
+
+    public void retriveCoursesBySession(CoursesListBean bean) {
+        _courseController.retriveCourseBySession(bean);
     }
 
 }

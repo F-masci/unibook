@@ -1,7 +1,7 @@
 package it.ispw.unibook.bean;
 
+import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.ISBNNotValidException;
-import it.ispw.unibook.exceptions.login.EmailNotValidException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,11 +12,11 @@ public class BookBean {
     private String name;
     protected String regex = "^\\d{13}$";
 
-    public BookBean(String ISBN) throws ISBNNotValidException {
+    public BookBean(String ISBN) throws BookException {
         this(ISBN, null);
     }
 
-    public BookBean(String ISBN, String name) throws ISBNNotValidException {
+    public BookBean(String ISBN, String name) throws BookException {
         this.ISBN = ISBN;
         this.name = name;
         validateISBN();
@@ -32,9 +32,14 @@ public class BookBean {
         this.name =  name;
     }
 
-    protected void validateISBN() throws ISBNNotValidException {
+    protected void validateISBN() throws BookException {
         Matcher matcher = Pattern.compile(regex).matcher(this.getISBN());
-        if(!matcher.matches()) throw new ISBNNotValidException();
+        if(!matcher.matches()) throw (BookException) new ISBNNotValidException().initCause(new ISBNNotValidException());
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
     }
 
 }

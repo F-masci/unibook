@@ -3,12 +3,12 @@ package it.ispw.unibook.view.cli.professor;
 import it.ispw.unibook.controller.graphics.cli.professor.HomeCLI;
 import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
 import it.ispw.unibook.utils.Printer;
-import it.ispw.unibook.view.cli.GenericProfessorPageCLI;
+import it.ispw.unibook.view.cli.GenericPageCLI;
 import it.ispw.unibook.view.cli.PageCLI;
 
 import java.io.IOException;
 
-public class PageHomeCLI extends GenericProfessorPageCLI implements PageCLI {
+public class PageHomeCLI extends GenericPageCLI implements PageCLI {
 
     private final HomeCLI controller = new HomeCLI();
 

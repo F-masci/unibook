@@ -5,7 +5,6 @@ import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.utils.ConnectionAppJDBC;
 import it.ispw.unibook.utils.Printer;
 
-import java.awt.print.Book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,17 +20,16 @@ public class BookDaoAppJDBC implements BookDao {
         connection = ConnectionAppJDBC.getInstance();
     }
 
-    // TODO: modificare il codice del corso con l'entità corso
     @Override
-    public List<BookEntity> getCourseBooks(int course) {
+    public List<BookEntity> retrieveCourseBooks(CourseEntity course) {
 
         // TODO: controllare se bisogna applicare il pattern FACTORY
         PreparedStatement stm = null;
-        List<BookEntity> booksList = new ArrayList<>();
+        List<BookEntity> books = new ArrayList<>();
 
         try {
             stm = connection.prepareStatement("SELECT * FROM book WHERE course=?");
-            stm.setInt(1, course);
+            stm.setInt(1, course.getCode());
             ResultSet res = stm.executeQuery();
 
             if(res.first()) {
@@ -40,7 +38,7 @@ public class BookDaoAppJDBC implements BookDao {
                             res.getString("ISBN"),
                             res.getString("title")
                     );
-                    booksList.add(book);
+                    books.add(book);
                 } while (res.next());
             }
 
@@ -49,41 +47,54 @@ public class BookDaoAppJDBC implements BookDao {
             System.exit(-1);
         }
 
-        return booksList;
+        return books;
 
     }
 
-    // TODO: modificare il codice del corso con l'entità corso
     @Override
-    public void insertBook(int course, BookEntity book) {
+    public void saveCourseBooks(CourseEntity course) {
 
-        PreparedStatement stm = null;
+        List<BookEntity> toAdd = course.getAddedBooks();
+        List<BookEntity> toDel = course.getDeletedBooks();
 
-        try {
-            stm = connection.prepareStatement("INSERT INTO book (course, ISBN, title) VALUES(?, ?, ?)");
-            stm.setInt(1, course);
-            stm.setString(2, book.getISBN());
-            stm.setString(3, book.getTitle());
-            stm.executeUpdate();
-        } catch (SQLException e) {
+        try (PreparedStatement addStm = connection.prepareStatement("INSERT INTO book(course, ISBN, title) VALUES(?, ?, ?);");
+             PreparedStatement delStm = connection.prepareStatement("DELETE FROM book WHERE course = ? AND ISBN = ?;")) {
+
+            connection.setAutoCommit(false);
+
+            for(BookEntity b: toAdd) {
+                addStm.setInt(1, course.getCode());
+                addStm.setString(2, b.getISBN());
+                addStm.setString(3, b.getTitle());
+                addStm.execute();
+            }
+
+            for(BookEntity b: toDel) {
+                delStm.setInt(1, course.getCode());
+                delStm.setString(2, b.getISBN());
+                delStm.execute();
+            }
+
+            connection.commit();
+
+        } catch(SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException exception) {
+                Printer.error(exception);
+                System.exit(-1);
+            }
+
             Printer.error(e);
             System.exit(-1);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException exception) {
+                Printer.error(exception);
+                System.exit(-1);
+            }
         }
-    }
 
-    @Override
-    public void removeBookByISBN(int course, String ISBN) {
-
-        PreparedStatement stm = null;
-
-        try {
-            stm = connection.prepareStatement("DELETE FROM book WHERE course = ? AND ISBN = ?;");
-            stm.setInt(1, course);
-            stm.setString(2, ISBN);
-            stm.executeUpdate();
-        } catch (SQLException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
     }
 }

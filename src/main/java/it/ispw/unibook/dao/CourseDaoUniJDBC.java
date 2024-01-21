@@ -21,6 +21,30 @@ public class CourseDaoUniJDBC implements CourseDao{
     }
 
     @Override
+    public CourseEntity retrieveCourseByCode(int courseCode) {
+        CourseEntity course = null;
+        try {
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course WHERE code=?");
+            stm.setInt(1, courseCode);
+            ResultSet res = stm.executeQuery();
+
+            if(res.first()) {
+                course = new CourseEntity(
+                        res.getInt("code"),
+                        res.getString("name"),
+                        res.getInt("startYear"),
+                        res.getInt("endYear")
+                );
+            }
+        } catch (SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+
+        return course;
+    }
+
+    @Override
     public List<CourseEntity> getAllCourses() {
         return null;
     }

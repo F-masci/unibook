@@ -1,16 +1,25 @@
 package it.ispw.unibook.view.cli.professor;
 
+import it.ispw.unibook.bean.ManageBookBean;
+import it.ispw.unibook.controller.graphics.cli.professor.InsertBookCLI;
 import it.ispw.unibook.controller.graphics.cli.professor.RemoveBookCLI;
+import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.ISBNNotValidException;
+import it.ispw.unibook.exceptions.course.BookAlreadyInCourseException;
+import it.ispw.unibook.exceptions.course.BookNotInCourseException;
 import it.ispw.unibook.utils.Printer;
-import it.ispw.unibook.view.cli.GenericProfessorPageCLI;
 import it.ispw.unibook.view.cli.PageCLI;
 
 import java.io.IOException;
 
-public class PageRemoveBookCLI extends GenericProfessorPageCLI implements PageCLI {
+public class PageRemoveBookCLI extends PageManageBookCLI implements PageCLI {
 
-    private final RemoveBookCLI controller = new RemoveBookCLI();
+    private final RemoveBookCLI controller;
+
+    public PageRemoveBookCLI() {
+        super(new RemoveBookCLI());
+        controller = (RemoveBookCLI) super.getController();
+    }
 
     @Override
     public void display() {
@@ -41,7 +50,8 @@ public class PageRemoveBookCLI extends GenericProfessorPageCLI implements PageCL
 
                 if (ISBN.equals("esc")) return;
 
-                controller.removeBook(course, ISBN);
+                ManageBookBean bean = new ManageBookBean(course, ISBN);
+                controller.removeBook(bean);
                 break;
 
             } catch (IOException e) {
@@ -49,7 +59,7 @@ public class PageRemoveBookCLI extends GenericProfessorPageCLI implements PageCL
                 System.exit(-1);
             } catch (NumberFormatException e) {
                 Printer.error("Il codice inserito non è un numero");
-            } catch (ISBNNotValidException e) {
+            } catch (BookException e) {
                 Printer.error(e);
             }
         }

@@ -5,6 +5,6 @@ import it.ispw.unibook.exceptions.book.BookNotFoundException;
 
 public interface LibraryDao {
 
-    public BookEntity getBookByISBN(String ISBN) throws BookNotFoundException;
+    public BookEntity searchBookByISBN(String ISBN) throws BookNotFoundException;
 
 }

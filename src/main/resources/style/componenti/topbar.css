@@ -1,3 +1,8 @@
 .topbar {
     -fx-background-color: #003366;
 }
+
+.breadcrump {
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}

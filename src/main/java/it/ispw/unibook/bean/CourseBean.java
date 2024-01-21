@@ -30,4 +30,9 @@ public class CourseBean {
         return endYear;
     }
 
+    @Override
+    public String toString() {
+        return this.getName() + " - " + this.getStartYear() + "/" + this.getEndYear();
+    }
+
 }

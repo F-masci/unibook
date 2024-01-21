@@ -16,7 +16,7 @@ import javax.json.JsonObject;
 
 public class LibraryDaoOL implements LibraryDao {
     @Override
-    public BookEntity getBookByISBN(String ISBN) throws BookNotFoundException {
+    public BookEntity searchBookByISBN(String ISBN) throws BookNotFoundException {
 
         try {
             

@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 
 public class GenericPageCLI {
 
+    protected GenericPageCLI() {}
+
     protected final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     protected void showErrorMessage(Exception e) {

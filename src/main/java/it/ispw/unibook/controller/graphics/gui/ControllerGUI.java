@@ -24,7 +24,7 @@ public class ControllerGUI {
         try {
             Printer.println("Cambio pagina in -> " + page.getPath());
             Parent root = FXMLLoader.load(Objects.requireNonNull(ControllerGUI.class.getResource(page.getPath())));
-            Scene scene = new Scene(root, 960, 540);
+            Scene scene = new Scene(root, 1280, 720);
             stage.setScene(scene);
             stage.show();
         } catch(Exception e) {

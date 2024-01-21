@@ -5,6 +5,7 @@ import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.controller.graphics.gui.ControllerGUI;
 import it.ispw.unibook.controller.graphics.gui.PagesGUI;
+import it.ispw.unibook.view.cli.PageCLI;
 import it.ispw.unibook.view.cli.PageLoginCLI;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -37,13 +38,14 @@ public class UniBook extends Application {
         while(true) {
             Printer.print("\nSelezione: ");
             try {
-                selection = Integer.parseInt(br.readLine());
+                selection = 1;
+                // selection = Integer.parseInt(br.readLine());
                 if(selection != 1 && selection != 2) throw new SelectionNotValidException();
                 break;
-            } catch (IOException e) {
+            } /*catch (IOException e) {
                 Printer.error("Errore durante la lettura dell'input");
                 System.exit(-1);
-            } catch (NumberFormatException e) {
+            } */catch (NumberFormatException e) {
                 Printer.error("L'input inserito non è valido");
             } catch (SelectionNotValidException e) {
                 Printer.error(e);
@@ -54,8 +56,8 @@ public class UniBook extends Application {
         if(selection == 1) {
             launch(args);
         } else {
-            PageLoginCLI login = new PageLoginCLI();
-            login.init();
+            PageCLI login = new PageLoginCLI();
+            login.display();
         }
 
         System.exit(0);

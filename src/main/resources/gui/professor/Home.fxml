@@ -1,62 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" styleClass="pane" stylesheets="@../../style/componenti/pane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.unibook.controller.graphics.gui.professor.HomeGUI">
-   <HBox prefWidth="960.0" styleClass="topbar" stylesheets="@../../style/componenti/topbar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@../../style/componenti/button.css" textFill="WHITE">
-         <styleClass>
-            <String fx:value="button" />
-            <String fx:value="home-button" />
-         </styleClass>
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/home.png" />
-               </image>
-               <rotationAxis>
-                  <Point3D />
-               </rotationAxis>
-            </ImageView>
-         </graphic>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-      </Button>
-   </HBox>
-   <Label layoutX="210.0" layoutY="50.0" prefHeight="50.0" prefWidth="880.0" text="I tuoi corsi" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.unibook.controller.graphics.gui.professor.HomeGUI">
+    <HBox styleClass="topbar" stylesheets="@../../style/componenti/topbar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" stylesheets="@../../style/componenti/button.css" textFill="WHITE">
+            <styleClass>
+                <String fx:value="button" />
+                <String fx:value="home-button" />
+            </styleClass>
+            <graphic>
+                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/home.png" />
+                    </image>
+                    <rotationAxis>
+                        <Point3D />
+                    </rotationAxis>
+                </ImageView>
+            </graphic>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </Button>
+      <Label prefHeight="65.0" styleClass="breadcrump" stylesheets="@../../style/componenti/topbar.css" text=" &gt; Home">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+    </HBox>
+   <Button layoutX="264.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#showCourseBooks" prefHeight="100.0" text="Visualizza libri di un corso" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="130.0">
       <font>
-         <Font name="Open Sans Bold" size="16.0" />
+         <Font size="24.0" />
       </font>
-      <graphic>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../images/course.png" />
-            </image>
-         </ImageView>
-      </graphic>
-   </Label>
-   <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="210.0" layoutY="91.0" prefHeight="449.0" prefWidth="920.0" stylesheets="@../../style/componenti/scrollPane.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="90.0">
-      <VBox fx:id="coursesList" alignment="TOP_CENTER" prefHeight="474.0" prefWidth="918.0" styleClass="courses-list" stylesheets="@../../style/pagine/professore/Home.css">
-         <children>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="course" stylesheets="@../../style/componenti/button.css" text="Corso">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </VBox>
-   </ScrollPane>
+      <stylesheets>
+         <URL value="@../../style/componenti/button.css" />
+         <URL value="@../../style/pagine/professore/Home.css" />
+      </stylesheets>
+      <styleClass>
+         <String fx:value="button" />
+         <String fx:value="menu-button" />
+      </styleClass>
+   </Button>
+   <Button layoutX="300.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#insertCourseBook" prefHeight="100.0" text="Inserisci libro ad un corso" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="330.0">
+      <font>
+         <Font size="18.0" />
+      </font>
+      <stylesheets>
+         <URL value="@../../style/componenti/button.css" />
+         <URL value="@../../style/pagine/professore/Home.css" />
+      </stylesheets>
+      <styleClass>
+         <String fx:value="button" />
+         <String fx:value="menu-button" />
+      </styleClass>
+   </Button>
+   <Button layoutX="287.0" layoutY="284.0" mnemonicParsing="false" prefHeight="100.0" styleClass="menu-button" text="Elimina libro da un corso" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="530.0">
+      <font>
+         <Font size="18.0" />
+      </font>
+      <stylesheets>
+         <URL value="@../../style/componenti/button.css" />
+         <URL value="@../../style/pagine/professore/Home.css" />
+      </stylesheets>
+   </Button>
 </AnchorPane>
