@@ -1,12 +1,8 @@
 package it.ispw.unibook.view.cli.professor;
 
 import it.ispw.unibook.bean.ManageBookBean;
-import it.ispw.unibook.controller.graphics.cli.professor.InsertBookCLI;
 import it.ispw.unibook.controller.graphics.cli.professor.RemoveBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
-import it.ispw.unibook.exceptions.book.ISBNNotValidException;
-import it.ispw.unibook.exceptions.course.BookAlreadyInCourseException;
-import it.ispw.unibook.exceptions.course.BookNotInCourseException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 
@@ -14,21 +10,16 @@ import java.io.IOException;
 
 public class PageRemoveBookCLI extends PageManageBookCLI implements PageCLI {
 
-    private final RemoveBookCLI controller;
+    private final RemoveBookCLI controller = new RemoveBookCLI();
 
-    public PageRemoveBookCLI() {
-        super(new RemoveBookCLI());
-        controller = (RemoveBookCLI) super.getController();
-    }
 
     @Override
     public void display() {
 
         Printer.clear();
-
         Printer.println("--- RIMOZIONE LIBRO ---");
 
-        printCoursesList();
+        super.printCoursesList(controller);
 
         String ISBN;
         int course;
@@ -51,7 +42,7 @@ public class PageRemoveBookCLI extends PageManageBookCLI implements PageCLI {
                 if (ISBN.equals("esc")) return;
 
                 ManageBookBean bean = new ManageBookBean(course, ISBN);
-                controller.removeBook(bean);
+                controller.removeBookFromCourse(bean);
                 break;
 
             } catch (IOException e) {

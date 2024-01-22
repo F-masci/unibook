@@ -2,7 +2,7 @@ package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
-import it.ispw.unibook.controller.application.BookController;
+import it.ispw.unibook.controller.application.ManageCourseBookController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class BooksListGUI extends GenericControllerGUI implements Initializable {
+public class BooksListGUI extends ManageBookGUI implements Initializable {
 
     @FXML
     private ComboBox<String> coursesCombo;
@@ -23,7 +23,7 @@ public class BooksListGUI extends GenericControllerGUI implements Initializable 
     private VBox booksList;
 
 
-    private final BookController controller = new BookController();
+    private final ManageCourseBookController controller = new ManageCourseBookController();
     private int courseSelected = 0;
 
     @Override

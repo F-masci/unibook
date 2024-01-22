@@ -1,13 +1,11 @@
 package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.BookBean;
-import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.bean.ManageBookBean;
 import it.ispw.unibook.controller.application.InsertCourseBookController;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.BookNotFoundException;
 import it.ispw.unibook.exceptions.book.ISBNNotValidException;
-import it.ispw.unibook.exceptions.course.BookAlreadyInCourseException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,10 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class InsertBookGUI extends GenericControllerGUI implements Initializable {
+public class InsertBookGUI extends ManageBookGUI implements Initializable {
 
     private final InsertCourseBookController controller = new InsertCourseBookController();
 
@@ -138,7 +135,7 @@ public class InsertBookGUI extends GenericControllerGUI implements Initializable
 
         try {
             ManageBookBean bean = new ManageBookBean(courseSelected, ISBNField.getText(), titleField.getText());
-            controller.insertBook(bean);
+            controller.insertBookInCourse(bean);
             successLabel.setText("Libro inserito correttamente");
         } catch(BookException e) {
             errorLabel.setText(e.getMessage());

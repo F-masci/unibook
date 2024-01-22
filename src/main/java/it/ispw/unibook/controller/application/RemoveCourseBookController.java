@@ -12,19 +12,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  *
  */
-public class RemoveCourseBookController {
+public class RemoveCourseBookController extends ManageCourseBookController {
 
-    public void removeBook(@NotNull ManageBookBean bean) throws BookException {
-
+    public void removeBookFromCourse(@NotNull ManageBookBean bean) throws BookException {
         try {
-
             BookEntity book = new BookEntity(bean.getISBN(), bean.getName());
-
             CourseDao dao = CourseDaoFactory.getInstance().getDao();
             CourseEntity course = dao.retrieveCourseByCode(bean.getCourse());
             course.delBook(book);
             course.saveBooks();
-
         } catch(BookNotInCourseException e) {
             throw (BookException) new BookException().initCause(e);
         }

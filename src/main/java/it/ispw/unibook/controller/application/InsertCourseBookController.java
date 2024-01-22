@@ -9,42 +9,32 @@ import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.BookNotFoundException;
 import it.ispw.unibook.exceptions.course.BookAlreadyInCourseException;
 import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.factory.CourseDaoFactory;
+import it.ispw.unibook.factory.LibraryDaoFactory;
+import org.jetbrains.annotations.NotNull;
 
-public class InsertCourseBookController {
+public class InsertCourseBookController extends ManageCourseBookController {
 
-    public void getBookInformation(BookBean bean) throws BookException {
-
+    public void getBookInformation(@NotNull BookBean bean) throws BookException {
         try {
-
-            // TODO: usare factory
-
-            LibraryDao dao = new LibraryDaoOL();
+            LibraryDao dao = LibraryDaoFactory.getInstance().getDao();
             BookEntity book = dao.searchBookByISBN(bean.getISBN());
-
             bean.setName(book.getTitle());
-
         } catch (BookNotFoundException e) {
-            throw (BookException) new BookNotFoundException().initCause(e);
+            throw (BookException) new BookNotFoundException(e.getMessage()).initCause(e);
         }
-
     }
 
-    public void insertBook(ManageBookBean bean) throws CourseException {
-
+    public void insertBookInCourse(@NotNull ManageBookBean bean) throws CourseException {
         try {
-
-            // TODO: usare factory
             BookEntity book = new BookEntity(bean.getISBN(), bean.getName());
-
-            CourseDao dao = new CourseDaoUniJDBC();
+            CourseDao dao = CourseDaoFactory.getInstance().getDao();
             CourseEntity course = dao.retrieveCourseByCode(bean.getCourse());
             course.addBook(book);
             course.saveBooks();
-
         } catch(BookAlreadyInCourseException e) {
-            throw (CourseException) new BookAlreadyInCourseException().initCause(e);
+            throw (CourseException) new BookAlreadyInCourseException(e.getMessage()).initCause(e);
         }
-
     }
 
 }

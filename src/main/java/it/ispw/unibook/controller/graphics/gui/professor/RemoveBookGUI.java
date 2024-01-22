@@ -1,14 +1,8 @@
 package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.*;
-import it.ispw.unibook.controller.application.BookController;
-import it.ispw.unibook.controller.application.CourseController;
-import it.ispw.unibook.controller.application.InsertCourseBookController;
 import it.ispw.unibook.controller.application.RemoveCourseBookController;
 import it.ispw.unibook.exceptions.book.BookException;
-import it.ispw.unibook.exceptions.book.BookNotFoundException;
-import it.ispw.unibook.exceptions.book.ISBNNotValidException;
-import it.ispw.unibook.exceptions.course.CourseException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
@@ -17,13 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class RemoveBookGUI extends GenericControllerGUI implements Initializable {
+public class RemoveBookGUI extends ManageBookGUI implements Initializable {
 
     private final RemoveCourseBookController controller = new RemoveCourseBookController();
 
@@ -81,7 +74,7 @@ public class RemoveBookGUI extends GenericControllerGUI implements Initializable
 
         try {
             ManageBookBean bean = new ManageBookBean(courseSelected, ISBN);
-            controller.removeBook(bean);
+            controller.removeBookFromCourse(bean);
 
             coursesCombo.setDisable(true);
             booksCombo.setDisable(true);

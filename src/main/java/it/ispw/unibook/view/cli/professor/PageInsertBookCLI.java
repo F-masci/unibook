@@ -3,13 +3,10 @@ package it.ispw.unibook.view.cli.professor;
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.ManageBookBean;
 import it.ispw.unibook.controller.graphics.cli.professor.InsertBookCLI;
-import it.ispw.unibook.controller.graphics.cli.professor.ManageBookCli;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.BookNotFoundException;
-import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 import it.ispw.unibook.exceptions.book.WrongBookException;
 import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
-import it.ispw.unibook.exceptions.course.BookAlreadyInCourseException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
@@ -20,25 +17,19 @@ import java.io.InputStreamReader;
 
 public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
 
-    private final InsertBookCLI controller;
+    private final InsertBookCLI controller = new InsertBookCLI();
 
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     private int course;
 
-    public PageInsertBookCLI() {
-        super(new InsertBookCLI());
-        controller = (InsertBookCLI) super.getController();
-    }
-
     @Override
     public void display() {
 
         Printer.clear();
-
         Printer.println("--- INSERIMENTO AUTOMATICO LIBRO ---");
 
-        printCoursesList();
+        super.printCoursesList(controller);
 
         while(true) {
             try {
@@ -86,7 +77,7 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
 
                 if(tmp.equals("S")) {
                     ManageBookBean manageBean = new ManageBookBean(course, bean);
-                    controller.insertBook(manageBean);
+                    controller.insertBookInCourse(manageBean);
                     break;
                 } else {
                     throw new WrongBookException();
@@ -101,7 +92,7 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
                 Throwable cause = e.getCause();
                 if(cause != null) {
                     if(cause.getClass() == BookNotFoundException.class) Printer.println("Il libro non è stato trovato");
-                    if(cause.getClass() == BookNotFoundException.class || cause.getClass() == WrongBookException.class)
+                    if(cause.getClass() == BookNotFoundException.class || e.getClass() == WrongBookException.class)
                         if(wrongBookHandler()) continue;
                 } else {
                     Printer.error(e);
@@ -172,7 +163,7 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
                 if (name.equals("esc")) return;
 
                 ManageBookBean bean = new ManageBookBean(course, ISBN, name);
-                controller.insertBook(bean);
+                controller.insertBookInCourse(bean);
                 break;
 
             } catch (IOException e) {
