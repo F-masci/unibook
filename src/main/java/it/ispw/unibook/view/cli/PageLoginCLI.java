@@ -32,12 +32,12 @@ public class PageLoginCLI extends GenericPageCLI implements PageCLI {
 
                 Printer.print("Email: ");
                 // email = br.readLine();
-                email = "professore@uniroma2.eu";
+                email = "studente@students.uniroma2.eu";
                 Printer.println(email);
 
                 Printer.print("Password: ");
                 // password = br.readLine();
-                password = "professore";
+                password = "studente";
                 Printer.println(password);
 
                 LoginBean bean = new LoginBean(email, password);

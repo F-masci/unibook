@@ -38,7 +38,7 @@ public class UniBook extends Application {
         while(true) {
             Printer.print("\nSelezione: ");
             try {
-                selection = 1;
+                selection = 2;
                 // selection = Integer.parseInt(br.readLine());
                 if(selection != 1 && selection != 2) throw new SelectionNotValidException();
                 break;

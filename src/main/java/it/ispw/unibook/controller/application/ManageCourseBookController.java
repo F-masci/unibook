@@ -17,41 +17,15 @@ import java.util.List;
 
 public class ManageCourseBookController {
 
+    CourseController _courseController = new CourseController();
+    BookController _bookController = new BookController();
+
     public void retrieveCoursesBySession(CoursesListBean bean) {
-
-        CourseDao dao = CourseDaoFactory.getInstance().getDao();
-        AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
-        List<CourseEntity> courses = dao.getProfessorCourses(account.getCode());
-        List<CourseBean> list = new ArrayList<>();
-        for(CourseEntity c: courses) {
-            CourseBean course = new CourseBean(
-                    c.getCode(),
-                    c.getName(),
-                    c.getStartYear(),
-                    c.getEndYear()
-            );
-            list.add(course);
-        }
-        bean.setList(list);
-
+        _courseController.retrieveCoursesBySession(bean);
     }
 
     public void retrieveBooksByCourse(BooksListBean bean) {
-
-        CourseEntity course = new CourseEntity(bean.getCourseCode());
-        List<BookEntity> books = course.getBooks();
-        List<BookBean> list = new ArrayList<>();
-        for(BookEntity b: books) {
-            try {
-                BookBean book = new BookBean(
-                        b.getISBN(),
-                        b.getTitle()
-                );
-                list.add(book);
-            } catch(BookException ignored) {}
-        }
-        bean.setList(list);
-
+        _bookController.retrieveBooksByCourse(bean);
     }
 
 }
