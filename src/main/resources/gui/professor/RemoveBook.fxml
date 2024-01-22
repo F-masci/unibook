@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.unibook.controller.graphics.gui.professor.RemoveBookGUI">
+    <HBox styleClass="topbar" stylesheets="@../../style/componenti/topbar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Button mnemonicParsing="false" onMouseClicked="#returnToHomePage" prefHeight="65.0" prefWidth="65.0" stylesheets="@../../style/componenti/button.css" textFill="WHITE">
+            <styleClass>
+                <String fx:value="button" />
+                <String fx:value="home-button" />
+            </styleClass>
+            <graphic>
+                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/home.png" />
+                    </image>
+                    <rotationAxis>
+                        <Point3D />
+                    </rotationAxis>
+                </ImageView>
+            </graphic>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </Button>
+      <Label prefHeight="65.0" styleClass="breadcrump" stylesheets="@../../style/componenti/topbar.css" text=" &gt; Home &gt; Inserisci libro ad un corso">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+    </HBox>
+   <ComboBox fx:id="coursesCombo" layoutX="200.0" layoutY="184.0" onAction="#loadBooksList" prefHeight="65.0" prefWidth="880.0" promptText="Seleziona un corso..." styleClass="legacy-combo-box" stylesheets="@../../style/componenti/comboBox.css" />
+   <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="634.0" prefHeight="65.0" prefWidth="880.0" textAlignment="CENTER" textFill="RED">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   <Label fx:id="successLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="634.0" prefHeight="65.0" prefWidth="880.0" textAlignment="CENTER" textFill="#15d015">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   <Button fx:id="removeBookButton" layoutX="200.0" layoutY="524.0" mnemonicParsing="false" onMouseClicked="#removeBook" prefHeight="100.0" prefWidth="880.0" styleClass="menu-button" text="Rimuovi libro">
+      <font>
+         <Font size="18.0" />
+      </font>
+      <stylesheets>
+         <URL value="@../../style/componenti/button.css" />
+         <URL value="@../../style/pagine/professore/Home.css" />
+      </stylesheets>
+   </Button>
+   <ComboBox fx:id="booksCombo" disable="true" layoutX="200.0" layoutY="328.0" prefHeight="65.0" prefWidth="880.0" promptText="Seleziona un libro..." styleClass="legacy-combo-box" stylesheets="@../../style/componenti/comboBox.css" />
+</AnchorPane>

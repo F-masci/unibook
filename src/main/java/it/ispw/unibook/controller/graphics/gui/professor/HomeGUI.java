@@ -24,4 +24,9 @@ public class HomeGUI extends GenericGUI {
         changePage(PagesGUI.INSERT_COURSE_BOOK_PROFESSOR);
     }
 
+    @FXML
+    public void removeCourseBook() {
+        changePage(PagesGUI.REMOVE_COURSE_BOOK_PROFESSOR);
+    }
+
 }

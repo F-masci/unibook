@@ -2,12 +2,7 @@ package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
-import it.ispw.unibook.bean.CoursesListBean;
 import it.ispw.unibook.controller.application.BookController;
-import it.ispw.unibook.controller.application.InsertCourseBookController;
-import it.ispw.unibook.utils.Printer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 
-import java.awt.print.Book;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -44,7 +38,7 @@ public class BooksListGUI extends GenericControllerGUI implements Initializable 
         courseSelected = selected;
 
         BooksListBean bean = new BooksListBean(courseSelected);
-        controller.getBooks(bean);
+        super.retrieveBooksByCourse(bean);
         List<BookBean> books = bean.getList();
 
         booksList.getChildren().clear();

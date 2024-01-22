@@ -5,6 +5,7 @@ public enum PagesGUI {
     HOME_PROFESSOR("/gui/professor/Home.fxml"),
     COURSE_BOOKS_LIST_PROFESSOR("/gui/professor/BooksList.fxml"),
     INSERT_COURSE_BOOK_PROFESSOR("/gui/professor/InsertBook.fxml"),
+    REMOVE_COURSE_BOOK_PROFESSOR("/gui/professor/RemoveBook.fxml"),
     HOME_STUDENT("/gui/student/Home.fxml");
 
     private final String path;

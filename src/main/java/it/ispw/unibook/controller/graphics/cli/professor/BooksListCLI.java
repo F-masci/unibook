@@ -7,7 +7,7 @@ public class BooksListCLI extends ManageBookCli {
 
     public void getBooks(BooksListBean bean) {
         BookController controller = new BookController();
-        controller.getBooks(bean);
+        controller.retrieveBooksByCourse(bean);
     }
 
 

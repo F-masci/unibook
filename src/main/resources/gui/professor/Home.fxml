@@ -64,7 +64,7 @@
          <String fx:value="menu-button" />
       </styleClass>
    </Button>
-   <Button layoutX="287.0" layoutY="284.0" mnemonicParsing="false" prefHeight="100.0" styleClass="menu-button" text="Elimina libro da un corso" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="530.0">
+   <Button layoutX="287.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#removeCourseBook" prefHeight="100.0" styleClass="menu-button" text="Elimina libro da un corso" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="530.0">
       <font>
          <Font size="18.0" />
       </font>
