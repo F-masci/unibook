@@ -12,15 +12,13 @@
     -fx-padding: 2;
 }
 
-.legacy-combo-box,
-.legacy-combo-box:editable:focused {
+.legacy-combo-box {
     -fx-background-color: transparent, transparent, transparent, transparent;
     -fx-background-radius: 3px;
     -fx-background-insets: 0px;
 }
 
-.legacy-combo-box .text-field,
-.legacy-combo-box:editable:focused .text-field {
+.legacy-combo-box .text-field {
     -fx-background-color: transparent, transparent, transparent, transparent;
     -fx-background-radius: 3px;
     -fx-background-insets: 0px;
@@ -30,8 +28,7 @@
     -fx-background-color: transparent;
 }
 
-.legacy-combo-box > .arrow-button,
-.legacy-combo-box:editable:focused > .arrow-button {
+.legacy-combo-box > .arrow-button {
     -fx-background-color: transparent;
 }
 
