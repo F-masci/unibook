@@ -25,21 +25,4 @@ public class PageBooksListCLI extends GenericStudentPageCLI implements PageCLI {
 
     }
 
-    private int requestCourseCode() {
-
-        while (true) {
-            try {
-
-                Printer.print("Codice corso: ");
-                return Integer.parseInt(br.readLine());
-
-            } catch (IOException e) {
-                Printer.error(e);
-                System.exit(-1);
-            } catch (NumberFormatException e) {
-                showErrorMessage("L'input inserito non è un numero");
-            }
-        }
-    }
-
 }

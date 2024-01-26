@@ -1,5 +1,6 @@
 package it.ispw.unibook.dao;
 
+import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
@@ -73,6 +74,34 @@ public class CourseDaoUniJDBC implements CourseDao{
         }
 
         return coursesList;
+
+    }
+
+    @Override
+    public CourseEntity retrieveCourseBySellableBook(SellableBookEntity sellableBook, AccountEntity seller) {
+
+        CourseEntity course = null;
+
+        try {
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course WHERE code = (SELECT course FROM sellable_book WHERE code=? AND seller=?) LIMIT 1");
+            stm.setInt(1, sellableBook.getCode());
+            stm.setInt(2, seller.getCode());
+            ResultSet res = stm.executeQuery();
+
+            if(res.first()) {
+                 course = new CourseEntity(
+                    res.getInt("code"),
+                    res.getString("name"),
+                    res.getInt("startYear"),
+                    res.getInt("endYear")
+                );
+            }
+        } catch (SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+
+        return course;
 
     }
 

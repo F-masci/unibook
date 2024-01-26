@@ -21,7 +21,7 @@ public class InsertCourseBookController extends ManageCourseBookController {
             BookEntity book = dao.searchBookByISBN(bean.getISBN());
             bean.setName(book.getTitle());
         } catch (BookNotFoundException e) {
-            throw (BookException) new BookNotFoundException(e.getMessage()).initCause(e);
+            throw (BookException) e.initCause(e);
         }
     }
 
@@ -31,9 +31,8 @@ public class InsertCourseBookController extends ManageCourseBookController {
             CourseDao dao = CourseDaoFactory.getInstance().getDao();
             CourseEntity course = dao.retrieveCourseByCode(bean.getCourse());
             course.addBook(book);
-            course.saveBooks();
         } catch(BookAlreadyInCourseException e) {
-            throw (CourseException) new BookAlreadyInCourseException(e.getMessage()).initCause(e);
+            throw (CourseException) e.initCause(e);
         }
     }
 

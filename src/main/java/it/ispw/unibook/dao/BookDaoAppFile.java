@@ -13,7 +13,12 @@ public class BookDaoAppFile implements BookDao {
     }
 
     @Override
-    public void saveCourseBooks(CourseEntity course) {
+    public void addBookToCourse(CourseEntity course, BookEntity book) {
+
+    }
+
+    @Override
+    public void removeBookFromCourse(CourseEntity course, BookEntity book) {
 
     }
 }

@@ -52,49 +52,28 @@ public class BookDaoAppJDBC implements BookDao {
     }
 
     @Override
-    public void saveCourseBooks(CourseEntity course) {
-
-        List<BookEntity> toAdd = course.getAddedBooks();
-        List<BookEntity> toDel = course.getDeletedBooks();
-
-        try (PreparedStatement addStm = connection.prepareStatement("INSERT INTO book(course, ISBN, title) VALUES(?, ?, ?);");
-             PreparedStatement delStm = connection.prepareStatement("DELETE FROM book WHERE course = ? AND ISBN = ?;")) {
-
-            connection.setAutoCommit(false);
-
-            for(BookEntity b: toAdd) {
-                addStm.setInt(1, course.getCode());
-                addStm.setString(2, b.getISBN());
-                addStm.setString(3, b.getTitle());
-                addStm.execute();
-            }
-
-            for(BookEntity b: toDel) {
-                delStm.setInt(1, course.getCode());
-                delStm.setString(2, b.getISBN());
-                delStm.execute();
-            }
-
-            connection.commit();
-
+    public void addBookToCourse(CourseEntity course, BookEntity book) {
+        try (PreparedStatement stm = connection.prepareStatement("INSERT INTO book(course, ISBN, title) VALUES(?, ?, ?);")) {
+            stm.setInt(1, course.getCode());
+            stm.setString(2, book.getISBN());
+            stm.setString(3, book.getTitle());
+            stm.execute();
         } catch(SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException exception) {
-                Printer.error(exception);
-                System.exit(-1);
-            }
-
             Printer.error(e);
             System.exit(-1);
-        } finally {
-            try {
-                connection.setAutoCommit(true);
-            } catch (SQLException exception) {
-                Printer.error(exception);
-                System.exit(-1);
-            }
         }
-
     }
+
+    @Override
+    public void removeBookFromCourse(CourseEntity course, BookEntity book) {
+        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM book WHERE course = ? AND ISBN = ?;")) {
+            stm.setInt(1, course.getCode());
+            stm.setString(2, book.getISBN());
+            stm.execute();
+        } catch(SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
 }

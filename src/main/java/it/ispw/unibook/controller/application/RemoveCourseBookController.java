@@ -19,10 +19,9 @@ public class RemoveCourseBookController extends ManageCourseBookController {
             BookEntity book = new BookEntity(bean.getISBN(), bean.getName());
             CourseDao dao = CourseDaoFactory.getInstance().getDao();
             CourseEntity course = dao.retrieveCourseByCode(bean.getCourse());
-            course.delBook(book);
-            course.saveBooks();
+            course.removeBook(book);
         } catch(BookNotInCourseException e) {
-            throw (BookException) new BookException().initCause(e);
+            throw (BookException) e.initCause(e);
         }
     }
 

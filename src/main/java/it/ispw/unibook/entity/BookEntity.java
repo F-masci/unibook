@@ -22,7 +22,7 @@ public class BookEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || this.getClass() != o.getClass()) return false;
+        if (!(o instanceof BookEntity)) return false;
         return Objects.equals( ((BookEntity) o).getISBN(), this.getISBN() );
     }
 

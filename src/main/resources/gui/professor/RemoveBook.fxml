@@ -34,7 +34,7 @@
                 <Insets />
             </HBox.margin>
         </Button>
-      <Label prefHeight="65.0" styleClass="breadcrump" stylesheets="@../../style/componenti/topbar.css" text=" &gt; Home &gt; Inserisci libro ad un corso">
+      <Label prefHeight="65.0" styleClass="breadcrump" stylesheets="@../../style/componenti/topbar.css" text=" &gt; Home &gt; Rimuovi libro da un corso">
          <font>
             <Font size="18.0" />
          </font></Label>

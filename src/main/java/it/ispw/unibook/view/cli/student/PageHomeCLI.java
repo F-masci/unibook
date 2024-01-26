@@ -24,9 +24,13 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
             Printer.println("--- HOME ---");
             Printer.println("Seleziona cosa vuoi fare");
 
-            Printer.println("[0] Esci\n" +
-                            "[1] Visualizza corsi\n" +
-                            "[2] Visualizza libri");
+            Printer.println("""
+                [0] Esci
+                [1] Visualizza corsi
+                [2] Visualizza libri
+                [3] Inserisci libro in vendita
+                [4] Rimuovi libro in vendita
+                [6] Compra libro""");
 
             while (true) {
 
@@ -40,6 +44,8 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
                         }
                         case 1 -> controller.showCourses();
                         case 2 -> controller.showBooks();
+                        case 3 -> controller.showInsertSellableBook();
+                        case 4 -> controller.showRemoveSellableBook();
                         default -> throw new SelectionNotValidException();
                     }
 

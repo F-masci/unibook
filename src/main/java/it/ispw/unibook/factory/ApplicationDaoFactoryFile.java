@@ -16,6 +16,12 @@ public class ApplicationDaoFactoryFile extends ApplicationDaoFactory {
     public BookDao getBookDao() {
         return new BookDaoAppFile();
     }
+
+    @Override
+    public SellableBookDao getSellableBookDao() {
+        return null;
+    }
+
     @Override
     public LoginDao getLoginDao() {
         return new LoginDaoAppFile();

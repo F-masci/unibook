@@ -6,7 +6,7 @@ import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BookBean {
+public class BookBean extends Bean {
 
     private final String ISBN;
     private String name;
@@ -33,8 +33,10 @@ public class BookBean {
     }
 
     protected void validateISBN() throws BookException {
-        Matcher matcher = Pattern.compile(regex).matcher(this.getISBN());
-        if(!matcher.matches()) throw (BookException) new ISBNNotValidException().initCause(new ISBNNotValidException());
+        if(ISBN != null) {
+            Matcher matcher = Pattern.compile(regex).matcher(this.getISBN());
+            if (!matcher.matches()) throw (BookException) new ISBNNotValidException().initCause(new ISBNNotValidException());
+        }
     }
 
     @Override
