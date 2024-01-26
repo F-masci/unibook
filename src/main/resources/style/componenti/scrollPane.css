@@ -5,10 +5,6 @@
     -thumb-hover-color: rgb(89, 88, 91);
 }
 
-.scroll-pane:focused {
-    -fx-background-color: white;
-}
-
 .scroll-pane > .corner {
     -fx-background-color: transparent;
 }

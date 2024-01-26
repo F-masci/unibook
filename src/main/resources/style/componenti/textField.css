@@ -29,10 +29,6 @@
     -fx-text-fill: rgba(0, 0, 0, 0.87);
 }
 
-.text-field:floating .floating-text {
-    -fx-background-color: white;
-}
-
 .text-field:focus-within .floating-text {
     -fx-text-fill: #006699;
 }
@@ -47,11 +43,6 @@
     -fx-background-color: transparent;
     -fx-backrgound-insets: 0;
     -fx-padding: 0;
-}
-
-.text-field .text-field:focused {
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
 }
 
 .text-field:disabled {

@@ -25,19 +25,17 @@ public class LoginDaoAppJDBC implements LoginDao {
 
         AccountEntity account = null;
 
-        try {
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM account WHERE email=? AND password=? LIMIT 1");
+             PreparedStatement stmError = connection.prepareStatement("SELECT * FROM account WHERE email=? LIMIT 1");) {
 
-            // Cerco l'utente
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM account WHERE email=? AND password=? LIMIT 1");
             stm.setString(1, email);
             stm.setString(2, password);
             ResultSet res = stm.executeQuery();
 
             // Cerco di capire l'erorre
             if (!res.first()) {
-                stm = connection.prepareStatement("SELECT * FROM account WHERE email=? LIMIT 1");
-                stm.setString(1, email);
-                res = stm.executeQuery();
+                stmError.setString(1, email);
+                res = stmError.executeQuery();
 
                 if (!res.first()) {
                     res.close();
@@ -56,9 +54,9 @@ public class LoginDaoAppJDBC implements LoginDao {
             };
 
             account = new AccountEntity(
-                    res.getInt("code"),
-                    res.getString("email"),
-                    type
+                res.getInt("code"),
+                res.getString("email"),
+                type
             );
 
             res.close();
