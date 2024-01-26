@@ -90,7 +90,7 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
 
     @Override
     public void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook) {
-        try (PreparedStatement stm = connection.prepareStatement("INSERT INTO sellable_book(course, ISBN, seller, price) VALUES(?, ?, ?, ?);")) {
+        try (PreparedStatement stm = connection.prepareStatement("INSERT INTO sellable_book(course, isbn, seller, price) VALUES(?, ?, ?, ?);")) {
             stm.setInt(1, course.getCode());
             stm.setString(2, sellableBook.getISBN());
             stm.setInt(3, sellableBook.getSeller().getCode());
@@ -123,7 +123,7 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
             );
             return new SellableBookEntity(
                     res.getInt("code"),
-                    res.getString("ISBN"),
+                    res.getString("isbn"),
                     res.getString("title"),
                     res.getFloat("price"),
                     seller

@@ -7,7 +7,7 @@ public class ISBNNotValidException extends BookException {
     }
 
     public ISBNNotValidException() {
-        this("ISBN non valido");
+        this("isbn non valido");
     }
 
 }

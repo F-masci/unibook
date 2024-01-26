@@ -69,11 +69,11 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
         errorLabel.setText("");
 
         String value = booksCombo.getValue();
-        String ISBN = "";
-        if (value != null) ISBN = items.get(value);
+        String isbn = "";
+        if (value != null) isbn = items.get(value);
 
         try {
-            ManageBookBean bean = new ManageBookBean(courseSelected, ISBN);
+            ManageBookBean bean = new ManageBookBean(courseSelected, isbn);
             controller.removeBookFromCourse(bean);
 
             coursesCombo.setDisable(true);

@@ -12,8 +12,11 @@ import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
+import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.factory.CourseDaoFactory;
+import it.ispw.unibook.factory.CourseEntityFacotry;
 import it.ispw.unibook.factory.SellableBookDaoFactory;
+import it.ispw.unibook.factory.SellableBookFactory;
 import it.ispw.unibook.utils.SessionManager;
 
 import java.util.ArrayList;
@@ -30,15 +33,12 @@ public class RemoveSellableBookController {
 
     public void removeSellableBook(SellableBookBean bean) throws SellableBookException {
         try {
-            // TODO: usare factory per course
-            CourseDao dao = CourseDaoFactory.getInstance().getDao();
-            SellableBookEntity sellableBook = new SellableBookEntity(bean.getCode());
+            SellableBookEntity sellableBook = SellableBookFactory.getInstance().createSellableBookEntity(bean.getCode());
             AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
-            CourseEntity course = dao.retrieveCourseBySellableBook(sellableBook, account);
-            if(course == null) throw new SellableBookNotFoundException();
+            CourseEntity course = CourseEntityFacotry.getInstance().createCourseEntity(sellableBook, account);
             course.removeSellableBook(sellableBook);
-        } catch (SellableBookNotFoundException e) {
-            throw (SellableBookException) new SellableBookNotFoundException().initCause(e);
+        } catch (SellableBookNotFoundException | CourseNotFoundException e) {
+            throw new SellableBookException(e.getMessage(), e);
         }
     }
 

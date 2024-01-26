@@ -4,16 +4,16 @@ import java.util.Objects;
 
 public class BookEntity {
 
-    private final String ISBN;
+    private final String isbn;
     private final String title;
 
-    public BookEntity(String ISBN, String title) {
-        this.ISBN = ISBN;
+    public BookEntity(String isbn, String title) {
+        this.isbn = isbn;
         this.title = title;
     }
 
     public String getISBN() {
-        return ISBN;
+        return isbn;
     }
     public String getTitle() {
         return title;

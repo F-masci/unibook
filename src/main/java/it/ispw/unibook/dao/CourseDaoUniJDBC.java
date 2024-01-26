@@ -1,10 +1,15 @@
 package it.ispw.unibook.dao;
 
+import it.ispw.unibook.bean.BookBean;
+import it.ispw.unibook.bean.BooksListBean;
+import it.ispw.unibook.entity.BookEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
+import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.utils.ConnectionUniJDBC;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,11 +27,10 @@ public class CourseDaoUniJDBC implements CourseDao{
     }
 
     @Override
-    public CourseEntity retrieveCourseByCode(int courseCode) {
+    public CourseEntity retrieveCourseByCode(int code) {
         CourseEntity course = null;
-        try {
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course WHERE code=? ORDER BY startYear DESC, endYear DESC, name");
-            stm.setInt(1, courseCode);
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course WHERE code=? ORDER BY startYear DESC, endYear DESC, name")){
+            stm.setInt(1, code);
             ResultSet res = stm.executeQuery();
 
             if(res.first()) {
@@ -46,15 +50,14 @@ public class CourseDaoUniJDBC implements CourseDao{
     }
 
     @Override
-    public List<CourseEntity> retrieveCoursesByProfessor(int accountCode) {
+    public List<CourseEntity> retrieveCoursesByProfessor(AccountEntity professor) {
 
         // TODO: controllare se bisogna applicare il pattern FACTORY
         List<CourseEntity> coursesList = new ArrayList<>();
 
         // Cerco i corsi
-        try {
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_professor_course WHERE professoreCode=? ORDER BY courseStartYear DESC, courseEndYear DESC, courseName");
-            stm.setInt(1, accountCode);
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_professor_course WHERE professoreCode=? ORDER BY courseStartYear DESC, courseEndYear DESC, courseName")) {
+            stm.setInt(1, professor.getCode());
             ResultSet res = stm.executeQuery();
 
             if(res.first()) {
@@ -82,8 +85,7 @@ public class CourseDaoUniJDBC implements CourseDao{
 
         CourseEntity course = null;
 
-        try {
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course WHERE code = (SELECT course FROM sellable_book WHERE code=? AND seller=?) LIMIT 1");
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course WHERE code = (SELECT course FROM sellable_book WHERE code=? AND seller=?) LIMIT 1")) {
             stm.setInt(1, sellableBook.getCode());
             stm.setInt(2, seller.getCode());
             ResultSet res = stm.executeQuery();
@@ -112,8 +114,7 @@ public class CourseDaoUniJDBC implements CourseDao{
         List<CourseEntity> coursesList = new ArrayList<>();
 
         // Cerco i corsi
-        try {
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course ORDER BY startYear DESC, endYear DESC, name");
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course ORDER BY startYear DESC, endYear DESC, name")) {
             ResultSet res = stm.executeQuery();
 
             if(res.first()) {

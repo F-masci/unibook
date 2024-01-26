@@ -21,7 +21,7 @@ public class PageRemoveBookCLI extends PageManageBookCLI implements PageCLI {
 
         super.printCoursesList(controller);
 
-        String ISBN;
+        String isbn;
         int course;
 
         while(true) {
@@ -35,13 +35,13 @@ public class PageRemoveBookCLI extends PageManageBookCLI implements PageCLI {
 
                 course = Integer.parseInt(line);
 
-                Printer.println("Inserisci l'ISBN del libro da rimuovere oppure digita esc per tornare indietro");
+                Printer.println("Inserisci l'isbn del libro da rimuovere oppure digita esc per tornare indietro");
                 Printer.print("Libro: ");
-                ISBN = br.readLine();
+                isbn = br.readLine();
 
-                if (ISBN.equals("esc")) return;
+                if (isbn.equals("esc")) return;
 
-                ManageBookBean bean = new ManageBookBean(course, ISBN);
+                ManageBookBean bean = new ManageBookBean(course, isbn);
                 controller.removeBookFromCourse(bean);
                 break;
 

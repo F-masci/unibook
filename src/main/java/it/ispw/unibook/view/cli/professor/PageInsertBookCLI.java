@@ -57,18 +57,18 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
 
     private void insertBookAuto() {
 
-        String ISBN;
+        String isbn;
 
         while(true) {
             try {
 
-                Printer.println("Inserisci l'ISBN del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro");
-                Printer.print("ISBN: ");
-                ISBN = br.readLine();
+                Printer.println("Inserisci l'isbn del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro");
+                Printer.print("isbn: ");
+                isbn = br.readLine();
 
-                if (ISBN.equals("esc")) return;
+                if (isbn.equals("esc")) return;
 
-                BookBean bean = new BookBean(ISBN);
+                BookBean bean = new BookBean(isbn);
                 controller.getBookInformation(bean);
                 Printer.println("Libro trovato: " + bean.getName());
 
@@ -87,7 +87,7 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
                 Printer.error(e);
                 System.exit(-1);
             } catch (NumberFormatException e) {
-                Printer.error("L'ISBN inserito non è un numero");
+                Printer.error("L'isbn inserito non è un numero");
             } catch (BookException | CourseException e) {
                 Throwable cause = e.getCause();
                 if(cause != null) {
@@ -145,16 +145,16 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
 
         Printer.println("--- INSERIMENTO MANUALE LIBRO ---");
 
-        String ISBN, name;
+        String isbn, name;
 
         while(true) {
             try {
 
-                Printer.println("Inserisci l'ISBN del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro");
-                Printer.print("ISBN: ");
-                ISBN = br.readLine();
+                Printer.println("Inserisci l'isbn del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro");
+                Printer.print("isbn: ");
+                isbn = br.readLine();
 
-                if (ISBN.equals("esc")) return;
+                if (isbn.equals("esc")) return;
 
                 Printer.println("Inserisci il titolo del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro");
                 Printer.print("Titolo: ");
@@ -162,7 +162,7 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
 
                 if (name.equals("esc")) return;
 
-                ManageBookBean bean = new ManageBookBean(course, ISBN, name);
+                ManageBookBean bean = new ManageBookBean(course, isbn, name);
                 controller.insertBookInCourse(bean);
                 break;
 

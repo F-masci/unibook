@@ -84,7 +84,7 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
         } catch (BookException e) {
             errorLabel.setText(e.getMessage());
             Throwable cause = e.getCause();
-            if(cause.getClass() == ISBNNotValidException.class) {               // ISBN non valido
+            if(cause.getClass() == ISBNNotValidException.class) {               // isbn non valido
                 searchBookButton.setVisible(true);
             } else if(cause.getClass() == BookNotFoundException.class) {        // Libro non trovato
                 retryButton.setVisible(true);

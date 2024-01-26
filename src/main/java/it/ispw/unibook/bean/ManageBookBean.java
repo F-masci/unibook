@@ -7,12 +7,12 @@ public class ManageBookBean extends BookBean {
 
     private final int course;
 
-    public ManageBookBean(int course, String ISBN, String name) throws BookException {
-        super(ISBN, name);
+    public ManageBookBean(int course, String isbn, String name) throws BookException {
+        super(isbn, name);
         this.course = course;
     }
-    public ManageBookBean(int course, String ISBN) throws BookException {
-        super(ISBN);
+    public ManageBookBean(int course, String isbn) throws BookException {
+        super(isbn);
         this.course = course;
     }
 

@@ -40,12 +40,12 @@
             <Font size="18.0" />
          </font></Label>
     </HBox>
-   <Label layoutX="200.0" layoutY="219.0" prefHeight="30.0" prefWidth="880.0" text="ISBN:">
+   <Label layoutX="200.0" layoutY="219.0" prefHeight="30.0" prefWidth="880.0" text="isbn:">
       <font>
          <Font name="System Italic" size="22.0" />
       </font>
    </Label>
-   <TextField fx:id="ISBNField" disable="true" layoutX="200.0" layoutY="256.0" prefHeight="65.0" prefWidth="880.0" promptText="Inserisci ISBN..." stylesheets="@../../style/componenti/textField.css" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="256.0">
+   <TextField fx:id="ISBNField" disable="true" layoutX="200.0" layoutY="256.0" prefHeight="65.0" prefWidth="880.0" promptText="Inserisci isbn..." stylesheets="@../../style/componenti/textField.css" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="256.0">
       <font>
          <Font size="24.0" />
       </font>

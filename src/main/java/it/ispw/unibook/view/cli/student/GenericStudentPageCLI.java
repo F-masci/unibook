@@ -50,7 +50,7 @@ public class GenericStudentPageCLI extends GenericPageCLI {
 
     protected String requestBookCode() {
         try {
-            Printer.print("ISBN libro: ");
+            Printer.print("isbn libro: ");
             return br.readLine();
         } catch (IOException e) {
             Printer.error(e);

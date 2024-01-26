@@ -2,6 +2,7 @@ package it.ispw.unibook.utils;
 
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.AccountTypes;
+import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 
 import java.util.ArrayList;
 
@@ -15,18 +16,18 @@ public class SessionManager {
         sessions.add(account);
     }
 
-    public static AccountEntity getAccountBySessionID(int code) {
+    public static AccountEntity getAccountBySessionID(int code) throws SessionNotFoundException {
         for(AccountEntity a: sessions) {
             if(a.getCode() == code) return a;
         }
-        return null;
+        throw new SessionNotFoundException();
     }
 
-    public static AccountTypes getAccountTypeBySessionID(int code) {
+    public static AccountTypes getAccountTypeBySessionID(int code) throws SessionNotFoundException {
         for(AccountEntity a: sessions) {
             if(a.getCode() == code) return a.getType();
         }
-        return null;
+        throw new SessionNotFoundException();
     }
 
 }

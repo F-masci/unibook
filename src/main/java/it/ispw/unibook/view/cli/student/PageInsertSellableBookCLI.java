@@ -26,8 +26,8 @@ public class PageInsertSellableBookCLI extends GenericStudentPageCLI implements 
 
         while(true) {
             try {
-                String ISBN = super.requestBookCode();
-                BookBean bookBean = new BookBean(ISBN);
+                String isbn = super.requestBookCode();
+                BookBean bookBean = new BookBean(isbn);
 
                 Printer.print("Prezzo di vendita: ");
                 float price = Float.parseFloat(br.readLine());

@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public abstract class ApplicationDaoFactory {
 
-    public static ApplicationDaoFactory instance = null;
+    private static ApplicationDaoFactory instance = null;
     public static ApplicationDaoFactory getInstance() {
         try {
             if (instance == null) {

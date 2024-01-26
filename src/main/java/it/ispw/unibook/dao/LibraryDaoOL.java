@@ -16,11 +16,11 @@ import javax.json.JsonObject;
 
 public class LibraryDaoOL implements LibraryDao {
     @Override
-    public BookEntity searchBookByISBN(String ISBN) throws BookNotFoundException {
+    public BookEntity searchBookByISBN(String isbn) throws BookNotFoundException {
 
         try {
             
-            String endpoint = "https://openlibrary.org/isbn/" + ISBN + ".json";
+            String endpoint = "https://openlibrary.org/isbn/" + isbn + ".json";
             HttpClient client = HttpClientBuilder.create().build();
             HttpGet getRequest = new HttpGet(endpoint);
             HttpResponse response = client.execute(getRequest);
@@ -29,7 +29,7 @@ public class LibraryDaoOL implements LibraryDao {
                 StringReader stringReader = new StringReader(EntityUtils.toString(response.getEntity()));
                 JsonObject json = Json.createReader(stringReader).readObject();
                 String name = json.getString("title");
-                return new BookEntity(ISBN, name);
+                return new BookEntity(isbn, name);
             } else {
                 throw new BookNotFoundException();
             }

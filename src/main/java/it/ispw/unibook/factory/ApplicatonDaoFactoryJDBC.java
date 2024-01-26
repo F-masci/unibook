@@ -5,7 +5,7 @@ import it.ispw.unibook.dao.*;
 public class ApplicatonDaoFactoryJDBC extends ApplicationDaoFactory {
 
     private static ApplicatonDaoFactoryJDBC instance = null;
-    private ApplicatonDaoFactoryJDBC() {};
+    private ApplicatonDaoFactoryJDBC() {}
 
     public static ApplicatonDaoFactoryJDBC getInstance() {
         if(instance == null) instance = new ApplicatonDaoFactoryJDBC();

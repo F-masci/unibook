@@ -5,7 +5,7 @@ import it.ispw.unibook.dao.*;
 public class ApplicationDaoFactoryFile extends ApplicationDaoFactory {
 
     private static ApplicationDaoFactoryFile instance = null;
-    private ApplicationDaoFactoryFile() {};
+    private ApplicationDaoFactoryFile() {}
 
     public static ApplicationDaoFactoryFile getInstance() {
         if(instance == null) instance = new ApplicationDaoFactoryFile();

@@ -14,20 +14,20 @@ public class SellableBookBean extends BookBean {
         this(code, 0, null, null, null);
     }
 
-    public SellableBookBean(int code, String ISBN, String name, Float price) throws BookException {
-        this(code, 0, ISBN, name, price);
+    public SellableBookBean(int code, String isbn, String name, Float price) throws BookException {
+        this(code, 0, isbn, name, price);
     }
 
     public SellableBookBean(int courseCode, BookBean bean, Float price) throws BookException {
         this(0, courseCode, bean.getISBN(), bean.getName(), price);
     }
 
-    public SellableBookBean(int courseCode, String ISBN, Float price) throws BookException {
-        this(0, courseCode, ISBN, null, price);
+    public SellableBookBean(int courseCode, String isbn, Float price) throws BookException {
+        this(0, courseCode, isbn, null, price);
     }
 
-    public SellableBookBean(int code, int courseCode, String ISBN, String name, Float price) throws BookException {
-        super(ISBN, name);
+    public SellableBookBean(int code, int courseCode, String isbn, String name, Float price) throws BookException {
+        super(isbn, name);
         try {
             this.code = code;
             this.courseCode = courseCode;
