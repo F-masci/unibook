@@ -7,6 +7,7 @@ import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.BookNotFoundException;
 import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -51,9 +52,14 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
 
     private int courseSelected = 0;
 
+    // FIXME exceptions
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadCoursesComboBox(coursesCombo);
+        try {
+            loadCoursesComboBox(coursesCombo);
+        } catch (SessionException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

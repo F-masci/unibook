@@ -47,11 +47,7 @@ public class LoginDaoAppJDBC implements LoginDao {
 
             }
 
-            AccountTypes type = switch (res.getString("type")) {
-                case "Professore" -> AccountTypes.PROFESSOR;
-                case "Studente" -> AccountTypes.STUDENT;
-                default -> null;
-            };
+            AccountTypes type = AccountTypes.getFromString(res.getString("type"));
 
             account = new AccountEntity(
                 res.getInt("code"),

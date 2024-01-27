@@ -6,6 +6,7 @@ import it.ispw.unibook.bean.SellableBooksListBean;
 import it.ispw.unibook.controller.graphics.cli.student.InsertSellableCLI;
 import it.ispw.unibook.controller.graphics.cli.student.RemoveSellableCLI;
 import it.ispw.unibook.exceptions.book.BookException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 
@@ -18,38 +19,43 @@ public class PageRemoveSellableBookCLI extends GenericStudentPageCLI implements 
     @Override
     public void display() {
 
-        Printer.clear();
-        Printer.println("-- PAGINA RIMOZIONE LIBRO IN VENDITA --");
+        try {
 
-        SellableBooksListBean ellableBooksListBean = new SellableBooksListBean();
-        controller.retrieveSellableBooksBySession(ellableBooksListBean);
-        List<SellableBookBean> sellableBooks = ellableBooksListBean.getList();
+            Printer.clear();
+            Printer.println("-- PAGINA RIMOZIONE LIBRO IN VENDITA --");
 
-        Printer.println("\n--- LIBRI COLLEGATI ---");
+            SellableBooksListBean sellableBooksListBean = new SellableBooksListBean();
+            controller.retrieveSellableBooksBySession(sellableBooksListBean);
+            List<SellableBookBean> sellableBooks = sellableBooksListBean.getList();
 
-        for (SellableBookBean b : sellableBooks) {
-            Printer.println("[" + b.getCode() + "] " + b);
-        }
+            Printer.println("\n--- LIBRI COLLEGATI ---");
 
-        Printer.println("");
-
-        while(true) {
-            try {
-                int code = requestSellableBookCode();
-                SellableBookBean sellableBookBean = new SellableBookBean(code);
-                controller.removeSellableBook(sellableBookBean);
-
-                Printer.println("Libro eliminato correttamente");
-
-                waitForExit();
-
-                return;
-
-            } catch (BookException e) {
-                showErrorMessage(e);
+            for (SellableBookBean b : sellableBooks) {
+                Printer.println("[" + b.getCode() + "] " + b);
             }
-        }
 
+            Printer.println("");
+
+            while(true) {
+                try {
+                    int code = requestSellableBookCode();
+                    SellableBookBean sellableBookBean = new SellableBookBean(code);
+                    controller.removeSellableBook(sellableBookBean);
+
+                    Printer.println("Libro eliminato correttamente");
+
+                    waitForExit();
+
+                    return;
+
+                } catch (BookException | SessionException e) {
+                    showErrorMessage(e);
+                }
+            }
+        } catch (SessionException e) {
+            showErrorMessage(e);
+            return;
+        }
 
     }
 }

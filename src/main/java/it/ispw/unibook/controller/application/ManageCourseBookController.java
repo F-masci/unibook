@@ -19,15 +19,15 @@ import java.util.List;
 
 public class ManageCourseBookController {
 
-    CourseController _courseController = new CourseController();
-    BookController _bookController = new BookController();
+    CourseController courseController = new CourseController();
+    BookController bookController = new BookController();
 
     public void retrieveCoursesBySession(CoursesListBean bean) throws SessionException {
-        _courseController.retrieveCoursesBySession(bean);
+        courseController.retrieveCoursesBySession(bean);
     }
 
     public void retrieveBooksByCourse(BooksListBean bean) throws CourseException {
-        _bookController.retrieveBooksByCourse(bean);
+        bookController.retrieveBooksByCourse(bean);
     }
 
 }

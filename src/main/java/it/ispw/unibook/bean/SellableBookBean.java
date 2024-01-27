@@ -14,6 +14,10 @@ public class SellableBookBean extends BookBean {
         this(code, 0, null, null, null);
     }
 
+    public SellableBookBean(String isbn) throws BookException {
+        this(0, 0, isbn, null, null);
+    }
+
     public SellableBookBean(int code, String isbn, String name, Float price) throws BookException {
         this(code, 0, isbn, name, price);
     }

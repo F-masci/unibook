@@ -27,4 +27,9 @@ public class ApplicationDaoFactoryFile extends ApplicationDaoFactory {
         return new LoginDaoAppFile();
     }
 
+    @Override
+    public NegotiationDao getAccountDao() {
+        return null;
+    }
+
 }

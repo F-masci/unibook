@@ -4,6 +4,7 @@ import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.bean.CoursesListBean;
 import it.ispw.unibook.controller.application.BookController;
 import it.ispw.unibook.controller.application.CourseController;
+import it.ispw.unibook.exceptions.course.CourseException;
 
 public class GenericStudentCLI {
 
@@ -13,7 +14,7 @@ public class GenericStudentCLI {
     public void retrieveCourses(CoursesListBean bean) {
         _courseController.retrieveCourses(bean);
     }
-    public void retrieveBooksByCourse(BooksListBean bean) {
+    public void retrieveBooksByCourse(BooksListBean bean) throws CourseException {
         _bookController.retrieveBooksByCourse(bean);
     }
 

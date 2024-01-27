@@ -1,10 +1,10 @@
 package it.ispw.unibook.entity;
 
-import it.ispw.unibook.bean.SellableBookBean;
-import it.ispw.unibook.dao.CourseDao;
-import it.ispw.unibook.dao.SellableBookDao;
-import it.ispw.unibook.factory.SellableBookDaoFactory;
+import it.ispw.unibook.dao.NegotiationDao;
+import it.ispw.unibook.exceptions.negotiation.BuyerAlreadyInNegotiationException;
+import it.ispw.unibook.factory.ApplicationDaoFactory;
 
+import java.util.List;
 import java.util.Objects;
 
 public class SellableBookEntity extends BookEntity {
@@ -14,6 +14,8 @@ public class SellableBookEntity extends BookEntity {
     private final float price;
 
     private final AccountEntity seller;
+
+    private List<AccountEntity> buyers = null;
 
     // TODO: usare factory
     public SellableBookEntity(int code) {
@@ -49,9 +51,24 @@ public class SellableBookEntity extends BookEntity {
         return seller;
     }
 
+    public void addBuyer(AccountEntity buyer) throws BuyerAlreadyInNegotiationException {
+        if(buyers == null) loadNegotiations();
+        if(buyers.contains(buyer)) throw new BuyerAlreadyInNegotiationException();
+        buyers.add(buyer);
+        // TODO: capire se usare DAO account o DAO SellableBook
+        NegotiationDao dao = ApplicationDaoFactory.getInstance().getAccountDao();
+        dao.addBuyerToSellableBookNegotiation(this, buyer);
+    }
+
+    private void loadNegotiations() {
+        NegotiationDao dao = ApplicationDaoFactory.getInstance().getAccountDao();
+        buyers = dao.retrieveBuyersBySellableBook(this);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+        if(o instanceof BookEntity && Objects.equals(((BookEntity) o).getISBN(), this.getISBN())) return true;
         if (!(o instanceof SellableBookEntity) || ((SellableBookEntity) o).getCode() == 0) return false;
         return  Objects.equals( ((SellableBookEntity) o).getCode(), this.getCode() );
     }

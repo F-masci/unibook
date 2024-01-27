@@ -4,6 +4,8 @@ import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.graphics.cli.student.InsertSellableCLI;
 import it.ispw.unibook.exceptions.book.BookException;
+import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 
@@ -22,7 +24,12 @@ public class PageInsertSellableBookCLI extends GenericStudentPageCLI implements 
         super.printCoursesList(controller);
         int courseCode = requestCourseCode();
 
-        super.printCourseBooksList(controller, courseCode);
+        try {
+            super.printCourseBooksList(controller, courseCode);
+        } catch (CourseException e) {
+            showErrorMessage(e);
+            return;
+        }
 
         while(true) {
             try {
@@ -42,7 +49,7 @@ public class PageInsertSellableBookCLI extends GenericStudentPageCLI implements 
             } catch(IOException e) {
                 Printer.error(e);
                 System.exit(-1);
-            } catch(BookException e) {
+            } catch(BookException | SessionException e) {
                 showErrorMessage(e);
             }
         }

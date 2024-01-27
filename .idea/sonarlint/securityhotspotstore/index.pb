@@ -220,3 +220,15 @@ e
 5src/main/java/it/ispw/unibook/dao/BookDaoAppFile.java,2\a\2a1125a69345ee22f30fd238e0a28e49e0dfe830
 f
 6src/main/java/it/ispw/unibook/dao/LoginDaoAppFile.java,8\0\80eca4513fad7fa84be6c1e49f127603cef53dc6
+‚
+Rsrc/main/java/it/ispw/unibook/controller/graphics/cli/student/PurchaseBookCLI.java,b\5\b52e723619d28fc120838d35f25df30b64ab8141
+€
+Psrc/main/java/it/ispw/unibook/controller/application/PurchaseBookController.java,c\c\cc2de9c9b534c102cf90fe955ca748afb3ede9ab
+e
+5src/main/java/it/ispw/unibook/dao/NegotiationDao.java,6\2\6250513d756a8e6d7d0edb8e7a994ef7cfd8876b
+l
+<src/main/java/it/ispw/unibook/dao/NegotiationDaoAppJDBC.java,f\a\fafdd746b0df3ab551cf7b2b10c5bb7585c76631
+~
+Nsrc/main/java/it/ispw/unibook/exceptions/negotiation/NegotiationException.java,e\6\e6e0df47e21ede12f280232aaa24e57fe9696610
+Œ
+\src/main/java/it/ispw/unibook/exceptions/negotiation/BuyerAlreadyInNegotiationException.java,9\e\9ecb5ec318c8434522540e0a3e3be7c96197839e

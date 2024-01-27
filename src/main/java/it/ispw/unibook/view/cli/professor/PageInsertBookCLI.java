@@ -8,6 +8,7 @@ import it.ispw.unibook.exceptions.book.BookNotFoundException;
 import it.ispw.unibook.exceptions.book.WrongBookException;
 import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
 import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 
@@ -19,8 +20,6 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
 
     private final InsertBookCLI controller = new InsertBookCLI();
 
-    private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
     private int course;
 
     @Override
@@ -29,7 +28,12 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
         Printer.clear();
         Printer.println("--- INSERIMENTO AUTOMATICO LIBRO ---");
 
-        super.printCoursesList(controller);
+        // FIXME exceptions
+        try {
+            super.printCoursesList(controller);
+        } catch (SessionException e) {
+            throw new RuntimeException(e);
+        }
 
         while(true) {
             try {
@@ -92,8 +96,7 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
                 Throwable cause = e.getCause();
                 if(cause != null) {
                     if(cause.getClass() == BookNotFoundException.class) Printer.println("Il libro non è stato trovato");
-                    if(cause.getClass() == BookNotFoundException.class || e.getClass() == WrongBookException.class)
-                        if(wrongBookHandler()) continue;
+                    if(cause.getClass() == BookNotFoundException.class || e.getClass() == WrongBookException.class && wrongBookHandler()) continue;
                 } else {
                     Printer.error(e);
                 }
@@ -145,7 +148,8 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
 
         Printer.println("--- INSERIMENTO MANUALE LIBRO ---");
 
-        String isbn, name;
+        String isbn;
+        String name;
 
         while(true) {
             try {

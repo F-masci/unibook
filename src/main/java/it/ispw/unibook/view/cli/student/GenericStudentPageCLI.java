@@ -5,6 +5,7 @@ import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.CoursesListBean;
 import it.ispw.unibook.controller.graphics.cli.student.GenericStudentCLI;
+import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.GenericPageCLI;
 
@@ -25,7 +26,7 @@ public class GenericStudentPageCLI extends GenericPageCLI {
         Printer.println("");
     }
 
-    protected void printCourseBooksList(GenericStudentCLI controller, int courseCode) {
+    protected void printCourseBooksList(GenericStudentCLI controller, int courseCode) throws CourseException {
         BooksListBean bean = new BooksListBean(courseCode);
         controller.retrieveBooksByCourse(bean);
         List<BookBean> books = bean.getList();
@@ -48,9 +49,13 @@ public class GenericStudentPageCLI extends GenericPageCLI {
         return requestInt("Codice libro in vendita: ");
     }
 
-    protected String requestBookCode() {
+    protected  String requestBookCode() {
+        return requestBookCode("ISBN libro: ");
+    }
+
+    protected String requestBookCode(String msg) {
         try {
-            Printer.print("isbn libro: ");
+            Printer.print(msg);
             return br.readLine();
         } catch (IOException e) {
             Printer.error(e);

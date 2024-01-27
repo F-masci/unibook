@@ -3,6 +3,7 @@ package it.ispw.unibook.view.cli.professor;
 import it.ispw.unibook.bean.ManageBookBean;
 import it.ispw.unibook.controller.graphics.cli.professor.RemoveBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 
@@ -19,7 +20,12 @@ public class PageRemoveBookCLI extends PageManageBookCLI implements PageCLI {
         Printer.clear();
         Printer.println("--- RIMOZIONE LIBRO ---");
 
-        super.printCoursesList(controller);
+        // FIXME exceptions
+        try {
+            super.printCoursesList(controller);
+        } catch (SessionException e) {
+            throw new RuntimeException(e);
+        }
 
         String isbn;
         int course;

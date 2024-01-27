@@ -6,6 +6,8 @@ import it.ispw.unibook.bean.CoursesListBean;
 import it.ispw.unibook.controller.application.ManageCourseBookController;
 import it.ispw.unibook.controller.graphics.gui.GenericGUI;
 import it.ispw.unibook.controller.graphics.gui.PagesGUI;
+import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
@@ -15,7 +17,7 @@ import java.util.List;
 
 public class ManageBookGUI extends GenericGUI {
 
-    ManageCourseBookController _controller = new ManageCourseBookController();
+    ManageCourseBookController controller = new ManageCourseBookController();
 
     protected ManageBookGUI() {}
 
@@ -24,33 +26,35 @@ public class ManageBookGUI extends GenericGUI {
         changePage(PagesGUI.HOME_PROFESSOR);
     }
 
-    private final ObservableMap<String, Integer> _courses = FXCollections.observableHashMap();
-    protected void loadCoursesComboBox(ComboBox<String> combo) {
+    private final ObservableMap<String, Integer> courses = FXCollections.observableHashMap();
+    protected void loadCoursesComboBox(ComboBox<String> combo) throws SessionException {
 
         CoursesListBean bean = new CoursesListBean();
         retrieveCoursesBySession(bean);
 
         List<CourseBean> courses = bean.getList();
         for(CourseBean c: courses) {
-            this._courses.put(c.toString(), c.getCode());
+            this.courses.put(c.toString(), c.getCode());
         }
 
-        combo.setItems(FXCollections.observableArrayList(this._courses.keySet()));
+        combo.setItems(FXCollections.observableArrayList(this.courses.keySet()));
     }
 
     protected int getCourseSelectedFromComboBox(ComboBox<String> combo) {
         String value = combo.getValue();
         if (value != null) {
-            return _courses.get(value);
+            return courses.get(value);
         }
         return 0;
     }
 
-    protected void retrieveCoursesBySession(CoursesListBean bean) {
-        _controller.retrieveCoursesBySession(bean);
+    // FIXME exceptions
+    protected void retrieveCoursesBySession(CoursesListBean bean) throws SessionException {
+        controller.retrieveCoursesBySession(bean);
     }
-    protected void retrieveBooksByCourse(BooksListBean bean) {
-        _controller.retrieveBooksByCourse(bean);
+    // FIXME exceptions
+    protected void retrieveBooksByCourse(BooksListBean bean) throws CourseException {
+        controller.retrieveBooksByCourse(bean);
     }
 
 }

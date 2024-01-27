@@ -1,5 +1,6 @@
 package it.ispw.unibook.factory;
 
+import it.ispw.unibook.dao.NegotiationDao;
 import it.ispw.unibook.dao.BookDao;
 import it.ispw.unibook.dao.LoginDao;
 import it.ispw.unibook.dao.SellableBookDao;
@@ -30,6 +31,7 @@ public abstract class ApplicationDaoFactory {
     }
 
     public abstract LoginDao getLoginDao();
+    public abstract NegotiationDao getAccountDao();
     public abstract BookDao getBookDao();
     public abstract SellableBookDao getSellableBookDao();
 }

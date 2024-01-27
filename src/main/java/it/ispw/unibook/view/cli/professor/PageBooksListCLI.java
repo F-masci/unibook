@@ -3,6 +3,8 @@ package it.ispw.unibook.view.cli.professor;
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.controller.graphics.cli.professor.ManageBookCli;
+import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 
@@ -18,10 +20,20 @@ public class PageBooksListCLI extends PageManageBookCLI implements PageCLI {
         Printer.clear();
         Printer.println("--- PAGINA LIBRI COLLEGATI AL CORSO ---");
 
-        printCoursesList(controller);
+        // FIXME exceptions
+        try {
+            printCoursesList(controller);
+        } catch (SessionException e) {
+            throw new RuntimeException(e);
+        }
 
+        // FIXME exceptions
         int code = requestCourseCode();
-        super.printCourseBooksList(controller, code);
+        try {
+            super.printCourseBooksList(controller, code);
+        } catch (CourseException e) {
+            throw new RuntimeException(e);
+        }
 
         waitForExit();
 

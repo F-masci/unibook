@@ -24,4 +24,8 @@ public class ApplicatonDaoFactoryJDBC extends ApplicationDaoFactory {
     public LoginDao getLoginDao() {
         return new LoginDaoAppJDBC();
     }
+    @Override
+    public NegotiationDao getAccountDao() {
+        return new NegotiationDaoAppJDBC();
+    }
 }

@@ -3,6 +3,8 @@ package it.ispw.unibook.controller.graphics.cli.professor;
 import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.bean.CoursesListBean;
 import it.ispw.unibook.controller.application.ManageCourseBookController;
+import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.exceptions.login.SessionException;
 
 /**
  * Questo controller grafico implementa tutte quelle funzioni che permettono alle View di ottenere i dati
@@ -11,14 +13,14 @@ import it.ispw.unibook.controller.application.ManageCourseBookController;
  */
 public class ManageBookCli {
 
-    private final ManageCourseBookController _controller = new ManageCourseBookController();
+    private final ManageCourseBookController controller = new ManageCourseBookController();
 
-    public void retrieveCoursesBySession(CoursesListBean bean) {
-        _controller.retrieveCoursesBySession(bean);
+    public void retrieveCoursesBySession(CoursesListBean bean) throws SessionException {
+        controller.retrieveCoursesBySession(bean);
     }
 
-    public void retrieveBooksByCourse(BooksListBean bean) {
-        _controller.retrieveBooksByCourse(bean);
+    public void retrieveBooksByCourse(BooksListBean bean) throws CourseException {
+        controller.retrieveBooksByCourse(bean);
     }
 
 }

@@ -1,6 +1,7 @@
 package it.ispw.unibook.view.cli.student;
 
 import it.ispw.unibook.controller.graphics.cli.student.GenericStudentCLI;
+import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.GenericPageCLI;
 import it.ispw.unibook.view.cli.PageCLI;
@@ -19,7 +20,12 @@ public class PageBooksListCLI extends GenericStudentPageCLI implements PageCLI {
         printCoursesList(controller);
 
         int code = requestCourseCode();
-        super.printCourseBooksList(controller, code);
+        try {
+            super.printCourseBooksList(controller, code);
+        } catch (CourseException e) {
+            showErrorMessage(e);
+            return;
+        }
 
         waitForExit();
 

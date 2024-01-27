@@ -3,6 +3,8 @@ package it.ispw.unibook.controller.graphics.gui.professor;
 import it.ispw.unibook.bean.*;
 import it.ispw.unibook.controller.application.RemoveCourseBookController;
 import it.ispw.unibook.exceptions.book.BookException;
+import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
@@ -37,13 +39,19 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
 
     private final ObservableMap<String, String> items = FXCollections.observableHashMap();;
 
+    // FIXME exceptions
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadCoursesComboBox(coursesCombo);
+        try {
+            loadCoursesComboBox(coursesCombo);
+        } catch (SessionException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    // FIXME exceptions
     @FXML
-    public void loadBooksList(ActionEvent event) {
+    public void loadBooksList(ActionEvent event) throws CourseException {
         int selected = getCourseSelectedFromComboBox(coursesCombo);
         if(selected == courseSelected) return;
         courseSelected = selected;

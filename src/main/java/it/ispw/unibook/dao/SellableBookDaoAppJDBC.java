@@ -1,6 +1,7 @@
 package it.ispw.unibook.dao;
 
 import it.ispw.unibook.entity.*;
+import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.utils.ConnectionAppJDBC;
 import it.ispw.unibook.utils.Printer;
 
@@ -20,16 +21,41 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
     }
 
     @Override
-    public SellableBookEntity retrieveSellableBookByCode(int code) {
-
-        SellableBookEntity sellableBook = null;
+    public SellableBookEntity retrieveSellableBookByCode(int code) throws SellableBookNotFoundException {
 
         try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_sellable_book WHERE code=? LIMIT 1;")) {
             stm.setInt(1, code);
             ResultSet res = stm.executeQuery();
 
             if(res.first()) {
-                sellableBook = createEntityFromViewResultSet(res);
+                return createEntityFromViewResultSet(res);
+            }
+
+            throw new SellableBookNotFoundException();
+
+        } catch(SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+
+        return null;
+
+    }
+
+    @Override
+    public List<SellableBookEntity> retrieveSellableBooksByIsbn(String Isbn) {
+
+        List<SellableBookEntity> sellableBooks = new ArrayList<>();
+
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_sellable_book WHERE isbn=?;")) {
+            stm.setString(1, Isbn);
+            ResultSet res = stm.executeQuery();
+
+            if(res.first()) {
+                do {
+                    SellableBookEntity sellableBook = createEntityFromViewResultSet(res);
+                    sellableBooks.add(sellableBook);
+                } while (res.next());
             }
 
         } catch(SQLException e) {
@@ -37,7 +63,7 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
             System.exit(-1);
         }
 
-        return sellableBook;
+        return sellableBooks;
     }
 
     @Override
