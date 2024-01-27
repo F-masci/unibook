@@ -8,14 +8,14 @@ import it.ispw.unibook.exceptions.course.CourseException;
 
 public class GenericStudentCLI {
 
-    CourseController _courseController = new CourseController();
-    BookController _bookController = new BookController();
+    CourseController courseController = new CourseController();
+    BookController bookController = new BookController();
 
     public void retrieveCourses(CoursesListBean bean) {
-        _courseController.retrieveCourses(bean);
+        courseController.retrieveCourses(bean);
     }
     public void retrieveBooksByCourse(BooksListBean bean) throws CourseException {
-        _bookController.retrieveBooksByCourse(bean);
+        bookController.retrieveBooksByCourse(bean);
     }
 
 }

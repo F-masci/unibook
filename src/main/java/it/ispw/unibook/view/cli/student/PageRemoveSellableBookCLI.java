@@ -1,9 +1,7 @@
 package it.ispw.unibook.view.cli.student;
 
-import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.bean.SellableBooksListBean;
-import it.ispw.unibook.controller.graphics.cli.student.InsertSellableCLI;
 import it.ispw.unibook.controller.graphics.cli.student.RemoveSellableCLI;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -54,7 +52,6 @@ public class PageRemoveSellableBookCLI extends GenericStudentPageCLI implements 
             }
         } catch (SessionException e) {
             showErrorMessage(e);
-            return;
         }
 
     }

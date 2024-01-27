@@ -1,7 +1,5 @@
 package it.ispw.unibook.view.cli.professor;
 
-import it.ispw.unibook.bean.BookBean;
-import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.controller.graphics.cli.professor.ManageBookCli;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -9,7 +7,6 @@ import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 
 import java.io.IOException;
-import java.util.List;
 
 public class PageBooksListCLI extends PageManageBookCLI implements PageCLI {
 

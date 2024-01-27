@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Controller applicativo per l'implementazione delle operazioni comuni
- * sulle entità Libro richieste ai vari controller
+ * sulle entità Libro richieste dai vari controller
  */
 public class BookController {
 

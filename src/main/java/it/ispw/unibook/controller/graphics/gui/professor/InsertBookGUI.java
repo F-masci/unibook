@@ -27,7 +27,7 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
     private ComboBox<String> coursesCombo;
 
     @FXML
-    private TextField ISBNField;
+    private TextField isbnField;
 
     @FXML
     private TextField titleField;
@@ -68,7 +68,7 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
         if(selected == courseSelected) return;
         courseSelected = selected;
 
-        ISBNField.setDisable(false);
+        isbnField.setDisable(false);
 
     }
 
@@ -78,9 +78,9 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
         errorLabel.setText("");
 
         try {
-            BookBean bean = new BookBean(ISBNField.getText());
+            BookBean bean = new BookBean(isbnField.getText());
             searchBookButton.setVisible(false);
-            ISBNField.setDisable(true);
+            isbnField.setDisable(true);
             controller.getBookInformation(bean);
 
             // Libro trovato
@@ -102,13 +102,13 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
     @FXML
     public void retryInsertAuto() {
         errorLabel.setText("");
-        ISBNField.setText("");
+        isbnField.setText("");
         titleField.setText("");
         retryButton.setVisible(false);
         insertManualButton.setVisible(false);
         searchBookButton.setVisible(true);
         coursesCombo.setDisable(false);
-        ISBNField.setDisable(false);
+        isbnField.setDisable(false);
     }
 
     @FXML
@@ -117,7 +117,7 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
         retryButton.setVisible(false);
         insertManualButton.setVisible(false);
         titleField.setDisable(false);
-        ISBNField.setDisable(false);
+        isbnField.setDisable(false);
         saveBookButton.setVisible(true);
     }
 
@@ -136,17 +136,17 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
         errorButton.setVisible(false);
         saveBookButton.setVisible(false);
         coursesCombo.setDisable(true);
-        ISBNField.setDisable(true);
+        isbnField.setDisable(true);
         titleField.setDisable(true);
 
         try {
-            ManageBookBean bean = new ManageBookBean(courseSelected, ISBNField.getText(), titleField.getText());
+            ManageBookBean bean = new ManageBookBean(courseSelected, isbnField.getText(), titleField.getText());
             controller.insertBookInCourse(bean);
             successLabel.setText("Libro inserito correttamente");
         } catch(BookException e) {
             errorLabel.setText(e.getMessage());
             coursesCombo.setDisable(false);
-            ISBNField.setDisable(false);
+            isbnField.setDisable(false);
             titleField.setDisable(false);
             saveBookButton.setVisible(true);
         } catch (CourseException e) {

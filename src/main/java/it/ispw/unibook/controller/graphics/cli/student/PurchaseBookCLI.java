@@ -1,6 +1,7 @@
 package it.ispw.unibook.controller.graphics.cli.student;
 
 import it.ispw.unibook.bean.BookBean;
+import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.bean.SellableBooksListBean;
 import it.ispw.unibook.controller.application.PurchaseBookController;
@@ -14,6 +15,9 @@ public class PurchaseBookCLI extends GenericStudentCLI {
 
     public SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) {
         return controller.retrieveSellableBooksByIsbn(bean);
+    }
+    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) {
+        return controller.retrieveSellableBooksByCourse(bean);
     }
 
     public void purchaseBook(SellableBookBean bean) throws SellableBookException, NegotiationException, SessionException {

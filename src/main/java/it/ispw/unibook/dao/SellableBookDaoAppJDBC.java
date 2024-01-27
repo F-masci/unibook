@@ -43,12 +43,12 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
     }
 
     @Override
-    public List<SellableBookEntity> retrieveSellableBooksByIsbn(String Isbn) {
+    public List<SellableBookEntity> retrieveSellableBooksByIsbn(String isbn) {
 
         List<SellableBookEntity> sellableBooks = new ArrayList<>();
 
         try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_sellable_book WHERE isbn=?;")) {
-            stm.setString(1, Isbn);
+            stm.setString(1, isbn);
             ResultSet res = stm.executeQuery();
 
             if(res.first()) {

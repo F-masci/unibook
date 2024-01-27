@@ -68,8 +68,8 @@ public class SellableBookEntity extends BookEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if(o instanceof BookEntity && Objects.equals(((BookEntity) o).getISBN(), this.getISBN())) return true;
-        if (!(o instanceof SellableBookEntity) || ((SellableBookEntity) o).getCode() == 0) return false;
+        if(o instanceof BookEntity book && Objects.equals(book.getISBN(), this.getISBN())) return true;
+        if (!(o instanceof SellableBookEntity sellableBook) || sellableBook.getCode() == 0) return false;
         return  Objects.equals( ((SellableBookEntity) o).getCode(), this.getCode() );
     }
 

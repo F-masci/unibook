@@ -1,10 +1,7 @@
 package it.ispw.unibook.controller.application;
 
-import it.ispw.unibook.bean.CourseBean;
-import it.ispw.unibook.bean.CoursesListBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.bean.SellableBooksListBean;
-import it.ispw.unibook.dao.CourseDao;
 import it.ispw.unibook.dao.SellableBookDao;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
@@ -15,10 +12,8 @@ import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.login.SessionNotFoundException;
-import it.ispw.unibook.factory.CourseDaoFactory;
 import it.ispw.unibook.factory.CourseEntityFacotry;
 import it.ispw.unibook.factory.SellableBookDaoFactory;
-import it.ispw.unibook.factory.SellableBookFactory;
 import it.ispw.unibook.utils.SessionManager;
 
 import java.util.ArrayList;

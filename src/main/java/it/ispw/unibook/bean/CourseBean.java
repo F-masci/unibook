@@ -7,6 +7,10 @@ public class CourseBean {
     private final int startYear;
     private final int endYear;
 
+    public CourseBean(int code) {
+        this(code, null, 0, 0);
+    }
+
     public CourseBean(int code, String name, int startYear, int endYear) {
         this.code = code;
         this.name = name;

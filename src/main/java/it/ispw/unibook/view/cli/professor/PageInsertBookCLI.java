@@ -12,9 +12,7 @@ import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
 
@@ -60,15 +58,12 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
     }
 
     private void insertBookAuto() {
-
-        String isbn;
-
         while(true) {
             try {
 
                 Printer.println("Inserisci l'isbn del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro");
                 Printer.print("isbn: ");
-                isbn = br.readLine();
+                String isbn = br.readLine();
 
                 if (isbn.equals("esc")) return;
 
@@ -79,13 +74,12 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
                 Printer.print("Le informazioni trovate sono corrette? [S]: ");
                 String tmp = br.readLine();
 
-                if(tmp.equals("S")) {
-                    ManageBookBean manageBean = new ManageBookBean(course, bean);
-                    controller.insertBookInCourse(manageBean);
-                    break;
-                } else {
-                    throw new WrongBookException();
-                }
+                if(!tmp.equals("S")) throw new WrongBookException();
+
+                ManageBookBean manageBean = new ManageBookBean(course, bean);
+                controller.insertBookInCourse(manageBean);
+
+                break;
 
             } catch (IOException e) {
                 Printer.error(e);
@@ -112,8 +106,9 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
 
         Printer.clear();
 
-        Printer.println("[1] Riprova\n" +
-                        "[2] Inserisci manualmente");
+        Printer.println("""
+           [1] Riprova
+           [2] Inserisci manualmente""");
 
         while (true) {
 

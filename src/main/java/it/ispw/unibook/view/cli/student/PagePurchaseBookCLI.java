@@ -1,6 +1,7 @@
 package it.ispw.unibook.view.cli.student;
 
 import it.ispw.unibook.bean.BookBean;
+import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.bean.SellableBooksListBean;
 import it.ispw.unibook.controller.graphics.cli.student.PurchaseBookCLI;
@@ -63,28 +64,9 @@ public class PagePurchaseBookCLI extends GenericStudentPageCLI implements PageCL
     private void showGlobalSearch() {
         while(true) {
             try {
-                Printer.println("Inserisci l'ISBN del libro che vuoi cercare");
                 String isbn = requestBookCode();
-
-                BookBean bookBean = new BookBean(isbn);
-                SellableBooksListBean sellableBooksListBean = controller.retrieveSellableBooksByIsbn(bookBean);
-
-                List<SellableBookBean> sellableBooks = sellableBooksListBean.getList();
-
-                Printer.println("\n--- LIBRI COLLEGATI ---");
-
-                for (SellableBookBean b : sellableBooks) {
-                    Printer.println("[" + b.getCode() + "] " + b);
-                }
-
-                int code = requestSellableBookCode();
-                SellableBookBean purchaseBean = new SellableBookBean(code);
-                controller.purchaseBook(purchaseBean);
-
-                Printer.println("Trattativa iniziata correttamente");
-
-                waitForExit();
-
+                BookBean bean = new BookBean(isbn);
+                purchaseBook(controller.retrieveSellableBooksByIsbn(bean));
                 break;
             } catch (BookException | NegotiationException | SessionException e) {
                 showErrorMessage(e);
@@ -92,6 +74,37 @@ public class PagePurchaseBookCLI extends GenericStudentPageCLI implements PageCL
         }
     }
 
-    private void showCourseSearch() {}
+    private void showCourseSearch() {
+        while(true) {
+            try {
+                super.printCoursesList(controller);
+                int course = requestCourseCode();
+                CourseBean courseBean = new CourseBean(course);
+                purchaseBook(controller.retrieveSellableBooksByCourse(courseBean));
+                break;
+            } catch (BookException | NegotiationException | SessionException e) {
+                showErrorMessage(e);
+            }
+        }
+    }
+
+    private void purchaseBook(SellableBooksListBean sellableBooksListBean) throws BookException, NegotiationException, SessionException {
+
+        List<SellableBookBean> sellableBooks = sellableBooksListBean.getList();
+        Printer.println("\n--- LIBRI COLLEGATI ---");
+
+        for (SellableBookBean b : sellableBooks) {
+            Printer.println("[" + b.getCode() + "] " + b);
+        }
+
+        int code = requestSellableBookCode();
+        SellableBookBean purchaseBean = new SellableBookBean(code);
+        controller.purchaseBook(purchaseBean);
+
+        Printer.println("Trattativa iniziata correttamente");
+
+        waitForExit();
+
+    }
 
 }

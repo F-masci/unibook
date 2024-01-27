@@ -3,10 +3,7 @@ package it.ispw.unibook.view.cli.student;
 import it.ispw.unibook.controller.graphics.cli.student.GenericStudentCLI;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.utils.Printer;
-import it.ispw.unibook.view.cli.GenericPageCLI;
 import it.ispw.unibook.view.cli.PageCLI;
-
-import java.io.IOException;
 
 public class PageBooksListCLI extends GenericStudentPageCLI implements PageCLI {
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Controller applicativo per l'implementazione delle operazioni comuni
- * sulle entità Corso richieste ai vari controller
+ * sulle entità Corso richieste dai vari controller
  */
 public class CourseController {
 

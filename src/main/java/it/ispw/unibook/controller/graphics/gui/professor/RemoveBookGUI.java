@@ -37,7 +37,7 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
 
     private int courseSelected = 0;
 
-    private final ObservableMap<String, String> items = FXCollections.observableHashMap();;
+    private final ObservableMap<String, String> items = FXCollections.observableHashMap();
 
     // FIXME exceptions
     @Override
