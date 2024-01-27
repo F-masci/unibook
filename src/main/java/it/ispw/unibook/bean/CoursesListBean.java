@@ -1,8 +1,5 @@
 package it.ispw.unibook.bean;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesListBean extends Bean {

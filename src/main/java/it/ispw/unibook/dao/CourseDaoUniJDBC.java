@@ -1,15 +1,10 @@
 package it.ispw.unibook.dao;
 
-import it.ispw.unibook.bean.BookBean;
-import it.ispw.unibook.bean.BooksListBean;
-import it.ispw.unibook.entity.BookEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
-import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.utils.ConnectionUniJDBC;
-import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
