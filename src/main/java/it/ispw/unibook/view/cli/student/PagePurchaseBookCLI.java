@@ -11,11 +11,12 @@ import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
+import it.ispw.unibook.view.cli.PageManageSellableBookCLI;
 
 import java.io.IOException;
 import java.util.List;
 
-public class PagePurchaseBookCLI extends GenericStudentPageCLI implements PageCLI {
+public class PagePurchaseBookCLI extends PageManageSellableBookCLI implements PageCLI {
 
     PurchaseBookCLI controller = new PurchaseBookCLI();
 

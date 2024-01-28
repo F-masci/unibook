@@ -1,4 +1,4 @@
-package it.ispw.unibook.controller.graphics.cli.professor;
+package it.ispw.unibook.controller.graphics.cli;
 
 import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.bean.CoursesListBean;
@@ -11,12 +11,15 @@ import it.ispw.unibook.exceptions.login.SessionException;
  * da mostrare all'utente che sono richiesti da più classi. I Controller grafici che gestiscono queste View
  * dovrebbero essere implementati come sottoclasse di questo Controller generale.
  */
-public class ManageBookCli {
+public class ManageBookCLI {
 
     private final ManageCourseBookController controller = new ManageCourseBookController();
 
     public void retrieveCoursesBySession(CoursesListBean bean) throws SessionException {
         controller.retrieveCoursesBySession(bean);
+    }
+    public void retrieveCourses(CoursesListBean bean) {
+        controller.retrieveCourses(bean);
     }
 
     public void retrieveBooksByCourse(BooksListBean bean) throws CourseException {

@@ -1,18 +1,16 @@
 package it.ispw.unibook.view.cli.student;
 
 import it.ispw.unibook.bean.SellableBookBean;
-import it.ispw.unibook.bean.SellableBooksListBean;
-import it.ispw.unibook.controller.graphics.cli.student.RemoveSellableCLI;
+import it.ispw.unibook.controller.graphics.cli.student.RemoveSellableBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
+import it.ispw.unibook.view.cli.PageManageSellableBookCLI;
 
-import java.util.List;
+public class PageRemoveSellableBookCLI extends PageManageSellableBookCLI implements PageCLI {
 
-public class PageRemoveSellableBookCLI extends GenericStudentPageCLI implements PageCLI {
-
-    private final RemoveSellableCLI controller = new RemoveSellableCLI();
+    private final RemoveSellableBookCLI controller = new RemoveSellableBookCLI();
 
     @Override
     public void display() {
@@ -22,17 +20,7 @@ public class PageRemoveSellableBookCLI extends GenericStudentPageCLI implements 
             Printer.clear();
             Printer.println("-- PAGINA RIMOZIONE LIBRO IN VENDITA --");
 
-            SellableBooksListBean sellableBooksListBean = new SellableBooksListBean();
-            controller.retrieveSellableBooksBySession(sellableBooksListBean);
-            List<SellableBookBean> sellableBooks = sellableBooksListBean.getList();
-
-            Printer.println("\n--- LIBRI COLLEGATI ---");
-
-            for (SellableBookBean b : sellableBooks) {
-                Printer.println("[" + b.getCode() + "] " + b);
-            }
-
-            Printer.println("");
+            super.printSellableBooksList(controller);
 
             while(true) {
                 try {

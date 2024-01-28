@@ -12,8 +12,7 @@ import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 import it.ispw.unibook.factory.CourseDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
 
-public class InsertSellableBookController {
-
+public class InsertSellableBookController extends ManageSellableBookController{
     public void insertSellableBook(SellableBookBean bean) throws SellableBookException, SessionException {
         try {
             AccountEntity seller = SessionManager.getAccountBySessionID(bean.getSessionId());

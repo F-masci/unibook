@@ -1,13 +1,14 @@
 package it.ispw.unibook.view.cli.student;
 
-import it.ispw.unibook.controller.graphics.cli.student.GenericStudentCLI;
+import it.ispw.unibook.controller.graphics.cli.ManageSellableBookCLI;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
+import it.ispw.unibook.view.cli.PageManageSellableBookCLI;
 
-public class PageBooksListCLI extends GenericStudentPageCLI implements PageCLI {
+public class PageBooksListCLI extends PageManageSellableBookCLI implements PageCLI {
 
-    private final GenericStudentCLI controller = new GenericStudentCLI();
+    private final ManageSellableBookCLI controller = new ManageSellableBookCLI();
 
     @Override
     public void display() {

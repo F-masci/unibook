@@ -8,6 +8,7 @@ import it.ispw.unibook.exceptions.course.BookAlreadyInCourseException;
 import it.ispw.unibook.exceptions.course.BookNotInCourseException;
 import it.ispw.unibook.factory.ApplicationDaoFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseEntity {
@@ -43,23 +44,23 @@ public class CourseEntity {
         return endYear;
     }
     public List<BookEntity> getBooks() {
-        if(books == null) loadBooks();
+        loadBooks();
         return books;
     }
     public List<SellableBookEntity> getSellableBooks() {
-        if(books == null) loadSellableBooks();
+        loadSellableBooks();
         return sellableBooks;
     }
 
     public void addBook(BookEntity book) throws BookAlreadyInCourseException {
-        if(books == null) loadBooks();
+        loadBooks();
         if(books.contains(book)) throw new BookAlreadyInCourseException();
         books.add(book);
         BookDao dao = ApplicationDaoFactory.getInstance().getBookDao();
         dao.addBookToCourse(this, book);
     }
     public void removeBook(BookEntity book) throws BookNotInCourseException {
-        if(books == null) loadBooks();
+        loadBooks();
         if(!books.contains(book)) throw new BookNotInCourseException();
         books.remove(book);
         BookDao dao = ApplicationDaoFactory.getInstance().getBookDao();
@@ -67,8 +68,8 @@ public class CourseEntity {
     }
 
     public void addSellableBook(SellableBookEntity sellableBook) throws UnsellableBookInCourseException {
-        if(sellableBooks == null) loadSellableBooks();
-        if(books == null) loadBooks();
+        loadSellableBooks();
+        loadBooks();
         if(!books.contains(sellableBook)) throw new UnsellableBookInCourseException();
         sellableBooks.add(sellableBook);
         SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
@@ -76,21 +77,26 @@ public class CourseEntity {
     }
 
     public void removeSellableBook(SellableBookEntity sellableBook) throws SellableBookNotFoundException {
-        if(sellableBooks == null) loadSellableBooks();
+        loadSellableBooks();
         if(!sellableBooks.contains(sellableBook)) throw new SellableBookNotFoundException();
+        sellableBook.clearBuyers();
         sellableBooks.remove(sellableBook);
         SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
         dao.removeSellableBookFromCourse(this, sellableBook);
     }
 
     private void loadBooks() {
-        BookDao dao = ApplicationDaoFactory.getInstance().getBookDao();
-        books = dao.retrieveCourseBooks(this);
+        if(books == null) {
+            BookDao dao = ApplicationDaoFactory.getInstance().getBookDao();
+            books = dao.retrieveCourseBooks(this);
+        }
     }
 
     private void loadSellableBooks() {
-        SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
-        sellableBooks = dao.retrieveCourseSellableBooks(this);
+        if(sellableBooks == null) {
+            SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
+            sellableBooks = dao.retrieveCourseSellableBooks(this);
+        }
     }
 
 }

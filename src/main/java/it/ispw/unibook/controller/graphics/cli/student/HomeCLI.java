@@ -9,11 +9,15 @@ public class HomeCLI {
 
     public void showBooks() { changeView(new PageBooksListCLI()); }
 
+    public void showActiveSellableBooks() { changeView(new PageActiveSellableBookCLI()); }
+
     public void showPurchaseBook() { changeView(new PagePurchaseBookCLI()); }
 
     public void showInsertSellableBook() { changeView(new PageInsertSellableBookCLI()); }
 
     public void showRemoveSellableBook() { changeView(new PageRemoveSellableBookCLI()); }
+
+    public void showMarkSellableBookSold() { changeView(new PageMarkSellableBookSoldCLI()); }
 
     private void changeView(PageCLI page) {
         page.display();

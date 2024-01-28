@@ -2,18 +2,19 @@ package it.ispw.unibook.view.cli.student;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.SellableBookBean;
-import it.ispw.unibook.controller.graphics.cli.student.InsertSellableCLI;
+import it.ispw.unibook.controller.graphics.cli.student.InsertSellableBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
+import it.ispw.unibook.view.cli.PageManageSellableBookCLI;
 
 import java.io.IOException;
 
-public class PageInsertSellableBookCLI extends GenericStudentPageCLI implements PageCLI {
+public class PageInsertSellableBookCLI extends PageManageSellableBookCLI implements PageCLI {
 
-    private final InsertSellableCLI controller = new InsertSellableCLI();
+    private final InsertSellableBookCLI controller = new InsertSellableBookCLI();
 
     @Override
     public void display() {

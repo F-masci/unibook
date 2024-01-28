@@ -1,6 +1,7 @@
 package it.ispw.unibook.bean;
 
 import it.ispw.unibook.exceptions.EmailNotValidException;
+import it.ispw.unibook.exceptions.FieldNotValidException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +13,7 @@ public class LoginBean extends Bean {
     private final String password;
     protected String regex = "^(.+)@(.+)$";
 
-    public LoginBean(String email, String password) throws EmailNotValidException {
+    public LoginBean(String email, String password) throws FieldNotValidException {
         this.email = email;
         this.password = password;
         validateEmail();
@@ -26,9 +27,12 @@ public class LoginBean extends Bean {
         return password;
     }
 
-    protected void validateEmail() throws EmailNotValidException {
-        Matcher matcher = Pattern.compile(regex).matcher(this.getEmail());
-        if(!matcher.matches()) throw new EmailNotValidException();
+    protected void validateEmail() throws FieldNotValidException {
+        try {
+            validateField(this.getEmail(), EMAIL_REGEX);
+        } catch (FieldNotValidException e) {
+            throw new EmailNotValidException();
+        }
     }
 
 }

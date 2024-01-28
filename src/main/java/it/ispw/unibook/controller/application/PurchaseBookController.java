@@ -23,24 +23,7 @@ import it.ispw.unibook.utils.SessionManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseBookController {
-
-    public SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) {
-        SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
-        List<SellableBookEntity> sellableBooks = dao.retrieveSellableBooksByIsbn(bean.getISBN());
-        SellableBooksListBean resBean = new SellableBooksListBean();
-        insertCoursesListIntoBean(sellableBooks, resBean);
-        return resBean;
-    }
-
-    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) {
-        CourseDao dao = CourseDaoFactory.getInstance().getDao();
-        CourseEntity course = dao.retrieveCourseByCode(bean.getCode());
-        List<SellableBookEntity> sellableBooks = course.getSellableBooks();
-        SellableBooksListBean resBean = new SellableBooksListBean();
-        insertCoursesListIntoBean(sellableBooks, resBean);
-        return resBean;
-    }
+public class PurchaseBookController extends ManageSellableBookController {
 
     public void purchaseBook(SellableBookBean bean) throws SellableBookException, NegotiationException, SessionException {
         try {
@@ -55,22 +38,6 @@ public class PurchaseBookController {
         } catch (SessionNotFoundException e) {
             throw new SessionException(e.getMessage(), e);
         }
-    }
-
-    private void insertCoursesListIntoBean(List<SellableBookEntity> sellableBooks, SellableBooksListBean bean) {
-        List<SellableBookBean> list = new ArrayList<>();
-        for(SellableBookEntity b: sellableBooks) {
-            try {
-                SellableBookBean sellableBook = new SellableBookBean(
-                        b.getCode(),
-                        b.getISBN(),
-                        b.getTitle(),
-                        b.getPrice()
-                );
-                list.add(sellableBook);
-            } catch (BookException ignored) {}
-        }
-        bean.setList(list);
     }
 
 }

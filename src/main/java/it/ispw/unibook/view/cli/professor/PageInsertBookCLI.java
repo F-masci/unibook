@@ -11,6 +11,7 @@ import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
+import it.ispw.unibook.view.cli.PageManageBookCLI;
 
 import java.io.IOException;
 

@@ -1,6 +1,7 @@
 package it.ispw.unibook.dao;
 
 import it.ispw.unibook.entity.*;
+import it.ispw.unibook.exceptions.book.sellable.SellableBookAlreadySoldException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.utils.ConnectionAppJDBC;
 import it.ispw.unibook.utils.Printer;
@@ -139,6 +140,7 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
         }
     }
 
+    // TODO: modificare con Facotry
     private SellableBookEntity createEntityFromViewResultSet(ResultSet res) throws SQLException {
             AccountEntity seller = new AccountEntity(
                     res.getInt("sellerCode"),
@@ -147,13 +149,27 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
                     res.getString("sellerName"),
                     res.getString("sellerSurname")
             );
-            return new SellableBookEntity(
+            SellableBookEntity sellableBook = new SellableBookEntity(
                     res.getInt("code"),
                     res.getString("isbn"),
                     res.getString("title"),
                     res.getFloat("price"),
                     seller
             );
+            int buyerCode = res.getInt("buyerCode");
+            if(!res.wasNull()) {
+                AccountEntity buyer = new AccountEntity(
+                        res.getInt("buyerCode"),
+                        res.getString("buyerEmail"),
+                        AccountTypes.STUDENT,
+                        res.getString("buyerName"),
+                        res.getString("buyerSurname")
+                );
+                try {
+                    sellableBook.markAsSold(buyer);
+                } catch (SellableBookAlreadySoldException ignored) {}
+            }
+            return sellableBook;
     }
 
 }

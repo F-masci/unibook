@@ -2,6 +2,7 @@ package it.ispw.unibook.controller.graphics.gui;
 
 import it.ispw.unibook.bean.LoginBean;
 import it.ispw.unibook.controller.application.LoginController;
+import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.login.*;
 import it.ispw.unibook.exceptions.EmailNotValidException;
 import it.ispw.unibook.utils.SessionManager;
@@ -31,7 +32,7 @@ public class LoginGUI extends GenericGUI{
                 case PROFESSOR -> changePage(PagesGUI.HOME_PROFESSOR);
                 case null -> { break; }
             }
-        } catch (EmailNotValidException | LoginException | SessionException e) {
+        } catch (FieldNotValidException | LoginException | SessionException e) {
             errorLabel.setText(e.getMessage());
         }
     }

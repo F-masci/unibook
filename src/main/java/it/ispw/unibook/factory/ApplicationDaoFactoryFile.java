@@ -28,7 +28,7 @@ public class ApplicationDaoFactoryFile extends ApplicationDaoFactory {
     }
 
     @Override
-    public NegotiationDao getAccountDao() {
+    public AccountDao getAccountDao() {
         return null;
     }
 

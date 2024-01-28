@@ -1,10 +1,10 @@
-package it.ispw.unibook.view.cli.professor;
+package it.ispw.unibook.view.cli;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.CoursesListBean;
-import it.ispw.unibook.controller.graphics.cli.professor.ManageBookCli;
+import it.ispw.unibook.controller.graphics.cli.ManageBookCLI;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
@@ -17,7 +17,7 @@ public class PageManageBookCLI extends GenericPageCLI {
     protected PageManageBookCLI() {}
 
     // FIXME exceptions
-    protected void printCoursesList(ManageBookCli controller) throws SessionException {
+    protected void printCoursesList(ManageBookCLI controller) throws SessionException {
         CoursesListBean bean = new CoursesListBean();
         controller.retrieveCoursesBySession(bean);
         List<CourseBean> courses = bean.getList();
@@ -30,7 +30,7 @@ public class PageManageBookCLI extends GenericPageCLI {
     }
 
     // FIXME exceptions
-    protected void printCourseBooksList(ManageBookCli controller, int courseCode) throws CourseException {
+    protected void printCourseBooksList(ManageBookCLI controller, int courseCode) throws CourseException {
         BooksListBean bean = new BooksListBean(courseCode);
         controller.retrieveBooksByCourse(bean);
         List<BookBean> books = bean.getList();

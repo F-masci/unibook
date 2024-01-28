@@ -13,6 +13,9 @@ public class ManageCourseBookController {
     public void retrieveCoursesBySession(CoursesListBean bean) throws SessionException {
         courseController.retrieveCoursesBySession(bean);
     }
+    public void retrieveCourses(CoursesListBean bean) {
+        courseController.retrieveCourses(bean);
+    }
 
     public void retrieveBooksByCourse(BooksListBean bean) throws CourseException {
         bookController.retrieveBooksByCourse(bean);

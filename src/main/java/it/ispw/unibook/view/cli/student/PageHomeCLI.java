@@ -28,10 +28,11 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
                 [0] Esci
                 [1] Visualizza corsi
                 [2] Visualizza libri
-                [3] Compra libro
-                [4] Inserisci libro in vendita
-                [5] Rimuovi libro in vendita
-                [6] Segna libro come venduto""");
+                [3] Visualizza trattative aperte
+                [4] Compra libro
+                [5] Inserisci libro in vendita
+                [6] Rimuovi libro in vendita
+                [7] Segna libro come venduto""");
 
             while (true) {
 
@@ -45,9 +46,11 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
                         }
                         case 1 -> controller.showCourses();
                         case 2 -> controller.showBooks();
-                        case 3 -> controller.showPurchaseBook();
-                        case 4 -> controller.showInsertSellableBook();
-                        case 5 -> controller.showRemoveSellableBook();
+                        case 3 -> controller.showActiveSellableBooks();
+                        case 4 -> controller.showPurchaseBook();
+                        case 5 -> controller.showInsertSellableBook();
+                        case 6 -> controller.showRemoveSellableBook();
+                        case 7 -> controller.showMarkSellableBookSold();
                         default -> throw new SelectionNotValidException();
                     }
 

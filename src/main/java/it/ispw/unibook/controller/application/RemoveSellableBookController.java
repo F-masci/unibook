@@ -19,18 +19,7 @@ import it.ispw.unibook.utils.SessionManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RemoveSellableBookController {
-
-    public void retrieveSellableBooksBySession(SellableBooksListBean bean) throws SessionException {
-        try {
-            SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
-            AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
-            List<SellableBookEntity> sellableBooks = dao.retrieveSellableBooksBySeller(account);
-            insertCoursesListIntoBean(sellableBooks, bean);
-        } catch (SessionNotFoundException e) {
-            throw new SessionException(e.getMessage(), e);
-        }
-    }
+public class RemoveSellableBookController extends ManageSellableBookController {
 
     public void removeSellableBook(SellableBookBean bean) throws SellableBookException, SessionException {
         try {
@@ -44,22 +33,6 @@ public class RemoveSellableBookController {
         } catch (SessionNotFoundException e) {
             throw new SessionException(e.getMessage(), e);
         }
-    }
-
-    private void insertCoursesListIntoBean(List<SellableBookEntity> sellableBooks, SellableBooksListBean bean) {
-        List<SellableBookBean> list = new ArrayList<>();
-        for(SellableBookEntity b: sellableBooks) {
-            try {
-                SellableBookBean sellableBook = new SellableBookBean(
-                        b.getCode(),
-                        b.getISBN(),
-                        b.getTitle(),
-                        b.getPrice()
-                );
-                list.add(sellableBook);
-            } catch (BookException ignored) {}
-        }
-        bean.setList(list);
     }
 
 }

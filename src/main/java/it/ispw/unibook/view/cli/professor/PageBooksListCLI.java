@@ -1,16 +1,17 @@
 package it.ispw.unibook.view.cli.professor;
 
-import it.ispw.unibook.controller.graphics.cli.professor.ManageBookCli;
+import it.ispw.unibook.controller.graphics.cli.ManageBookCLI;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
+import it.ispw.unibook.view.cli.PageManageBookCLI;
 
 import java.io.IOException;
 
 public class PageBooksListCLI extends PageManageBookCLI implements PageCLI {
 
-    private final ManageBookCli controller = new ManageBookCli();
+    private final ManageBookCLI controller = new ManageBookCLI();
 
     @Override
     public void display() {
