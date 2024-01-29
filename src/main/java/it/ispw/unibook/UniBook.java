@@ -32,7 +32,7 @@ public class UniBook extends Application {
         Printer.println("\t[1] Interfaccia grafica");
         Printer.println("\t[2] Riga di comando");
 
-         int selection = 1;
+         int selection = 2;
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while(true) {

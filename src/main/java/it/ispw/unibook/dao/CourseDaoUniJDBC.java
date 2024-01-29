@@ -11,9 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class CourseDaoUniJDBC implements CourseDao{
+public class CourseDaoUniJDBC implements CourseDao {
 
     private Connection connection = null;
 
@@ -29,12 +30,7 @@ public class CourseDaoUniJDBC implements CourseDao{
             ResultSet res = stm.executeQuery();
 
             if(res.first()) {
-                course = new CourseEntity(
-                    res.getInt("code"),
-                    res.getString("name"),
-                    res.getInt("startYear"),
-                    res.getInt("endYear")
-                );
+                course = createEntityFromViewCourseResultSet(res);
             }
         } catch (SQLException e) {
             Printer.error(e);
@@ -47,7 +43,6 @@ public class CourseDaoUniJDBC implements CourseDao{
     @Override
     public List<CourseEntity> retrieveCoursesByProfessor(AccountEntity professor) {
 
-        // TODO: controllare se bisogna applicare il pattern FACTORY
         List<CourseEntity> coursesList = new ArrayList<>();
 
         // Cerco i corsi
@@ -57,12 +52,7 @@ public class CourseDaoUniJDBC implements CourseDao{
 
             if(res.first()) {
                 do {
-                    CourseEntity course = new CourseEntity(
-                        res.getInt("courseCode"),
-                        res.getString("courseName"),
-                        res.getInt("courseStartYear"),
-                        res.getInt("courseEndYear")
-                    );
+                    CourseEntity course = createEntityFromViewProfessorCourseResultSet(res);
                     coursesList.add(course);
                 } while(res.next());
             }
@@ -86,12 +76,7 @@ public class CourseDaoUniJDBC implements CourseDao{
             ResultSet res = stm.executeQuery();
 
             if(res.first()) {
-                 course = new CourseEntity(
-                    res.getInt("code"),
-                    res.getString("name"),
-                    res.getInt("startYear"),
-                    res.getInt("endYear")
-                );
+                course = createEntityFromViewCourseResultSet(res);
             }
         } catch (SQLException e) {
             Printer.error(e);
@@ -105,7 +90,6 @@ public class CourseDaoUniJDBC implements CourseDao{
     @Override
     public List<CourseEntity> retrieveCourses() {
 
-        // TODO: controllare se bisogna applicare il pattern FACTORY
         List<CourseEntity> coursesList = new ArrayList<>();
 
         // Cerco i corsi
@@ -114,12 +98,7 @@ public class CourseDaoUniJDBC implements CourseDao{
 
             if(res.first()) {
                 do {
-                    CourseEntity course = new CourseEntity(
-                        res.getInt("code"),
-                        res.getString("name"),
-                        res.getInt("startYear"),
-                        res.getInt("endYear")
-                    );
+                    CourseEntity course = createEntityFromViewCourseResultSet(res);
                     coursesList.add(course);
                 } while(res.next());
             }
@@ -130,6 +109,22 @@ public class CourseDaoUniJDBC implements CourseDao{
 
         return coursesList;
 
+    }
+
+    private CourseEntity createEntityFromViewCourseResultSet(ResultSet res) throws SQLException {
+        return createEntityFromResultSet(res, new ArrayList<>(Arrays.asList("code", "name", "startYear", "endYear" )));
+    }
+    private CourseEntity createEntityFromViewProfessorCourseResultSet(ResultSet res) throws SQLException {
+        return createEntityFromResultSet(res, new ArrayList<>(Arrays.asList("courseCode", "courseName", "courseStartYear", "courseEndYear" )));
+    }
+
+    private CourseEntity createEntityFromResultSet(ResultSet res, List<String> labels) throws SQLException {
+        return new CourseEntity(
+                res.getInt(labels.get(0)),
+                res.getString(labels.get(1)),
+                res.getInt(labels.get(2)),
+                res.getInt(labels.get(3))
+        );
     }
 
 }
