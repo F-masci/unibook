@@ -2,18 +2,20 @@ package it.ispw.unibook.exceptions.course;
 
 public class CourseException extends Exception{
 
+    private final static String DEFAULT_MSG = "Errore";
+
     public CourseException() {
-        this("Errore durante la manipolazione del corso");
+        this(DEFAULT_MSG);
     }
-    public CourseException(Exception e) {
-        this("Errore durante la manipolazione del corso", e);
+    public CourseException(Throwable cause) {
+        this(DEFAULT_MSG, cause);
     }
 
     public CourseException(String msg) {
         super(msg);
     }
-    public CourseException(String msg, Exception e) {
-        super(msg, e);
+    public CourseException(String msg, Throwable cause) {
+        super(msg, cause);
     }
 
 }

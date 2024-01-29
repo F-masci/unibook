@@ -2,11 +2,13 @@ package it.ispw.unibook.exceptions.book;
 
 public class BookException extends Exception {
 
+    private final static String DEFAULT_MSG = "Errore";
+
     public BookException() {
-        this("Errore");
+        this(DEFAULT_MSG);
     }
     public BookException(Throwable cause) {
-        this("Errore", cause);
+        this(DEFAULT_MSG, cause);
     }
 
     public BookException(String msg) {

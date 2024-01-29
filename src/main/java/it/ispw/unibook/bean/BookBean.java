@@ -1,5 +1,6 @@
 package it.ispw.unibook.bean;
 
+import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 
 import java.util.regex.Matcher;
@@ -11,14 +12,18 @@ public class BookBean extends Bean {
     private String name;
     protected String regex = "^\\d{13}$";
 
-    public BookBean(String isbn) throws ISBNNotValidException {
+    public BookBean(String isbn) throws BookException {
         this(isbn, null);
     }
 
-    public BookBean(String isbn, String name) throws ISBNNotValidException {
-        this.isbn = isbn;
-        this.name = name;
-        validateISBN();
+    public BookBean(String isbn, String name) throws BookException {
+        try {
+            this.isbn = isbn;
+            this.name = name;
+            validateISBN();
+        } catch(ISBNNotValidException e) {
+            throw new BookException(e.getMessage(), e);
+        }
     }
 
     public String getISBN() {

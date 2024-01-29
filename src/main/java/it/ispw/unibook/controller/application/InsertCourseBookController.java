@@ -21,7 +21,7 @@ public class InsertCourseBookController extends ManageCourseBookController {
             BookEntity book = dao.searchBookByISBN(bean.getISBN());
             bean.setName(book.getTitle());
         } catch (BookNotFoundException e) {
-            throw (BookException) e.initCause(e);
+            throw new BookException(e.getMessage(), e);
         }
     }
 
@@ -32,7 +32,7 @@ public class InsertCourseBookController extends ManageCourseBookController {
             CourseEntity course = dao.retrieveCourseByCode(bean.getCourse());
             course.addBook(book);
         } catch(BookAlreadyInCourseException e) {
-            throw (CourseException) e.initCause(e);
+            throw new CourseException(e.getMessage(), e);
         }
     }
 

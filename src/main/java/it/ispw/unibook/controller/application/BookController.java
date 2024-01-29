@@ -4,6 +4,7 @@ import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.entity.BookEntity;
 import it.ispw.unibook.entity.CourseEntity;
+import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
@@ -52,7 +53,7 @@ public class BookController {
                 BookBean book = createBookBeanFromEntity(b);
                 // Si aggiunge il bean alla lista
                 list.add(book);
-            } catch (ISBNNotValidException ignored) {
+            } catch (BookException ignored) {
                 // Posso ignorare quest'eccezione poiché non verrà mai sollevata in quanto
                 // i dati presi dalla persistenza presentano sempre un isbn valido
             }
@@ -65,10 +66,10 @@ public class BookController {
      * Funzione ausiliare per formattare il bean a partire dall'entità
      * @param book Entità da cui creare il bean
      * @return Bean contenente i dati dell'entità
-     * @throws ISBNNotValidException Non viene mai sollevata poiché i dati presi dalla 
+     * @throws BookException Non viene mai sollevata poiché i dati presi dalla
      * persistenza presentano sempre un isbn valido
      */
-    private BookBean createBookBeanFromEntity(@NotNull BookEntity book) throws ISBNNotValidException {
+    private BookBean createBookBeanFromEntity(@NotNull BookEntity book) throws BookException {
         return new BookBean(
             book.getISBN(),
             book.getTitle()

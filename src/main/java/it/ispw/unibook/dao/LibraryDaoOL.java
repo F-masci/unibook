@@ -9,10 +9,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
-import java.io.IOException;
-import java.io.StringReader;
 import javax.json.Json;
 import javax.json.JsonObject;
+import java.io.IOException;
+import java.io.StringReader;
 
 public class LibraryDaoOL implements LibraryDao {
     @Override

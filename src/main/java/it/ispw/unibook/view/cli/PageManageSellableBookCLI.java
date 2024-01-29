@@ -3,12 +3,10 @@ package it.ispw.unibook.view.cli;
 import it.ispw.unibook.bean.*;
 import it.ispw.unibook.controller.graphics.cli.ManageSellableBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
-import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
-import it.ispw.unibook.view.cli.GenericPageCLI;
 
-import java.io.IOException;
 import java.util.List;
 
 public class PageManageSellableBookCLI extends PageManageBookCLI {
@@ -72,41 +70,30 @@ public class PageManageSellableBookCLI extends PageManageBookCLI {
 
     }
 
+    // FIXME
     protected int requestCourseCode() {
-        return requestInt("Codice corso: ");
-    }
-    protected String requestBookCode() {
-        return requestBookCode("ISBN libro: ");
-    }
-    protected int requestSellableBookCode() {
-        return requestInt("Codice libro in vendita: ");
-    }
-    protected int requestAccountCode() {
-        return requestInt("Codice acquirente: ");
-    }
-
-    protected String requestBookCode(String msg) {
         try {
-            Printer.print(msg);
-            return br.readLine();
-        } catch (IOException e) {
-            Printer.error(e);
-            System.exit(-1);
+            return requestInt("Codice corso: ");
+        } catch (EscCliException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
-    private int requestInt(String msg) {
-        while (true) {
-            try {
-                Printer.print(msg);
-                return Integer.parseInt(br.readLine());
-            } catch (IOException e) {
-                Printer.error(e);
-                System.exit(-1);
-            } catch (NumberFormatException e) {
-                showErrorMessage("L'input inserito non è un numero");
-            }
+    // FIXME
+    protected int requestSellableBookCode() {
+        try {
+            return requestInt("Codice libro in vendita: ");
+        } catch (EscCliException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    protected int requestAccountCode() {
+        try {
+            return requestInt("Codice acquirente: ");
+        } catch (EscCliException e) {
+            throw new RuntimeException(e);
         }
     }
 

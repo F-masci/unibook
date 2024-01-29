@@ -5,11 +5,13 @@ import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.CoursesListBean;
 import it.ispw.unibook.controller.graphics.cli.ManageBookCLI;
+import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.GenericPageCLI;
 
+import java.io.IOException;
 import java.util.List;
 
 public class PageManageBookCLI extends GenericPageCLI {
@@ -43,6 +45,20 @@ public class PageManageBookCLI extends GenericPageCLI {
 
         Printer.println("");
 
+    }
+
+    protected String requestBookCode() throws EscCliException {
+        return requestBookCode("ISBN del libro (oppure esc per uscire): ");
+    }
+    protected String requestBookCode(String msg) throws EscCliException {
+        return requestString(msg);
+    }
+
+    protected int requestCourseCode() throws EscCliException {
+        return requestCourseCode("Codice del corso (oppure esc per uscire): ");
+    }
+    protected int requestCourseCode(String msg) throws EscCliException {
+        return requestInt(msg);
     }
 
 }

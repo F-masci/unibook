@@ -20,10 +20,9 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
         while(true) {
 
             Printer.clear();
+            Printer.println("\n--- HOME ---\n");
 
-            Printer.println("--- HOME ---");
             Printer.println("Seleziona cosa vuoi fare");
-
             Printer.println("""
                 [0] Esci
                 [1] Visualizza libri di un corso
@@ -34,7 +33,7 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
 
                 try {
 
-                    Printer.print("Azione: ");
+                    Printer.print("Selezione: ");
                     selection = Integer.parseInt(br.readLine());
                     switch (selection) {
                         case 0 -> {

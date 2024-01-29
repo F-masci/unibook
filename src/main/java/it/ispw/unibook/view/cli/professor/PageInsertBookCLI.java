@@ -4,8 +4,9 @@ import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.ManageBookBean;
 import it.ispw.unibook.controller.graphics.cli.professor.InsertBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
-import it.ispw.unibook.exceptions.book.BookNotFoundException;
+import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 import it.ispw.unibook.exceptions.book.WrongBookException;
+import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -13,9 +14,12 @@ import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 import it.ispw.unibook.view.cli.PageManageBookCLI;
 
-import java.io.IOException;
-
 public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
+
+    private static final String ISBN_REQUEST_TEXT = "Inserisci l'isbn del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro: ";
+    private static final String TITLE_REQUEST_TEXT = "Inserisci il titolo del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro: ";
+
+    private static final String SUCCESS_MESSAGE_TEXT = "Libro inserito correttamente";
 
     private final InsertBookCLI controller = new InsertBookCLI();
 
@@ -25,155 +29,117 @@ public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
     public void display() {
 
         Printer.clear();
-        Printer.println("--- INSERIMENTO AUTOMATICO LIBRO ---");
-
-        // FIXME exceptions
-        try {
-            super.printCoursesList(controller);
-        } catch (SessionException e) {
-            throw new RuntimeException(e);
-        }
+        Printer.println("--- PAGINA INSERIMENTO LIBRO AD UN CORSO ---");
 
         while(true) {
             try {
-
-                Printer.println("Inserisci il codice del corso a cui aggiungere il libro oppure digita esc per tornare indietro");
-                Printer.print("Corso: ");
-                String line = br.readLine();
-
-                if (line.equals("esc")) return;
-
-                course = Integer.parseInt(line);
-                break;
-
-            } catch (IOException e) {
-                Printer.error(e);
-                System.exit(-1);
-            } catch (NumberFormatException e) {
-                Printer.error("Il codice inserito non è un numero");
+                super.printCoursesList(controller);
+                course = super.requestCourseCode();
+                insertBookAuto();
+                return;
+            } catch (SessionException e) {
+                showErrorMessage(e);
+                return;
+            } catch (EscCliException ignored) {
+                return;
+            } catch (CourseException e) {
+                showErrorMessage(e);
             }
         }
 
-        insertBookAuto();
-
     }
 
-    private void insertBookAuto() {
+    private void insertBookAuto() throws CourseException, EscCliException {
+
+        Printer.clear();
+        Printer.println("--- INSERIMENTO AUTOMATICO LIBRO ---");
+
         while(true) {
             try {
 
-                Printer.println("Inserisci l'isbn del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro");
-                Printer.print("isbn: ");
-                String isbn = br.readLine();
-
-                if (isbn.equals("esc")) return;
-
+                String isbn = requestBookCode(ISBN_REQUEST_TEXT);
                 BookBean bean = new BookBean(isbn);
                 controller.getBookInformation(bean);
                 Printer.println("Libro trovato: " + bean.getName());
 
                 Printer.print("Le informazioni trovate sono corrette? [S]: ");
-                String tmp = br.readLine();
-
+                String tmp = requestString();
                 if(!tmp.equals("S")) throw new WrongBookException();
 
                 ManageBookBean manageBean = new ManageBookBean(course, bean);
                 controller.insertBookInCourse(manageBean);
 
-                break;
+                Printer.println(SUCCESS_MESSAGE_TEXT);
+                waitForExit();
 
-            } catch (IOException e) {
+                return;
+
+            } catch (BookException e) {
                 Printer.error(e);
-                System.exit(-1);
-            } catch (NumberFormatException e) {
-                Printer.error("L'isbn inserito non è un numero");
-            } catch (BookException | CourseException e) {
                 Throwable cause = e.getCause();
                 if(cause != null) {
-                    if(cause.getClass() == BookNotFoundException.class) Printer.println("Il libro non è stato trovato");
-                    if(cause.getClass() == BookNotFoundException.class || e.getClass() == WrongBookException.class && wrongBookHandler()) continue;
-                } else {
-                    Printer.error(e);
+
+                    if(cause.getClass() == ISBNNotValidException.class || wrongBookHandler()) continue;
+                    return;
+
                 }
-                break;
             }
         }
     }
 
-    private boolean wrongBookHandler() {
-
-        Printer.println("Seleziona come procedere");
-        int selection;
+    private void insertBookManual() throws EscCliException, CourseException {
 
         Printer.clear();
+        Printer.println("--- INSERIMENTO MANUALE LIBRO ---");
 
+        while(true) {
+            try {
+
+                String isbn = requestBookCode(ISBN_REQUEST_TEXT);
+                String name = requestString(TITLE_REQUEST_TEXT);
+
+                ManageBookBean bean = new ManageBookBean(course, isbn, name);
+                controller.insertBookInCourse(bean);
+
+                Printer.println(SUCCESS_MESSAGE_TEXT);
+                waitForExit();
+
+                return;
+
+            } catch (BookException e) {
+                showErrorMessage(e);
+            }
+        }
+
+    }
+
+    private boolean wrongBookHandler() throws EscCliException, CourseException {
+
+        Printer.clear();
+        Printer.println("Seleziona come procedere");
         Printer.println("""
            [1] Riprova
            [2] Inserisci manualmente""");
 
         while (true) {
-
             try {
-
-                Printer.print("Azione: ");
-                selection = Integer.parseInt(br.readLine());
+                Printer.print("Selezione: ");
+                int selection = requestInt();
                 switch (selection) {
                     case 1 -> {
                         return true;
                     }
-                    case 2 -> insertBookManual();
+                    case 2 -> {
+                        insertBookManual();
+                        return false;
+                    }
                     default -> throw new SelectionNotValidException();
                 }
 
-                return false;
-
-            } catch (IOException e) {
-                Printer.error(e);
-                System.exit(-1);
-            } catch (NumberFormatException e) {
-                showErrorMessage("L'input inserito non è un numero");
-            } catch (SelectionNotValidException e) {
-                showErrorMessage(e);
+            } catch (SelectionNotValidException exception) {
+                showErrorMessage(exception);
             }
         }
-    }
-
-    private void insertBookManual() {
-
-        Printer.clear();
-
-        Printer.println("--- INSERIMENTO MANUALE LIBRO ---");
-
-        String isbn;
-        String name;
-
-        while(true) {
-            try {
-
-                Printer.println("Inserisci l'isbn del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro");
-                Printer.print("isbn: ");
-                isbn = br.readLine();
-
-                if (isbn.equals("esc")) return;
-
-                Printer.println("Inserisci il titolo del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro");
-                Printer.print("Titolo: ");
-                name = br.readLine();
-
-                if (name.equals("esc")) return;
-
-                ManageBookBean bean = new ManageBookBean(course, isbn, name);
-                controller.insertBookInCourse(bean);
-                break;
-
-            } catch (IOException e) {
-                Printer.error(e);
-                System.exit(-1);
-            } catch (BookException | CourseException e) {
-                Printer.error(e);
-            }
-        }
-
     }
 
 }
