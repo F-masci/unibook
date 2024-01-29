@@ -11,6 +11,7 @@ import org.apache.http.util.EntityUtils;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.json.JsonReader;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -27,9 +28,11 @@ public class LibraryDaoOL implements LibraryDao {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == 200) {
                 StringReader stringReader = new StringReader(EntityUtils.toString(response.getEntity()));
-                JsonObject json = Json.createReader(stringReader).readObject();
-                String name = json.getString("title");
-                return new BookEntity(isbn, name);
+                try(JsonReader jsonReader = Json.createReader(stringReader)) {
+                    JsonObject json = jsonReader.readObject();
+                    String name = json.getString("title");
+                    return new BookEntity(isbn, name);
+                }
             } else {
                 throw new BookNotFoundException();
             }

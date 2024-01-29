@@ -24,7 +24,7 @@ public class GenericPageCLI {
     protected void waitForExit() {
         Printer.println("Premi un qualsisi tasto per tornare alla home");
         try {
-            String ignored = br.readLine();
+            br.readLine();
         } catch (IOException e) {
             Printer.error("Errore durante la lettura dell'input");
             System.exit(-1);

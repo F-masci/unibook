@@ -8,7 +8,6 @@ import it.ispw.unibook.exceptions.course.BookAlreadyInCourseException;
 import it.ispw.unibook.exceptions.course.BookNotInCourseException;
 import it.ispw.unibook.factory.ApplicationDaoFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CourseEntity {

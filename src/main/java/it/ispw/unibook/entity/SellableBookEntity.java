@@ -23,7 +23,7 @@ public class SellableBookEntity extends BookEntity {
 
     private List<AccountEntity> buyers = null;
 
-    private SellableBookStateMachine state = new SellableBookStateMachineGoF(this);
+    private final SellableBookStateMachine state = new SellableBookStateMachineGoF();
 
     // TODO: usare factory
     public SellableBookEntity(int code) {

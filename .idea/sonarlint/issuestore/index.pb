@@ -266,3 +266,5 @@ x
 Hsrc/main/java/it/ispw/unibook/controller/graphics/cli/ManageBookCLI.java,b\4\b490e0be73a29471a0b210d0fde5fc0b8f49fd2d
 ˆ
 Xsrc/main/java/it/ispw/unibook/controller/graphics/cli/student/RemoveSellableBookCLI.java,e\b\eb984276627d0e9d522386b4fcf541833478e8ce
+q
+Asrc/main/java/it/ispw/unibook/exceptions/cli/EscCliException.java,c\3\c3a287ab4dbe772266d712f19b54bc98fd567a9e

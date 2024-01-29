@@ -1,6 +1,5 @@
 package it.ispw.unibook.bean;
 
-import it.ispw.unibook.exceptions.EmailNotValidException;
 import it.ispw.unibook.exceptions.FieldNotValidException;
 
 import java.util.regex.Matcher;
@@ -9,7 +8,7 @@ import java.util.regex.Pattern;
 public class Bean {
 
     /* REGEX */
-    protected final static String EMAIL_REGEX = "^(.+)@(.+)$";
+    protected static final String EMAIL_REGEX = "^(.+)@(.+)$";
 
     private static int sessionId;
 

@@ -9,9 +9,7 @@ import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
-import it.ispw.unibook.view.cli.GenericPageCLI;
 
-import java.io.IOException;
 import java.util.List;
 
 public class PageManageBookCLI extends GenericPageCLI {

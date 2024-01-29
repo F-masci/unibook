@@ -1,7 +1,6 @@
 package it.ispw.unibook.bean;
 
 import it.ispw.unibook.exceptions.book.BookException;
-import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 
 public class ManageBookBean extends BookBean {
 

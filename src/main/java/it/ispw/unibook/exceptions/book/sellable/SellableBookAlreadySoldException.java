@@ -2,7 +2,7 @@ package it.ispw.unibook.exceptions.book.sellable;
 
 public class SellableBookAlreadySoldException extends SellableBookException {
 
-    private final static String DEFAULT_MSG = "Libro già venduto";
+    private static final String DEFAULT_MSG = "Libro già venduto";
 
     public SellableBookAlreadySoldException() {
         this(DEFAULT_MSG);

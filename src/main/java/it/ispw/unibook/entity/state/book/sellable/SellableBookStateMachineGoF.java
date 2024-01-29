@@ -7,12 +7,10 @@ import it.ispw.unibook.exceptions.book.sellable.SellableBookNotSoldExceptions;
 
 public class SellableBookStateMachineGoF implements SellableBookStateMachine {
 
-    private final SellableBookEntity reference;
     private SellableBookAbstractState current;
 
-    public SellableBookStateMachineGoF(SellableBookEntity reference) {
-        this.reference = reference;
-        current = SellableBookAbstractState.getInitialState(reference);
+    public SellableBookStateMachineGoF() {
+        current = SellableBookAbstractState.getInitialState();
     }
 
     public void setState(SellableBookAbstractState state) {

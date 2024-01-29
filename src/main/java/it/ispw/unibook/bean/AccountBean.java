@@ -1,8 +1,5 @@
 package it.ispw.unibook.bean;
 
-import it.ispw.unibook.entity.AccountTypes;
-import it.ispw.unibook.exceptions.EmailNotValidException;
-
 public class AccountBean extends Bean {
 
     private final int code;

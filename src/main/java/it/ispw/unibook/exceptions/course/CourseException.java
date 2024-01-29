@@ -2,7 +2,7 @@ package it.ispw.unibook.exceptions.course;
 
 public class CourseException extends Exception{
 
-    private final static String DEFAULT_MSG = "Errore";
+    private static final String DEFAULT_MSG = "Errore";
 
     public CourseException() {
         this(DEFAULT_MSG);

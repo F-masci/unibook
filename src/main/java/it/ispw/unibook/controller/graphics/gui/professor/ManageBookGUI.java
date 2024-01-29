@@ -32,8 +32,8 @@ public class ManageBookGUI extends GenericGUI {
         CoursesListBean bean = new CoursesListBean();
         retrieveCoursesBySession(bean);
 
-        List<CourseBean> courses = bean.getList();
-        for(CourseBean c: courses) {
+        List<CourseBean> localCourses = bean.getList();
+        for(CourseBean c: localCourses) {
             this.courses.put(c.toString(), c.getCode());
         }
 

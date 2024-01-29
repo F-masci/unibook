@@ -184,7 +184,7 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
             int buyerCode = res.getInt("buyerCode");
             if(!res.wasNull()) {
                 AccountEntity buyer = new AccountEntity(
-                        res.getInt("buyerCode"),
+                        buyerCode,
                         res.getString("buyerEmail"),
                         AccountTypes.STUDENT,
                         res.getString("buyerName"),
@@ -192,7 +192,9 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
                 );
                 try {
                     sellableBook.markAsSold(buyer);
-                } catch (SellableBookAlreadySoldException ignored) {}
+                } catch (SellableBookAlreadySoldException ignored) {
+                    // Ignored
+                }
             }
             return sellableBook;
     }

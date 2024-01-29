@@ -1,17 +1,15 @@
 package it.ispw.unibook;
 
-import it.ispw.unibook.controller.graphics.cli.LoginCLI;
-import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
-import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.controller.graphics.gui.ControllerGUI;
 import it.ispw.unibook.controller.graphics.gui.PagesGUI;
+import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
+import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 import it.ispw.unibook.view.cli.PageLoginCLI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class UniBook extends Application {

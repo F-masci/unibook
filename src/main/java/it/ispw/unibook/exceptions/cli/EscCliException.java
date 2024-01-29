@@ -2,7 +2,7 @@ package it.ispw.unibook.exceptions.cli;
 
 public class EscCliException extends CliException {
 
-    private final static String DEFAULT_MSG = "Hai inserito esc";
+    private static final String DEFAULT_MSG = "Hai inserito esc";
 
     public EscCliException() {
         this(DEFAULT_MSG);

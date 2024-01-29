@@ -2,7 +2,7 @@ package it.ispw.unibook.exceptions.book;
 
 public class BookNotFoundException extends BookException{
 
-    private final static String DEFAULT_MSG = "Libro non trovato";
+    private static final String DEFAULT_MSG = "Libro non trovato";
 
     public BookNotFoundException() {
         this(DEFAULT_MSG);

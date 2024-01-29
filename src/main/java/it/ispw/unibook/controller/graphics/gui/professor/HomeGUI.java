@@ -1,16 +1,8 @@
 package it.ispw.unibook.controller.graphics.gui.professor;
 
-import it.ispw.unibook.bean.CoursesListBean;
-import it.ispw.unibook.controller.application.InsertCourseBookController;
 import it.ispw.unibook.controller.graphics.gui.GenericGUI;
 import it.ispw.unibook.controller.graphics.gui.PagesGUI;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class HomeGUI extends GenericGUI {
 

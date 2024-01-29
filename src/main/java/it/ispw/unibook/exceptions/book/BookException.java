@@ -2,7 +2,7 @@ package it.ispw.unibook.exceptions.book;
 
 public class BookException extends Exception {
 
-    private final static String DEFAULT_MSG = "Errore";
+    private static final String DEFAULT_MSG = "Errore";
 
     public BookException() {
         this(DEFAULT_MSG);

@@ -38,9 +38,7 @@ public class PageActiveSellableBookCLI extends PageManageSellableBookCLI impleme
                     Printer.print("Azione: ");
                     selection = Integer.parseInt(br.readLine());
                     switch (selection) {
-                        case 0 -> {
-                            return;
-                        }
+                        case 0 -> {}
                         case 1 -> showOwnSellableBooks();
                         case 2 -> showActiveNegotiation();
                         default -> throw new SelectionNotValidException();

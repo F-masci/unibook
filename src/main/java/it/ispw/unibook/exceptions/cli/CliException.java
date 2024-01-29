@@ -2,7 +2,7 @@ package it.ispw.unibook.exceptions.cli;
 
 public class CliException extends Exception {
 
-    private final static String DEFAULT_MSG = "Errore";
+    private static final String DEFAULT_MSG = "Errore";
 
     public CliException() {
         this(DEFAULT_MSG);

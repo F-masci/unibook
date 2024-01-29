@@ -1,11 +1,8 @@
 package it.ispw.unibook.controller.graphics.cli;
 
 import it.ispw.unibook.bean.*;
-import it.ispw.unibook.controller.application.BookController;
-import it.ispw.unibook.controller.application.CourseController;
 import it.ispw.unibook.controller.application.ManageSellableBookController;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
-import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import org.jetbrains.annotations.NotNull;
 

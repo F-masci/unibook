@@ -5,7 +5,6 @@ import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.application.MarkSellableBookSoldController;
 import it.ispw.unibook.controller.graphics.cli.ManageSellableBookCLI;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
-import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 
 public class MarkSellableBookSoldCLI extends ManageSellableBookCLI {
 

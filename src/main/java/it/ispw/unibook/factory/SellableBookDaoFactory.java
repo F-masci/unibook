@@ -1,7 +1,5 @@
 package it.ispw.unibook.factory;
 
-import it.ispw.unibook.dao.LibraryDao;
-import it.ispw.unibook.dao.LibraryDaoOL;
 import it.ispw.unibook.dao.SellableBookDao;
 import it.ispw.unibook.dao.SellableBookDaoAppJDBC;
 

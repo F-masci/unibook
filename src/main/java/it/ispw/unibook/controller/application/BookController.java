@@ -5,7 +5,6 @@ import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.entity.BookEntity;
 import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.exceptions.book.BookException;
-import it.ispw.unibook.exceptions.book.ISBNNotValidException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.factory.CourseEntityFacotry;

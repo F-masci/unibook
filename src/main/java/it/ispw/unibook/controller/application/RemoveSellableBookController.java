@@ -1,12 +1,10 @@
 package it.ispw.unibook.controller.application;
 
 import it.ispw.unibook.bean.SellableBookBean;
-import it.ispw.unibook.bean.SellableBooksListBean;
 import it.ispw.unibook.dao.SellableBookDao;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
-import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
@@ -15,9 +13,6 @@ import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 import it.ispw.unibook.factory.CourseEntityFacotry;
 import it.ispw.unibook.factory.SellableBookDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RemoveSellableBookController extends ManageSellableBookController {
 

@@ -41,15 +41,13 @@ public class PagePurchaseBookCLI extends PageManageSellableBookCLI implements Pa
                 Printer.print("Azione: ");
                 selection = Integer.parseInt(br.readLine());
                 switch (selection) {
-                    case 0 -> {
-                        return;
-                    }
+                    case 0 -> {}
                     case 1 -> showGlobalSearch();
                     case 2 -> showCourseSearch();
                     default -> throw new SelectionNotValidException();
                 }
 
-                break;
+                return;
 
             } catch (IOException e) {
                 Printer.error(e);
