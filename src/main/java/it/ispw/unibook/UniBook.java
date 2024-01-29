@@ -32,13 +32,12 @@ public class UniBook extends Application {
         Printer.println("\t[1] Interfaccia grafica");
         Printer.println("\t[2] Riga di comando");
 
-         int selection = 0;
+         int selection = 1;
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while(true) {
             Printer.print("\nSelezione: ");
             try {
-                selection = 2;
                 // selection = Integer.parseInt(br.readLine());
                 if(selection != 1 && selection != 2) throw new SelectionNotValidException();
                 break;

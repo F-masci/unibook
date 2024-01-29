@@ -92,6 +92,31 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
     }
 
     @Override
+    public List<SellableBookEntity> retrieveSellableBooksByNegotiation(AccountEntity negotiationBuyer) {
+
+        List<SellableBookEntity> sellableBooks = new ArrayList<>();
+
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_negotiation WHERE studentCode=?;")) {
+            stm.setInt(1, negotiationBuyer.getCode());
+            ResultSet res = stm.executeQuery();
+
+            if(res.first()) {
+                do {
+                    SellableBookEntity sellableBook = createEntityFromViewResultSet(res);
+                    sellableBooks.add(sellableBook);
+                } while (res.next());
+            }
+
+        } catch(SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+
+        return sellableBooks;
+
+    }
+
+    @Override
     public List<SellableBookEntity> retrieveCourseSellableBooks(CourseEntity course) {
 
         List<SellableBookEntity> sellableBooks = new ArrayList<>();

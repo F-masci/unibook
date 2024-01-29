@@ -14,17 +14,28 @@ import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 import it.ispw.unibook.factory.CourseDaoFactory;
 import it.ispw.unibook.factory.SellableBookDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SellableBookController {
 
-    public void retrieveSellableBooksBySession(SellableBooksListBean bean) throws SessionException {
+    public void retrieveSellableBooksBySession(@NotNull SellableBooksListBean bean) throws SessionException {
         try {
             SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
             AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
             List<SellableBookEntity> sellableBooks = dao.retrieveSellableBooksBySeller(account);
+            insertSellableBooksListIntoBean(sellableBooks, bean);
+        } catch (SessionNotFoundException e) {
+            throw new SessionException(e.getMessage(), e);
+        }
+    }
+    public void retrieveSellableBooksBySessionActiveNegotiation(@NotNull SellableBooksListBean bean) throws SessionException {
+        try {
+            SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
+            AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
+            List<SellableBookEntity> sellableBooks = dao.retrieveSellableBooksByNegotiation(account);
             insertSellableBooksListIntoBean(sellableBooks, bean);
         } catch (SessionNotFoundException e) {
             throw new SessionException(e.getMessage(), e);

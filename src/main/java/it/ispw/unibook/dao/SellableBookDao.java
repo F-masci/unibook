@@ -12,6 +12,7 @@ public interface SellableBookDao {
     public SellableBookEntity retrieveSellableBookByCode(int code) throws SellableBookNotFoundException;
     public List<SellableBookEntity> retrieveSellableBooksByIsbn(String isbn);
     public List<SellableBookEntity> retrieveSellableBooksBySeller(AccountEntity seller);
+    public List<SellableBookEntity> retrieveSellableBooksByNegotiation(AccountEntity negotiationBuyer);
     public List<SellableBookEntity> retrieveCourseSellableBooks(CourseEntity course);
     public void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook);
     public void removeSellableBookFromCourse(CourseEntity course, SellableBookEntity sellableBook);

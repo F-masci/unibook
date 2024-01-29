@@ -7,6 +7,7 @@ import it.ispw.unibook.controller.application.ManageSellableBookController;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
+import org.jetbrains.annotations.NotNull;
 
 public class ManageSellableBookCLI extends ManageBookCLI {
 
@@ -14,6 +15,9 @@ public class ManageSellableBookCLI extends ManageBookCLI {
 
     public void retrieveSellableBooksBySession(SellableBooksListBean bean) throws SessionException {
         controller.retrieveSellableBooksBySession(bean);
+    }
+    public void retrieveSellableBooksBySessionActiveNegotiation(@NotNull SellableBooksListBean bean) throws SessionException {
+        controller.retrieveSellableBooksBySessionActiveNegotiation(bean);
     }
 
     public SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) {

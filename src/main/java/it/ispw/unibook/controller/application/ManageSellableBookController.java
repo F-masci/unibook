@@ -21,6 +21,9 @@ public class ManageSellableBookController extends ManageCourseBookController {
     public void retrieveSellableBooksBySession(@NotNull SellableBooksListBean bean) throws SessionException {
         sellableBookController.retrieveSellableBooksBySession(bean);
     }
+    public void retrieveSellableBooksBySessionActiveNegotiation(@NotNull SellableBooksListBean bean) throws SessionException {
+        sellableBookController.retrieveSellableBooksBySessionActiveNegotiation(bean);
+    }
 
     public SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) {
         return sellableBookController.retrieveSellableBooksByIsbn(bean);

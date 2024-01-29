@@ -57,6 +57,21 @@ public class PageManageSellableBookCLI extends PageManageBookCLI {
 
     }
 
+    protected void printActiveNegotiationsList(ManageSellableBookCLI controller) throws SessionException {
+        SellableBooksListBean bean = new SellableBooksListBean();
+        controller.retrieveSellableBooksBySessionActiveNegotiation(bean);
+        List<SellableBookBean> sellableBooks = bean.getList();
+
+        Printer.println("\n--- LIBRI IN VENDITA ---");
+
+        for (SellableBookBean b : sellableBooks) {
+            Printer.println("[" + b.getCode() + "] " + b);
+        }
+
+        Printer.println("");
+
+    }
+
     protected int requestCourseCode() {
         return requestInt("Codice corso: ");
     }
