@@ -12,26 +12,26 @@ public class CourseBean {
     }
 
     public CourseBean(int code, String name, int startYear, int endYear) {
-        this.code = code;
-        this.name = name;
-        this.startYear = startYear;
         this.endYear = endYear;
+        this.startYear = startYear;
+        this.name = name;
+        this.code = code;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
+    public int getEndYear() {
+        return endYear;
     }
 
     public int getStartYear() {
         return startYear;
     }
 
-    public int getEndYear() {
-        return endYear;
+    public String getName() {
+        return name;
+    }
+
+    public int getCode() {
+        return code;
     }
 
     @Override
