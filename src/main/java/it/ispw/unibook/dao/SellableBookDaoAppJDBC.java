@@ -50,15 +50,7 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
 
         try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_sellable_book WHERE isbn=?;")) {
             stm.setString(1, isbn);
-            ResultSet res = stm.executeQuery();
-
-            if(res.first()) {
-                do {
-                    SellableBookEntity sellableBook = createEntityFromViewResultSet(res);
-                    sellableBooks.add(sellableBook);
-                } while (res.next());
-            }
-
+            addResultSetToList(stm.executeQuery(), sellableBooks);
         } catch(SQLException e) {
             Printer.error(e);
             System.exit(-1);
@@ -74,15 +66,7 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
 
         try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_sellable_book WHERE sellerCode=?;")) {
             stm.setInt(1, account.getCode());
-            ResultSet res = stm.executeQuery();
-
-            if(res.first()) {
-                do {
-                    SellableBookEntity sellableBook = createEntityFromViewResultSet(res);
-                    sellableBooks.add(sellableBook);
-                } while (res.next());
-            }
-
+            addResultSetToList(stm.executeQuery(), sellableBooks);
         } catch(SQLException e) {
             Printer.error(e);
             System.exit(-1);
@@ -98,15 +82,7 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
 
         try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_negotiation WHERE studentCode=?;")) {
             stm.setInt(1, negotiationBuyer.getCode());
-            ResultSet res = stm.executeQuery();
-
-            if(res.first()) {
-                do {
-                    SellableBookEntity sellableBook = createEntityFromViewResultSet(res);
-                    sellableBooks.add(sellableBook);
-                } while (res.next());
-            }
-
+            addResultSetToList(stm.executeQuery(), sellableBooks);
         } catch(SQLException e) {
             Printer.error(e);
             System.exit(-1);
@@ -123,15 +99,7 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
 
         try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_sellable_book WHERE course=?;")) {
             stm.setInt(1, course.getCode());
-            ResultSet res = stm.executeQuery();
-
-            if(res.first()) {
-                do {
-                    SellableBookEntity sellableBook = createEntityFromViewResultSet(res);
-                    sellableBooks.add(sellableBook);
-                } while (res.next());
-            }
-
+            addResultSetToList(stm.executeQuery(), sellableBooks);
         } catch(SQLException e) {
             Printer.error(e);
             System.exit(-1);
@@ -197,6 +165,16 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
                 }
             }
             return sellableBook;
+    }
+
+    // FIXME
+    private void addResultSetToList(ResultSet res, List<SellableBookEntity> sellableBooks) throws SQLException {
+        if(res.first()) {
+            do {
+                SellableBookEntity sellableBook = createEntityFromViewResultSet(res);
+                sellableBooks.add(sellableBook);
+            } while (res.next());
+        }
     }
 
 }
