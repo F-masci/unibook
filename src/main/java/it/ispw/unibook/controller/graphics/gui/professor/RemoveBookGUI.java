@@ -86,7 +86,7 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
             booksCombo.setDisable(true);
             removeBookButton.setVisible(false);
             successLabel.setText("Libro rimosso correttamente");
-        } catch (BookException e) {
+        } catch (BookException | CourseException e) {
             errorLabel.setText(e.getMessage());
         }
     }

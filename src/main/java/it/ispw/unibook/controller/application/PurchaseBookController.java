@@ -13,7 +13,7 @@ import it.ispw.unibook.exceptions.negotiation.NegotiationException;
 import it.ispw.unibook.factory.SellableBookDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
 
-public class PurchaseBookController extends ManageSellableBookController {
+public class PurchaseBookController {
 
     public void purchaseBook(SellableBookBean bean) throws SellableBookException, NegotiationException, SessionException {
         try {

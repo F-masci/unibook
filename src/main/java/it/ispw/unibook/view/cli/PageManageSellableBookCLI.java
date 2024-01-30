@@ -9,7 +9,7 @@ import it.ispw.unibook.utils.Printer;
 
 import java.util.List;
 
-public class PageManageSellableBookCLI extends PageManageBookCLI {
+public class PageManageSellableBookCLI extends GenericPageManageBookCLI {
 
     protected PageManageSellableBookCLI() {}
 

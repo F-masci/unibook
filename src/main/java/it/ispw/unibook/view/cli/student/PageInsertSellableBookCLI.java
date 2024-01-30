@@ -51,7 +51,7 @@ public class PageInsertSellableBookCLI extends PageManageSellableBookCLI impleme
             } catch(IOException e) {
                 Printer.error(e);
                 System.exit(-1);
-            } catch(BookException | SessionException e) {
+            } catch(BookException | SessionException | CourseException e) {
                 showErrorMessage(e);
             } catch (EscCliException e) {
                 return;

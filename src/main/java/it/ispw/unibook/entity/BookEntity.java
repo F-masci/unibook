@@ -22,6 +22,13 @@ public class BookEntity {
         this.isbn = isbn;
         this.title = title;
     }
+    /**
+     * Costruttore alternativo per creare il libro con solo il codice
+     * @param isbn Codice identificativo del libro
+     */
+    public BookEntity(String isbn) {
+        this(isbn, null);
+    }
 
     /**
      *

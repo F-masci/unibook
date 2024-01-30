@@ -8,6 +8,7 @@ import it.ispw.unibook.controller.graphics.cli.student.PurchaseBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
+import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
 import it.ispw.unibook.utils.Printer;
@@ -84,7 +85,7 @@ public class PagePurchaseBookCLI extends PageManageSellableBookCLI implements Pa
                 CourseBean courseBean = new CourseBean(course);
                 purchaseBook(controller.retrieveSellableBooksByCourse(courseBean));
                 break;
-            } catch (BookException | NegotiationException | SessionException e) {
+            } catch (BookException | NegotiationException | SessionException | CourseException e) {
                 showErrorMessage(e);
             }
         }

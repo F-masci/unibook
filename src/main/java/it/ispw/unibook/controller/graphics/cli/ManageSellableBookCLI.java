@@ -1,14 +1,15 @@
 package it.ispw.unibook.controller.graphics.cli;
 
 import it.ispw.unibook.bean.*;
-import it.ispw.unibook.controller.application.ManageSellableBookController;
+import it.ispw.unibook.facade.ManageSellableBookFacade;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
+import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import org.jetbrains.annotations.NotNull;
 
 public class ManageSellableBookCLI extends ManageBookCLI {
 
-    ManageSellableBookController sellbaleBookController = new ManageSellableBookController();
+    ManageSellableBookFacade sellbaleBookController = new ManageSellableBookFacade();
 
     public void retrieveSellableBooksBySession(SellableBooksListBean bean) throws SessionException {
         sellbaleBookController.retrieveSellableBooksBySession(bean);
@@ -21,7 +22,7 @@ public class ManageSellableBookCLI extends ManageBookCLI {
         return sellbaleBookController.retrieveSellableBooksByIsbn(bean);
     }
 
-    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) {
+    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseNotFoundException {
         return sellbaleBookController.retrieveSellableBooksByCourse(bean);
     }
 

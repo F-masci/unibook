@@ -6,29 +6,26 @@
     -fx-border-width: 0 0 1 0;
     -fx-border-color: #003366;
     -fx-font-size: 24;
+    -fx-background-color: transparent, transparent, transparent, transparent;
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0px;
+    -fx-text-fill: #006699;
 }
 
 .legacy-combo-box > .arrow-button {
     -fx-padding: 2;
-}
-
-.legacy-combo-box {
-    -fx-background-color: transparent, transparent, transparent, transparent;
-    -fx-background-radius: 3px;
-    -fx-background-insets: 0px;
+    -fx-background-color: transparent;
 }
 
 .legacy-combo-box .text-field {
     -fx-background-color: transparent, transparent, transparent, transparent;
     -fx-background-radius: 3px;
     -fx-background-insets: 0px;
+    -fx-prompt-text-fill: #003366;
+    -fx-text-fill: #006699;
 }
 
 .legacy-combo-box .combo-box-button-container {
-    -fx-background-color: transparent;
-}
-
-.legacy-combo-box > .arrow-button {
     -fx-background-color: transparent;
 }
 
@@ -38,55 +35,10 @@
     -fx-text-fill: #006699;
 }
 
-.legacy-combo-box {
-    -line-color: #006699;
-    -unfocused-line-color: #006699;
-    -fx-prompt-text-fill: #006699;
-    -fx-text-fill: #006699;
-}
-
-.legacy-combo-box .text-field {
-    -fx-prompt-text-fill: #003366;
-    -fx-text-fill: #006699;
-}
-
 .legacy-combo-box .list-cell {
     -fx-text-fill: #006699;
 }
 
 .legacy-combo-box > .arrow-button > .arrow {
     -fx-background-color: #006699;
-}
-
-.combo-box {
-    -track-color: rgb(230, 230, 230);
-    -thumb-color: rgb(137, 137, 137);
-    -thumb-hover-color: rgb(89, 88, 91);
-    -fx-padding: 3 5 3 5;
-}
-
-.combo-box .caret .ripple-generator {
-    -ripple-color: rgba(98, 0, 238, 0.1);
-    -ripple-radius: 14;
-}
-
-.combo-box .combo-popup .virtual-flow {
-    -fx-background-radius: 5;
-    -fx-border-color: #ebebeb;
-    -fx-border-radius: 5;
-}
-
-.combo-box-cell {
-    -fx-background-color: transparent;
-    -fx-background-radius: 5;
-    -fx-padding: 5;
-}
-
-.combo-box-cell:hover {
-    -fx-background-color: -hover;
-}
-
-.combo-box-cell .data-label {
-    -fx-font-family: "Open Sans Regular";
-    -fx-text-fill: -text-he;
 }

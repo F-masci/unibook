@@ -8,6 +8,7 @@ import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
+import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 import it.ispw.unibook.factory.CourseDaoFactory;
@@ -49,7 +50,7 @@ public class SellableBookController {
         return resBean;
     }
 
-    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) {
+    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseNotFoundException {
         CourseDao dao = CourseDaoFactory.getInstance().getDao();
         CourseEntity course = dao.retrieveCourseByCode(bean.getCode());
         List<SellableBookEntity> sellableBooks = course.getSellableBooks();

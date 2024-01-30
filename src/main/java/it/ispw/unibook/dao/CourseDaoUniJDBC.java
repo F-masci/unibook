@@ -1,6 +1,7 @@
 package it.ispw.unibook.dao;
 
 import it.ispw.unibook.entity.SellableBookEntity;
+import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
@@ -23,21 +24,21 @@ public class CourseDaoUniJDBC implements CourseDao {
     }
 
     @Override
-    public CourseEntity retrieveCourseByCode(int code) {
-        CourseEntity course = null;
+    public CourseEntity retrieveCourseByCode(int code) throws CourseNotFoundException {
         try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course WHERE code=? ORDER BY startYear DESC, endYear DESC, name")){
             stm.setInt(1, code);
             ResultSet res = stm.executeQuery();
 
             if(res.first()) {
-                course = createEntityFromViewCourseResultSet(res);
+                return createEntityFromViewCourseResultSet(res);
+            } else {
+                throw new CourseNotFoundException();
             }
         } catch (SQLException e) {
             Printer.error(e);
             System.exit(-1);
         }
-
-        return course;
+        return null;
     }
 
     @Override

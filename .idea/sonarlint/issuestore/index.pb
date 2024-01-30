@@ -268,3 +268,13 @@ Hsrc/main/java/it/ispw/unibook/controller/graphics/cli/ManageBookCLI.java,b\4\b
 Xsrc/main/java/it/ispw/unibook/controller/graphics/cli/student/RemoveSellableBookCLI.java,e\b\eb984276627d0e9d522386b4fcf541833478e8ce
 q
 Asrc/main/java/it/ispw/unibook/exceptions/cli/EscCliException.java,c\3\c3a287ab4dbe772266d712f19b54bc98fd567a9e
+`
+0src/main/resources/style/componenti/comboBox.css,c\9\c995925402069b75d68ceac407336368963614b4
+p
+@src/main/java/it/ispw/unibook/facade/ManageCourseBookFacade.java,0\4\0462894d97c889075fdc72b3a105b21485121c24
+r
+Bsrc/main/java/it/ispw/unibook/facade/ManageSellableBookFacade.java,5\3\532e0a7a2e08c08c75690f5d23a93f133745ce52
+€
+Psrc/main/java/it/ispw/unibook/controller/graphics/cli/professor/ListBookCLI.java,6\2\6261cdbfe69735f502b39d38942c8c9ef728f4db
+t
+Dsrc/main/java/it/ispw/unibook/view/cli/GenericPageManageBookCLI.java,6\8\68856643ce9545d29ad0c5e81429215c4580c239

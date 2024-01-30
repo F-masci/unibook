@@ -7,13 +7,15 @@ import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.book.sellable.UnsellableBookInCourseException;
+import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 import it.ispw.unibook.factory.CourseDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
 
-public class InsertSellableBookController extends ManageSellableBookController{
-    public void insertSellableBook(SellableBookBean bean) throws SellableBookException, SessionException {
+public class InsertSellableBookController {
+    public void insertSellableBook(SellableBookBean bean) throws SellableBookException, SessionException, CourseException {
         try {
             AccountEntity seller = SessionManager.getAccountBySessionID(bean.getSessionId());
             CourseDao dao = CourseDaoFactory.getInstance().getDao();
@@ -24,6 +26,8 @@ public class InsertSellableBookController extends ManageSellableBookController{
             throw new SellableBookException(e.getMessage(), e);
         } catch (SessionNotFoundException e) {
             throw new SessionException(e.getMessage(), e);
+        } catch (CourseNotFoundException e) {
+            throw new CourseException(e.getMessage(), e);
         }
     }
 

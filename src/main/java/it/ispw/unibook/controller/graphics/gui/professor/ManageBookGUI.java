@@ -3,7 +3,7 @@ package it.ispw.unibook.controller.graphics.gui.professor;
 import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.CoursesListBean;
-import it.ispw.unibook.controller.application.ManageCourseBookController;
+import it.ispw.unibook.facade.ManageCourseBookFacade;
 import it.ispw.unibook.controller.graphics.gui.GenericGUI;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public abstract class ManageBookGUI extends GenericGUI {
 
-    ManageCourseBookController courseBookController = new ManageCourseBookController();
+    ManageCourseBookFacade courseBookController = new ManageCourseBookFacade();
 
     private final ObservableMap<String, Integer> courses = FXCollections.observableHashMap();
     protected void loadCoursesComboBox(ComboBox<String> combo) {

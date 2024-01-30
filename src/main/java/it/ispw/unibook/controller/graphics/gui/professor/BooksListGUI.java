@@ -2,7 +2,7 @@ package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
-import it.ispw.unibook.controller.application.ManageCourseBookController;
+import it.ispw.unibook.facade.ManageCourseBookFacade;
 import it.ispw.unibook.exceptions.course.CourseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ public class BooksListGUI extends ManageBookGUI implements Initializable {
     private VBox booksList;
 
 
-    private final ManageCourseBookController controller = new ManageCourseBookController();
+    private final ManageCourseBookFacade controller = new ManageCourseBookFacade();
     private int courseSelected = 0;
 
     @Override

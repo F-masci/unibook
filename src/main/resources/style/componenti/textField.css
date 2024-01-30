@@ -8,7 +8,7 @@
     -fx-font-size: 24px;
 }
 
-.text-field .text-field {
+.text-field {
     -fx-highlight-fill: #ECE0FD;
     -fx-prompt-text-fill: rgba(0, 0, 0, 0.60);
 }

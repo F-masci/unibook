@@ -14,7 +14,7 @@ import it.ispw.unibook.factory.CourseEntityFacotry;
 import it.ispw.unibook.factory.SellableBookDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
 
-public class RemoveSellableBookController extends ManageSellableBookController {
+public class RemoveSellableBookController {
 
     public void removeSellableBook(SellableBookBean bean) throws SellableBookException, SessionException {
         try {

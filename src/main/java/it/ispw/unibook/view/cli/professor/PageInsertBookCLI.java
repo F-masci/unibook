@@ -12,9 +12,9 @@ import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
-import it.ispw.unibook.view.cli.PageManageBookCLI;
+import it.ispw.unibook.view.cli.GenericPageManageBookCLI;
 
-public class PageInsertBookCLI extends PageManageBookCLI implements PageCLI {
+public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageCLI {
 
     // Messaggio per richiedere l'ISBN del libro all'utente
     private static final String ISBN_REQUEST_TEXT = "Inserisci l'isbn del libro che vuoi aggiungere alla lista oppure digita esc per tornare indietro: ";

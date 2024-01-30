@@ -2,16 +2,24 @@ package it.ispw.unibook.controller.graphics.cli.professor;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.CourseBean;
-import it.ispw.unibook.controller.application.RemoveCourseBookController;
 import it.ispw.unibook.controller.graphics.cli.ManageBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
+import it.ispw.unibook.exceptions.course.CourseException;
+import org.jetbrains.annotations.NotNull;
 
 public class RemoveBookCLI extends ManageBookCLI {
 
-    private final RemoveCourseBookController controller = new RemoveCourseBookController();
+    // Il controller grafico eredita da quello generale l'accesso tramite facade
+    // al sottosistema di gestione dei corsi e dei libri associati
 
-    public void removeBookFromCourse(CourseBean courseBean, BookBean bookBean) throws BookException {
-        controller.removeBookFromCourse(courseBean, bookBean);
+    /**
+     * Rimuove il libro dal corso svolgendo il caso d'uso
+     * @param courseBean Deve contenere il codice del corso da cui rimuovere il libro
+     * @param bookBean Deve contenere tutti i dati del libro da inserire
+     * @throws BookException Viene sollevata se il libro non è presente nel corso
+     */
+    public void removeBookFromCourse(@NotNull CourseBean courseBean, @NotNull BookBean bookBean) throws BookException, CourseException {
+        facade.removeBookFromCourse(courseBean, bookBean);
     }
 
 }

@@ -9,9 +9,9 @@ import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
-import it.ispw.unibook.view.cli.PageManageBookCLI;
+import it.ispw.unibook.view.cli.GenericPageManageBookCLI;
 
-public class PageRemoveBookCLI extends PageManageBookCLI implements PageCLI {
+public class PageRemoveBookCLI extends GenericPageManageBookCLI implements PageCLI {
 
     // Messaggio per richiedere il codice del corso all'utente
     private static final String COURSE_CODE_REQUEST_TEXT = "Inserisci il codice del corso a cui rimuovere il libro oppure digita esc per tornare indietro: ";

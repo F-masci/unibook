@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Questa View raccoglie le funzioni comuni alle View per stampare le liste dei libri e dei corsi.
  */
-public abstract class PageManageBookCLI extends GenericPageCLI {
+public abstract class GenericPageManageBookCLI extends GenericPageCLI {
 
     /**
      * Stampa a schermo la lista dei corsi associati all'utente attualmente loggato
