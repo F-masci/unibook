@@ -5,39 +5,35 @@ import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.CoursesListBean;
 import it.ispw.unibook.controller.application.ManageCourseBookController;
 import it.ispw.unibook.controller.graphics.gui.GenericGUI;
-import it.ispw.unibook.controller.graphics.gui.PagesGUI;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
+import it.ispw.unibook.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
-import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 
 import java.util.List;
 
-public class ManageBookGUI extends GenericGUI {
+public abstract class ManageBookGUI extends GenericGUI {
 
-    ManageCourseBookController controller = new ManageCourseBookController();
-
-    protected ManageBookGUI() {}
-
-    @FXML
-    protected void returnToHomePage() {
-        changePage(PagesGUI.HOME_PROFESSOR);
-    }
+    ManageCourseBookController courseBookController = new ManageCourseBookController();
 
     private final ObservableMap<String, Integer> courses = FXCollections.observableHashMap();
-    protected void loadCoursesComboBox(ComboBox<String> combo) throws SessionException {
+    protected void loadCoursesComboBox(ComboBox<String> combo) {
+        try {
+            CoursesListBean bean = new CoursesListBean();
+            retrieveCoursesBySession(bean);
 
-        CoursesListBean bean = new CoursesListBean();
-        retrieveCoursesBySession(bean);
+            List<CourseBean> localCourses = bean.getList();
+            for (CourseBean c : localCourses) {
+                this.courses.put(c.toString(), c.getCode());
+            }
 
-        List<CourseBean> localCourses = bean.getList();
-        for(CourseBean c: localCourses) {
-            this.courses.put(c.toString(), c.getCode());
+            combo.setItems(FXCollections.observableArrayList(this.courses.keySet()));
+        } catch (SessionException e) {
+            Printer.error(e);
+            System.exit(-1);
         }
-
-        combo.setItems(FXCollections.observableArrayList(this.courses.keySet()));
     }
 
     protected int getCourseSelectedFromComboBox(ComboBox<String> combo) {
@@ -48,13 +44,11 @@ public class ManageBookGUI extends GenericGUI {
         return 0;
     }
 
-    // FIXME exceptions
     protected void retrieveCoursesBySession(CoursesListBean bean) throws SessionException {
-        controller.retrieveCoursesBySession(bean);
+        courseBookController.retrieveCoursesBySession(bean);
     }
-    // FIXME exceptions
     protected void retrieveBooksByCourse(BooksListBean bean) throws CourseException {
-        controller.retrieveBooksByCourse(bean);
+        courseBookController.retrieveBooksByCourse(bean);
     }
 
 }

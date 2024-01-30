@@ -70,7 +70,7 @@ public class BookController {
      */
     private BookBean createBookBeanFromEntity(@NotNull BookEntity book) throws BookException {
         return new BookBean(
-            book.getISBN(),
+            book.getIsbn(),
             book.getTitle()
         );
     }

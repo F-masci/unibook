@@ -10,6 +10,7 @@ import it.ispw.unibook.view.cli.PageManageBookCLI;
 
 public class PageBooksListCLI extends PageManageBookCLI implements PageCLI {
 
+    // Controller grafico relativo alla View
     private final ManageBookCLI controller = new ManageBookCLI();
 
     @Override
@@ -19,6 +20,7 @@ public class PageBooksListCLI extends PageManageBookCLI implements PageCLI {
         Printer.println("\n--- PAGINA LIBRI COLLEGATI AD UN CORSO ---");
 
         try {
+            // Viene stampata la lista dei corsi relativa all'utente loggato
             super.printCoursesList(controller);
         } catch (SessionException e) {
             showErrorMessage(e);
@@ -27,9 +29,12 @@ public class PageBooksListCLI extends PageManageBookCLI implements PageCLI {
 
         while(true) {
             try {
+                // Viene richiesto il codice del corso di cui stampare la lista dei libri
                 int code = requestCourseCode();
+                // Viene stampata la lista dei libri associati al corso
                 super.printCourseBooksList(controller, code);
 
+                // Si attende un qualsiasi pulsante premuto per tornare alla home
                 waitForExit();
                 return;
 

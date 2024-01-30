@@ -1,7 +1,7 @@
 package it.ispw.unibook.controller.graphics.cli.professor;
 
 import it.ispw.unibook.bean.BookBean;
-import it.ispw.unibook.bean.ManageBookBean;
+import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.controller.application.InsertCourseBookController;
 import it.ispw.unibook.controller.graphics.cli.ManageBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
@@ -15,8 +15,8 @@ public class InsertBookCLI extends ManageBookCLI {
          controller.getBookInformation(bean);
      }
 
-     public void insertBookInCourse(ManageBookBean bean) throws CourseException {
-         controller.insertBookInCourse(bean);
+     public void insertBookInCourse(CourseBean courseBean, BookBean bookBean) throws CourseException {
+         controller.insertBookInCourse(courseBean, bookBean);
      }
 
 }

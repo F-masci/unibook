@@ -73,7 +73,7 @@ public class SellableBookController {
             try {
                 SellableBookBean sellableBook = new SellableBookBean(
                         b.getCode(),
-                        b.getISBN(),
+                        b.getIsbn(),
                         b.getTitle(),
                         b.getPrice()
                 );

@@ -1,7 +1,6 @@
 package it.ispw.unibook.entity.state.book.sellable;
 
 import it.ispw.unibook.entity.AccountEntity;
-import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookAlreadySoldException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotSoldExceptions;
 

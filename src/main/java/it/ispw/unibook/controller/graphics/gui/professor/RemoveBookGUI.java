@@ -1,10 +1,11 @@
 package it.ispw.unibook.controller.graphics.gui.professor;
 
-import it.ispw.unibook.bean.*;
+import it.ispw.unibook.bean.BookBean;
+import it.ispw.unibook.bean.BooksListBean;
+import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.controller.application.RemoveCourseBookController;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.CourseException;
-import it.ispw.unibook.exceptions.login.SessionException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
@@ -42,11 +43,7 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
     // FIXME exceptions
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            loadCoursesComboBox(coursesCombo);
-        } catch (SessionException e) {
-            throw new RuntimeException(e);
-        }
+        loadCoursesComboBox(coursesCombo);
     }
 
     // FIXME exceptions
@@ -81,8 +78,9 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
         if (value != null) isbn = items.get(value);
 
         try {
-            ManageBookBean bean = new ManageBookBean(courseSelected, isbn);
-            controller.removeBookFromCourse(bean);
+            CourseBean courseBean = new CourseBean(courseSelected);
+            BookBean bookBean = new BookBean(isbn);
+            controller.removeBookFromCourse(courseBean, bookBean);
 
             coursesCombo.setDisable(true);
             booksCombo.setDisable(true);

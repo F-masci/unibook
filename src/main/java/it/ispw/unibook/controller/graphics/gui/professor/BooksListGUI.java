@@ -4,7 +4,6 @@ import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.controller.application.ManageCourseBookController;
 import it.ispw.unibook.exceptions.course.CourseException;
-import it.ispw.unibook.exceptions.login.SessionException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,12 +29,7 @@ public class BooksListGUI extends ManageBookGUI implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // FIXME exceptions
-        try {
-            loadCoursesComboBox(coursesCombo);
-        } catch (SessionException e) {
-            throw new RuntimeException(e);
-        }
+        loadCoursesComboBox(coursesCombo);
     }
 
     // FIXME exceptions

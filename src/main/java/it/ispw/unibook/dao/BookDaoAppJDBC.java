@@ -53,7 +53,7 @@ public class BookDaoAppJDBC implements BookDao {
     public void addBookToCourse(CourseEntity course, BookEntity book) {
         try (PreparedStatement stm = connection.prepareStatement("INSERT INTO book(course, isbn, title) VALUES(?, ?, ?);")) {
             stm.setInt(1, course.getCode());
-            stm.setString(2, book.getISBN());
+            stm.setString(2, book.getIsbn());
             stm.setString(3, book.getTitle());
             stm.execute();
         } catch(SQLException e) {
@@ -66,7 +66,7 @@ public class BookDaoAppJDBC implements BookDao {
     public void removeBookFromCourse(CourseEntity course, BookEntity book) {
         try (PreparedStatement stm = connection.prepareStatement("DELETE FROM book WHERE course = ? AND isbn = ?;")) {
             stm.setInt(1, course.getCode());
-            stm.setString(2, book.getISBN());
+            stm.setString(2, book.getIsbn());
             stm.execute();
         } catch(SQLException e) {
             Printer.error(e);

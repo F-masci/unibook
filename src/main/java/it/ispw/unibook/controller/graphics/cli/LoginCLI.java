@@ -14,11 +14,12 @@ public class LoginCLI {
     public void login(LoginBean bean) throws LoginException {
         controller.login(bean);
 
-        // Se non vengono sollevate eccezioni dal controller applicativo l'utente viene mandato alla home
+        // Se non vengono sollevate eccezioni dal sellbaleBookController applicativo l'utente viene mandato alla home
         updateView(bean);
     }
 
     private void updateView(LoginBean bean) {
+        Printer.println("");
         try {
             switch (SessionManager.getAccountTypeBySessionID(bean.getSessionId())) {
                 case STUDENT -> new it.ispw.unibook.view.cli.student.PageHomeCLI().display();

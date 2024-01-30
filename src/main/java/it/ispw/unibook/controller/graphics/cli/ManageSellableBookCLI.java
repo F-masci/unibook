@@ -8,25 +8,25 @@ import org.jetbrains.annotations.NotNull;
 
 public class ManageSellableBookCLI extends ManageBookCLI {
 
-    ManageSellableBookController controller = new ManageSellableBookController();
+    ManageSellableBookController sellbaleBookController = new ManageSellableBookController();
 
     public void retrieveSellableBooksBySession(SellableBooksListBean bean) throws SessionException {
-        controller.retrieveSellableBooksBySession(bean);
+        sellbaleBookController.retrieveSellableBooksBySession(bean);
     }
     public void retrieveSellableBooksBySessionActiveNegotiation(@NotNull SellableBooksListBean bean) throws SessionException {
-        controller.retrieveSellableBooksBySessionActiveNegotiation(bean);
+        sellbaleBookController.retrieveSellableBooksBySessionActiveNegotiation(bean);
     }
 
     public SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) {
-        return controller.retrieveSellableBooksByIsbn(bean);
+        return sellbaleBookController.retrieveSellableBooksByIsbn(bean);
     }
 
     public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) {
-        return controller.retrieveSellableBooksByCourse(bean);
+        return sellbaleBookController.retrieveSellableBooksByCourse(bean);
     }
 
     public AccountsListBean retrieveActiveNegotiationBySellableBook(SellableBookBean bean) throws SellableBookNotFoundException {
-        return controller.retrieveActiveNegotiationBySellableBook(bean);
+        return sellbaleBookController.retrieveActiveNegotiationBySellableBook(bean);
     }
 
 }

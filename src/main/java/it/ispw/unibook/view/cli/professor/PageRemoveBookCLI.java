@@ -1,17 +1,27 @@
 package it.ispw.unibook.view.cli.professor;
 
-import it.ispw.unibook.bean.ManageBookBean;
+import it.ispw.unibook.bean.BookBean;
+import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.controller.graphics.cli.professor.RemoveBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
+import it.ispw.unibook.exceptions.cli.EscCliException;
+import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
 import it.ispw.unibook.view.cli.PageManageBookCLI;
 
-import java.io.IOException;
-
 public class PageRemoveBookCLI extends PageManageBookCLI implements PageCLI {
 
+    // Messaggio per richiedere il codice del corso all'utente
+    private static final String COURSE_CODE_REQUEST_TEXT = "Inserisci il codice del corso a cui rimuovere il libro oppure digita esc per tornare indietro: ";
+    // Messaggio per richiedere l'ISBN del libro all'utente
+    private static final String ISBN_REQUEST_TEXT = "Inserisci l'isbn del libro da rimuovere oppure digita esc per tornare indietro: ";
+
+    // Messaggio di conferma dell'operazione
+    private static final String SUCCESS_MESSAGE_TEXT = "Libro inserito correttamente";
+
+    // Controller grafico relativo alla View
     private final RemoveBookCLI controller = new RemoveBookCLI();
 
 
@@ -19,46 +29,45 @@ public class PageRemoveBookCLI extends PageManageBookCLI implements PageCLI {
     public void display() {
 
         Printer.clear();
-        Printer.println("--- RIMOZIONE LIBRO ---");
+        Printer.println("\n--- PAGINA RIMOZIONE LIBRO DA UN CORSO ---");
 
-        // FIXME exceptions
         try {
+            // Stampa la lista dei corsi collegati all'utente loggato
             super.printCoursesList(controller);
         } catch (SessionException e) {
-            throw new RuntimeException(e);
+            showErrorMessage(e);
+            System.exit(-1);
         }
-
-        String isbn;
-        int course;
 
         while(true) {
             try {
 
-                Printer.println("Inserisci il codice del corso a cui rimuovere il libro oppure digita esc per tornare indietro");
-                Printer.print("Corso: ");
-                String line = br.readLine();
+                // Richiede il codice del corso all'utente
+                int courseCode = requestCourseCode(COURSE_CODE_REQUEST_TEXT);
+                // Crea il bean da inviare al controller applicativo
+                CourseBean courseBean = new CourseBean(courseCode);
 
-                if (line.equals("esc")) return;
+                // Viene stampata la lista dei libri associati al corso
+                super.printCourseBooksList(controller, courseCode);
+                // Richiede il codice del libro all'utente
+                String isbn = requestBookCode(ISBN_REQUEST_TEXT);
+                // Crea il bean da inviare al controller applicativo
+                BookBean bookBean = new BookBean(isbn);
 
-                course = Integer.parseInt(line);
+                // Vengono inviati i bean contenenti i dati del libro e del corso al controller applicativo
+                controller.removeBookFromCourse(courseBean, bookBean);
 
-                Printer.println("Inserisci l'isbn del libro da rimuovere oppure digita esc per tornare indietro");
-                Printer.print("Libro: ");
-                isbn = br.readLine();
+                // Se non vengono sollevate eccezioni il libro è stato inserito correttamente e viene stampato il messaggio di conferma
+                Printer.println(SUCCESS_MESSAGE_TEXT);
+                // Si attende un qualsiasi pulsante premuto per tornare alla home
+                waitForExit();
 
-                if (isbn.equals("esc")) return;
+                return;
 
-                ManageBookBean bean = new ManageBookBean(course, isbn);
-                controller.removeBookFromCourse(bean);
-                break;
-
-            } catch (IOException e) {
-                Printer.error(e);
-                System.exit(-1);
-            } catch (NumberFormatException e) {
-                Printer.error("Il codice inserito non è un numero");
-            } catch (BookException e) {
-                Printer.error(e);
+            } catch (BookException | CourseException e) {
+                showErrorMessage(e);
+            } catch (EscCliException e) {
+                return;
             }
         }
 

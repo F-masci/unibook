@@ -144,7 +144,7 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
     public void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook) {
         try (PreparedStatement stm = connection.prepareStatement("INSERT INTO sellable_book(course, isbn, seller, price) VALUES(?, ?, ?, ?);")) {
             stm.setInt(1, course.getCode());
-            stm.setString(2, sellableBook.getISBN());
+            stm.setString(2, sellableBook.getIsbn());
             stm.setInt(3, sellableBook.getSeller().getCode());
             stm.setFloat(4, sellableBook.getPrice());
             stm.execute();
