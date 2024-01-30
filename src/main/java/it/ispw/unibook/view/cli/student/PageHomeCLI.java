@@ -13,6 +13,7 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
             --- HOME ---
             
             Seleziona cosa vuoi fare
+            [0] Esci
             [1] Visualizza corsi
             [2] Visualizza libri
             [3] Visualizza trattative aperte
@@ -37,6 +38,9 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
 
                 int selection = requestInt("Selezione (oppure esc per uscire): ");
                 switch (selection) {
+                    case 0 -> {
+                        return;
+                    }
                     case 1 -> controller.showCourses();
                     case 2 -> controller.showBooks();
                     case 3 -> controller.showActiveSellableBooks();
@@ -52,8 +56,8 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
 
             } catch (SelectionNotValidException e) {
                 showErrorMessage(e);
-            } catch (EscCliException e) {
-                return;
+            } catch (EscCliException ignored) {
+                // L'eccezioe può essere ignorata perchè per eseguire il logout l'utente deve immettere 0
             }
         }
     }
