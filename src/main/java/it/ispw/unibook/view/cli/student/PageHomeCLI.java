@@ -1,14 +1,26 @@
 package it.ispw.unibook.view.cli.student;
 
 import it.ispw.unibook.controller.graphics.cli.student.HomeCLI;
+import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.GenericPageCLI;
 import it.ispw.unibook.view.cli.PageCLI;
 
-import java.io.IOException;
-
 public class PageHomeCLI extends GenericPageCLI implements PageCLI {
+
+    private static final String MENU_TEXT = """
+            --- HOME ---
+            
+            Seleziona cosa vuoi fare
+            [1] Visualizza corsi
+            [2] Visualizza libri
+            [3] Visualizza trattative aperte
+            [4] Compra libro
+            [5] Inserisci libro in vendita
+            [6] Rimuovi libro in vendita
+            [7] Segna libro come venduto
+            """;
 
     // Controller grafico relativo alla View
     private final HomeCLI controller = new HomeCLI();
@@ -17,18 +29,14 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
     public void display() {
 
         // Viene stampato il menu
-        printMenu();
+        Printer.println(MENU_TEXT);
 
         while (true) {
 
             try {
 
-                Printer.print("Azione: ");
-                int selection = Integer.parseInt(br.readLine());
+                int selection = requestInt("Selezione (oppure esc per uscire): ");
                 switch (selection) {
-                    case 0 -> {
-                        return;
-                    }
                     case 1 -> controller.showCourses();
                     case 2 -> controller.showBooks();
                     case 3 -> controller.showActiveSellableBooks();
@@ -40,35 +48,14 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
                 }
 
                 // Viene ristampato il menu
-                printMenu();
+                Printer.println(MENU_TEXT);
 
-            } catch (IOException e) {
-                Printer.error(e);
-                System.exit(-1);
-            } catch (NumberFormatException e) {
-                showErrorMessage("L'input inserito non è un numero");
             } catch (SelectionNotValidException e) {
                 showErrorMessage(e);
+            } catch (EscCliException e) {
+                return;
             }
         }
-    }
-
-    /**
-     * Stampa il menu delle possibili scelte
-     */
-    public void printMenu() {
-        Printer.clear();
-        Printer.println("--- HOME ---\n");
-        Printer.println("Seleziona cosa vuoi fare");
-        Printer.println("""
-            [0] Esci
-            [1] Visualizza corsi
-            [2] Visualizza libri
-            [3] Visualizza trattative aperte
-            [4] Compra libro
-            [5] Inserisci libro in vendita
-            [6] Rimuovi libro in vendita
-            [7] Segna libro come venduto""");
     }
 
 }
