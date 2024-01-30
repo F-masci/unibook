@@ -33,7 +33,7 @@ public class PageRemoveBookCLI extends GenericPageManageBookCLI implements PageC
 
         try {
             // Stampa la lista dei corsi collegati all'utente loggato
-            super.printCoursesList(controller);
+            super.printSessionCoursesList(controller);
         } catch (SessionException e) {
             showErrorMessage(e);
             System.exit(-1);
@@ -54,10 +54,10 @@ public class PageRemoveBookCLI extends GenericPageManageBookCLI implements PageC
                 // Crea il bean da inviare al controller applicativo
                 BookBean bookBean = new BookBean(isbn);
 
-                // Vengono inviati i bean contenenti i dati del libro e del corso al controller applicativo
+                // Vengono inviati i bean contenenti i dati del libro e del corso al controller grafico
                 controller.removeBookFromCourse(courseBean, bookBean);
 
-                // Se non vengono sollevate eccezioni il libro è stato inserito correttamente e viene stampato il messaggio di conferma
+                // Se non vengono sollevate eccezioni l'operazione è stata completata correttamente e viene stampato il messaggio di conferma
                 Printer.println(SUCCESS_MESSAGE_TEXT);
                 // Si attende un qualsiasi pulsante premuto per tornare alla home
                 waitForExit();

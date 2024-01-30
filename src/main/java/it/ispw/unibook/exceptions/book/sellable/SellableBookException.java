@@ -1,8 +1,6 @@
 package it.ispw.unibook.exceptions.book.sellable;
 
-import it.ispw.unibook.exceptions.book.BookException;
-
-public class SellableBookException extends BookException {
+public class SellableBookException extends Exception {
 
     public SellableBookException() {
         this("Errore");

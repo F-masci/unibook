@@ -24,21 +24,13 @@ public abstract class GenericPageManageBookCLI extends GenericPageCLI {
      *                   Tale controller deve essere una classe figlia di <i>ManageBookCLI</i>
      * @throws SessionException Viene lanciata nel caso in cui la sessione corrente non sia stata trovata
      */
-    protected void printCoursesList(@NotNull ManageBookCLI controller) throws SessionException {
+    protected void printSessionCoursesList(@NotNull ManageBookCLI controller) throws SessionException {
         // Viene istanziato il bean per contenere i corsi
         CoursesListBean bean = new CoursesListBean();
         // Vengono richiesti i corsi al controller grafico
         controller.retrieveCoursesBySession(bean);
-        // Viene estratta la lista dei corsi
-        List<CourseBean> courses = bean.getList();
-
-        Printer.println("\n--- I TUOI CORSI ---");
-
-        // Vengono stampati i corsi utilizzando il metodo <i>toString</i> del bean
-        for(CourseBean c: courses) {
-            Printer.println("[" + c.getCode() + "] " + c);
-        }
-        Printer.println("");
+        // Viene stampata la lista associata al bean
+        printCoursesListBean(bean, "I TUOI CORSI");
     }
 
     /**
@@ -53,18 +45,8 @@ public abstract class GenericPageManageBookCLI extends GenericPageCLI {
         BooksListBean bean = new BooksListBean(courseCode);
         // Vengono richiesti i libri al controller grafico
         controller.retrieveBooksByCourse(bean);
-        // Viene estratta la lista dei corsi
-        List<BookBean> books = bean.getList();
-
-        Printer.println("\n--- LIBRI COLLEGATI AL CORSO ---");
-
-        // Vengono stampati i corsi utilizzando il metodo <i>toString</i> del bean
-        for (BookBean b : books) {
-            Printer.println("[" + b.getISBN() + "] " + b);
-        }
-
-        Printer.println("");
-
+        // Viene stampata la lista associata al bean
+        printCourseBooksListBean(bean, "LIBRI ASSOCAITI AL CORSO");
     }
 
     /**
@@ -104,6 +86,38 @@ public abstract class GenericPageManageBookCLI extends GenericPageCLI {
     protected int requestCourseCode(String msg) throws EscCliException {
         // Richiama la funzione più generale per richiedere un intero
         return requestInt(msg);
+    }
+
+    /**
+     * Metodo ausiliare per stampare la lista dei corsi in un bean
+     * @param bean Deve contenere la lista dei corsi
+     * @param msg Messaggio da stampare prima della lista
+     */
+    protected void printCoursesListBean(@NotNull CoursesListBean bean, String msg) {
+        // Viene estratta la lista dei corsi
+        List<CourseBean> courses = bean.getList();
+        if(msg != null)Printer.println("\n---" + msg + "---");
+        // Vengono stampati i corsi utilizzando il metodo <i>toString</i> del bean
+        for(CourseBean c: courses) {
+            Printer.println("[" + c.getCode() + "] " + c);
+        }
+        Printer.println("");
+    }
+
+    /**
+     * Metodo ausiliare per stampare la lista dei libri in un bean
+     * @param bean Deve contenere la lista dei libri
+     * @param msg Messaggio da stampare prima della lista
+     */
+    protected void printCourseBooksListBean(@NotNull BooksListBean bean, String msg) {
+        // Viene estratta la lista dei libri
+        List<BookBean> books = bean.getList();
+        if(msg != null)Printer.println("\n---" + msg + "---");
+        // Vengono stampati i libri utilizzando il metodo <i>toString</i> del bean
+        for (BookBean b : books) {
+            Printer.println("[" + b.getISBN() + "] " + b);
+        }
+        Printer.println("");
     }
 
 }

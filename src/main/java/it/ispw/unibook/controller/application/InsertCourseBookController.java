@@ -16,7 +16,7 @@ import it.ispw.unibook.factory.LibraryDaoFactory;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Controller applicativo del caso d'uso <i>Inserisci libro ac un corso</i>
+ * Controller applicativo del caso d'uso <i>Inserisci libro in un corso</i>
  */
 public class InsertCourseBookController {
 

@@ -14,9 +14,7 @@ import it.ispw.unibook.exceptions.login.SessionException;
 public abstract class ManageBookCLI {
 
     // Facade per l'accesso al sottosistema di gestione dei corsi e dei libri
-    // Quest'attributo viene ereditato e usato dalle classi figlie per accedere al sottosistema
-    // di gestione dei corsi e dei libri associati
-    protected final ManageCourseBookFacade facade = new ManageCourseBookFacade();
+    private final ManageCourseBookFacade facade = new ManageCourseBookFacade();
 
     /**
      * Ritorna la lista dei corsi associati all'utente loggato

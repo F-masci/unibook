@@ -278,3 +278,13 @@ Bsrc/main/java/it/ispw/unibook/facade/ManageSellableBookFacade.java,5\3\532e0a7
 Psrc/main/java/it/ispw/unibook/controller/graphics/cli/professor/ListBookCLI.java,6\2\6261cdbfe69735f502b39d38942c8c9ef728f4db
 t
 Dsrc/main/java/it/ispw/unibook/view/cli/GenericPageManageBookCLI.java,6\8\68856643ce9545d29ad0c5e81429215c4580c239
+|
+Lsrc/main/java/it/ispw/unibook/view/cli/GenericPageManageSellableBookCLI.java,3\8\38475d68ad0f53a37484ff93c81cb24f2e4e2ed7
+Å
+Qsrc/main/java/it/ispw/unibook/controller/graphics/cli/professor/BooksListCLI.java,0\d\0d5cf5975db305e5387cb38a2f287b9bfd922cc8
+
+Osrc/main/java/it/ispw/unibook/controller/graphics/cli/student/BooksListCLI.java,9\3\935121bc2c6632e480fd8545b68555c6e77ecd25
+Å
+Qsrc/main/java/it/ispw/unibook/controller/graphics/cli/student/CoursesListCLI.java,e\2\e2a4eaaf72aefb33c143774e5e2a763186614e8b
+á
+Wsrc/main/java/it/ispw/unibook/controller/graphics/cli/student/SellableBooksListCLI.java,f\d\fdcbae0a4aebdd5d6759535371b53454eec7fbce

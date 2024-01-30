@@ -85,7 +85,7 @@ public abstract class GenericPageCLI {
     }
     /**
      * Richiede un intero all'utente
-     * @param msg Messaggio da stampare prima di richiedere la stringa
+     * @param msg Messaggio da stampare prima di richiedere l'intero
      * @return L'intero immesso
      * @throws EscCliException Viene sollevata se l'utente inserisce esc per tornare indietro
      */
@@ -94,6 +94,31 @@ public abstract class GenericPageCLI {
             try {
                 // Viene richiesta una stringa all'utente e poi viene eseguito il parsing
                 return Integer.parseInt(requestString(msg));
+            } catch (NumberFormatException e) {
+                showErrorMessage("L'input inserito non è un numero");
+            }
+        }
+    }
+
+    /**
+     * Richiede un decimale all'utente
+     * @return Il decimale immesso
+     * @throws EscCliException Viene sollevata se l'utente inserisce esc per tornare indietro
+     */
+    protected float requestFloat() throws EscCliException {
+        return requestFloat(null);
+    }
+    /**
+     * Richiede un decimale all'utente
+     * @param msg Messaggio da stampare prima di richiedere il decimale
+     * @return Il decimale immesso
+     * @throws EscCliException Viene sollevata se l'utente inserisce esc per tornare indietro
+     */
+    protected float requestFloat(String msg) throws EscCliException {
+        while (true) {
+            try {
+                // Viene richiesta una stringa all'utente e poi viene eseguito il parsing
+                return Float.parseFloat(requestString(msg));
             } catch (NumberFormatException e) {
                 showErrorMessage("L'input inserito non è un numero");
             }

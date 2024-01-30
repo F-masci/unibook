@@ -5,12 +5,13 @@ import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.controller.graphics.cli.ManageBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.facade.ManageCourseBookFacade;
 import org.jetbrains.annotations.NotNull;
 
 public class InsertBookCLI extends ManageBookCLI {
 
-    // Il controller grafico eredita da quello generale l'accesso tramite facade
-    // al sottosistema di gestione dei corsi e dei libri associati
+    // Facade per l'accesso al sottosistema di gestione dei corsi e dei libri
+    private final ManageCourseBookFacade facade = new ManageCourseBookFacade();
 
     /**
      * Cerca il libro nella libreria tramite ISBN

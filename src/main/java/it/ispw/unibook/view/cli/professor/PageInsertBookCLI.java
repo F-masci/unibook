@@ -39,7 +39,7 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
         while(true) {
             try {
                 // Stampa la lista dei corsi collegati all'utente loggato
-                super.printCoursesList(controller);
+                super.printSessionCoursesList(controller);
                 // Richiede il codice di un corso e lo inserisce nel Bean
                 courseBean = new CourseBean(super.requestCourseCode());
                 // Avvia l'inserimento automatico di un libro
@@ -88,12 +88,12 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
                 // per chiedere all'utente come continuare
                 if(!tmp.equals("S")) throw new WrongBookException();
 
-                // Vengono inviati i bean contenenti i dati del libro e del corso al controller applicativo
+                // Vengono inviati i bean contenenti i dati del libro e del corso al controller grafico
                 controller.insertBookInCourse(courseBean, bookBean);
 
-                // Se non vengono sollevate eccezioni il libro è stato inserito correttamente e viene stampato il messaggio di conferma
+                // Se non vengono sollevate eccezioni l'operazione è stata completata correttamente e viene stampato il messaggio di conferma
                 Printer.println(SUCCESS_MESSAGE_TEXT);
-                // Si attende un qualsiasi pulsante premuto per tornare alla home
+                // Si attende la pressione del tasto invio per tornare alla home
                 waitForExit();
 
                 return;
@@ -135,10 +135,10 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
 
                 // Viene creato il bean contenente i dati del libro
                 BookBean bookBean = new BookBean(isbn, name);
-                // Vengono inviati i bean contenenti i dati del libro e del corso al controller applicativo
+                // Vengono inviati i bean contenenti i dati del libro e del corso al controller grafico
                 controller.insertBookInCourse(courseBean, bookBean);
 
-                // Se non vengono sollevate eccezioni il libro è stato inserito correttamente e viene stampato il messaggio di conferma
+                // Se non vengono sollevate eccezioni l'operazione è stata completata correttamente e viene stampato il messaggio di conferma
                 Printer.println(SUCCESS_MESSAGE_TEXT);
                 // Si attende un qualsiasi pulsante premuto per tornare alla home
                 waitForExit();

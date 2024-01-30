@@ -1,6 +1,6 @@
 package it.ispw.unibook.view.cli.professor;
 
-import it.ispw.unibook.controller.graphics.cli.professor.ListBookCLI;
+import it.ispw.unibook.controller.graphics.cli.professor.BooksListCLI;
 import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -11,7 +11,7 @@ import it.ispw.unibook.view.cli.PageCLI;
 public class PageBooksListCLI extends GenericPageManageBookCLI implements PageCLI {
 
     // Controller grafico relativo alla View
-    private final ListBookCLI controller = new ListBookCLI();
+    private final BooksListCLI controller = new BooksListCLI();
 
     @Override
     public void display() {
@@ -21,7 +21,7 @@ public class PageBooksListCLI extends GenericPageManageBookCLI implements PageCL
 
         try {
             // Viene stampata la lista dei corsi relativa all'utente loggato
-            super.printCoursesList(controller);
+            super.printSessionCoursesList(controller);
         } catch (SessionException e) {
             showErrorMessage(e);
             return;

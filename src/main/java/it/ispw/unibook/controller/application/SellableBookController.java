@@ -7,6 +7,7 @@ import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.exceptions.book.BookException;
+import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -79,7 +80,7 @@ public class SellableBookController {
                         b.getPrice()
                 );
                 list.add(sellableBook);
-            } catch (BookException ignored) {
+            } catch (BookException | SellableBookException ignored) {
                 // Ignored
             }
         }
