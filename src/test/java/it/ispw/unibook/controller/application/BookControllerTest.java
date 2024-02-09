@@ -19,8 +19,8 @@ class BookControllerTest {
         // Viene istanziato il bean contenente il codice del corso
         BooksListBean bean = new BooksListBean(1);
         // Viene caricata la lista dei libri nel bean
-        // Se non ci sono errori il caricamento è effettuato correttamente
-        Assertions.assertTrue(controller.retrieveBooksByCourse(bean));
+        // Se non vengono sollevate eccezioni il caricamento è effettuato correttamente
+        controller.retrieveBooksByCourse(bean);
     }
 
     /**
@@ -34,8 +34,9 @@ class BookControllerTest {
             // Viene istanziato il bean contenente il codice del corso
             BooksListBean bean = new BooksListBean(0);
             // Viene caricata la lista dei libri nel bean
-            // Se non ci sono errori il caricamento è effettuato correttamente
-            Assertions.assertTrue(controller.retrieveBooksByCourse(bean));
+            // Se non vengono sollevate eccezioni il caricamento è effettuato correttamente
+            controller.retrieveBooksByCourse(bean);
+            Assertions.fail("I corsi vengono caricati correttamente");
         } catch (CourseException e) {
             // Il metodo solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura per ottenere i libri del corso

@@ -22,8 +22,8 @@ class LoginControllerTest {
         // Viene istanziato il bean contenente le credenziali di accesso al sistema
         LoginBean bean = new LoginBean("studente@students.uniroma2.eu", "studente");
         // Viene eseguito il metodo per l'accesso
-        // Se non ci sono errori il login è effettuato correttamente
-        Assertions.assertTrue(controller.login(bean));
+        // Se non vengono sollevate eccezioni il login è effettuato correttamente
+        controller.login(bean);
     }
 
     /**
@@ -40,8 +40,9 @@ class LoginControllerTest {
             // Viene istanziato il bean contenente le credenziali di accesso al sistema
             LoginBean bean = new LoginBean("emailNonPresente@students.uniroma2.eu", "passwordCasuale");
             // Viene eseguito il metodo per l'accesso
-            // Se non ci sono errori il login è effettuato correttamente
+            // Se non vengono sollevate eccezioni il login è effettuato correttamente
             controller.login(bean);
+            Assertions.fail("Il login viene effettuato correttamente");
         } catch(LoginException e) {
             // Il metodo di login solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura di accesso al sistema
@@ -67,8 +68,9 @@ class LoginControllerTest {
             // Viene istanziato il bean contenente le credenziali di accesso al sistema
             LoginBean bean = new LoginBean("studente@students.uniroma2.eu", "passwordErrata");
             // Viene eseguito il metodo per l'accesso
-            // Se non ci sono errori il login è effettuato correttamente
+            // Se non vengono sollevate eccezioni il login è effettuato correttamente
             controller.login(bean);
+            Assertions.fail("Il login viene effettuato correttamente");
         } catch(LoginException e) {
             // Il metodo di login solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura di accesso al sistema

@@ -65,26 +65,17 @@ public class CourseController {
         List<CourseBean> list = new ArrayList<>();
         for(CourseEntity c: courses) {
             // Viene creato il bean del libro a partire dall'entità
-            CourseBean course = createBeanFromEntity(c);
+            CourseBean course = new CourseBean(
+                    c.getCode(),
+                    c.getName(),
+                    c.getStartYear(),
+                    c.getEndYear()
+            );
             // Si aggiunge il bean alla lista
             list.add(course);
         }
         // Viene impostata la lista nel bean
         bean.setList(list);
-    }
-
-    /**
-     * Funzione ausiliare per formattare il bean a partire dall'entità
-     * @param course Entità da cui creare il bean
-     * @return Bean contenente i dati dell'entità
-     */
-    private CourseBean createBeanFromEntity(CourseEntity course) {
-        return new CourseBean(
-            course.getCode(),
-            course.getName(),
-            course.getStartYear(),
-            course.getEndYear()
-        );
     }
 
 }

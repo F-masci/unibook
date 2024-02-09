@@ -24,7 +24,7 @@ public class BookController {
      * @param bean Deve contenere il codice del corso. Contiene la lista dei libri collegati
      * @throws CourseException Viene sollevata nel caso in cui il corso non viene trovato nello strato di persistenza
      */
-    public boolean retrieveBooksByCourse(@NotNull BooksListBean bean) throws CourseException {
+    public void retrieveBooksByCourse(@NotNull BooksListBean bean) throws CourseException {
         try {
             // Viene istanziato il DAO tramite factory per cercare il corso
             UniversityDao dao = UniversityDaoFactory.getInstance().getDao();
@@ -33,7 +33,6 @@ public class BookController {
             CourseEntity course = dao.retrieveCourseByCode(bean.getCourseCode());
             // Si estrae la lista di libri dal corso e si inserisce all'interno del bean
             insertBooksListIntoBean(course.getBooks(), bean);
-            return true;
         } catch (CourseNotFoundException e) {
             // In caso in cui il corso non sia presente viene sollevata l'eccezione al chiamante
             throw new CourseException(e.getMessage(), e);
