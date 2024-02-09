@@ -318,3 +318,7 @@ Dsrc/main/java/it/ispw/unibook/exceptions/PriceNotValidException.java,5\5\556e4
 Lsrc/test/java/it/ispw/unibook/controller/application/BookControllerTest.java,e\c\ecf00eec3a7879121aa7720a2d3244a72eb23d8d
 s
 Csrc/main/java/it/ispw/unibook/exceptions/ISBNNotValidException.java,c\c\cc6fc3c2f5b7b127ca124710add0f773e0d6a1fc
+ˆ
+Xsrc/test/java/it/ispw/unibook/controller/application/InsertCourseBookControllerTest.java,5\6\562fc05fa9a86b43aac4fed7a0e01fc255a3e96d
+ˆ
+Xsrc/test/java/it/ispw/unibook/controller/application/RemoveCourseBookControllerTest.java,0\e\0e748562335c345dcc28d5020c24b5f1278e98dc

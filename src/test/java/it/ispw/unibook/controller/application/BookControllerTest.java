@@ -20,7 +20,7 @@ class BookControllerTest {
         BooksListBean bean = new BooksListBean(1);
         // Viene caricata la lista dei libri nel bean
         // Se non vengono sollevate eccezioni il caricamento è effettuato correttamente
-        controller.retrieveBooksByCourse(bean);
+        Assertions.assertDoesNotThrow(() -> controller.retrieveBooksByCourse(bean));
     }
 
     /**

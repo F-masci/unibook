@@ -40,7 +40,7 @@ class InsertCourseBookControllerTest {
         InsertCourseBookController controller = new InsertCourseBookController();
         CourseBean courseBean = new CourseBean(1);
         BookBean bookBean = new BookBean(VALID_ISBN, VALID_TITLE);
-        controller.insertBookInCourse(courseBean, bookBean);
+        Assertions.assertDoesNotThrow(() -> controller.insertBookInCourse(courseBean, bookBean));
     }
 
     @Test

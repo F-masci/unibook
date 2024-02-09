@@ -19,7 +19,7 @@ class RemoveCourseBookControllerTest {
         RemoveCourseBookController controller = new RemoveCourseBookController();
         CourseBean courseBean = new CourseBean(1);
         BookBean bookBean = new BookBean(VALID_ISBN, VALID_TITLE);
-        controller.removeBookFromCourse(courseBean, bookBean);
+        Assertions.assertDoesNotThrow(() -> controller.removeBookFromCourse(courseBean, bookBean));
     }
 
     @Test

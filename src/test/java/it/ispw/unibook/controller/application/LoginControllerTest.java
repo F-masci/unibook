@@ -23,7 +23,7 @@ class LoginControllerTest {
         LoginBean bean = new LoginBean("studente@students.uniroma2.eu", "studente");
         // Viene eseguito il metodo per l'accesso
         // Se non vengono sollevate eccezioni il login è effettuato correttamente
-        controller.login(bean);
+        Assertions.assertDoesNotThrow(() -> controller.login(bean));
     }
 
     /**
