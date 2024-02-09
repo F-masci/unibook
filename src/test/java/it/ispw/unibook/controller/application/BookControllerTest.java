@@ -10,31 +10,32 @@ class BookControllerTest {
 
     /**
      * Viene testato il metodo per ottenere la lista dei libri di un corso esistente
-     * @throws CourseException Viene sollevata se il corso non viene trovato
      */
     @Test
-    void testRetrieveBooksByCourseWithCoursePresent() throws CourseException {
-        // Viene istanziato il controller applicativo per eseguire il login
+    void testRetrieveBooksByCourseWithCoursePresent() {
+        // Viene istanziato il controller applicativo per eseguire il metodo
         BookController controller = new BookController();
         // Viene istanziato il bean contenente il codice del corso
         BooksListBean bean = new BooksListBean(1);
         // Viene caricata la lista dei libri nel bean
-        // Se non vengono sollevate eccezioni il caricamento è effettuato correttamente
+        // Se non vengono sollevate eccezioni il caricamento è stato effettuato correttamente
         Assertions.assertDoesNotThrow(() -> controller.retrieveBooksByCourse(bean));
     }
 
     /**
-     * Viene testato il metodo per ottenere la lista dei libri di un corso esistente
+     * Viene testato il metodo per ottenere la lista dei libri di un corso non esistente
+     * Il metodo dovrebbe restituire un eccezione che ha come causa l'eccezione relativa
+     * al corso non trovato
      */
     @Test
     void testRetrieveBooksByCourseWithCourseNotPresent()  {
         try {
-            // Viene istanziato il controller applicativo per eseguire il login
+            // Viene istanziato il controller applicativo per eseguire il metodo
             BookController controller = new BookController();
             // Viene istanziato il bean contenente il codice del corso
             BooksListBean bean = new BooksListBean(0);
             // Viene caricata la lista dei libri nel bean
-            // Se non vengono sollevate eccezioni il caricamento è effettuato correttamente
+            // Se non vengono sollevate eccezioni il caricamento è stato effettuato correttamente
             controller.retrieveBooksByCourse(bean);
             Assertions.fail("I corsi vengono caricati correttamente");
         } catch (CourseException e) {
