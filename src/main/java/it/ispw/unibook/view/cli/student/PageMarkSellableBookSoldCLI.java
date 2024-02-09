@@ -41,6 +41,9 @@ public class PageMarkSellableBookSoldCLI extends GenericPageManageSellableBookCL
                 // Istanzia il bean per salvare lo studente che ha effettivamente comprato il libro
                 AccountBean buyerBean = new AccountBean(buyer);
 
+                // Vengono inviati i bean contenenti il libro in vendita e l'acquirente al controller grafico
+                controller.markSellableBookSold(sellableBookBean, buyerBean);
+
                 // Se non vengono sollevate eccezioni l'operazione è stata effettuata correttamente e viene stampato il messaggio di conferma
                 Printer.println(SUCCESS_MESSAGE_TEXT);
                 // Si attende la pressione del tasto invio per tornare alla home

@@ -57,7 +57,7 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
             } catch (SelectionNotValidException e) {
                 showErrorMessage(e);
             } catch (EscCliException ignored) {
-                // L'eccezioe può essere ignorata perchè per eseguire il logout l'utente deve immettere 0
+                // L'eccezione può essere ignorata perchè per eseguire il logout l'utente deve immettere 0
             }
         }
     }

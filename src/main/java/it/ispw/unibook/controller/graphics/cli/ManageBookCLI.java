@@ -25,13 +25,6 @@ public abstract class ManageBookCLI {
     public void retrieveCoursesBySession(CoursesListBean bean) throws SessionException {
         facade.retrieveCoursesBySession(bean);
     }
-    /**
-     * Ritorna la lista dei corsi presenti nel sistema
-     * @param bean Contiene la lista dei corsi
-     */
-    public void retrieveCourses(CoursesListBean bean) {
-        facade.retrieveCourses(bean);
-    }
 
     /**
      * Ritorna la lista dei libri associati a un corso

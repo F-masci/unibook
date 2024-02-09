@@ -15,4 +15,14 @@ public class SellableBookForSaleState extends SellableBookAbstractState {
     public AccountEntity getBuyer() throws SellableBookNotSoldExceptions {
         throw new SellableBookNotSoldExceptions();
     }
+
+    @Override
+    public boolean isSold() {
+        return false;
+    }
+
+    @Override
+    public boolean isForSale() {
+        return true;
+    }
 }

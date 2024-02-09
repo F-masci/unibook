@@ -39,13 +39,6 @@ public class ManageCourseBookFacade {
     public void retrieveCoursesBySession(@NotNull CoursesListBean bean) throws SessionException {
         courseController.retrieveCoursesBySession(bean);
     }
-    /**
-     * Ritorna la lista dei corsi presenti nel sistema
-     * @param bean Contiene la lista dei corsi
-     */
-    public void retrieveCourses(@NotNull CoursesListBean bean) {
-        courseController.retrieveCourses(bean);
-    }
 
     /**
      * Ritorna la lista dei libri associati a un corso

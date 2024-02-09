@@ -14,7 +14,7 @@ public class ApplicatonDaoFactoryJDBC extends ApplicationDaoFactory {
 
     @Override
     public BookDao getBookDao() {
-        return new BookDaoAppJDBC();
+        return BookDaoAppJDBC.getInstance();
     }
     @Override
     public SellableBookDao getSellableBookDao() {
@@ -27,5 +27,10 @@ public class ApplicatonDaoFactoryJDBC extends ApplicationDaoFactory {
     @Override
     public AccountDao getAccountDao() {
         return new AccountDaoAppJDBC();
+    }
+
+    @Override
+    public CourseDao getCourseDao() {
+        return new CourseDaoAppJDBC();
     }
 }

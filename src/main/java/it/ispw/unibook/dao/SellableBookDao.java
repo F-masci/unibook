@@ -14,7 +14,9 @@ public interface SellableBookDao {
     public List<SellableBookEntity> retrieveSellableBooksBySeller(AccountEntity seller);
     public List<SellableBookEntity> retrieveSellableBooksByNegotiation(AccountEntity negotiationBuyer);
     public List<SellableBookEntity> retrieveCourseSellableBooks(CourseEntity course);
-    public void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook);
-    public void removeSellableBookFromCourse(CourseEntity course, SellableBookEntity sellableBook);
+
+    public void addBuyerToSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer);
+    public void removeBuyerFromSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer);
+    public void setBuyerToSellableBook(SellableBookEntity sellableBook, AccountEntity buyer);
 
 }

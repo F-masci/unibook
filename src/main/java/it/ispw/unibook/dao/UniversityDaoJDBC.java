@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CourseDaoUniJDBC implements CourseDao {
+public class UniversityDaoJDBC implements UniversityDao {
 
     private Connection connection = null;
 
-    public CourseDaoUniJDBC() {
+    public UniversityDaoJDBC() {
         connection = ConnectionUniJDBC.getInstance();
     }
 

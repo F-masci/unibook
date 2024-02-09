@@ -1,6 +1,7 @@
 package it.ispw.unibook.entity;
 
 import it.ispw.unibook.dao.AccountDao;
+import it.ispw.unibook.dao.SellableBookDao;
 import it.ispw.unibook.entity.state.book.sellable.SellableBookStateMachine;
 import it.ispw.unibook.entity.state.book.sellable.SellableBookStateMachineGoF;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookAlreadySoldException;
@@ -78,7 +79,7 @@ public class SellableBookEntity extends BookEntity {
         if(buyers.contains(buyer)) throw new BuyerAlreadyInNegotiationException();
         buyers.add(buyer);
         // TODO: capire se usare DAO account o DAO SellableBook
-        AccountDao dao = ApplicationDaoFactory.getInstance().getAccountDao();
+        SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
         dao.addBuyerToSellableBookNegotiation(this, buyer);
     }
 
@@ -87,13 +88,13 @@ public class SellableBookEntity extends BookEntity {
         if(!buyers.contains(buyer)) throw new BuyerNotInNegotiationException();
         buyers.add(buyer);
         // TODO: capire se usare DAO account o DAO SellableBook
-        AccountDao dao = ApplicationDaoFactory.getInstance().getAccountDao();
+        SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
         dao.removeBuyerFromSellableBookNegotiation(this, buyer);
     }
 
     public void markAsSold(AccountEntity buyer) throws SellableBookAlreadySoldException {
         state.markAsSold(buyer);
-        AccountDao dao = ApplicationDaoFactory.getInstance().getAccountDao();
+        SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
         dao.setBuyerToSellableBook(this, buyer);
     }
     public AccountEntity getBuyer() throws SellableBookNotSoldExceptions {
@@ -105,6 +106,14 @@ public class SellableBookEntity extends BookEntity {
             AccountDao dao = ApplicationDaoFactory.getInstance().getAccountDao();
             buyers = dao.retrieveBuyersBySellableBook(this);
         }
+    }
+
+    public boolean isSold() {
+        return state.isSold();
+    }
+
+    public boolean isForSale() {
+        return state.isForSale();
     }
 
     @Override

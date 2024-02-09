@@ -13,13 +13,4 @@ public class BookDaoAppFile implements BookDao {
         return new ArrayList<>();
     }
 
-    @Override
-    public void addBookToCourse(CourseEntity course, BookEntity book) {
-        // TODO
-    }
-
-    @Override
-    public void removeBookFromCourse(CourseEntity course, BookEntity book) {
-        // TODO
-    }
 }

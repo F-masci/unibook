@@ -1,7 +1,7 @@
 package it.ispw.unibook.controller.application;
 
 import it.ispw.unibook.bean.*;
-import it.ispw.unibook.dao.CourseDao;
+import it.ispw.unibook.dao.UniversityDao;
 import it.ispw.unibook.dao.SellableBookDao;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
@@ -12,7 +12,7 @@ import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.login.SessionNotFoundException;
-import it.ispw.unibook.factory.CourseDaoFactory;
+import it.ispw.unibook.factory.UniversityDaoFactory;
 import it.ispw.unibook.factory.SellableBookDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +27,7 @@ public class SellableBookController {
             SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
             AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
             List<SellableBookEntity> sellableBooks = dao.retrieveSellableBooksBySeller(account);
-            insertSellableBooksListIntoBean(sellableBooks, bean);
+            insertForSaleSellableBooksListIntoBean(sellableBooks, bean);
         } catch (SessionNotFoundException e) {
             throw new SessionException(e.getMessage(), e);
         }
@@ -37,7 +37,7 @@ public class SellableBookController {
             SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
             AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
             List<SellableBookEntity> sellableBooks = dao.retrieveSellableBooksByNegotiation(account);
-            insertSellableBooksListIntoBean(sellableBooks, bean);
+            insertForSaleSellableBooksListIntoBean(sellableBooks, bean);
         } catch (SessionNotFoundException e) {
             throw new SessionException(e.getMessage(), e);
         }
@@ -47,16 +47,16 @@ public class SellableBookController {
         SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
         List<SellableBookEntity> sellableBooks = dao.retrieveSellableBooksByIsbn(bean.getISBN());
         SellableBooksListBean resBean = new SellableBooksListBean();
-        insertSellableBooksListIntoBean(sellableBooks, resBean);
+        insertForSaleSellableBooksListIntoBean(sellableBooks, resBean);
         return resBean;
     }
 
     public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseNotFoundException {
-        CourseDao dao = CourseDaoFactory.getInstance().getDao();
+        UniversityDao dao = UniversityDaoFactory.getInstance().getDao();
         CourseEntity course = dao.retrieveCourseByCode(bean.getCode());
         List<SellableBookEntity> sellableBooks = course.getSellableBooks();
         SellableBooksListBean resBean = new SellableBooksListBean();
-        insertSellableBooksListIntoBean(sellableBooks, resBean);
+        insertForSaleSellableBooksListIntoBean(sellableBooks, resBean);
         return resBean;
     }
 
@@ -69,9 +69,18 @@ public class SellableBookController {
         return resBean;
     }
 
-    private void insertSellableBooksListIntoBean(List<SellableBookEntity> sellableBooks, SellableBooksListBean bean) {
+    private void insertAllSellableBooksListIntoBean(List<SellableBookEntity> sellableBooks, SellableBooksListBean bean) {
+        insertSellableBooksListIntoBean(sellableBooks, bean, false);
+    }
+
+    private void insertForSaleSellableBooksListIntoBean(List<SellableBookEntity> sellableBooks, SellableBooksListBean bean) {
+        insertSellableBooksListIntoBean(sellableBooks, bean, true);
+    }
+
+    private void insertSellableBooksListIntoBean(List<SellableBookEntity> sellableBooks, SellableBooksListBean bean, boolean onlyForSale) {
         List<SellableBookBean> list = new ArrayList<>();
         for(SellableBookEntity b: sellableBooks) {
+            if(onlyForSale && b.isSold()) continue;
             try {
                 SellableBookBean sellableBook = new SellableBookBean(
                         b.getCode(),

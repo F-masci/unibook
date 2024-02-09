@@ -44,7 +44,7 @@
       </font>
       <stylesheets>
          <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professore/Home.css" />
+         <URL value="@../../style/pagine/professor/Home.css" />
       </stylesheets>
       <styleClass>
          <String fx:value="button" />
@@ -57,7 +57,7 @@
       </font>
       <stylesheets>
          <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professore/Home.css" />
+         <URL value="@../../style/pagine/professor/Home.css" />
       </stylesheets>
       <styleClass>
          <String fx:value="button" />
@@ -70,7 +70,7 @@
       </font>
       <stylesheets>
          <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professore/Home.css" />
+         <URL value="@../../style/pagine/professor/Home.css" />
       </stylesheets>
    </Button>
 </AnchorPane>

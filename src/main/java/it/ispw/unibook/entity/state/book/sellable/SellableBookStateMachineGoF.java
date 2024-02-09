@@ -25,4 +25,14 @@ public class SellableBookStateMachineGoF implements SellableBookStateMachine {
     public AccountEntity getBuyer() throws SellableBookNotSoldExceptions {
         return current.getBuyer();
     }
+
+    @Override
+    public boolean isSold() {
+        return current.isSold();
+    }
+
+    @Override
+    public boolean isForSale() {
+        return current.isForSale();
+    }
 }

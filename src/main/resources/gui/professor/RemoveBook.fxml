@@ -56,7 +56,7 @@
       </font>
       <stylesheets>
          <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professore/Home.css" />
+         <URL value="@../../style/pagine/professor/Home.css" />
       </stylesheets>
    </Button>
    <ComboBox fx:id="booksCombo" disable="true" layoutX="200.0" layoutY="328.0" prefHeight="65.0" prefWidth="880.0" promptText="Seleziona un libro..." styleClass="legacy-combo-box" stylesheets="@../../style/componenti/comboBox.css" />

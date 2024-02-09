@@ -1,6 +1,6 @@
 package it.ispw.unibook.factory;
 
-import it.ispw.unibook.dao.CourseDao;
+import it.ispw.unibook.dao.UniversityDao;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
@@ -9,7 +9,7 @@ import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 public class CourseEntityFacotry {
 
     private static CourseEntityFacotry instance = null;
-    CourseDao dao = CourseDaoFactory.getInstance().getDao();
+    UniversityDao dao = UniversityDaoFactory.getInstance().getDao();
 
     private CourseEntityFacotry() {}
 

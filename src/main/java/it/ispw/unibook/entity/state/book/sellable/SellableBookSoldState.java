@@ -20,4 +20,14 @@ public class SellableBookSoldState extends SellableBookAbstractState {
     public AccountEntity getBuyer() {
         return buyer;
     }
+
+    @Override
+    public boolean isSold() {
+        return true;
+    }
+
+    @Override
+    public boolean isForSale() {
+        return false;
+    }
 }

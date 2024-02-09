@@ -58,6 +58,6 @@ public class SellableBookBean extends BookBean {
 
     @Override
     public String toString() {
-        return this.getName() + " - " + this.getPrice();
+        return this.getName() + " - " + String.format("%.2f", this.getPrice()) + "€";
     }
 }

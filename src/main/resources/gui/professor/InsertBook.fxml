@@ -77,7 +77,7 @@
       </font>
       <stylesheets>
          <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professore/Home.css" />
+         <URL value="@../../style/pagine/professor/Home.css" />
       </stylesheets>
    </Button>
    <Button fx:id="saveBookButton" layoutX="200.0" layoutY="524.0" mnemonicParsing="false" onMouseClicked="#confirmBook" prefHeight="100.0" prefWidth="880.0" styleClass="menu-button" text="Salva libro" visible="false">
@@ -86,7 +86,7 @@
       </font>
       <stylesheets>
          <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professore/Home.css" />
+         <URL value="@../../style/pagine/professor/Home.css" />
       </stylesheets>
    </Button>
    <Button fx:id="insertManualButton" layoutX="193.0" layoutY="524.0" mnemonicParsing="false" onMouseClicked="#manualInsert" prefHeight="100.0" prefWidth="400.0" styleClass="menu-button" text="Inserimento manuale" visible="false">
@@ -95,7 +95,7 @@
       </font>
       <stylesheets>
          <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professore/Home.css" />
+         <URL value="@../../style/pagine/professor/Home.css" />
       </stylesheets>
    </Button>
    <Button fx:id="retryButton" layoutX="680.0" layoutY="524.0" mnemonicParsing="false" onMouseClicked="#retryInsertAuto" prefHeight="100.0" prefWidth="400.0" styleClass="menu-button" text="Riprova" visible="false">
@@ -104,7 +104,7 @@
       </font>
       <stylesheets>
          <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professore/Home.css" />
+         <URL value="@../../style/pagine/professor/Home.css" />
       </stylesheets>
    </Button>
    <Button fx:id="confirmButton" layoutX="680.0" layoutY="524.0" mnemonicParsing="false" onMouseClicked="#confirmBook" prefHeight="100.0" prefWidth="400.0" styleClass="menu-button" text="Conferma" visible="false">
@@ -113,7 +113,7 @@
       </font>
       <stylesheets>
          <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professore/Home.css" />
+         <URL value="@../../style/pagine/professor/Home.css" />
       </stylesheets>
    </Button>
    <Button fx:id="errorButton" layoutX="193.0" layoutY="524.0" mnemonicParsing="false" onMouseClicked="#errorBook" prefHeight="100.0" prefWidth="400.0" styleClass="menu-button" text="Dati errati" visible="false">
@@ -122,7 +122,7 @@
       </font>
       <stylesheets>
          <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professore/Home.css" />
+         <URL value="@../../style/pagine/professor/Home.css" />
       </stylesheets>
    </Button>
 </AnchorPane>

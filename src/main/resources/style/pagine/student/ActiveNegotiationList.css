@@ -1,0 +1,14 @@
+.books-list {
+    -fx-spacing: 10px;
+    -fx-padding: 5px;
+    -fx-background-color: #eeeeee;
+}
+
+.sellable-book {
+    -fx-background-color: #006699;
+    -fx-text-fill: white;
+    -fx-padding: 8px;
+    -fx-font-size: 16px;
+    -fx-max-width: Infinity;
+    -fx-font-weight: bold;
+}

@@ -75,40 +75,4 @@ public class AccountDaoAppJDBC implements AccountDao {
 
     }
 
-    @Override
-    public void addBuyerToSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer) {
-        try (PreparedStatement stm = connection.prepareStatement("INSERT INTO negotiation(book, student) VALUES(?, ?);")) {
-            stm.setInt(1, sellableBook.getCode());
-            stm.setInt(2, buyer.getCode());
-            stm.execute();
-        } catch(SQLException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
-    }
-
-    @Override
-    public void removeBuyerFromSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer) {
-        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM negotiation WHERE book=? AND student=?;")) {
-            stm.setInt(1, sellableBook.getCode());
-            stm.setInt(2, buyer.getCode());
-            stm.execute();
-        } catch(SQLException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
-    }
-
-    @Override
-    public void setBuyerToSellableBook(SellableBookEntity sellableBook, AccountEntity buyer) {
-        try (PreparedStatement stm = connection.prepareStatement("UPDATE sellable_book SET buyer=? WHERE code=?;")) {
-            stm.setInt(1, buyer.getCode());
-            stm.setInt(2, sellableBook.getCode());
-            stm.execute();
-        } catch(SQLException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
-    }
-
 }

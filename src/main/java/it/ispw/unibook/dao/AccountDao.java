@@ -9,8 +9,5 @@ public interface AccountDao {
 
     public AccountEntity retrieveAccountByCode(int code);
     public List<AccountEntity> retrieveBuyersBySellableBook(SellableBookEntity sellableBook);
-    public void addBuyerToSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer);
-    public void removeBuyerFromSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer);
-    public void setBuyerToSellableBook(SellableBookEntity sellableBook, AccountEntity buyer);
 
 }

@@ -1,9 +1,6 @@
 package it.ispw.unibook.factory;
 
-import it.ispw.unibook.dao.AccountDao;
-import it.ispw.unibook.dao.BookDao;
-import it.ispw.unibook.dao.LoginDao;
-import it.ispw.unibook.dao.SellableBookDao;
+import it.ispw.unibook.dao.*;
 import it.ispw.unibook.exceptions.PersistenceNotValidException;
 import it.ispw.unibook.utils.ApplicationProperties;
 import it.ispw.unibook.utils.Printer;
@@ -32,6 +29,7 @@ public abstract class ApplicationDaoFactory {
 
     public abstract LoginDao getLoginDao();
     public abstract AccountDao getAccountDao();
+    public abstract CourseDao getCourseDao();
     public abstract BookDao getBookDao();
     public abstract SellableBookDao getSellableBookDao();
 }

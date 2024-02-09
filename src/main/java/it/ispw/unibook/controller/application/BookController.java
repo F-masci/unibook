@@ -2,13 +2,13 @@ package it.ispw.unibook.controller.application;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
-import it.ispw.unibook.dao.CourseDao;
+import it.ispw.unibook.dao.UniversityDao;
 import it.ispw.unibook.entity.BookEntity;
 import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
-import it.ispw.unibook.factory.CourseDaoFactory;
+import it.ispw.unibook.factory.UniversityDaoFactory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class BookController {
     public void retrieveBooksByCourse(@NotNull BooksListBean bean) throws CourseException {
         try {
             // Viene istanziato il DAO tramite factory per cercare il corso
-            CourseDao dao = CourseDaoFactory.getInstance().getDao();
+            UniversityDao dao = UniversityDaoFactory.getInstance().getDao();
             // Viene cercato sulla persistenza il corso corrispondete al codice fornito
             // Se il corso non viene trovato viene sollevata l'eccezione
             CourseEntity course = dao.retrieveCourseByCode(bean.getCourseCode());

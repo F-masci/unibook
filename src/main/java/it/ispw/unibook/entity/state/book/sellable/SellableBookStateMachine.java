@@ -10,4 +10,7 @@ public interface SellableBookStateMachine {
 
     public AccountEntity getBuyer() throws SellableBookNotSoldExceptions;
 
+    public boolean isSold();
+    public boolean isForSale();
+
 }

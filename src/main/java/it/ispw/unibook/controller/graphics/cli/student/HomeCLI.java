@@ -9,7 +9,7 @@ public class HomeCLI {
 
     public void showBooks() { changeView(new PageBooksListCLI()); }
 
-    public void showActiveSellableBooks() { changeView(new PageActiveSellableBookCLI()); }
+    public void showActiveSellableBooks() { changeView(new PageActiveNegotiationCLI()); }
 
     public void showPurchaseBook() { changeView(new PagePurchaseBookCLI()); }
 

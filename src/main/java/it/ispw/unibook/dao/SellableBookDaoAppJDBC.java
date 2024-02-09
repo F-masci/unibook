@@ -109,12 +109,10 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
     }
 
     @Override
-    public void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook) {
-        try (PreparedStatement stm = connection.prepareStatement("INSERT INTO sellable_book(course, isbn, seller, price) VALUES(?, ?, ?, ?);")) {
-            stm.setInt(1, course.getCode());
-            stm.setString(2, sellableBook.getIsbn());
-            stm.setInt(3, sellableBook.getSeller().getCode());
-            stm.setFloat(4, sellableBook.getPrice());
+    public void addBuyerToSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer) {
+        try (PreparedStatement stm = connection.prepareStatement("INSERT INTO negotiation(book, student) VALUES(?, ?);")) {
+            stm.setInt(1, sellableBook.getCode());
+            stm.setInt(2, buyer.getCode());
             stm.execute();
         } catch(SQLException e) {
             Printer.error(e);
@@ -123,9 +121,22 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
     }
 
     @Override
-    public void removeSellableBookFromCourse(CourseEntity course, SellableBookEntity sellableBook) {
-        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM sellable_book WHERE code=?;")) {
+    public void removeBuyerFromSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer) {
+        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM negotiation WHERE book=? AND student=?;")) {
             stm.setInt(1, sellableBook.getCode());
+            stm.setInt(2, buyer.getCode());
+            stm.execute();
+        } catch(SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
+    @Override
+    public void setBuyerToSellableBook(SellableBookEntity sellableBook, AccountEntity buyer) {
+        try (PreparedStatement stm = connection.prepareStatement("UPDATE sellable_book SET buyer=? WHERE code=?;")) {
+            stm.setInt(1, buyer.getCode());
+            stm.setInt(2, sellableBook.getCode());
             stm.execute();
         } catch(SQLException e) {
             Printer.error(e);

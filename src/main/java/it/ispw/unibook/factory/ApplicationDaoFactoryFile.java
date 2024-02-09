@@ -24,11 +24,16 @@ public class ApplicationDaoFactoryFile extends ApplicationDaoFactory {
 
     @Override
     public LoginDao getLoginDao() {
-        return new LoginDaoAppFile();
+        return LoginDaoAppFile.getInstance();
     }
 
     @Override
     public AccountDao getAccountDao() {
+        return null;
+    }
+
+    @Override
+    public CourseDao getCourseDao() {
         return null;
     }
 

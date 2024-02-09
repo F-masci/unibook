@@ -1,0 +1,7 @@
+.menu-button {
+    -fx-font-size: 24px;
+}
+
+.menu-button:hover {
+    -fx-font-size: 28px;
+}

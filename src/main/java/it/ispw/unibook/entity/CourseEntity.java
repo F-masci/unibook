@@ -1,6 +1,7 @@
 package it.ispw.unibook.entity;
 
 import it.ispw.unibook.dao.BookDao;
+import it.ispw.unibook.dao.CourseDao;
 import it.ispw.unibook.dao.SellableBookDao;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.exceptions.book.sellable.UnsellableBookInCourseException;
@@ -55,14 +56,14 @@ public class CourseEntity {
         loadBooks();
         if(books.contains(book)) throw new BookAlreadyInCourseException();
         books.add(book);
-        BookDao dao = ApplicationDaoFactory.getInstance().getBookDao();
+        CourseDao dao = ApplicationDaoFactory.getInstance().getCourseDao();
         dao.addBookToCourse(this, book);
     }
     public void removeBook(BookEntity book) throws BookNotInCourseException {
         loadBooks();
         if(!books.contains(book)) throw new BookNotInCourseException();
         books.remove(book);
-        BookDao dao = ApplicationDaoFactory.getInstance().getBookDao();
+        CourseDao dao = ApplicationDaoFactory.getInstance().getCourseDao();
         dao.removeBookFromCourse(this, book);
     }
 
@@ -71,7 +72,7 @@ public class CourseEntity {
         loadBooks();
         if(!books.contains(sellableBook)) throw new UnsellableBookInCourseException();
         sellableBooks.add(sellableBook);
-        SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
+        CourseDao dao = ApplicationDaoFactory.getInstance().getCourseDao();
         dao.addSellableBookToCourse(this, sellableBook);
     }
 
@@ -80,7 +81,7 @@ public class CourseEntity {
         if(!sellableBooks.contains(sellableBook)) throw new SellableBookNotFoundException();
         sellableBook.clearBuyers();
         sellableBooks.remove(sellableBook);
-        SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
+        CourseDao dao = ApplicationDaoFactory.getInstance().getCourseDao();
         dao.removeSellableBookFromCourse(this, sellableBook);
     }
 

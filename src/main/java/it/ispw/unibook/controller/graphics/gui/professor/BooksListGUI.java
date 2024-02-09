@@ -2,13 +2,13 @@ package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
-import it.ispw.unibook.facade.ManageCourseBookFacade;
 import it.ispw.unibook.exceptions.course.CourseException;
+import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -23,32 +23,32 @@ public class BooksListGUI extends ManageBookGUI implements Initializable {
     @FXML
     private VBox booksList;
 
-
-    private final ManageCourseBookFacade controller = new ManageCourseBookFacade();
     private int courseSelected = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadCoursesComboBox(coursesCombo);
+        loadSessionCourses(coursesCombo);
     }
 
     // FIXME exceptions
     @FXML
     public void loadBooksList(ActionEvent event) throws CourseException {
-        int selected = getCourseSelectedFromComboBox(coursesCombo);
-        if(selected == courseSelected) return;
-        courseSelected = selected;
+        try {
+            int selected = getCourseSelectedFromComboBox(coursesCombo);
+            if (selected == courseSelected) return;
+            courseSelected = selected;
 
-        BooksListBean bean = new BooksListBean(courseSelected);
-        super.retrieveBooksByCourse(bean);
-        List<BookBean> books = bean.getList();
+            BooksListBean bean = new BooksListBean(courseSelected);
+            super.retrieveBooksByCourse(bean);
+            List<BookBean> books = bean.getList();
 
-        booksList.getChildren().clear();
-        for (BookBean b : books) {
-            String text = b.getISBN() + " - " + b.toString();
-            Button book = new Button(text);
-            book.getStyleClass().add("book");
-            booksList.getChildren().add(book);
-        }
+            booksList.getChildren().clear();
+            for (BookBean b : books) {
+                String text = b.getISBN() + " - " + b.toString();
+                Label label = new Label(text);
+                label.getStyleClass().add("book");
+                booksList.getChildren().add(label);
+            }
+        } catch (ComboSelectionNotValidException ignored) {}
     }
 }

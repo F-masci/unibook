@@ -14,4 +14,7 @@ public abstract class SellableBookAbstractState {
 
     public abstract AccountEntity getBuyer() throws SellableBookNotSoldExceptions;
 
+    public abstract boolean isSold();
+    public abstract boolean isForSale();
+
 }
