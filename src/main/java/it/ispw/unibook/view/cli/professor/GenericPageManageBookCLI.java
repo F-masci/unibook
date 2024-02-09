@@ -1,18 +1,12 @@
 package it.ispw.unibook.view.cli.professor;
 
-import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
-import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.CoursesListBean;
 import it.ispw.unibook.controller.graphics.cli.professor.ManageBookCLI;
-import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
-import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.GenericPageCLI;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Questa View raccoglie le funzioni comuni alle View per stampare le liste dei libri e dei corsi.

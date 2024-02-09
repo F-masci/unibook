@@ -62,11 +62,13 @@ public class SellableBookEntity extends BookEntity {
     }
 
     public void clearBuyers() {
-        List<AccountEntity> buyers = new ArrayList<>(this.getBuyers());
-        for(AccountEntity b: buyers) {
+        List<AccountEntity> buyersCopy = new ArrayList<>(this.getBuyers());
+        for(AccountEntity b: buyersCopy) {
             try {
                 this.removeBuyer(b);
-            } catch(BuyerNotInNegotiationException ignored) {}
+            } catch(BuyerNotInNegotiationException ignored) {
+                // Quest'eccezione non viene mai sollevata
+            }
         }
     }
 
@@ -74,7 +76,6 @@ public class SellableBookEntity extends BookEntity {
         loadNegotiations();
         if(buyers.contains(buyer)) throw new BuyerAlreadyInNegotiationException();
         buyers.add(buyer);
-        // TODO: capire se usare DAO account o DAO SellableBook
         SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
         dao.addBuyerToSellableBookNegotiation(this, buyer);
     }
@@ -83,7 +84,6 @@ public class SellableBookEntity extends BookEntity {
         loadNegotiations();
         if(!buyers.contains(buyer)) throw new BuyerNotInNegotiationException();
         buyers.add(buyer);
-        // TODO: capire se usare DAO account o DAO SellableBook
         SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
         dao.removeBuyerFromSellableBookNegotiation(this, buyer);
     }

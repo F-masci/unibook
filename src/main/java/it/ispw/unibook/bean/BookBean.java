@@ -1,10 +1,8 @@
 package it.ispw.unibook.bean;
 
+import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.ISBNNotValidException;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class BookBean extends Bean {
 
@@ -37,9 +35,12 @@ public class BookBean extends Bean {
     }
 
     protected void validateISBN() throws ISBNNotValidException {
-        if(isbn != null) {
-            Matcher matcher = Pattern.compile(regex).matcher(this.getISBN());
-            if (!matcher.matches()) throw new ISBNNotValidException();
+        try {
+            if(isbn != null) {
+                validateField(this.getISBN(), ISBN_REGEX);
+            }
+        } catch (FieldNotValidException e) {
+            throw new ISBNNotValidException();
         }
     }
 

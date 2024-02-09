@@ -8,6 +8,7 @@ import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
+import it.ispw.unibook.utils.Printer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,13 +38,11 @@ public class SearchByCourseGUI extends ManageSellableBookGUI implements Initiali
 
     private int courseSelected = 0;
 
-    // FIXME exceptions
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadAllCourses(coursesCombo);
     }
 
-    // FIXME exceptions
     @FXML
     public void onCourseSelected(ActionEvent event) {
         try {
@@ -53,10 +52,13 @@ public class SearchByCourseGUI extends ManageSellableBookGUI implements Initiali
             loadCourseSellableBooks(sellableBooksCombo, selected);
             sellableBooksCombo.setDisable(false);
             purchaseBookButton.setDisable(false);
-        } catch (ComboSelectionNotValidException | CourseException e) {
+        } catch (CourseException e) {
             sellableBooksCombo.setDisable(true);
             purchaseBookButton.setDisable(true);
             errorLabel.setText(e.getMessage());
+        } catch(ComboSelectionNotValidException e) {
+            Printer.error(e);
+            System.exit(-1);
         }
     }
 

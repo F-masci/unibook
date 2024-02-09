@@ -9,6 +9,7 @@ public class Bean {
 
     /* REGEX */
     protected static final String EMAIL_REGEX = "^(.+)@(.+)$";
+    protected static final String ISBN_REGEX = "^\\d{13}$";
 
     private static int sessionId;
 

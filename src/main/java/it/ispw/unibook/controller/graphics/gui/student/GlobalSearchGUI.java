@@ -36,15 +36,14 @@ public class GlobalSearchGUI extends ManageSellableBookGUI {
     @FXML
     private Button searchBookButton;
 
-    private String isbnPrec = null;
+    private String isbnPre = null;
 
-    // FIXME exceptions
     @FXML
     public void searchBook() {
         try {
             String isbn = isbnField.getText();
-            if (Objects.equals(isbn, isbnPrec)) return;
-            isbnPrec = isbn;
+            if (Objects.equals(isbn, isbnPre)) return;
+            isbnPre = isbn;
             loadIsbnSellableBooks(sellableBooksCombo, isbn);
             sellableBooksCombo.setDisable(false);
             purchaseBookButton.setDisable(false);

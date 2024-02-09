@@ -49,7 +49,6 @@ public class AccountDaoAppJDBC implements AccountDao {
     @Override
     public List<AccountEntity> retrieveBuyersBySellableBook(SellableBookEntity sellableBook) {
 
-        // TODO: controllare se bisogna applicare il pattern FACTORY
         List<AccountEntity> buyers = new ArrayList<>();
 
         try(PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_negotiation WHERE book=?")) {

@@ -1,6 +1,6 @@
 package it.ispw.unibook.exceptions.gui;
 
-public class GuiException extends Exception {
+public class GuiException extends RuntimeException {
 
     private static final String DEFAULT_MSG = "Errore";
 

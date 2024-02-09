@@ -15,6 +15,8 @@ import java.util.List;
  */
 public abstract class GenericPageCLI {
 
+    private static final String TITLE_SEPARATOR = "---";
+
     // Contiene il BufferedReader utilizzato dalle funzioni delle pagine CLI per richiedere dati all'utente
     protected final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -213,7 +215,7 @@ public abstract class GenericPageCLI {
     protected void printCoursesListBean(@NotNull CoursesListBean bean, String msg) {
         // Viene estratta la lista dei corsi
         List<CourseBean> courses = bean.getList();
-        if(msg != null)Printer.println("\n---" + msg + "---");
+        if(msg != null) Printer.println("\n" + TITLE_SEPARATOR + msg + TITLE_SEPARATOR);
         // Vengono stampati i corsi utilizzando il metodo <i>toString</i> del bean
         for(CourseBean c: courses) {
             Printer.println("[" + c.getCode() + "] " + c);
@@ -229,7 +231,7 @@ public abstract class GenericPageCLI {
     protected void printCourseBooksListBean(@NotNull BooksListBean bean, String msg) {
         // Viene estratta la lista dei libri
         List<BookBean> books = bean.getList();
-        if(msg != null)Printer.println("\n---" + msg + "---");
+        if(msg != null) Printer.println("\n" + TITLE_SEPARATOR + msg + TITLE_SEPARATOR);
         // Vengono stampati i libri utilizzando il metodo <i>toString</i> del bean
         for (BookBean b : books) {
             Printer.println("[" + b.getISBN() + "] " + b);
@@ -245,7 +247,7 @@ public abstract class GenericPageCLI {
     protected void printSellableBooksListBean(@NotNull SellableBooksListBean bean, String msg) {
         // Viene estratta la lista dei libri
         List<SellableBookBean> sellableBooks = bean.getList();
-        if(msg != null)Printer.println("\n---" + msg + "---");
+        if(msg != null) Printer.println("\n" + TITLE_SEPARATOR + msg + TITLE_SEPARATOR);
         // Vengono stampati i libri utilizzando il metodo <i>toString</i> del bean
         for (SellableBookBean b : sellableBooks) {
             Printer.println("[" + b.getCode() + "] " + b);
@@ -262,7 +264,7 @@ public abstract class GenericPageCLI {
         // Viene estratta la lista degli account
         List<AccountBean> accounts = bean.getList();
         // Vengono stampati gli account utilizzando il metodo <i>toString</i> del bean
-        if(msg != null)Printer.println("\n---" + msg + "---");
+        if(msg != null) Printer.println("\n" + TITLE_SEPARATOR + msg + TITLE_SEPARATOR);
         for (AccountBean a : accounts) {
             Printer.println("[" + a.getCode() + "] " + a);
         }

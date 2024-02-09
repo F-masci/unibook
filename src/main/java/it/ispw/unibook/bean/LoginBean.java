@@ -8,7 +8,6 @@ public class LoginBean extends Bean {
 
     private final String email;
     private final String password;
-    protected String regex = "^(.+)@(.+)$";
 
     public LoginBean(String email, String password) throws FieldNotValidException {
         this.email = email;
