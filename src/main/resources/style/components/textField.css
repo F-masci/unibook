@@ -6,9 +6,6 @@
     -fx-padding: 5;
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 24px;
-}
-
-.text-field {
     -fx-highlight-fill: #ECE0FD;
     -fx-prompt-text-fill: rgba(0, 0, 0, 0.60);
 }

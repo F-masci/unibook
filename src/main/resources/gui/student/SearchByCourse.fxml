@@ -14,8 +14,8 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.unibook.controller.graphics.gui.student.SearchByCourseGUI">
-    <HBox styleClass="topbar" stylesheets="@../../style/componenti/topbar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <Button mnemonicParsing="false" onMouseClicked="#returnToHomePage" prefHeight="65.0" prefWidth="65.0" stylesheets="@../../style/componenti/button.css" textFill="WHITE">
+    <HBox styleClass="topbar" stylesheets="@../../style/components/topbar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Button mnemonicParsing="false" onMouseClicked="#returnToHomePage" prefHeight="65.0" prefWidth="65.0" stylesheets="@../../style/components/button.css" textFill="WHITE">
             <styleClass>
                 <String fx:value="button" />
                 <String fx:value="home-button" />
@@ -34,12 +34,12 @@
                 <Insets />
             </HBox.margin>
         </Button>
-      <Label prefHeight="65.0" styleClass="breadcrump" stylesheets="@../../style/componenti/topbar.css" text=" &gt; Home &gt; Acquista libro &gt; Cerca nel corso">
+      <Label prefHeight="65.0" styleClass="breadcrump" stylesheets="@../../style/components/topbar.css" text=" &gt; Home &gt; Acquista libro &gt; Cerca nel corso">
          <font>
             <Font size="18.0" />
          </font></Label>
     </HBox>
-   <ComboBox fx:id="coursesCombo" layoutX="200.0" layoutY="184.0" onAction="#onCourseSelected" prefHeight="65.0" prefWidth="880.0" promptText="Seleziona un corso..." styleClass="legacy-combo-box" stylesheets="@../../style/componenti/comboBox.css" />
+   <ComboBox fx:id="coursesCombo" layoutX="200.0" layoutY="184.0" onAction="#onCourseSelected" prefHeight="65.0" prefWidth="880.0" promptText="Seleziona un corso..." styleClass="legacy-combo-box" stylesheets="@../../style/components/comboBox.css" />
    <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="634.0" prefHeight="65.0" prefWidth="880.0" textAlignment="CENTER" textFill="RED">
       <font>
          <Font size="24.0" />
@@ -55,9 +55,9 @@
          <Font size="18.0" />
       </font>
       <stylesheets>
-         <URL value="@../../style/componenti/button.css" />
-         <URL value="@../../style/pagine/professor/Home.css" />
+         <URL value="@../../style/components/button.css" />
+         <URL value="@../../style/pages/professor/Home.css" />
       </stylesheets>
    </Button>
-   <ComboBox fx:id="sellableBooksCombo" disable="true" layoutX="200.0" layoutY="328.0" prefHeight="65.0" prefWidth="880.0" promptText="Seleziona un libro in vendita..." styleClass="legacy-combo-box" stylesheets="@../../style/componenti/comboBox.css" />
+   <ComboBox fx:id="sellableBooksCombo" disable="true" layoutX="200.0" layoutY="328.0" prefHeight="65.0" prefWidth="880.0" promptText="Seleziona un libro in vendita..." styleClass="legacy-combo-box" stylesheets="@../../style/components/comboBox.css" />
 </AnchorPane>

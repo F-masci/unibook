@@ -16,8 +16,8 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.unibook.controller.graphics.gui.student.BooksListGUI">
-        <HBox prefWidth="960.0" styleClass="topbar" stylesheets="@../../style/componenti/topbar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <Button mnemonicParsing="false" onMouseClicked="#returnToHomePage" prefHeight="65.0" prefWidth="65.0" stylesheets="@../../style/componenti/button.css" textFill="WHITE">
+        <HBox prefWidth="960.0" styleClass="topbar" stylesheets="@../../style/components/topbar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button mnemonicParsing="false" onMouseClicked="#returnToHomePage" prefHeight="65.0" prefWidth="65.0" stylesheets="@../../style/components/button.css" textFill="WHITE">
                 <styleClass>
                     <String fx:value="button" />
                     <String fx:value="home-button" />
@@ -36,17 +36,17 @@
                     <Insets />
                 </HBox.margin>
             </Button>
-            <Label prefHeight="65.0" styleClass="breadcrump" stylesheets="@../../style/componenti/topbar.css" text=" &gt; Home &gt; Lista dei libri di un corso">
+            <Label prefHeight="65.0" styleClass="breadcrump" stylesheets="@../../style/components/topbar.css" text=" &gt; Home &gt; Lista dei libri di un corso">
          <font>
             <Font size="18.0" />
          </font></Label>
         </HBox>
-        <ComboBox fx:id="coursesCombo" layoutX="381.0" layoutY="57.0" onAction="#onCourseSelected" prefHeight="45.0" promptText="Seleziona un corso..." styleClass="legacy-combo-box" stylesheets="@../../style/componenti/comboBox.css" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0" />
-        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="210.0" layoutY="131.0" prefHeight="400.0" prefWidth="920.0" stylesheets="@../../style/componenti/scrollPane.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="131.0">
+        <ComboBox fx:id="coursesCombo" layoutX="381.0" layoutY="57.0" onAction="#onCourseSelected" prefHeight="45.0" promptText="Seleziona un corso..." styleClass="legacy-combo-box" stylesheets="@../../style/components/comboBox.css" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0" />
+        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="210.0" layoutY="131.0" prefHeight="400.0" prefWidth="920.0" stylesheets="@../../style/components/scrollPane.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="131.0">
             <VBox fx:id="booksList" alignment="TOP_CENTER" prefHeight="304.0" prefWidth="918.0" styleClass="books-list">
          <stylesheets>
-            <URL value="@../../style/pagine/professor/Home.css" />
-            <URL value="@../../style/pagine/professor/BooksList.css" />
+            <URL value="@../../style/pages/professor/Home.css" />
+            <URL value="@../../style/pages/professor/BooksList.css" />
          </stylesheets>
             </VBox>
         </ScrollPane>
