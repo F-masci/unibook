@@ -1,7 +1,9 @@
 package it.ispw.unibook.dao;
 
-import it.ispw.unibook.entity.*;
-import it.ispw.unibook.exceptions.book.sellable.SellableBookAlreadySoldException;
+import it.ispw.unibook.entity.AccountEntity;
+import it.ispw.unibook.entity.AccountTypes;
+import it.ispw.unibook.entity.CourseEntity;
+import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.utils.ConnectionAppJDBC;
 import it.ispw.unibook.utils.Printer;
@@ -144,7 +146,6 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
         }
     }
 
-    // TODO: modificare con Facotry
     private SellableBookEntity createEntityFromViewResultSet(ResultSet res) throws SQLException {
             AccountEntity seller = new AccountEntity(
                     res.getInt("sellerCode"),
@@ -153,32 +154,27 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
                     res.getString("sellerName"),
                     res.getString("sellerSurname")
             );
-            SellableBookEntity sellableBook = new SellableBookEntity(
-                    res.getInt("code"),
-                    res.getString("isbn"),
-                    res.getString("title"),
-                    res.getFloat("price"),
-                    seller
-            );
             int buyerCode = res.getInt("buyerCode");
+            AccountEntity buyer = null;
             if(!res.wasNull()) {
-                AccountEntity buyer = new AccountEntity(
+                buyer = new AccountEntity(
                         buyerCode,
                         res.getString("buyerEmail"),
                         AccountTypes.STUDENT,
                         res.getString("buyerName"),
                         res.getString("buyerSurname")
                 );
-                try {
-                    sellableBook.markAsSold(buyer);
-                } catch (SellableBookAlreadySoldException ignored) {
-                    // Ignored
-                }
             }
-            return sellableBook;
+            return new SellableBookEntity(
+                    res.getInt("code"),
+                    res.getString("isbn"),
+                    res.getString("title"),
+                    res.getFloat("price"),
+                    seller,
+                    buyer
+            );
     }
 
-    // FIXME
     private void addResultSetToList(ResultSet res, List<SellableBookEntity> sellableBooks) throws SQLException {
         if(res.first()) {
             do {

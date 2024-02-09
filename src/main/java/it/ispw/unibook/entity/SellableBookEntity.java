@@ -26,20 +26,30 @@ public class SellableBookEntity extends BookEntity {
 
     private final SellableBookStateMachine state = new SellableBookStateMachineGoF();
 
-    // TODO: usare factory
     public SellableBookEntity(int code) {
-        this(code, null, null, -1, null);
+        this(code, null, null, -1, null, null);
     }
 
     public SellableBookEntity(String isbn, float price, AccountEntity seller) {
-        this(0, isbn, null, price, seller);
+        this(0, isbn, null, price, seller, null);
     }
 
     public SellableBookEntity(int code, String isbn, String title, float price, AccountEntity seller) {
+        this(code, isbn, title, price, seller, null);
+    }
+
+    public SellableBookEntity(int code, String isbn, String title, float price, AccountEntity seller, AccountEntity buyer) {
         super(isbn, title);
         this.code = code;
         this.price = price;
         this.seller = seller;
+        if(buyer != null) {
+            try {
+                this.markAsSold(buyer);
+            } catch (SellableBookAlreadySoldException ignored) {
+                // Quest'eccezione non verrà mai sollevata poiché nello stato iniziale il libro non può essere già venduto
+            }
+        }
     }
 
     public float getPrice() {

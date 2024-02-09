@@ -3,6 +3,7 @@ package it.ispw.unibook.view.cli;
 import it.ispw.unibook.bean.LoginBean;
 import it.ispw.unibook.controller.graphics.cli.LoginCLI;
 import it.ispw.unibook.exceptions.FieldNotValidException;
+import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.login.LoginException;
 import it.ispw.unibook.utils.Printer;
 
@@ -27,30 +28,17 @@ public class PageLoginCLI extends GenericPageCLI implements PageCLI {
 
             try {
 
-                String email = null;
-                String password = null;
-
-                Printer.print("Email: ");
-                // email = br.readLine();
-                email = "studente@students.uniroma2.eu";
-                //email = "professore@uniroma2.eu";
-                Printer.println(email);
-
-                Printer.print("Password: ");
-                // password = br.readLine();
-                password = "studente";
-                //password = "professore";
-                Printer.println(password);
+                String email = requestString("Email: ");
+                String password = requestString("Password: ");
 
                 LoginBean bean = new LoginBean(email, password);
                 controller.login(bean);
                 break;
 
-            } /* catch (IOException e) {
-                    Printer.error(e);
-                    System.exit(-1);
-            } */catch (LoginException | FieldNotValidException e) {
+            } catch (LoginException | FieldNotValidException e) {
                 showErrorMessage(e);
+            } catch (EscCliException e) {
+                return;
             }
         }
 

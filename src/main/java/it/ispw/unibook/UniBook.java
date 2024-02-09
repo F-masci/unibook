@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class UniBook extends Application {
@@ -22,27 +23,23 @@ public class UniBook extends Application {
      */
     public static void main(String[] args) {
 
-        // FIXME: eliminare la scelta automatica
-        // launch(args);
-        // System.exit(0);
-
         Printer.println("Seleziona l'interfaccia che vuoi usare");
         Printer.println("\t[1] Interfaccia grafica");
         Printer.println("\t[2] Riga di comando");
 
-         int selection = 1;
-         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int selection;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while(true) {
             Printer.print("\nSelezione: ");
             try {
-                // selection = Integer.parseInt(br.readLine());
+                selection = Integer.parseInt(br.readLine());
                 if(selection != 1 && selection != 2) throw new SelectionNotValidException();
                 break;
-            } /*catch (IOException e) {
+            } catch (IOException e) {
                 Printer.error("Errore durante la lettura dell'input");
                 System.exit(-1);
-            } */catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 Printer.error("L'input inserito non è valido");
             } catch (SelectionNotValidException e) {
                 Printer.error(e);

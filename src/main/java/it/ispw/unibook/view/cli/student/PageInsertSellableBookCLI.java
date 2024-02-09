@@ -1,6 +1,5 @@
 package it.ispw.unibook.view.cli.student;
 
-import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.graphics.cli.student.InsertSellableBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
@@ -46,14 +45,10 @@ public class PageInsertSellableBookCLI extends GenericPageManageSellableBookCLI 
             try {
                 // Richiede all'utente il codice di un libro (ISBN)
                 String isbn = super.requestBookCode();
-                // Istanzia il bean relativo al libro
-                // Se il codice inserito non ha un formato valido viene sollevata un'eccezione
-                BookBean bookBean = new BookBean(isbn);
-
                 // Richiede il prezzo di vendita del libro all'utente
                 float price = requestFloat("Prezzo di vendita: ");
                 // Istanzia il bean per salvare il nuovo libro in vendita
-                SellableBookBean sellableBookBean = new SellableBookBean(courseCode, bookBean, price);
+                SellableBookBean sellableBookBean = new SellableBookBean(courseCode, isbn, price);
 
                 // Viene inviato il bean contenete i dati del libro, del corso e il prezzo al controller applicativo
                 controller.insertSellableBook(sellableBookBean);
