@@ -90,7 +90,7 @@ public abstract class GenericPageManageSellableBookCLI extends GenericPageCLI {
         // Viene istanziato il bean per contenere il libro in vendita
         SellableBooksListBean bean = new SellableBooksListBean();
         // Vengono richiesti i libri in vendita al controller grafico
-        controller.retrieveSellableBooksBySessionActiveNegotiation(bean);
+        controller.retrieveSellableBooksByActiveNegotiationOfSession(bean);
         // Viene stampata la lista associata al bean
         printSellableBooksListBean(bean, "LIBRI CHE STAI ACQUISTANDO");
     }

@@ -7,7 +7,6 @@ import it.ispw.unibook.controller.application.InsertSellableBookController;
 import it.ispw.unibook.controller.application.SellableBookController;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
-import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,15 +42,15 @@ public class ManageSellableBookFacade {
     public void retrieveSellableBooksBySession(@NotNull SellableBooksListBean bean) throws SessionException {
         sellableBookController.retrieveSellableBooksBySession(bean);
     }
-    public void retrieveSellableBooksBySessionActiveNegotiation(@NotNull SellableBooksListBean bean) throws SessionException {
-        sellableBookController.retrieveSellableBooksBySessionActiveNegotiation(bean);
+    public void retrieveSellableBooksByActiveNegotiationOfSession(@NotNull SellableBooksListBean bean) throws SessionException {
+        sellableBookController.retrieveSellableBooksByActiveNegotiationOfSession(bean);
     }
 
     public SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) {
         return sellableBookController.retrieveSellableBooksByIsbn(bean);
     }
 
-    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseNotFoundException {
+    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseException {
         return sellableBookController.retrieveSellableBooksByCourse(bean);
     }
 

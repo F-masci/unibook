@@ -3,13 +3,14 @@ package it.ispw.unibook.controller.graphics.cli.student;
 import it.ispw.unibook.bean.AccountBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.application.MarkSellableBookSoldController;
+import it.ispw.unibook.exceptions.account.AccountNotFoundException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 
 public class MarkSellableBookSoldCLI extends ManageSellableBookCLI {
 
     MarkSellableBookSoldController controller = new MarkSellableBookSoldController();
 
-    public void markSellableBookSold(SellableBookBean sellableBookBean, AccountBean buyerBean) throws SellableBookException {
+    public void markSellableBookSold(SellableBookBean sellableBookBean, AccountBean buyerBean) throws SellableBookException, AccountNotFoundException {
         controller.markSellableBookSold(sellableBookBean, buyerBean);
     }
 

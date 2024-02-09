@@ -22,7 +22,7 @@ public class CourseController {
     /**
      * Carica nel bean la lista dei corsi associati al profilo che ha effettuato la richiesta
      * @param bean Deve contenere il codice della sessione corrente. Contiene la lista dei corsi collegati
-     * @throws SessionException Viene sollevata in caso in cui il codice della sessione non sia valido
+     * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
      */
     public void retrieveCoursesBySession(CoursesListBean bean) throws SessionException {
         try {
@@ -31,7 +31,7 @@ public class CourseController {
             // Si cerca l'account collegato alla sessione che ha inviato il messaggio
             AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
 
-            // Viene usato il dao per ottenere dallo stato di persistenza tutti i corsi associati
+            // Viene usato il dao per ottenere dallo strato di persistenza tutti i corsi associati
             // all'account che ha inviato il messaggio
             List<CourseEntity> courses = dao.retrieveCoursesByProfessor(account);
             // Si carica la lista dei corsi all'interno del bean
@@ -48,7 +48,7 @@ public class CourseController {
     public void retrieveCourses(CoursesListBean bean) {
         // Si carica il dao per la comunicazione con la persistenza
         UniversityDao dao = UniversityDaoFactory.getInstance().getDao();
-        // Viene usato il dao per ottenere dallo stato di persistenza tutti i corsi
+        // Viene usato il dao per ottenere dallo strato di persistenza tutti i corsi
         List<CourseEntity> courses = dao.retrieveCourses();
         // Si carica la lista dei corsi all'interno del bean
         insertCoursesListIntoBean(courses, bean);

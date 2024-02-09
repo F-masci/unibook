@@ -3,6 +3,7 @@ package it.ispw.unibook.controller.graphics.gui.student;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.bean.SellableBooksListBean;
 import it.ispw.unibook.exceptions.login.SessionException;
+import it.ispw.unibook.utils.Printer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,7 +22,7 @@ public class ActiveNegotiationListGUI extends ManageSellableBookGUI implements I
     public void initialize(URL location, ResourceBundle resources) {
         try {
             SellableBooksListBean bean = new SellableBooksListBean();
-            super.retrieveSellableBooksBySessionActiveNegotiation(bean);
+            super.retrieveSellableBooksByActiveNegotiationOfSession(bean);
             List<SellableBookBean> sellableBooks = bean.getList();
 
             for (SellableBookBean s : sellableBooks) {
@@ -31,7 +32,8 @@ public class ActiveNegotiationListGUI extends ManageSellableBookGUI implements I
                 sellableBooksList.getChildren().add(label);
             }
         } catch (SessionException e) {
-            throw new RuntimeException(e);
+            Printer.error(e);
+            System.exit(-1);
         }
     }
 }

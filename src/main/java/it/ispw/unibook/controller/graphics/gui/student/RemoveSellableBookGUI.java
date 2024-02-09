@@ -4,6 +4,7 @@ import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.application.RemoveSellableBookController;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
+import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import javafx.fxml.FXML;
@@ -47,7 +48,7 @@ public class RemoveSellableBookGUI extends ManageSellableBookGUI implements Init
             removeSellableBookButton.setVisible(false);
             sellableBooksCombo.setDisable(true);
             successLabel.setText("Libro in vendita rimosso correttamente");
-        } catch (ComboSelectionNotValidException | SellableBookException | BookException | SessionException e) {
+        } catch (ComboSelectionNotValidException | SellableBookException | BookException | SessionException | CourseException e) {
             errorLabel.setText(e.getMessage());
         }
     }

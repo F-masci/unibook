@@ -3,7 +3,6 @@ package it.ispw.unibook.controller.graphics.cli.student;
 import it.ispw.unibook.bean.*;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
-import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.facade.ManageSellableBookFacade;
 import org.jetbrains.annotations.NotNull;
@@ -34,15 +33,15 @@ public abstract class ManageSellableBookCLI {
     public void retrieveSellableBooksBySession(SellableBooksListBean bean) throws SessionException {
         facade.retrieveSellableBooksBySession(bean);
     }
-    public void retrieveSellableBooksBySessionActiveNegotiation(@NotNull SellableBooksListBean bean) throws SessionException {  // FIXME controllare nome
-        facade.retrieveSellableBooksBySessionActiveNegotiation(bean);
+    public void retrieveSellableBooksByActiveNegotiationOfSession(@NotNull SellableBooksListBean bean) throws SessionException {
+        facade.retrieveSellableBooksByActiveNegotiationOfSession(bean);
     }
 
     public SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) {
         return facade.retrieveSellableBooksByIsbn(bean);
     }
 
-    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseNotFoundException {
+    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseException {
         return facade.retrieveSellableBooksByCourse(bean);
     }
 

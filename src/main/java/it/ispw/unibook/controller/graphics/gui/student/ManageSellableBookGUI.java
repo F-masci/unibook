@@ -6,7 +6,6 @@ import it.ispw.unibook.controller.graphics.gui.PagesGUI;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
-import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.facade.ManageSellableBookFacade;
 import it.ispw.unibook.utils.Printer;
@@ -76,11 +75,11 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
     protected SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) {
         return manageSellableBookFacade.retrieveSellableBooksByIsbn(bean);
     }
-    protected SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseNotFoundException {
+    protected SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseException {
         return manageSellableBookFacade.retrieveSellableBooksByCourse(bean);
     }
-    public void retrieveSellableBooksBySessionActiveNegotiation(@NotNull SellableBooksListBean bean) throws SessionException {
-        manageSellableBookFacade.retrieveSellableBooksBySessionActiveNegotiation(bean);
+    public void retrieveSellableBooksByActiveNegotiationOfSession(@NotNull SellableBooksListBean bean) throws SessionException {
+        manageSellableBookFacade.retrieveSellableBooksByActiveNegotiationOfSession(bean);
     }
     protected AccountsListBean retrieveActiveNegotiationBySellableBook(SellableBookBean bean) throws SellableBookException {
         return manageSellableBookFacade.retrieveActiveNegotiationBySellableBook(bean);

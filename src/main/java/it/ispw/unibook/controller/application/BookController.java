@@ -23,7 +23,7 @@ public class BookController {
     /**
      * Carica nel bean la lista dei libri associati al corso
      * @param bean Deve contenere il codice del corso. Contiene la lista dei libri collegati
-     * @throws CourseException Viene sollevata in caso in cui il corso non viene trovato nello strato di persistenza
+     * @throws CourseException Viene sollevata nel caso in cui il corso non viene trovato nello strato di persistenza
      */
     public void retrieveBooksByCourse(@NotNull BooksListBean bean) throws CourseException {
         try {

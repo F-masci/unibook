@@ -3,6 +3,7 @@ package it.ispw.unibook.view.cli.student;
 import it.ispw.unibook.bean.AccountBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.graphics.cli.student.MarkSellableBookSoldCLI;
+import it.ispw.unibook.exceptions.account.AccountNotFoundException;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.cli.EscCliException;
@@ -50,7 +51,7 @@ public class PageMarkSellableBookSoldCLI extends GenericPageManageSellableBookCL
 
                 return;
 
-            } catch (BookException | SellableBookException | SessionException e) {
+            } catch (BookException | SellableBookException | SessionException | AccountNotFoundException e) {
                 showErrorMessage(e);
             } catch(EscCliException e) {
                 return;

@@ -67,7 +67,7 @@ public class UniversityDaoJDBC implements UniversityDao {
     }
 
     @Override
-    public CourseEntity retrieveCourseBySellableBook(SellableBookEntity sellableBook, AccountEntity seller) {
+    public CourseEntity retrieveCourseBySellableBook(SellableBookEntity sellableBook, AccountEntity seller) throws CourseNotFoundException {
 
         CourseEntity course = null;
 
@@ -78,6 +78,8 @@ public class UniversityDaoJDBC implements UniversityDao {
 
             if(res.first()) {
                 course = createEntityFromViewCourseResultSet(res);
+            } else {
+                throw new CourseNotFoundException();
             }
         } catch (SQLException e) {
             Printer.error(e);

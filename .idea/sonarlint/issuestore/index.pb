@@ -324,3 +324,15 @@ m
 =src/main/java/it/ispw/unibook/dao/AccountAttributesOrder.java,4\8\48a55ef47c7d6046e4a7b87494216967ec29c965
 ?
 csv/account.csv,b\5\b53c8b656d8ffcb1872d7d1ab99591afdd921203
+ˆ
+Xsrc/main/java/it/ispw/unibook/controller/graphics/cli/student/ManageSellableBookCLI.java,4\c\4ce30b579ddd6a953998cf76f727c46cc65c51d5
+„
+Tsrc/main/java/it/ispw/unibook/view/cli/student/GenericPageManageSellableBookCLI.java,8\e\8ea978c8b5ccae828c04414ee0dfce332279d8fa
+‚
+Rsrc/main/java/it/ispw/unibook/controller/graphics/cli/professor/ManageBookCLI.java,c\9\c98a627e2a13c0a73c95f4bf43c065fd7b72fd4f
+~
+Nsrc/main/java/it/ispw/unibook/view/cli/professor/GenericPageManageBookCLI.java,f\5\f5a89ec61bc1fc138930a62e000b714df39c68db
+v
+Fsrc/main/java/it/ispw/unibook/exceptions/account/AccountException.java,0\4\0410408706f4149b7a649ccfe57c5d5ca7e9a69c
+~
+Nsrc/main/java/it/ispw/unibook/exceptions/account/AccountNotFoundException.java,c\4\c4a2cae648ffedf84ad3cdc268bbf35f75c46406

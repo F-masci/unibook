@@ -1,6 +1,7 @@
 package it.ispw.unibook.dao;
 
 import it.ispw.unibook.entity.*;
+import it.ispw.unibook.exceptions.account.AccountNotFoundException;
 import it.ispw.unibook.utils.ConnectionAppJDBC;
 import it.ispw.unibook.utils.Printer;
 
@@ -20,7 +21,7 @@ public class AccountDaoAppJDBC implements AccountDao {
     }
 
     @Override
-    public AccountEntity retrieveAccountByCode(int code) {
+    public AccountEntity retrieveAccountByCode(int code) throws AccountNotFoundException {
         AccountEntity account = null;
         try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM account WHERE code=?")){
             stm.setInt(1, code);
@@ -34,6 +35,8 @@ public class AccountDaoAppJDBC implements AccountDao {
                         res.getString("name"),
                         res.getString("surname")
                 );
+            } else {
+                throw new AccountNotFoundException();
             }
         } catch (SQLException e) {
             Printer.error(e);

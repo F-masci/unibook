@@ -5,6 +5,7 @@ import it.ispw.unibook.controller.graphics.cli.student.RemoveSellableBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.cli.EscCliException;
+import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
@@ -47,7 +48,7 @@ public class PageRemoveSellableBookCLI extends GenericPageManageSellableBookCLI 
 
                 return;
 
-            } catch (BookException | SessionException | SellableBookException e) {
+            } catch (BookException | SessionException | SellableBookException | CourseException e) {
                 showErrorMessage(e);
             } catch (EscCliException e) {
                 return;

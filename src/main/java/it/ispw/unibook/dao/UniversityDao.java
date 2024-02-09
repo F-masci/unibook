@@ -14,7 +14,7 @@ public interface UniversityDao {
 
     public CourseEntity retrieveCourseByCode(int code) throws CourseNotFoundException;
     public List<CourseEntity> retrieveCoursesByProfessor(AccountEntity professor);
-    public CourseEntity retrieveCourseBySellableBook(SellableBookEntity sellableBook, AccountEntity seller);
+    public CourseEntity retrieveCourseBySellableBook(SellableBookEntity sellableBook, AccountEntity seller) throws CourseNotFoundException;
     public List<CourseEntity> retrieveCourses();
 
 }
