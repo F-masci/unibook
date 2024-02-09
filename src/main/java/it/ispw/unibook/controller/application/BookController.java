@@ -5,7 +5,6 @@ import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.dao.UniversityDao;
 import it.ispw.unibook.entity.BookEntity;
 import it.ispw.unibook.entity.CourseEntity;
-import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.factory.UniversityDaoFactory;
@@ -25,7 +24,7 @@ public class BookController {
      * @param bean Deve contenere il codice del corso. Contiene la lista dei libri collegati
      * @throws CourseException Viene sollevata nel caso in cui il corso non viene trovato nello strato di persistenza
      */
-    public void retrieveBooksByCourse(@NotNull BooksListBean bean) throws CourseException {
+    public boolean retrieveBooksByCourse(@NotNull BooksListBean bean) throws CourseException {
         try {
             // Viene istanziato il DAO tramite factory per cercare il corso
             UniversityDao dao = UniversityDaoFactory.getInstance().getDao();
@@ -34,6 +33,7 @@ public class BookController {
             CourseEntity course = dao.retrieveCourseByCode(bean.getCourseCode());
             // Si estrae la lista di libri dal corso e si inserisce all'interno del bean
             insertBooksListIntoBean(course.getBooks(), bean);
+            return true;
         } catch (CourseNotFoundException e) {
             // In caso in cui il corso non sia presente viene sollevata l'eccezione al chiamante
             throw new CourseException(e.getMessage(), e);
@@ -51,32 +51,16 @@ public class BookController {
         // Si prepara la lista da restituire al chiamante
         List<BookBean> list = new ArrayList<>();
         for (BookEntity b : books) {
-            try {
-                // Viene creato il bean del libro a partire dall'entità
-                BookBean book = createBeanFromEntity(b);
-                // Si aggiunge il bean alla lista
-                list.add(book);
-            } catch (BookException ignored) {
-                // Posso ignorare quest'eccezione poiché non verrà mai sollevata in quanto
-                // i dati presi dalla persistenza presentano sempre un isbn valido
-            }
+            // Viene creato il bean del libro a partire dall'entità
+            BookBean book = new BookBean(
+                    b.getIsbn(),
+                    b.getTitle()
+            );
+            // Si aggiunge il bean alla lista
+            list.add(book);
         }
         // Viene impostata la lista nel bean
         bean.setList(list);
-    }
-
-    /**
-     * Funzione ausiliare per formattare il bean a partire dall'entità
-     * @param book Entità da cui creare il bean
-     * @return Bean contenente i dati dell'entità
-     * @throws BookException Non viene mai sollevata poiché i dati presi dalla
-     * persistenza presentano sempre un isbn valido
-     */
-    private BookBean createBeanFromEntity(@NotNull BookEntity book) throws BookException {
-        return new BookBean(
-            book.getIsbn(),
-            book.getTitle()
-        );
     }
 
 }

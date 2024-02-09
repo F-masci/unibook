@@ -19,7 +19,7 @@ public class LoginController {
      * @param bean Contiene le credenziali per eseguire l'accesso al sistema
      * @throws LoginException Viene impostata la causa con una sottoclasse che specifica il motivo per cui non viene eseguito il login
      */
-    public void login(@NotNull LoginBean bean) throws LoginException {
+    public boolean login(@NotNull LoginBean bean) throws LoginException {
         try {
             // Viene istanziato il DAO selezionato nel file di config del sistema
             LoginDao dao = ApplicationDaoFactory.getInstance().getLoginDao();
@@ -34,10 +34,11 @@ public class LoginController {
             // relativa e si imposta il codice della sessione nella classe Bean
             SessionManager.addSession(account);
             Bean.setSessionId(account.getCode());
+            return true;
         } catch(EmailNotFoundException | IncorrectPasswordException e) {
             // Viene catturata l'eccezione e viene sollevata un'eccezione generale
             // al chiamante impostando quella catturata come causa
-            throw (LoginException) new LoginException(e.getMessage()).initCause(e);
+            throw new LoginException(e.getMessage(), e);
         }
     }
 

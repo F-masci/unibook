@@ -1,8 +1,7 @@
 package it.ispw.unibook.bean;
 
 import it.ispw.unibook.exceptions.FieldNotValidException;
-import it.ispw.unibook.exceptions.book.BookException;
-import it.ispw.unibook.exceptions.book.ISBNNotValidException;
+import it.ispw.unibook.exceptions.ISBNNotValidException;
 
 public class BookBean extends Bean {
 
@@ -10,18 +9,14 @@ public class BookBean extends Bean {
     private String name;
     protected String regex = "^\\d{13}$";
 
-    public BookBean(String isbn) throws BookException {
+    public BookBean(String isbn) throws FieldNotValidException {
         this(isbn, null);
     }
 
-    public BookBean(String isbn, String name) throws BookException {
-        try {
-            this.isbn = isbn;
-            this.name = name;
-            validateISBN();
-        } catch(ISBNNotValidException e) {
-            throw new BookException(e.getMessage(), e);
-        }
+    public BookBean(String isbn, String name) throws FieldNotValidException {
+        this.isbn = isbn;
+        this.name = name;
+        validateISBN();
     }
 
     public String getISBN() {
@@ -34,13 +29,13 @@ public class BookBean extends Bean {
         this.name =  name;
     }
 
-    protected void validateISBN() throws ISBNNotValidException {
+    protected void validateISBN() throws FieldNotValidException {
         try {
             if(isbn != null) {
                 validateField(this.getISBN(), ISBN_REGEX);
             }
         } catch (FieldNotValidException e) {
-            throw new ISBNNotValidException();
+            throw new ISBNNotValidException(new ISBNNotValidException());
         }
     }
 

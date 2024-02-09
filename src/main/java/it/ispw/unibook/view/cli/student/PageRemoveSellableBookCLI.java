@@ -48,7 +48,7 @@ public class PageRemoveSellableBookCLI extends GenericPageManageSellableBookCLI 
 
                 return;
 
-            } catch (BookException | SessionException | SellableBookException | CourseException e) {
+            } catch (SessionException | SellableBookException | CourseException e) {
                 showErrorMessage(e);
             } catch (EscCliException e) {
                 return;

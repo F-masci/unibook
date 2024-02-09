@@ -2,9 +2,10 @@ package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.CourseBean;
+import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.BookNotFoundException;
-import it.ispw.unibook.exceptions.book.ISBNNotValidException;
+import it.ispw.unibook.exceptions.ISBNNotValidException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.facade.ManageCourseBookFacade;
@@ -167,7 +168,7 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
             facade.insertBookInCourse(courseBean, bookBean);
             // Viene impostato il messaggio di conferma dell'operazione
             successLabel.setText(SUCCESS_MESSAGE_TEXT);
-        } catch(BookException e) {
+        } catch(FieldNotValidException e) {
             errorLabel.setText(e.getMessage());
             coursesCombo.setDisable(false);
             isbnField.setDisable(false);

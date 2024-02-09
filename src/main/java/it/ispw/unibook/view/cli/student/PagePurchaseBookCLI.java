@@ -5,6 +5,7 @@ import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.bean.SellableBooksListBean;
 import it.ispw.unibook.controller.graphics.cli.student.PurchaseBookCLI;
+import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.cli.EscCliException;
@@ -65,7 +66,7 @@ public class PagePurchaseBookCLI extends GenericPageManageSellableBookCLI implem
                 // Viene chiesto all'utente di scegliere quale libro acquistare tra quelli con quel codice
                 purchaseBook(controller.retrieveSellableBooksByIsbn(bean));
                 return;
-            } catch (NegotiationException | SessionException | BookException | SellableBookException e) {
+            } catch (NegotiationException | SessionException | FieldNotValidException | SellableBookException e) {
                 showErrorMessage(e);
             } catch (EscCliException e) {
                 return;
@@ -106,25 +107,19 @@ public class PagePurchaseBookCLI extends GenericPageManageSellableBookCLI implem
      * @throws BookException Viene sollevata se
      */
     private void purchaseBook(@NotNull SellableBooksListBean sellableBooksListBean) throws NegotiationException, SessionException, EscCliException, SellableBookException {
-        try {
-            // Stampa i libri in vendita
-            printSellableBooksListBean(sellableBooksListBean, "LIBRI COLLEGATI");
-            // Richiede all'utente un libro in vendita
-            int code = requestSellableBookCode();
-            // Viene istanziato il bean contenete il libro da acquistare
-            SellableBookBean purchaseBean = new SellableBookBean(code);
-            // Viene inviato il bean contenete il libro da acquistare al controller grafico
-            controller.purchaseBook(purchaseBean);
+        // Stampa i libri in vendita
+        printSellableBooksListBean(sellableBooksListBean, "LIBRI COLLEGATI");
+        // Richiede all'utente un libro in vendita
+        int code = requestSellableBookCode();
+        // Viene istanziato il bean contenete il libro da acquistare
+        SellableBookBean purchaseBean = new SellableBookBean(code);
+        // Viene inviato il bean contenete il libro da acquistare al controller grafico
+        controller.purchaseBook(purchaseBean);
 
-            // Se non vengono sollevate eccezioni l'operazione è stata completata correttamente e viene stampato il messaggio di conferma
-            Printer.println(SUCCESS_MESSAGE_TEXT);
-            // Si attende la pressione del tasto invio per tornare alla home
-            waitForExit();
-
-        } catch(BookException ignored) {
-            // Può essere ignorata poiché viene sollevata solo se l'isbn del libro
-            // non è valido, ma in questo caso viene inserito solo il codice de libro in vendita
-        }
+        // Se non vengono sollevate eccezioni l'operazione è stata completata correttamente e viene stampato il messaggio di conferma
+        Printer.println(SUCCESS_MESSAGE_TEXT);
+        // Si attende la pressione del tasto invio per tornare alla home
+        waitForExit();
     }
 
 }

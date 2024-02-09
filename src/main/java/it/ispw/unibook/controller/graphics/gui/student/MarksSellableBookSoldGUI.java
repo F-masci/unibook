@@ -4,7 +4,6 @@ import it.ispw.unibook.bean.AccountBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.application.MarkSellableBookSoldController;
 import it.ispw.unibook.exceptions.account.AccountNotFoundException;
-import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import javafx.event.ActionEvent;
@@ -50,7 +49,7 @@ public class MarksSellableBookSoldGUI extends ManageSellableBookGUI implements I
             sellableBookSelected = selected;
             loadSellableBookBuyers(buyersCombo, selected);
             buyersCombo.setDisable(false);
-        } catch(ComboSelectionNotValidException | SellableBookException | BookException e) {
+        } catch(ComboSelectionNotValidException | SellableBookException e) {
             errorLabel.setText(e.getMessage());
         }
     }
@@ -68,7 +67,7 @@ public class MarksSellableBookSoldGUI extends ManageSellableBookGUI implements I
             buyersCombo.setDisable(true);
             markSellableBookSoldButton.setVisible(false);
             successLabel.setText("Libro impostato correttamente come venduto");
-        } catch (BookException | ComboSelectionNotValidException | SellableBookException | AccountNotFoundException e) {
+        } catch (ComboSelectionNotValidException | SellableBookException | AccountNotFoundException e) {
             errorLabel.setText(e.getMessage());
         }
     }

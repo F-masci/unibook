@@ -27,7 +27,7 @@ public class LoginBean extends Bean {
         try {
             validateField(this.getEmail(), EMAIL_REGEX);
         } catch (FieldNotValidException e) {
-            throw new EmailNotValidException();
+            throw new EmailNotValidException(new EmailNotValidException());
         }
     }
 

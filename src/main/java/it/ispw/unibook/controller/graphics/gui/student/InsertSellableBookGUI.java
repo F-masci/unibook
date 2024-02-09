@@ -2,6 +2,7 @@ package it.ispw.unibook.controller.graphics.gui.student;
 
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.application.InsertSellableBookController;
+import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
@@ -73,7 +74,7 @@ public class InsertSellableBookGUI extends ManageSellableBookGUI implements Init
             priceField.setDisable(true);
             insertSellableBookButton.setVisible(false);
             successLabel.setText("Libro inserito correttamente in vendita");
-        } catch (BookException | ComboSelectionNotValidException | SellableBookException | SessionException | CourseException | NumberFormatException e) {
+        } catch (ComboSelectionNotValidException | SellableBookException | SessionException | CourseException | NumberFormatException | FieldNotValidException e) {
             errorLabel.setText(e.getMessage());
         }
     }

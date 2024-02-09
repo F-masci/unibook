@@ -1,12 +1,14 @@
 package it.ispw.unibook.exceptions;
 
-public class FieldNotValidException extends Exception {
+public class FieldNotValidException extends RuntimeException {
+
+    private static final String DEFAULT_MSG = "Campo non valido";
 
     public FieldNotValidException() {
-        this("Campo non valido");
+        this(DEFAULT_MSG);
     }
     public FieldNotValidException(Throwable cause) {
-        this("Campo non valido", cause);
+        this(DEFAULT_MSG, cause);
     }
 
     public FieldNotValidException(String msg) {

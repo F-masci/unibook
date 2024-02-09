@@ -6,7 +6,6 @@ import it.ispw.unibook.dao.UniversityDao;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
-import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -151,19 +150,15 @@ public class SellableBookController {
         for(SellableBookEntity b: sellableBooks) {
             // Viene controllato il filtro
             if((filter == SellableBookFilter.ONLY_FOR_SALE && !b.isForSale()) || (filter == SellableBookFilter.ONLY_SOLD && !b.isSold())) continue;
-            try {
-                // Viene creato il bean del libro a partire dall'entità
-                SellableBookBean sellableBook = new SellableBookBean(
-                        b.getCode(),
-                        b.getIsbn(),
-                        b.getTitle(),
-                        b.getPrice()
-                );
-                // Si aggiunge il bean alla lista
-                list.add(sellableBook);
-            } catch (BookException | SellableBookException ignored) {
-                // Possono essere ignorati poiché i dati, proveniendo dalla persistenza, sono formattati correttamente
-            }
+            // Viene creato il bean del libro a partire dall'entità
+            SellableBookBean sellableBook = new SellableBookBean(
+                    b.getCode(),
+                    b.getIsbn(),
+                    b.getTitle(),
+                    b.getPrice()
+            );
+            // Si aggiunge il bean alla lista
+            list.add(sellableBook);
         }
         // Viene impostata la lista nel bean
         bean.setList(list);

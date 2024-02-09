@@ -68,16 +68,12 @@ public abstract class GenericPageManageSellableBookCLI extends GenericPageCLI {
      * @throws SellableBookException Viene lanciata nel caso in cui il libro in vendita non sia stato trovato
      */
     protected void printSellableBookActiveNegotiationsList(@NotNull ManageSellableBookCLI controller, int sellableBookCode) throws SellableBookException {
-        try {
-            // Viene istanziato il bean per contenere il libro in vendita
-            SellableBookBean sellableBookBean = new SellableBookBean(sellableBookCode);
-            // Vengono richiesti gli accounts al controller grafico
-            AccountsListBean accountsListBean = controller.retrieveActiveNegotiationBySellableBook(sellableBookBean);
-            // Viene stampata la lista associata al bean
-            printAccountsListBean(accountsListBean, "TRATTATIVE IN CORSO");
-        } catch(BookException ignored) {
-            // Quest'eccezione può essere ignorata poiché viene sollevata nel caso in cui si inserisce un ISBN non valido
-        }
+        // Viene istanziato il bean per contenere il libro in vendita
+        SellableBookBean sellableBookBean = new SellableBookBean(sellableBookCode);
+        // Vengono richiesti gli accounts al controller grafico
+        AccountsListBean accountsListBean = controller.retrieveActiveNegotiationBySellableBook(sellableBookBean);
+        // Viene stampata la lista associata al bean
+        printAccountsListBean(accountsListBean, "TRATTATIVE IN CORSO");
     }
 
     /**

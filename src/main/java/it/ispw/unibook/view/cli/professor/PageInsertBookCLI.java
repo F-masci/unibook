@@ -3,8 +3,9 @@ package it.ispw.unibook.view.cli.professor;
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.controller.graphics.cli.professor.InsertBookCLI;
+import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.BookException;
-import it.ispw.unibook.exceptions.book.ISBNNotValidException;
+import it.ispw.unibook.exceptions.ISBNNotValidException;
 import it.ispw.unibook.exceptions.book.WrongBookException;
 import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
@@ -144,7 +145,7 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
 
                 return;
 
-            } catch (BookException e) {
+            } catch (FieldNotValidException e) {
                 showErrorMessage(e);
             }
         }

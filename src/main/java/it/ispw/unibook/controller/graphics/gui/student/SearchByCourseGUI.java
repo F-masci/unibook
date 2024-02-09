@@ -2,6 +2,7 @@ package it.ispw.unibook.controller.graphics.gui.student;
 
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.application.PurchaseBookController;
+import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
@@ -72,7 +73,7 @@ public class SearchByCourseGUI extends ManageSellableBookGUI implements Initiali
             sellableBooksCombo.setDisable(true);
             purchaseBookButton.setVisible(false);
             successLabel.setText("Trattativa iniziata correttamente");
-        } catch (BookException | ComboSelectionNotValidException | SellableBookException | NegotiationException | SessionException e) {
+        } catch (ComboSelectionNotValidException | SellableBookException | NegotiationException | SessionException e) {
             errorLabel.setText(e.getMessage());
         }
     }

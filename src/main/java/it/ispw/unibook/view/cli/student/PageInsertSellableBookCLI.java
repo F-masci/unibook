@@ -2,6 +2,7 @@ package it.ispw.unibook.view.cli.student;
 
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.graphics.cli.student.InsertSellableBookCLI;
+import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.cli.EscCliException;
@@ -60,7 +61,7 @@ public class PageInsertSellableBookCLI extends GenericPageManageSellableBookCLI 
 
                 return;
 
-            } catch(BookException | SessionException | CourseException | SellableBookException e) {
+            } catch(SessionException | CourseException | SellableBookException | FieldNotValidException e) {
                 showErrorMessage(e);
             } catch (EscCliException e) {
                 return;

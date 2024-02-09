@@ -56,7 +56,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
         }
     }
 
-    protected void loadSellableBookBuyers(ComboBox<String> combo, int sellableBook) throws SellableBookException, BookException {
+    protected void loadSellableBookBuyers(ComboBox<String> combo, int sellableBook) throws SellableBookException {
         SellableBookBean sellableBookBean = new SellableBookBean(sellableBook);
         AccountsListBean accountsBean = retrieveActiveNegotiationBySellableBook(sellableBookBean);
         loadAccountsComboBox(combo, accountsBean);
