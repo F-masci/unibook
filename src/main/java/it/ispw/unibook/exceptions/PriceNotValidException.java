@@ -1,7 +1,5 @@
 package it.ispw.unibook.exceptions;
 
-import it.ispw.unibook.exceptions.FieldNotValidException;
-
 public class PriceNotValidException extends FieldNotValidException {
 
     private static final String DEFAULT_MSG = "Il prezzo non è valido";

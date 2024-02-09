@@ -8,7 +8,7 @@ import it.ispw.unibook.exceptions.login.LoginException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LoginControllerTest {
+class LoginControllerTest {
 
     /**
      * Viene testato un esempio di login corretto al sistema
@@ -16,7 +16,7 @@ public class LoginControllerTest {
      * @throws LoginException Viene sollevata in caso di errore con il login
      */
     @Test
-    public void testLoginSuccessfully() throws FieldNotValidException, LoginException {
+    void testLoginSuccessfully() throws FieldNotValidException, LoginException {
         // Viene istanziato il controller applicativo per eseguire il login
         LoginController controller = new LoginController();
         // Viene istanziato il bean contenente le credenziali di accesso al sistema
@@ -33,7 +33,7 @@ public class LoginControllerTest {
      * @throws FieldNotValidException Viene sollevata se l'email inserita è formattata male
      */
     @Test
-    public void testLoginEmailNotFound() throws FieldNotValidException {
+    void testLoginEmailNotFound() throws FieldNotValidException {
         try {
             // Viene istanziato il controller applicativo per eseguire il login
             LoginController controller = new LoginController();
@@ -60,7 +60,7 @@ public class LoginControllerTest {
      * @throws FieldNotValidException Viene sollevata se l'email inserita è formattata male
      */
     @Test
-    public void testLoginIncorrectPassword() throws FieldNotValidException {
+    void testLoginIncorrectPassword() throws FieldNotValidException {
         try {
             // Viene istanziato il controller applicativo per eseguire il login
             LoginController controller = new LoginController();

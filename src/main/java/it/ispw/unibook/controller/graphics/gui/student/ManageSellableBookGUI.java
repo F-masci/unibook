@@ -3,7 +3,7 @@ package it.ispw.unibook.controller.graphics.gui.student;
 import it.ispw.unibook.bean.*;
 import it.ispw.unibook.controller.graphics.gui.GenericGUI;
 import it.ispw.unibook.controller.graphics.gui.PagesGUI;
-import it.ispw.unibook.exceptions.book.BookException;
+import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -39,7 +39,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
         loadSellableBooksComboBox(combo, sellableBooksBean);
     }
 
-    protected void loadIsbnSellableBooks(ComboBox<String> combo, String isbn) throws BookException {
+    protected void loadIsbnSellableBooks(ComboBox<String> combo, String isbn) throws FieldNotValidException {
         BookBean bookBean = new BookBean(isbn);
         SellableBooksListBean sellableBooksBean = retrieveSellableBooksByIsbn(bookBean);
         loadSellableBooksComboBox(combo, sellableBooksBean);

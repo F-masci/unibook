@@ -6,14 +6,14 @@ import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class BookControllerTest {
+class BookControllerTest {
 
     /**
      * Viene testato il metodo per ottenere la lista dei libri di un corso esistente
      * @throws CourseException Viene sollevata se il corso non viene trovato
      */
     @Test
-    public void testRetrieveBooksByCourseWithCoursePresent() throws CourseException {
+    void testRetrieveBooksByCourseWithCoursePresent() throws CourseException {
         // Viene istanziato il controller applicativo per eseguire il login
         BookController controller = new BookController();
         // Viene istanziato il bean contenente il codice del corso
@@ -27,7 +27,7 @@ public class BookControllerTest {
      * Viene testato il metodo per ottenere la lista dei libri di un corso esistente
      */
     @Test
-    public void testRetrieveBooksByCourseWithCourseNotPresent()  {
+    void testRetrieveBooksByCourseWithCourseNotPresent()  {
         try {
             // Viene istanziato il controller applicativo per eseguire il login
             BookController controller = new BookController();

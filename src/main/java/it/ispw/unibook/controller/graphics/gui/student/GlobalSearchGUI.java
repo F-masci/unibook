@@ -3,12 +3,10 @@ package it.ispw.unibook.controller.graphics.gui.student;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.controller.application.PurchaseBookController;
 import it.ispw.unibook.exceptions.FieldNotValidException;
-import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
-import it.ispw.unibook.utils.Printer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -48,7 +46,7 @@ public class GlobalSearchGUI extends ManageSellableBookGUI {
             loadIsbnSellableBooks(sellableBooksCombo, isbn);
             sellableBooksCombo.setDisable(false);
             purchaseBookButton.setDisable(false);
-        } catch (BookException e) {
+        } catch (FieldNotValidException e) {
             sellableBooksCombo.setDisable(true);
             purchaseBookButton.setDisable(true);
             errorLabel.setText(e.getMessage());
