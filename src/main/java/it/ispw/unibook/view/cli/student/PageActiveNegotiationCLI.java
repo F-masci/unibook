@@ -10,6 +10,13 @@ import it.ispw.unibook.view.cli.PageCLI;
 
 public class PageActiveNegotiationCLI extends GenericPageManageSellableBookCLI implements PageCLI {
 
+    private static final String MENU_ACTIVE_NEGOTIATION_TEXT = """
+        --- PAGINA TRATTATIVE ATTIVE ---
+        
+        Seleziona quali vuoi visualizzare
+        [1] I tuoi libri in vendita
+        [2] Libri che stai acquistando""";
+
     // Controller grafico relativo alla View
     private final ActiveNegotiationCLI controller = new ActiveNegotiationCLI();
 
@@ -17,11 +24,7 @@ public class PageActiveNegotiationCLI extends GenericPageManageSellableBookCLI i
     public void display() {
 
         Printer.clear();
-        Printer.println("\n--- PAGINA TRATTATIVE ATTIVE ---");
-        Printer.println("Seleziona quali vuoi visualizzare");
-        Printer.println("""
-            [1] I tuoi libri in vendita
-            [2] Libri che stai acquistando""");
+        Printer.println(MENU_ACTIVE_NEGOTIATION_TEXT);
 
         while (true) {
             try {

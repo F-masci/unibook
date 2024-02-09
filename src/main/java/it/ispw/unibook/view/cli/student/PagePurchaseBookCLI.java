@@ -19,6 +19,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class PagePurchaseBookCLI extends GenericPageManageSellableBookCLI implements PageCLI {
 
+    private static final String MENU_PURCHASE_BOOK_TEXT = """
+        --- PAGINA ACQUISTO LIBRO ---
+        
+        Seleziona quali vuoi visualizzare
+        [1] Ricerca globale
+        [2] Cerca nel corso""";
+
     // Messaggio di conferma dell'operazione
     private static final String SUCCESS_MESSAGE_TEXT = "Acquisto avviato correttamente";
 
@@ -29,11 +36,7 @@ public class PagePurchaseBookCLI extends GenericPageManageSellableBookCLI implem
     public void display() {
 
         Printer.clear();
-        Printer.println("\n--- PAGINA ACQUISTO LIBRO ---");
-        Printer.println("Seleziona come vuoi cercare");
-        Printer.println("""
-                [1] Ricerca globale
-                [2] Cerca nel corso""");
+        Printer.println(MENU_PURCHASE_BOOK_TEXT);
 
         while (true) {
             try {

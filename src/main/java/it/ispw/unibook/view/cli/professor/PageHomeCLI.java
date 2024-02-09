@@ -9,7 +9,7 @@ import it.ispw.unibook.view.cli.PageCLI;
 
 public class PageHomeCLI extends GenericPageCLI implements PageCLI {
 
-    private static final String MENU_TEXT = """
+    private static final String MENU_PROFESOR_TEXT = """
             --- HOME ---
             
             Seleziona cosa vuoi fare
@@ -26,7 +26,7 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
     public void display() {
 
         // Viene stampato il menu
-        Printer.println(MENU_TEXT);
+        Printer.println(MENU_PROFESOR_TEXT);
 
         while (true) {
 
@@ -45,7 +45,7 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
                 }
 
                 // Viene ristampato il menu
-                Printer.println(MENU_TEXT);
+                Printer.println(MENU_PROFESOR_TEXT);
 
             } catch (SelectionNotValidException e) {
                 showErrorMessage(e);
