@@ -2,7 +2,6 @@ package it.ispw.unibook.controller.graphics.cli.professor;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.CourseBean;
-import it.ispw.unibook.controller.graphics.cli.ManageBookCLI;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.facade.ManageCourseBookFacade;

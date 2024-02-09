@@ -8,7 +8,6 @@ import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.PageCLI;
-import it.ispw.unibook.view.cli.GenericPageManageSellableBookCLI;
 
 public class PageRemoveSellableBookCLI extends GenericPageManageSellableBookCLI implements PageCLI {
 

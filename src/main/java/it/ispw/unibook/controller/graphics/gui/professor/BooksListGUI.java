@@ -1,21 +1,23 @@
 package it.ispw.unibook.controller.graphics.gui.professor;
 
-import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.BooksListBean;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
+import it.ispw.unibook.facade.ManageCourseBookFacade;
+import it.ispw.unibook.utils.Printer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class BooksListGUI extends ManageBookGUI implements Initializable {
+
+    // Facade per l'accesso al sottosistema di gestione dei corsi e dei libri
+    ManageCourseBookFacade facade = new ManageCourseBookFacade();
 
     @FXML
     private ComboBox<String> coursesCombo;
@@ -27,28 +29,27 @@ public class BooksListGUI extends ManageBookGUI implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Viene caricata la combo dei corsi con i corsi associati all'utente loggato
         loadSessionCourses(coursesCombo);
     }
 
-    // FIXME exceptions
     @FXML
-    public void loadBooksList(ActionEvent event) throws CourseException {
+    public void onCourseSelected(ActionEvent event) throws CourseException {
         try {
+            // Controlla che il corso selezionato sia cambiato
             int selected = getCourseSelectedFromComboBox(coursesCombo);
             if (selected == courseSelected) return;
+            // In caso sia cambiato viene aggiornato il valore del corso correntemente selezionato
             courseSelected = selected;
-
+            // Viene inizializzato il bean per contenere la lista dei libri relativi al corso
             BooksListBean bean = new BooksListBean(courseSelected);
-            super.retrieveBooksByCourse(bean);
-            List<BookBean> books = bean.getList();
-
-            booksList.getChildren().clear();
-            for (BookBean b : books) {
-                String text = b.getISBN() + " - " + b.toString();
-                Label label = new Label(text);
-                label.getStyleClass().add("book");
-                booksList.getChildren().add(label);
-            }
-        } catch (ComboSelectionNotValidException ignored) {}
+            // Viene caricata la lista dei libri
+            facade.retrieveBooksByCourse(bean);
+            // Viene stampata la lista dei libri
+            loadCourseBooksIntoList(booksList, bean);
+        } catch (CourseException | ComboSelectionNotValidException e) { // Queste due eccezioni non dovrebbero essere mai sollevate poiché si utilizzano delle combo box con valori prefissati
+            Printer.error(e);
+            System.exit(-1);
+        }
     }
 }

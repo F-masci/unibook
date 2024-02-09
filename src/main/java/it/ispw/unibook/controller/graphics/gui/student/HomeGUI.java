@@ -1,9 +1,10 @@
 package it.ispw.unibook.controller.graphics.gui.student;
 
+import it.ispw.unibook.controller.graphics.gui.GenericGUI;
 import it.ispw.unibook.controller.graphics.gui.PagesGUI;
 import javafx.fxml.FXML;
 
-public class HomeGUI extends GenericStudentGUI {
+public class HomeGUI extends GenericGUI {
 
     @FXML
     public void showCourses() {

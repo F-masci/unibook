@@ -1,4 +1,4 @@
-package it.ispw.unibook.controller.graphics.cli;
+package it.ispw.unibook.controller.graphics.cli.student;
 
 import it.ispw.unibook.bean.*;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
@@ -8,7 +8,7 @@ import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.facade.ManageSellableBookFacade;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class ManageSellableBookCLI extends ManageBookCLI {
+public abstract class ManageSellableBookCLI {
 
     // Facade per l'accesso al sottosistema di gestione dei libri in vendita
     private final ManageSellableBookFacade facade = new ManageSellableBookFacade();

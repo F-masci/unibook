@@ -3,6 +3,7 @@ package it.ispw.unibook.facade;
 import it.ispw.unibook.bean.*;
 import it.ispw.unibook.controller.application.BookController;
 import it.ispw.unibook.controller.application.CourseController;
+import it.ispw.unibook.controller.application.InsertSellableBookController;
 import it.ispw.unibook.controller.application.SellableBookController;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
@@ -18,6 +19,8 @@ public class ManageSellableBookFacade {
     private final BookController bookController = new BookController();
     // Controller per ottenere l'informazione dei libri in vendita
     private final SellableBookController sellableBookController = new SellableBookController();
+
+    private final InsertSellableBookController insertSellableBookController = new InsertSellableBookController();
 
     /**
      * Ritorna la lista dei corsi presenti nel sistema
@@ -54,6 +57,12 @@ public class ManageSellableBookFacade {
 
     public AccountsListBean retrieveActiveNegotiationBySellableBook(SellableBookBean bean) throws SellableBookException {
         return sellableBookController.retrieveActiveNegotiationBySellableBook(bean);
+    }
+
+    /*-- INSERIMENTO --*/
+
+    public void insertSellableBook(SellableBookBean bean) throws SellableBookException, SessionException, CourseException {
+        insertSellableBookController.insertSellableBook(bean);
     }
 
 }

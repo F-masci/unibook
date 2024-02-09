@@ -2,7 +2,6 @@ package it.ispw.unibook.view.cli.student;
 
 import it.ispw.unibook.controller.graphics.cli.student.CoursesListCLI;
 import it.ispw.unibook.utils.Printer;
-import it.ispw.unibook.view.cli.GenericPageManageSellableBookCLI;
 import it.ispw.unibook.view.cli.PageCLI;
 
 public class PageCoursesListCLI extends GenericPageManageSellableBookCLI implements PageCLI {

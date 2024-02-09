@@ -1,6 +1,8 @@
 package it.ispw.unibook.controller.graphics.gui.student;
 
 import it.ispw.unibook.bean.*;
+import it.ispw.unibook.controller.graphics.gui.GenericGUI;
+import it.ispw.unibook.controller.graphics.gui.PagesGUI;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
@@ -8,11 +10,16 @@ import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.facade.ManageSellableBookFacade;
 import it.ispw.unibook.utils.Printer;
+import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class ManageSellableBookGUI extends GenericStudentGUI {
+public abstract class ManageSellableBookGUI extends GenericGUI {
 
+    @FXML
+    protected void returnToHomePage() {
+        changePage(PagesGUI.HOME_STUDENT);
+    }
     private final ManageSellableBookFacade manageSellableBookFacade = new ManageSellableBookFacade();
 
     protected void loadAllCourses(ComboBox<String> combo) {

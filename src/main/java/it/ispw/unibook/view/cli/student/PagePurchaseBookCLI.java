@@ -13,7 +13,6 @@ import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
 import it.ispw.unibook.utils.Printer;
-import it.ispw.unibook.view.cli.GenericPageManageSellableBookCLI;
 import it.ispw.unibook.view.cli.PageCLI;
 import org.jetbrains.annotations.NotNull;
 

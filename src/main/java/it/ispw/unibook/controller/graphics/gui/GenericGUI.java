@@ -5,6 +5,8 @@ import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 
@@ -84,6 +86,17 @@ public abstract class GenericGUI {
             return accountsCombo.get(value);
         }
         throw new ComboSelectionNotValidException();
+    }
+
+    protected void loadCourseBooksIntoList(VBox list, BooksListBean bean) {
+        List<BookBean> books = bean.getList();
+        list.getChildren().clear();
+        for (BookBean b : books) {
+            String text = b.getISBN() + " - " + b.toString();
+            Label label = new Label(text);
+            label.getStyleClass().add("book");
+            list.getChildren().add(label);
+        }
     }
 
     protected void changePage(PagesGUI page) {

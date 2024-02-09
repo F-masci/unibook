@@ -5,7 +5,6 @@ import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
-import it.ispw.unibook.view.cli.GenericPageManageBookCLI;
 import it.ispw.unibook.view.cli.PageCLI;
 
 public class PageBooksListCLI extends GenericPageManageBookCLI implements PageCLI {

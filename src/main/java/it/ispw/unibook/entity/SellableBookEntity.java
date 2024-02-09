@@ -32,11 +32,7 @@ public class SellableBookEntity extends BookEntity {
     }
 
     public SellableBookEntity(String isbn, float price, AccountEntity seller) {
-        this(isbn, null, price, seller);
-    }
-
-    public SellableBookEntity(String isbn, String title, float price, AccountEntity seller) {
-        this(0, isbn, title, price, seller);
+        this(0, isbn, null, price, seller);
     }
 
     public SellableBookEntity(int code, String isbn, String title, float price, AccountEntity seller) {

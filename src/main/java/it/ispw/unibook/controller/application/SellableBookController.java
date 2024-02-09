@@ -1,8 +1,8 @@
 package it.ispw.unibook.controller.application;
 
 import it.ispw.unibook.bean.*;
-import it.ispw.unibook.dao.UniversityDao;
 import it.ispw.unibook.dao.SellableBookDao;
+import it.ispw.unibook.dao.UniversityDao;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
@@ -12,21 +12,36 @@ import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.login.SessionNotFoundException;
-import it.ispw.unibook.factory.UniversityDaoFactory;
 import it.ispw.unibook.factory.SellableBookDaoFactory;
+import it.ispw.unibook.factory.UniversityDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller applicativo per l'implementazione delle operazioni comuni
+ * sulle entità Libro In Vendita richieste dai vari controller
+ */
 public class SellableBookController {
 
+    /**
+     * Carica nel bean la lista dei libri in vendita dell'utente loggato
+     * @param bean Deve contenere il codice della sessione corrente. Contiene la lista dei libri in vendita collegati
+     * @throws SessionException Viene sollevata in caso in cui il codice della sessione non sia valido
+     */
     public void retrieveSellableBooksBySession(@NotNull SellableBooksListBean bean) throws SessionException {
         try {
+            // Si carica il dao per la comunicazione con la persistenza
             SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
+            // Si cerca l'account collegato alla sessione che ha inviato il messaggio
             AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
+
+            // Viene usato il dao per ottenere dallo stato di persistenza tutti i libri in vendita associati
+            // all'account che ha inviato il messaggio
             List<SellableBookEntity> sellableBooks = dao.retrieveSellableBooksBySeller(account);
+            // Si carica la lista dei corsi all'interno del bean
             insertForSaleSellableBooksListIntoBean(sellableBooks, bean);
         } catch (SessionNotFoundException e) {
             throw new SessionException(e.getMessage(), e);
@@ -69,18 +84,21 @@ public class SellableBookController {
         return resBean;
     }
 
-    private void insertAllSellableBooksListIntoBean(List<SellableBookEntity> sellableBooks, SellableBooksListBean bean) {
-        insertSellableBooksListIntoBean(sellableBooks, bean, false);
-    }
-
     private void insertForSaleSellableBooksListIntoBean(List<SellableBookEntity> sellableBooks, SellableBooksListBean bean) {
-        insertSellableBooksListIntoBean(sellableBooks, bean, true);
+        insertSellableBooksListIntoBean(sellableBooks, bean, SellableBookFilter.ONLY_FOR_SALE);
     }
 
-    private void insertSellableBooksListIntoBean(List<SellableBookEntity> sellableBooks, SellableBooksListBean bean, boolean onlyForSale) {
+    private void insertSellableBooksListIntoBean(List<SellableBookEntity> sellableBooks, SellableBooksListBean bean, SellableBookFilter filter) {
         List<SellableBookBean> list = new ArrayList<>();
         for(SellableBookEntity b: sellableBooks) {
-            if(onlyForSale && b.isSold()) continue;
+            switch (filter) {
+                case ONLY_FOR_SALE:
+                    if(b.isSold()) continue;
+                    break;
+                case ONLY_SOLD:
+                    if(b.isForSale()) continue;
+                    break;
+            }
             try {
                 SellableBookBean sellableBook = new SellableBookBean(
                         b.getCode(),
@@ -108,6 +126,10 @@ public class SellableBookController {
             list.add(account);
         }
         bean.setList(list);
+    }
+
+    private enum SellableBookFilter {
+        ONLY_SOLD, ONLY_FOR_SALE, ALL;
     }
 
 }
