@@ -10,7 +10,7 @@ import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.login.SessionNotFoundException;
-import it.ispw.unibook.factory.SellableBookDaoFactory;
+import it.ispw.unibook.factory.ApplicationDaoFactory;
 import it.ispw.unibook.factory.UniversityDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,7 @@ public class SellableBookController {
     public void retrieveSellableBooksBySession(@NotNull SellableBooksListBean bean) throws SessionException {
         try {
             // Si carica il dao per la comunicazione con la persistenza
-            SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
+            SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
             // Si cerca l'account collegato alla sessione che ha inviato il messaggio
             AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
             // Viene usato il dao per ottenere dallo strato di persistenza tutti i libri in vendita associati
@@ -53,7 +53,7 @@ public class SellableBookController {
     public void retrieveSellableBooksByActiveNegotiationOfSession(@NotNull SellableBooksListBean bean) throws SessionException {
         try {
             // Si carica il dao per la comunicazione con la persistenza
-            SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
+            SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
             // Si cerca l'account collegato alla sessione che ha inviato il messaggio
             AccountEntity account = SessionManager.getAccountBySessionID(bean.getSessionId());
             // Viene usato il dao per ottenere dallo strato di persistenza tutti i libri in vendita che
@@ -73,7 +73,7 @@ public class SellableBookController {
      */
     public SellableBooksListBean retrieveSellableBooksByIsbn(@NotNull BookBean bean) {
         // Si carica il dao per la comunicazione con la persistenza
-        SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
+        SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
         // Viene usato il dao per ottenere dallo strato di persistenza tutti i libri in vendita con
         // l'ISBN fornito
         List<SellableBookEntity> sellableBooks = dao.retrieveSellableBooksByIsbn(bean.getISBN());
@@ -113,7 +113,7 @@ public class SellableBookController {
      */
     public AccountsListBean retrieveActiveNegotiationBySellableBook(SellableBookBean bean) throws SellableBookException {
         // Si carica il dao per la comunicazione con la persistenza
-        SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
+        SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
         // Viene cercato sulla persistenza il libro in vendita corrispondete al codice fornito
         // Se il libro in vendita non viene trovato viene sollevata l'eccezione
         SellableBookEntity sellableBook = dao.retrieveSellableBookByCode(bean.getCode());

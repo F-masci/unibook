@@ -9,14 +9,14 @@ import java.util.List;
 
 public interface SellableBookDao {
 
-    public SellableBookEntity retrieveSellableBookByCode(int code) throws SellableBookNotFoundException;
-    public List<SellableBookEntity> retrieveSellableBooksByIsbn(String isbn);
-    public List<SellableBookEntity> retrieveSellableBooksBySeller(AccountEntity seller);
-    public List<SellableBookEntity> retrieveSellableBooksByNegotiation(AccountEntity negotiationBuyer);
-    public List<SellableBookEntity> retrieveCourseSellableBooks(CourseEntity course);
+    SellableBookEntity retrieveSellableBookByCode(int code) throws SellableBookNotFoundException;
+    List<SellableBookEntity> retrieveSellableBooksByIsbn(String isbn);
+    List<SellableBookEntity> retrieveSellableBooksBySeller(AccountEntity seller);
+    List<SellableBookEntity> retrieveSellableBooksByNegotiation(AccountEntity negotiationBuyer);
+    List<SellableBookEntity> retrieveCourseSellableBooks(CourseEntity course);
 
-    public void addBuyerToSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer);
-    public void removeBuyerFromSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer);
-    public void setBuyerToSellableBook(SellableBookEntity sellableBook, AccountEntity buyer);
+    void addBuyerToSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer);
+    void removeBuyerFromSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer);
+    void setBuyerToSellableBook(SellableBookEntity sellableBook, AccountEntity buyer);
 
 }

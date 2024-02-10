@@ -5,13 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>it.ispw.unibook</groupId>
-    <artifactId>UniBook</artifactId>
+    <artifactId>unibook</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>UniBook</name>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javafx.version>21</javafx.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
@@ -83,7 +84,9 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>it.ispw.unibook.UniBook</mainClass>
+                    <jlinkImageName>unibook</jlinkImageName>
+                    <launcher>launcher</launcher>
+                    <mainClass>it.ispw.unibook/it.ispw.unibook.UniBook</mainClass>
                 </configuration>
             </plugin>
         </plugins>

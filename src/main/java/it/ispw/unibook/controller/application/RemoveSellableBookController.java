@@ -12,7 +12,7 @@ import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.login.SessionNotFoundException;
-import it.ispw.unibook.factory.SellableBookDaoFactory;
+import it.ispw.unibook.factory.ApplicationDaoFactory;
 import it.ispw.unibook.factory.UniversityDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,7 @@ public class RemoveSellableBookController {
     public void removeSellableBook(@NotNull SellableBookBean bean) throws SellableBookException, SessionException, CourseException {
         try {
             // Si carica il dao per la comunicazione con la persistenza
-            SellableBookDao sellableBookDao = SellableBookDaoFactory.getInstance().getDao();
+            SellableBookDao sellableBookDao = ApplicationDaoFactory.getInstance().getSellableBookDao();
             // Viene cercato sulla persistenza il libro in vendita corrispondete al codice fornito
             // Se il libro in vendita non viene trovato viene sollevata l'eccezione
             SellableBookEntity sellableBook = sellableBookDao.retrieveSellableBookByCode(bean.getCode());
@@ -42,7 +42,7 @@ public class RemoveSellableBookController {
             UniversityDao universityDao = UniversityDaoFactory.getInstance().getDao();
             // Viene cercato sulla persistenza il corso a cui è associato il libro in vendita
             // Se il corso non viene trovato viene sollevata l'eccezione
-            CourseEntity course = universityDao.retrieveCourseBySellableBook(sellableBook, seller);
+            CourseEntity course = universityDao.retrieveCourseByCode(sellableBook.getCourseCode());
             // Il libro in vendita viene rimosso da quelli del corso
             // Il salvataggio in persistenza è gestito dall'entità
             course.removeSellableBook(sellableBook);

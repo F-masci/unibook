@@ -19,31 +19,6 @@ public class CourseDaoAppJDBC implements CourseDao {
     }
 
     @Override
-    public void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook) {
-        try (PreparedStatement stm = connection.prepareStatement("INSERT INTO sellable_book(course, isbn, seller, price) VALUES(?, ?, ?, ?);")) {
-            stm.setInt(1, course.getCode());
-            stm.setString(2, sellableBook.getIsbn());
-            stm.setInt(3, sellableBook.getSeller().getCode());
-            stm.setFloat(4, sellableBook.getPrice());
-            stm.execute();
-        } catch(SQLException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
-    }
-
-    @Override
-    public void removeSellableBookFromCourse(CourseEntity course, SellableBookEntity sellableBook) {
-        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM sellable_book WHERE code=?;")) {
-            stm.setInt(1, sellableBook.getCode());
-            stm.execute();
-        } catch(SQLException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
-    }
-
-    @Override
     public void addBookToCourse(CourseEntity course, BookEntity book) {
         try (PreparedStatement stm = connection.prepareStatement("INSERT INTO book(course, isbn, title) VALUES(?, ?, ?);")) {
             stm.setInt(1, course.getCode());
@@ -61,6 +36,31 @@ public class CourseDaoAppJDBC implements CourseDao {
         try (PreparedStatement stm = connection.prepareStatement("DELETE FROM book WHERE course = ? AND isbn = ?;")) {
             stm.setInt(1, course.getCode());
             stm.setString(2, book.getIsbn());
+            stm.execute();
+        } catch(SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
+    @Override
+    public void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook) {
+        try (PreparedStatement stm = connection.prepareStatement("INSERT INTO sellable_book(course, isbn, seller, price) VALUES(?, ?, ?, ?);")) {
+            stm.setInt(1, course.getCode());
+            stm.setString(2, sellableBook.getIsbn());
+            stm.setInt(3, sellableBook.getSeller().getCode());
+            stm.setFloat(4, sellableBook.getPrice());
+            stm.execute();
+        } catch(SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
+    @Override
+    public void removeSellableBookFromCourse(CourseEntity course, SellableBookEntity sellableBook) {
+        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM sellable_book WHERE code=?;")) {
+            stm.setInt(1, sellableBook.getCode());
             stm.execute();
         } catch(SQLException e) {
             Printer.error(e);

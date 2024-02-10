@@ -1,9 +1,8 @@
 package it.ispw.unibook.dao;
 
-public enum AccountAttributesOrder {
-    CODE, EMAIL, PASSWORD, NAME, SURNAME, TYPE;
+public enum BookAttributesOrder {
+    COURSE, ISBN, TITLE;
     public int getIndex() {
         return this.ordinal();
     }
-
 }

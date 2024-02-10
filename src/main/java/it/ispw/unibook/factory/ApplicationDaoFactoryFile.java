@@ -14,12 +14,12 @@ public class ApplicationDaoFactoryFile extends ApplicationDaoFactory {
 
     @Override
     public BookDao getBookDao() {
-        return new BookDaoAppFile();
+        return BookDaoAppFile.getInstance();
     }
 
     @Override
     public SellableBookDao getSellableBookDao() {
-        return null;
+        return SellableBookDaoAppFile.getInstance();
     }
 
     @Override
@@ -29,12 +29,12 @@ public class ApplicationDaoFactoryFile extends ApplicationDaoFactory {
 
     @Override
     public AccountDao getAccountDao() {
-        return null;
+        return new AccountDaoAppJDBC();
     }
 
     @Override
     public CourseDao getCourseDao() {
-        return null;
+        return CourseDaoAppFile.getInstance();
     }
 
 }

@@ -12,22 +12,34 @@ public class BookEntity {
     private final String isbn;
     // Titolo del libro
     private final String title;
+    // Codice del corso a cui appartiene
+    private final int courseCode;
 
     /**
      * Costruttore di default dell'entità
      * @param isbn Codice identificativo del libro
      * @param title Titolo del libro
+     * @param courseCode Codice del corso a cui è collegato
      */
-    public BookEntity(String isbn, String title) {
+    public BookEntity(String isbn, String title, int courseCode) {
         this.isbn = isbn;
         this.title = title;
+        this.courseCode = courseCode;
+    }
+    /**
+     * Costruttore alternativo per creare il libro con solo isbn e titolo
+     * @param isbn Codice identificativo del libro
+     * @param title Titolo del libro
+     */
+    public BookEntity(String isbn, String title) {
+        this(isbn, title, 0);
     }
     /**
      * Costruttore alternativo per creare il libro con solo il codice
      * @param isbn Codice identificativo del libro
      */
     public BookEntity(String isbn) {
-        this(isbn, null);
+        this(isbn, null, 0);
     }
 
     /**
@@ -44,6 +56,14 @@ public class BookEntity {
      */
     public String getTitle() {
         return title;
+    }
+
+    /**
+     *
+     * @return Codice del corso a cui appartiene il libro
+     */
+    public int getCourseCode() {
+        return courseCode;
     }
 
     /**

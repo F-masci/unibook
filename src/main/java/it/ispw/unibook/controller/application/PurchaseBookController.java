@@ -10,7 +10,7 @@ import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 import it.ispw.unibook.exceptions.negotiation.BuyerAlreadyInNegotiationException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
-import it.ispw.unibook.factory.SellableBookDaoFactory;
+import it.ispw.unibook.factory.ApplicationDaoFactory;
 import it.ispw.unibook.utils.SessionManager;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,7 +29,7 @@ public class PurchaseBookController {
     public void purchaseBook(@NotNull SellableBookBean bean) throws SellableBookException, NegotiationException, SessionException {
         try {
             // Si carica il dao per la comunicazione con la persistenza
-            SellableBookDao dao = SellableBookDaoFactory.getInstance().getDao();
+            SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
             // Viene cercato sulla persistenza il libro in vendita corrispondete al codice fornito
             // Se il libro in vendita non viene trovato viene sollevata l'eccezione
             SellableBookEntity sellableBook = dao.retrieveSellableBookByCode(bean.getCode());

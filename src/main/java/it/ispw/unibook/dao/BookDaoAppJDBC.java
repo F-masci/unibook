@@ -39,7 +39,8 @@ public class BookDaoAppJDBC implements BookDao {
                 do {
                     BookEntity book = new BookEntity(
                             res.getString("isbn"),
-                            res.getString("title")
+                            res.getString("title"),
+                            course.getCode()
                     );
                     books.add(book);
                 } while (res.next());

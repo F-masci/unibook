@@ -320,3 +320,15 @@ Xsrc/test/java/it/ispw/unibook/controller/application/InsertCourseBookController
 Xsrc/test/java/it/ispw/unibook/controller/application/RemoveCourseBookControllerTest.java,0\e\0e748562335c345dcc28d5020c24b5f1278e98dc
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
+g
+7src/main/java/it/ispw/unibook/dao/CourseDaoAppFile.java,5\a\5ad5c778c898b39838dee57dab236d0821f9ba72
+<
+csv/book.csv,8\5\858c7d90ce5ebb7e46d3caef5876584d680fb3e0
+j
+:src/main/java/it/ispw/unibook/dao/BookAttributesOrder.java,b\7\b73f4b2fceea8e127ef8b761ae07cd609dbd88c0
+m
+=src/main/java/it/ispw/unibook/dao/SellableBookDaoAppFile.java,c\7\c7b5663c30f0cd546b91c0836d0fbee54800b817
+D
+csv/sellableBook.csv,7\7\77a0529966ee641eb69b081b367b7e6bd619404e
+r
+Bsrc/main/java/it/ispw/unibook/dao/SellableBookAttributesOrder.java,0\1\01bcf693e21f4b0d5a75919a7b50f316761d997e

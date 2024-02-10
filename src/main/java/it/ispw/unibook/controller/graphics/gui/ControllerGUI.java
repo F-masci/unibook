@@ -21,7 +21,6 @@ public class ControllerGUI {
 
     public static void setPage(PagesGUI page) {
         try {
-            Printer.println("Cambio pagina in -> " + page.getPath());
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(ControllerGUI.class.getResource(page.getPath())));
             Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
             stage.setScene(scene);

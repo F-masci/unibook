@@ -27,19 +27,19 @@ public class SellableBookEntity extends BookEntity {
     private final SellableBookStateMachine state = new SellableBookStateMachineGoF();
 
     public SellableBookEntity(int code) {
-        this(code, null, null, -1, null, null);
+        this(code, null, null, -1, null, null, 0);
     }
 
     public SellableBookEntity(String isbn, float price, AccountEntity seller) {
-        this(0, isbn, null, price, seller, null);
+        this(0, isbn, null, price, seller, null, 0);
     }
 
     public SellableBookEntity(int code, String isbn, String title, float price, AccountEntity seller) {
-        this(code, isbn, title, price, seller, null);
+        this(code, isbn, title, price, seller, null, 0);
     }
 
-    public SellableBookEntity(int code, String isbn, String title, float price, AccountEntity seller, AccountEntity buyer) {
-        super(isbn, title);
+    public SellableBookEntity(int code, String isbn, String title, float price, AccountEntity seller, AccountEntity buyer, int courseCode) {
+        super(isbn, title, courseCode);
         this.code = code;
         this.price = price;
         this.seller = seller;

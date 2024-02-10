@@ -171,7 +171,8 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
                     res.getString("title"),
                     res.getFloat("price"),
                     seller,
-                    buyer
+                    buyer,
+                    res.getInt("course")
             );
     }
 
