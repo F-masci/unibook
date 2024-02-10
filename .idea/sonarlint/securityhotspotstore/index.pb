@@ -128,8 +128,6 @@ l
 Vsrc/main/java/it/ispw/unibook/controller/application/InsertSellableBookController.java,9\2\926a723f86673ba1e702cde201621f5635a3bf49
 h
 8src/main/java/it/ispw/unibook/bean/SellableBookBean.java,6\e\6ece1e64bb92b55fd8dca321c0a080744ad035d1
-Ç
-Rsrc/main/java/it/ispw/unibook/exceptions/book/sellable/PriceNotValidException.java,3\4\34336d04613deabff135583f9774361c214fcd54
 Å
 Qsrc/main/java/it/ispw/unibook/exceptions/book/sellable/SellableBookException.java,3\a\3ab27a09b70861eab2ee6482ae7d52d5f530d2ce
 f
@@ -146,8 +144,6 @@ Tsrc/main/java/it/ispw/unibook/controller/application/InsertCourseBookController
 Ysrc/main/java/it/ispw/unibook/exceptions/book/sellable/SellableBookNotFoundException.java,2\a\2a4ec47d7f5ca818697758832e929069c7e7c891
 Ü
 Vsrc/main/java/it/ispw/unibook/controller/application/RemoveSellableBookController.java,3\c\3c13b36348226674ad5ed3990132e46115e56bb7
-x
-Hsrc/main/java/it/ispw/unibook/exceptions/book/ISBNNotValidException.java,9\4\94c125ffdd3407a5fae6adade09c19b461c91c0c
 m
 =src/main/java/it/ispw/unibook/bean/SellableBooksListBean.java,0\e\0e6c6ccc595460a573775b9ee18334ab28546639
 q
@@ -322,3 +318,5 @@ Csrc/main/java/it/ispw/unibook/exceptions/ISBNNotValidException.java,c\c\cc6fc3
 Xsrc/test/java/it/ispw/unibook/controller/application/InsertCourseBookControllerTest.java,5\6\562fc05fa9a86b43aac4fed7a0e01fc255a3e96d
 à
 Xsrc/test/java/it/ispw/unibook/controller/application/RemoveCourseBookControllerTest.java,0\e\0e748562335c345dcc28d5020c24b5f1278e98dc
+N
+src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
