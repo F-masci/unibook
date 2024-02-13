@@ -112,7 +112,8 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
     @Override
     public List<SellableBookEntity> retrieveSellableBooksByNegotiation(AccountEntity negotiationBuyer) {
-        return null;
+        // TODO
+        return new ArrayList<>();
     }
 
     @Override
@@ -138,17 +139,17 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
     @Override
     public void addBuyerToSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer) {
-
+        // TODO
     }
 
     @Override
     public void removeBuyerFromSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer) {
-
+        // TODO
     }
 
     @Override
     public void setBuyerToSellableBook(SellableBookEntity sellableBook, AccountEntity buyer) {
-
+        // TODO
     }
 
     private SellableBookEntity createEntityFromTuple(String[] tuple) {

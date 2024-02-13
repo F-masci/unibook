@@ -8,6 +8,7 @@ import it.ispw.unibook.entity.CourseEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
+import it.ispw.unibook.exceptions.book.sellable.SellableBookNotOwnedException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -38,6 +39,8 @@ public class RemoveSellableBookController {
             SellableBookEntity sellableBook = sellableBookDao.retrieveSellableBookByCode(bean.getCode());
             // Si cerca l'account collegato alla sessione che ha inviato il messaggio
             AccountEntity seller = SessionManager.getAccountBySessionID(bean.getSessionId());
+            // Si controlla che l'account che ha inviato il messaggio sia effettivamente il vednitore del libro
+            if(!sellableBook.getSeller().equals(seller)) throw new SellableBookNotOwnedException();
             // Si carica il dao per la comunicazione con la persistenza
             UniversityDao universityDao = UniversityDaoFactory.getInstance().getDao();
             // Viene cercato sulla persistenza il corso a cui è associato il libro in vendita
