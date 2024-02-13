@@ -146,8 +146,6 @@ Ysrc/main/java/it/ispw/unibook/exceptions/book/sellable/SellableBookNotFoundExce
 Vsrc/main/java/it/ispw/unibook/controller/application/RemoveSellableBookController.java,3\c\3c13b36348226674ad5ed3990132e46115e56bb7
 m
 =src/main/java/it/ispw/unibook/bean/SellableBooksListBean.java,0\e\0e6c6ccc595460a573775b9ee18334ab28546639
-q
-Asrc/main/java/it/ispw/unibook/factory/SellableBookDaoFactory.java,c\7\c7c5d7544e40a712d34ca4ab01f0d8f3ba25b88e
 }
 Msrc/main/java/it/ispw/unibook/view/cli/student/PageRemoveSellableBookCLI.java,5\1\51a403ee5118fb5f5f41771699fedaeaacb5493c
 ‰
@@ -332,3 +330,9 @@ D
 csv/sellableBook.csv,7\7\77a0529966ee641eb69b081b367b7e6bd619404e
 r
 Bsrc/main/java/it/ispw/unibook/dao/SellableBookAttributesOrder.java,0\1\01bcf693e21f4b0d5a75919a7b50f316761d997e
+h
+8src/main/java/it/ispw/unibook/dao/AccountDaoAppFile.java,c\b\cbeb9112ec5a4e4adbc4a59dd77f478aa13af0f7
+C
+csv/negotiation.csv,6\7\67a5a0fdc10dc66315bc87c4dd3e3d48cad0f612
+q
+Asrc/main/java/it/ispw/unibook/dao/NegotiationAttributesOrder.java,b\f\bf4a855f45e74ba380c54b8ed798fb3e6fdb84fb

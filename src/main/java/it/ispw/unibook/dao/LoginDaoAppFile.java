@@ -59,7 +59,7 @@ public class LoginDaoAppFile implements LoginDao {
                 if (Objects.equals(tuple[AccountAttributesOrder.EMAIL.getIndex()], email)) {
                     // Controlla che la password inserita sia uguale a quella del record
                     if(Objects.equals(tuple[AccountAttributesOrder.PASSWORD.getIndex()], password)) {
-                        // Viene istanziato il tipo relativo all'account loggatp
+                        // Viene istanziato il tipo relativo all'account loggato
                         AccountTypes type = AccountTypes.getFromString(tuple[AccountAttributesOrder.TYPE.getIndex()]);
                         // Viene istanziato l'entità relativa all'account loggato
                         account = new AccountEntity(
