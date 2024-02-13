@@ -1,12 +1,12 @@
 package it.ispw.unibook.controller.graphics.gui.student;
 
 import it.ispw.unibook.bean.SellableBookBean;
-import it.ispw.unibook.controller.application.PurchaseBookController;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
+import it.ispw.unibook.facade.ManageSellableBookFacade;
 import it.ispw.unibook.utils.Printer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +20,11 @@ import java.util.ResourceBundle;
 
 public class SearchByCourseGUI extends ManageSellableBookGUI implements Initializable {
 
-    private final PurchaseBookController controller = new PurchaseBookController();
+    // Messaggio di conferma dell'operazione
+    private static final String SUCCESS_MESSAGE_TEXT = "Trattativa iniziata correttamente";
+
+    // Facade per l'accesso al sottosistema di gestione dei libri in vendita
+    private final ManageSellableBookFacade facade = new ManageSellableBookFacade();
 
     @FXML
     private ComboBox<String> coursesCombo;
@@ -39,16 +43,21 @@ public class SearchByCourseGUI extends ManageSellableBookGUI implements Initiali
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Viene caricata la combo dei corsi con tutti i corsi del sistema
         loadAllCourses(coursesCombo);
     }
 
     @FXML
     public void onCourseSelected(ActionEvent event) {
         try {
-            int selected = getCourseSelectedFromComboBox(coursesCombo);
+            // Controlla che il corso selezionato sia cambiato
+            int selected = super.getCourseSelectedFromComboBox(coursesCombo);
             if (selected == courseSelected) return;
+            // In caso sia cambiato viene aggiornato il valore del corso correntemente selezionato
             courseSelected = selected;
-            loadCourseSellableBooks(sellableBooksCombo, selected);
+            // Viene caricata la combo con i libri in vendita del corso selezionato
+            super.loadCourseSellableBooks(sellableBooksCombo, selected);
+
             sellableBooksCombo.setDisable(false);
             purchaseBookButton.setDisable(false);
         } catch (CourseException e) {
@@ -64,13 +73,16 @@ public class SearchByCourseGUI extends ManageSellableBookGUI implements Initiali
     @FXML
     public void purchaseBook() {
         try {
+            // Viene istanziato il bean contenete il libro in vendita selezionato
             int selected = super.getSellableBookSelectedFromComboBox(sellableBooksCombo);
             SellableBookBean bean = new SellableBookBean(selected);
-            controller.purchaseBook(bean);
+            // Viene avviato l'acquisto del libro
+            facade.purchaseBook(bean);
+
             coursesCombo.setDisable(true);
             sellableBooksCombo.setDisable(true);
             purchaseBookButton.setVisible(false);
-            successLabel.setText("Trattativa iniziata correttamente");
+            successLabel.setText(SUCCESS_MESSAGE_TEXT);
         } catch (ComboSelectionNotValidException | SellableBookException | NegotiationException | SessionException e) {
             errorLabel.setText(e.getMessage());
         }

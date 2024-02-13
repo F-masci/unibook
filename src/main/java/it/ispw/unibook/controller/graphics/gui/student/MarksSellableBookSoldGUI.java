@@ -2,10 +2,10 @@ package it.ispw.unibook.controller.graphics.gui.student;
 
 import it.ispw.unibook.bean.AccountBean;
 import it.ispw.unibook.bean.SellableBookBean;
-import it.ispw.unibook.controller.application.MarkSellableBookSoldController;
 import it.ispw.unibook.exceptions.account.AccountNotFoundException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
+import it.ispw.unibook.facade.ManageSellableBookFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +18,10 @@ import java.util.ResourceBundle;
 
 public class MarksSellableBookSoldGUI extends ManageSellableBookGUI implements Initializable {
 
-    private final MarkSellableBookSoldController controller = new MarkSellableBookSoldController();
+    // Messaggio di conferma dell'operazione
+    private static final String SUCCESS_MESSAGE_TEXT = "Libro impostato correttamente come venduto";
+    // Facade per l'accesso al sottosistema di gestione dei libri in vendita
+    private final ManageSellableBookFacade facade = new ManageSellableBookFacade();
 
     @FXML
     private ComboBox<String> sellableBooksCombo;
@@ -38,16 +41,21 @@ public class MarksSellableBookSoldGUI extends ManageSellableBookGUI implements I
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadSessionSellableBooks(sellableBooksCombo);
+        // Viene caricata la combo dei libri in vendita con i libri in vendita associati all'utente loggato
+        super.loadSessionSellableBooks(sellableBooksCombo);
     }
 
     @FXML
     public void onSellableBookSelected(ActionEvent event) {
         try {
+            // Controlla che il libro in vendita selezionato sia cambiato
             int selected = super.getSellableBookSelectedFromComboBox(sellableBooksCombo);
             if (selected == sellableBookSelected) return;
+            // In caso sia cambiato viene aggiornato il valore del libro in vendita correntemente selezionato
             sellableBookSelected = selected;
-            loadSellableBookBuyers(buyersCombo, selected);
+            // Viene caricata la combo con gli acquirenti del libro in vendita selezionato
+            super.loadSellableBookBuyers(buyersCombo, selected);
+
             buyersCombo.setDisable(false);
         } catch(ComboSelectionNotValidException | SellableBookException e) {
             errorLabel.setText(e.getMessage());
@@ -59,14 +67,17 @@ public class MarksSellableBookSoldGUI extends ManageSellableBookGUI implements I
         errorLabel.setText("");
 
         try {
+            // Viene istanziato il bean con il codice del libro in vendita e l'acquirente che lo ha effettivamente comprato
             int buyer = super.getAccountSelectedFromComboBox(buyersCombo);
             SellableBookBean sellableBookBean = new SellableBookBean(sellableBookSelected);
             AccountBean buyerBean = new AccountBean(buyer);
-            controller.markSellableBookSold(sellableBookBean, buyerBean);
+            // Viene impostato l'acquirente reale del libro in vendita
+            facade.markSellableBookSold(sellableBookBean, buyerBean);
+
             sellableBooksCombo.setDisable(true);
             buyersCombo.setDisable(true);
             markSellableBookSoldButton.setVisible(false);
-            successLabel.setText("Libro impostato correttamente come venduto");
+            successLabel.setText(SUCCESS_MESSAGE_TEXT);
         } catch (ComboSelectionNotValidException | SellableBookException | AccountNotFoundException e) {
             errorLabel.setText(e.getMessage());
         }

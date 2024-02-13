@@ -27,7 +27,7 @@ public class BookDaoAppFile implements BookDao {
         try {
             // Istanzia il descrittore del file relativo al file dei libri
             fd = new File("csv/" + BOOK_FILE_NAME);
-            // Se il file dei libri non esiste viene creato
+            // Se il file dei libri non esiste Viene istanziato
             if (!fd.exists() && !fd.createNewFile()) throw new IOException();
         } catch (IOException | NullPointerException e) {
             Printer.error(e);

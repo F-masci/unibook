@@ -25,6 +25,7 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
     // Messaggio di conferma dell'operazione
     private static final String SUCCESS_MESSAGE_TEXT = "Libro inserito correttamente";
 
+    // Facade per l'accesso al sottosistema di gestione dei corsi e dei libri
     private final ManageCourseBookFacade facade = new ManageCourseBookFacade();
 
     @FXML
@@ -59,14 +60,14 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Viene caricata la combo dei corsi con i corsi associati all'utente loggato
-        loadSessionCourses(coursesCombo);
+        super.loadSessionCourses(coursesCombo);
     }
 
     @FXML
     public void onCourseSelected(ActionEvent event) {
         try {
             // Controlla che il corso selezionato sia cambiato
-            int selected = getCourseSelectedFromComboBox(coursesCombo);
+            int selected = super.getCourseSelectedFromComboBox(coursesCombo);
             if (selected == courseSelected) return;
             // In caso sia cambiato viene aggiornato il valore del corso correntemente selezionato
             courseSelected = selected;
@@ -84,7 +85,7 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
         errorLabel.setText("");
 
         try {
-            // Viene creato il bean contenente il libro da salvare
+            // Viene istanziato il bean contenente il libro da salvare
             BookBean bean = new BookBean(isbnField.getText());
             // Vengono visualizzati i pulsanti per eseguire le azioni
             searchBookButton.setVisible(false);

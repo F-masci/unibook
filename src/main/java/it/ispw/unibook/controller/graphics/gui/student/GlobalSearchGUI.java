@@ -1,12 +1,12 @@
 package it.ispw.unibook.controller.graphics.gui.student;
 
 import it.ispw.unibook.bean.SellableBookBean;
-import it.ispw.unibook.controller.application.PurchaseBookController;
 import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
+import it.ispw.unibook.facade.ManageSellableBookFacade;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -17,7 +17,11 @@ import java.util.Objects;
 
 public class GlobalSearchGUI extends ManageSellableBookGUI {
 
-    private final PurchaseBookController controller = new PurchaseBookController();
+    // Messaggio di conferma dell'operazione
+    private static final String SUCCESS_MESSAGE_TEXT = "Trattativa iniziata correttamente";
+
+    // Facade per l'accesso al sottosistema di gestione dei libri in vendita
+    private final ManageSellableBookFacade facade = new ManageSellableBookFacade();
 
     @FXML
     private TextField isbnField;
@@ -40,10 +44,14 @@ public class GlobalSearchGUI extends ManageSellableBookGUI {
     @FXML
     public void searchBook() {
         try {
+            // Controlla che il libro cercato sia cambiato
             String isbn = isbnField.getText();
             if (Objects.equals(isbn, isbnPre)) return;
+            // In caso sia cambiato viene aggiornato il valore del libro correntemente cercato
             isbnPre = isbn;
-            loadIsbnSellableBooks(sellableBooksCombo, isbn);
+            // Viene caricata la combo dei libri in vendita
+            super.loadIsbnSellableBooks(sellableBooksCombo, isbn);
+
             sellableBooksCombo.setDisable(false);
             purchaseBookButton.setDisable(false);
         } catch (FieldNotValidException e) {
@@ -57,14 +65,17 @@ public class GlobalSearchGUI extends ManageSellableBookGUI {
     public void purchaseBook() {
         errorLabel.setText("");
         try {
+            // Viene istanziato il bean con il libro in vendita selezionato
             int selected = super.getSellableBookSelectedFromComboBox(sellableBooksCombo);
             SellableBookBean bean = new SellableBookBean(selected);
-            controller.purchaseBook(bean);
+            // Viene avviato l'acquisto del libro
+            facade.purchaseBook(bean);
+
             isbnField.setDisable(true);
             sellableBooksCombo.setDisable(true);
             purchaseBookButton.setVisible(false);
             searchBookButton.setVisible(false);
-            successLabel.setText("Trattativa iniziata correttamente");
+            successLabel.setText(SUCCESS_MESSAGE_TEXT);
         } catch (ComboSelectionNotValidException | SellableBookException | NegotiationException | SessionException e) {
             errorLabel.setText(e.getMessage());
         }

@@ -2,10 +2,10 @@ package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.CourseBean;
-import it.ispw.unibook.controller.application.RemoveCourseBookController;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
+import it.ispw.unibook.facade.ManageCourseBookFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +21,8 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
     // Messaggio di conferma dell'operazione
     private static final String SUCCESS_MESSAGE_TEXT = "Libro rimosso correttamente";
 
-    private final RemoveCourseBookController controller = new RemoveCourseBookController();
+    // Facade per l'accesso al sottosistema di gestione dei corsi e dei libri
+    private final ManageCourseBookFacade facade = new ManageCourseBookFacade();
 
     @FXML
     private ComboBox<String> coursesCombo;
@@ -40,19 +41,20 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadSessionCourses(coursesCombo);
+        // Viene caricata la combo dei corsi con i corsi associati all'utente loggato
+        super.loadSessionCourses(coursesCombo);
     }
 
     @FXML
     public void loadBooksList(ActionEvent event) {
         try {
             // Controlla che il corso selezionato sia cambiato
-            int selected = getCourseSelectedFromComboBox(coursesCombo);
+            int selected = super.getCourseSelectedFromComboBox(coursesCombo);
             if (selected == courseSelected) return;
             // In caso sia cambiato viene aggiornato il valore del corso correntemente selezionato
             courseSelected = selected;
             // Viene caricata la combo dei libri collegati al corso
-            loadCourseBooks(booksCombo, selected);
+            super.loadCourseBooks(booksCombo, selected);
         } catch (ComboSelectionNotValidException | CourseException e) {
             errorLabel.setText(e.getMessage());
         }
@@ -67,7 +69,7 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
 
         try {
             // Carica il libro selezionato dalla combo
-            isbn = getCourseBookSelectedFromComboBox(booksCombo);
+            isbn = super.getCourseBookSelectedFromComboBox(booksCombo);
         } catch (ComboSelectionNotValidException e) {
             errorLabel.setText(e.getMessage());
             return;
@@ -79,7 +81,7 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
             // Viene istanziato il bean contenete il libro selezionato
             BookBean bookBean = new BookBean(isbn);
             // Rimuove il libro dal corso svolgendo il caso d'uso
-            controller.removeBookFromCourse(courseBean, bookBean);
+            facade.removeBookFromCourse(courseBean, bookBean);
 
             // Vengono oscurati i pulsanti per eseguire le azioni e disabilitati i campi per l'inserimento
             coursesCombo.setDisable(true);

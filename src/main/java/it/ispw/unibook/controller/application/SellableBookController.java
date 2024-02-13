@@ -150,7 +150,7 @@ public class SellableBookController {
         for(SellableBookEntity b: sellableBooks) {
             // Viene controllato il filtro
             if((filter == SellableBookFilter.ONLY_FOR_SALE && !b.isForSale()) || (filter == SellableBookFilter.ONLY_SOLD && !b.isSold())) continue;
-            // Viene creato il bean del libro a partire dall'entità
+            // Viene istanziato il bean del libro a partire dall'entità
             SellableBookBean sellableBook = new SellableBookBean(
                     b.getCode(),
                     b.getIsbn(),

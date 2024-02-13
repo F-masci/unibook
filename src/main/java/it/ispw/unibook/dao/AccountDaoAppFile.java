@@ -33,11 +33,11 @@ public class AccountDaoAppFile implements AccountDao {
         try {
             // Istanzia il descrittore del file relativo al file degli account
             fdAccount = new File("csv/" + ACCOUNT_FILE_NAME);
-            // Se il file degli accouny non esiste viene creato
+            // Se il file degli accouny non esiste Viene istanziato
             if (!fdAccount.exists() && !fdAccount.createNewFile()) throw new IOException();
             // Istanzia il descrittore del file relativo al file degli acquirenti dei libri
             fdNegotiation = new File("csv/" + NEGOTIATION_FILE_NAME);
-            // Se il file degli acquirenti dei libri non esiste viene creato
+            // Se il file degli acquirenti dei libri non esiste Viene istanziato
             if (!fdNegotiation.exists() && !fdNegotiation.createNewFile()) throw new IOException();
         } catch (IOException | NullPointerException e) {
             Printer.error(e);

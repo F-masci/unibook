@@ -37,11 +37,11 @@ public class SellableBookDaoAppFile implements SellableBookDao {
         try {
             // Istanzia il descrittore del file relativo al file dei libri in vendita
             fdSellableBook = new File("csv/" + SELLABLE_BOOK_FILE_NAME);
-            // Se il file non esiste viene creato
+            // Se il file non esiste Viene istanziato
             if (!fdSellableBook.exists() && !fdSellableBook.createNewFile()) throw new IOException();
             // Istanzia il descrittore del file relativo al file degli acquirenti dei libri
             fdSellableBook = new File("csv/" + NEGOTIATION_FILE_NAME);
-            // Se il file non esiste viene creato
+            // Se il file non esiste Viene istanziato
             if (!fdNegotiation.exists() && !fdNegotiation.createNewFile()) throw new IOException();
         } catch (IOException | NullPointerException e) {
             Printer.error(e);

@@ -32,11 +32,11 @@ public class CourseDaoAppFile implements CourseDao {
         try {
             // Istanzia il descrittore del file relativo al file dei libri
             fdBook = new File("csv/" + BOOK_FILE_NAME);
-            // Se il file dei libri non esiste viene creato
+            // Se il file dei libri non esiste Viene istanziato
             if (!fdBook.exists() && !fdBook.createNewFile()) throw new IOException();
             // Istanzia il descrittore del file relativo al file dei libri in vendita
             fdSellableBook = new File("csv/" + SELLABLE_BOOK_FILE_NAME);
-            // Se il file dei libri in vendita non esiste viene creato
+            // Se il file dei libri in vendita non esiste Viene istanziato
             if (!fdSellableBook.exists() && !fdSellableBook.createNewFile()) throw new IOException();
         } catch (IOException | NullPointerException e) {
             Printer.error(e);

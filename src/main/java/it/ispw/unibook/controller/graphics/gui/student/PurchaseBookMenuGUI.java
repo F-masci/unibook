@@ -6,11 +6,17 @@ import javafx.fxml.FXML;
 
 public class PurchaseBookMenuGUI extends GenericGUI {
 
+    /**
+     * Mostra la pagina per cercare un libro nel sistema tramite ISBN
+     */
     @FXML
     public void showGlobalSearch() {
         changePage(PagesGUI.GLOBAL_SEARCH_STUDENT);
     }
 
+    /**
+     * Mostra la pagina per cercare un libro in vendita in un corso
+     */
     @FXML
     public void showSearchByCourse() {
         changePage(PagesGUI.SEARCH_BY_COURSE_STUDENT);

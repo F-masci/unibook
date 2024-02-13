@@ -64,7 +64,7 @@ public class CourseController {
         // Si prepara la lista da restituire al chiamante
         List<CourseBean> list = new ArrayList<>();
         for(CourseEntity c: courses) {
-            // Viene creato il bean del libro a partire dall'entità
+            // Viene istanziato il bean del libro a partire dall'entità
             CourseBean course = new CourseBean(
                     c.getCode(),
                     c.getName(),

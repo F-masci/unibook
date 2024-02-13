@@ -9,18 +9,18 @@ import it.ispw.unibook.utils.SessionManager;
 
 public class LoginCLI {
 
+    // Controller applicativo per eseguire il login
     private final LoginController controller = new LoginController();
 
     public void login(LoginBean bean) throws LoginException {
-        controller.login(bean);
-
-        // Se non vengono sollevate eccezioni dal sellbaleBookController applicativo l'utente viene mandato alla home
-        updateView(bean);
-    }
-
-    private void updateView(LoginBean bean) {
-        Printer.println("");
         try {
+            // Viene eseguito il login
+            controller.login(bean);
+
+            // Se non vengono sollevate eccezioni il login è stato eseguito correttamente
+            Printer.println("");
+            // Nel bean viene l'ID della sessione corrispondente
+            // A seconda del ruolo dell'utente loggato viene istanziata la nuova View
             switch (SessionManager.getAccountTypeBySessionID(bean.getSessionId())) {
                 case STUDENT -> new it.ispw.unibook.view.cli.student.PageHomeCLI().display();
                 case PROFESSOR -> new it.ispw.unibook.view.cli.professor.PageHomeCLI().display();

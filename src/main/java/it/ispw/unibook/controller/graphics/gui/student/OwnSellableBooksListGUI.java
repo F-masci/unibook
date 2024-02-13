@@ -29,20 +29,27 @@ public class OwnSellableBooksListGUI extends ManageSellableBookGUI implements In
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadSessionSellableBooks(sellableBooksCombo);
+        // Viene caricata la combo dei libri in vendita con i libri in vendita associati all'utente loggato
+        super.loadSessionSellableBooks(sellableBooksCombo);
     }
 
     @FXML
     public void onSellableBookSelected(ActionEvent event) {
         try {
-            int selected = getSellableBookSelectedFromComboBox(sellableBooksCombo);
+            // Controlla che il libro in vendita selezionato sia cambiato
+            int selected = super.getSellableBookSelectedFromComboBox(sellableBooksCombo);
             if (selected == sellableBookSelected) return;
+            // In caso sia cambiato viene aggiornato il valore del libro in vendita correntemente selezionato
             sellableBookSelected = selected;
 
+            // Viene istanziato il bean contenente il codice del libro in vendita selezionato
             SellableBookBean sellableBookBean = new SellableBookBean(selected);
+            // Viene richiesto al padre il bean contenente gli acquirenti del libro in vendita selezionato
             AccountsListBean accountsBean = super.retrieveActiveNegotiationBySellableBook(sellableBookBean);
+            // Viene estratta dal bean la lista degli acquirenti del libro in vendita
             List<AccountBean> buyers = accountsBean.getList();
 
+            // Viene stampata la lista degli acquirenti
             buyersList.getChildren().clear();
             for (AccountBean a : buyers) {
                 String text = a.getCode() + " - " + a;

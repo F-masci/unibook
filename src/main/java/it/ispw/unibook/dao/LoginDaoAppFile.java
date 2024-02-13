@@ -28,7 +28,7 @@ public class LoginDaoAppFile implements LoginDao {
         try {
             // Istanzia il descrittore del file relativo al file
             fd = new File("csv/" + FILE_NAME);
-            // Se il file non esiste viene creato
+            // Se il file non esiste Viene istanziato
             if (!fd.exists() && !fd.createNewFile()) throw new IOException();
         } catch (IOException | NullPointerException e) {
             Printer.error(e);

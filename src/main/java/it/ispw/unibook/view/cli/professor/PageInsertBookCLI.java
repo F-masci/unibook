@@ -133,7 +133,7 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
                 // Viene chiesto il titolo del libro all'utente
                 String name = requestString(TITLE_REQUEST_TEXT);
 
-                // Viene creato il bean contenente i dati del libro
+                // Viene istanziato il bean contenente i dati del libro
                 BookBean bookBean = new BookBean(isbn, name);
                 // Vengono inviati i bean contenenti i dati del libro e del corso al controller grafico
                 controller.insertBookInCourse(courseBean, bookBean);

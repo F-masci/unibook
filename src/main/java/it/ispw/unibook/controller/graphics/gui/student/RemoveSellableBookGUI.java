@@ -1,11 +1,11 @@
 package it.ispw.unibook.controller.graphics.gui.student;
 
 import it.ispw.unibook.bean.SellableBookBean;
-import it.ispw.unibook.controller.application.RemoveSellableBookController;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.exceptions.login.SessionException;
+import it.ispw.unibook.facade.ManageSellableBookFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,7 +17,11 @@ import java.util.ResourceBundle;
 
 public class RemoveSellableBookGUI extends ManageSellableBookGUI implements Initializable {
 
-    private final RemoveSellableBookController controller = new RemoveSellableBookController();
+    // Messaggio di conferma dell'operazione
+    private static final String SUCCESS_MESSAGE_TEXT = "Libro in vendita rimosso correttamente";
+
+    // Facade per l'accesso al sottosistema di gestione dei libri in vendita
+    private final ManageSellableBookFacade facade = new ManageSellableBookFacade();
 
     @FXML
     private ComboBox<String> sellableBooksCombo;
@@ -33,7 +37,8 @@ public class RemoveSellableBookGUI extends ManageSellableBookGUI implements Init
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadSessionSellableBooks(sellableBooksCombo);
+        // Viene caricata la combo dei libri in vendita con i libri in vendita associati all'utente loggato
+        super.loadSessionSellableBooks(sellableBooksCombo);
     }
 
     @FXML
@@ -41,12 +46,15 @@ public class RemoveSellableBookGUI extends ManageSellableBookGUI implements Init
         errorLabel.setText("");
 
         try {
+            // Viene istanziato il bean con il codice del libro da rimuovere
             int code = super.getSellableBookSelectedFromComboBox(sellableBooksCombo);
             SellableBookBean bean = new SellableBookBean(code);
-            controller.removeSellableBook(bean);
+            // Viene rimosso il libro in vendita
+            facade.removeSellableBook(bean);
+
             removeSellableBookButton.setVisible(false);
             sellableBooksCombo.setDisable(true);
-            successLabel.setText("Libro in vendita rimosso correttamente");
+            successLabel.setText(SUCCESS_MESSAGE_TEXT);
         } catch (ComboSelectionNotValidException | SellableBookException | SessionException | CourseException e) {
             errorLabel.setText(e.getMessage());
         }

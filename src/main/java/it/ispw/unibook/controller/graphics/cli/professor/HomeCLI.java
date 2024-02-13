@@ -8,7 +8,7 @@ import it.ispw.unibook.view.cli.professor.PageRemoveBookCLI;
 public class HomeCLI {
 
     /**
-     * Mostra la pagina con la lista dei libri per un cors
+     * Mostra la pagina con la lista dei libri per un corso
      */
     public void showBooks() {
         changeView(new PageBooksListCLI());

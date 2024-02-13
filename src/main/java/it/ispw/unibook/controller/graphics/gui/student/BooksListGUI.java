@@ -25,19 +25,25 @@ public class BooksListGUI extends ManageSellableBookGUI implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadAllCourses(coursesCombo);
+        // Viene caricata la combo dei corsi con tutti i corsi presenti nel sistema
+        super.loadAllCourses(coursesCombo);
     }
 
     @FXML
     public void onCourseSelected(ActionEvent event) throws CourseException {
         try {
-            int selected = getCourseSelectedFromComboBox(coursesCombo);
+            // Controlla che il corso selezionato sia cambiato
+            int selected = super.getCourseSelectedFromComboBox(coursesCombo);
             if (selected == courseSelected) return;
+            // In caso sia cambiato viene aggiornato il valore del corso correntemente selezionato
             courseSelected = selected;
+            // Viene inizializzato il bean per contenere la lista dei libri relativi al corso
             BooksListBean bean = new BooksListBean(courseSelected);
+            // Viene caricata la lista dei libri
             super.retrieveBooksByCourse(bean);
-            loadCourseBooksIntoList(booksList, bean);
-        } catch (ComboSelectionNotValidException | CourseException e) {
+            // Viene stampata la lista dei libri
+            super.loadCourseBooksIntoList(booksList, bean);
+        } catch (ComboSelectionNotValidException | CourseException e) { // Queste due eccezioni non dovrebbero essere mai sollevate poiché si utilizzano delle combo box con valori prefissati
             Printer.error(e);
             System.exit(-1);
         }

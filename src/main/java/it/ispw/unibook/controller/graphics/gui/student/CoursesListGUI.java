@@ -18,10 +18,14 @@ public class CoursesListGUI extends ManageSellableBookGUI implements Initializab
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Viene istanziato il bean che conterrà la lista dei corsi
         CoursesListBean bean = new CoursesListBean();
+        // Viene caricata la lista dei corsi
         super.retrieveCourses(bean);
+        // Viene estratta dal bean la lista dei corsi
         List<CourseBean> courses = bean.getList();
 
+        // Viene mostrata la lista dei corsi
         for (CourseBean c : courses) {
             String text = c.getCode() + " - " + c.toString();
             Label label = new Label(text);

@@ -21,10 +21,14 @@ public class ActiveNegotiationListGUI extends ManageSellableBookGUI implements I
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            // Viene istanziato il bean che conterrà la lista dei libri in vendita
             SellableBooksListBean bean = new SellableBooksListBean();
+            // Viene caricata la lista dei libri in vendita
             super.retrieveSellableBooksByActiveNegotiationOfSession(bean);
+            // Viene estratta dal bean la lista dei libri in vendita
             List<SellableBookBean> sellableBooks = bean.getList();
 
+            // Viene mostrata la lista libri in vendita
             for (SellableBookBean s : sellableBooks) {
                 String text = s.getCode() + " - " + s;
                 Label label = new Label(text);

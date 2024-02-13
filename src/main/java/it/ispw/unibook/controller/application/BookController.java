@@ -50,7 +50,7 @@ public class BookController {
         // Si prepara la lista da restituire al chiamante
         List<BookBean> list = new ArrayList<>();
         for (BookEntity b : books) {
-            // Viene creato il bean del libro a partire dall'entità
+            // Viene istanziato il bean del libro a partire dall'entità
             BookBean book = new BookBean(
                     b.getIsbn(),
                     b.getTitle()

@@ -14,7 +14,7 @@ import it.ispw.unibook.exceptions.login.SessionException;
 public abstract class ManageBookCLI {
 
     // Facade per l'accesso al sottosistema di gestione dei corsi e dei libri
-    private final ManageCourseBookFacade facade = new ManageCourseBookFacade();
+    private final ManageCourseBookFacade manageCourseBookFacade = new ManageCourseBookFacade();
 
     /**
      * Ritorna la lista dei corsi associati all'utente loggato
@@ -23,7 +23,7 @@ public abstract class ManageBookCLI {
      * @throws SessionException Viene sollevata se la sessione non viene trovata
      */
     public void retrieveCoursesBySession(CoursesListBean bean) throws SessionException {
-        facade.retrieveCoursesBySession(bean);
+        manageCourseBookFacade.retrieveCoursesBySession(bean);
     }
 
     /**
@@ -33,7 +33,7 @@ public abstract class ManageBookCLI {
      * @throws CourseException Viene sollevata se il corso non viene trovato
      */
     public void retrieveBooksByCourse(BooksListBean bean) throws CourseException {
-        facade.retrieveBooksByCourse(bean);
+        manageCourseBookFacade.retrieveBooksByCourse(bean);
     }
 
 }

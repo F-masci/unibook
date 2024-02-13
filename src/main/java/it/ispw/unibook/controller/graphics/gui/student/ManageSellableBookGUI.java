@@ -19,69 +19,170 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
     protected void returnToHomePage() {
         changePage(PagesGUI.HOME_STUDENT);
     }
+
+    // Facade per l'accesso al sottosistema di gestione dei libri in vendita
     private final ManageSellableBookFacade manageSellableBookFacade = new ManageSellableBookFacade();
 
-    protected void loadAllCourses(ComboBox<String> combo) {
+    /**
+     * Carica tutti i corsi del sistema nella combo
+     * @param combo ComboBox su cui caricare i corsi
+     */
+    protected void loadAllCourses(@NotNull ComboBox<String> combo) {
+        // Viene istanziato il bean che conterrà la lista dei corsi
         CoursesListBean bean = new CoursesListBean();
-        retrieveCourses(bean);
-        loadCoursesComboBox(combo, bean);
+        // Viene caricata la lista dei corsi nel bean
+        this.retrieveCourses(bean);
+        // Viene carica la lista dei corsi nel bean nella combo
+        // La gestione della ComboBox è affidata alla classe padre
+        super.loadCoursesComboBox(combo, bean);
     }
 
-    protected void loadCourseBooks(ComboBox<String> combo, int course) throws CourseException {
+    /**
+     * Carica i libri di un corso nella combo
+     * @param combo ComboBox su cui caricare i libri
+     * @param course Codice del corso
+     * @throws CourseException Viene sollevata se il corso non è stato trovato
+     */
+    protected void loadCourseBooks(@NotNull ComboBox<String> combo, int course) throws CourseException {
+        // Viene istanziato il bean che conterrà la lista dei libri del corso
         BooksListBean bean = new BooksListBean(course);
-        retrieveBooksByCourse(bean);
-        loadCourseBooksComboBox(combo, bean);
+        // Viene caricata la lista dei libri nel bean
+        this.retrieveBooksByCourse(bean);
+        // Viene carica la lista dei libri nel bean nella combo
+        // La gestione della ComboBox è affidata alla classe padre
+        super.loadCourseBooksComboBox(combo, bean);
     }
 
-    protected void loadCourseSellableBooks(ComboBox<String> combo, int course) throws CourseException {
+    /**
+     * Carica i libri in vendita di un corso nella combo
+     * @param combo ComboBox su cui caricare i libri in vendita
+     * @param course Codice del corso
+     * @throws CourseException Viene sollevata se il corso non è stato trovato
+     */
+    protected void loadCourseSellableBooks(@NotNull ComboBox<String> combo, int course) throws CourseException {
+        // Viene istanziato il bean che contiene il codice del corso
         CourseBean courseBean = new CourseBean(course);
-        SellableBooksListBean sellableBooksBean =  retrieveSellableBooksByCourse(courseBean);
-        loadSellableBooksComboBox(combo, sellableBooksBean);
+        // Viene ritornata la lista dei libri in vendita per il corso
+        SellableBooksListBean sellableBooksBean =  this.retrieveSellableBooksByCourse(courseBean);
+        // Viene carica la lista dei libri in vendita nel bean nella combo
+        // La gestione della ComboBox è affidata alla classe padre
+        super.loadSellableBooksComboBox(combo, sellableBooksBean);
     }
 
-    protected void loadIsbnSellableBooks(ComboBox<String> combo, String isbn) throws FieldNotValidException {
+    /**
+     * Carica i libri in vendita nella combo
+     * @param combo ComboBox su cui caricare i libri in vendita
+     * @param isbn ISBN del libro di cui si vogliono cercare le copie in vendita
+     * @throws FieldNotValidException Viene sollevata se l'ISBN non ha un formato valido
+     */
+    protected void loadIsbnSellableBooks(@NotNull ComboBox<String> combo, String isbn) throws FieldNotValidException {
+        // Viene istanziato il bean che contiene l'isbn del libro
         BookBean bookBean = new BookBean(isbn);
-        SellableBooksListBean sellableBooksBean = retrieveSellableBooksByIsbn(bookBean);
-        loadSellableBooksComboBox(combo, sellableBooksBean);
+        // Viene ritornata la lista dei libri in vendita con l'isbn fornito
+        SellableBooksListBean sellableBooksBean = this.retrieveSellableBooksByIsbn(bookBean);
+        // Viene carica la lista dei libri in vendita nel bean nella combo
+        // La gestione della ComboBox è affidata alla classe padre
+        super.loadSellableBooksComboBox(combo, sellableBooksBean);
     }
 
-    protected void loadSessionSellableBooks(ComboBox<String> combo) {
+    /**
+     * Carica i libri in vendita dell'utente loggato nella combo
+     * @param combo ComboBox su cui caricare i libri in vendita
+     */
+    protected void loadSessionSellableBooks(@NotNull ComboBox<String> combo) {
         try {
+            // Viene istanziato il bean che conterrà la lista dei libri in vendita dell'utente loggato
             SellableBooksListBean bean = new SellableBooksListBean();
-            retrieveSellableBooksBySession(bean);
-            loadSellableBooksComboBox(combo, bean);
+            // Viene caricata la lista dei libri in vendita nel bean
+            this.retrieveSellableBooksBySession(bean);
+            // Viene carica la lista dei libri in vendita nel bean nella combo
+            // La gestione della ComboBox è affidata alla classe padre
+            super.loadSellableBooksComboBox(combo, bean);
         } catch (SessionException e) {
             Printer.error(e);
             System.exit(-1);
         }
     }
 
-    protected void loadSellableBookBuyers(ComboBox<String> combo, int sellableBook) throws SellableBookException {
+    /**
+     * Carica gli acquirenti di un libro in vendita
+     * @param combo ComboBox su cui caricare gli acquirenti
+     * @param sellableBook Codice del libro in vendita
+     * @throws SellableBookException Viene sollevata se il libro in vendita non è stato trovato
+     */
+    protected void loadSellableBookBuyers(@NotNull ComboBox<String> combo, int sellableBook) throws SellableBookException {
+        // Viene istanziato il bean che contiene il codice del libro in vendita
         SellableBookBean sellableBookBean = new SellableBookBean(sellableBook);
-        AccountsListBean accountsBean = retrieveActiveNegotiationBySellableBook(sellableBookBean);
-        loadAccountsComboBox(combo, accountsBean);
+        // Viene ritornata la lista degli acquirenti del libro in vendita
+        AccountsListBean accountsBean = this.retrieveActiveNegotiationBySellableBook(sellableBookBean);
+        // Viene carica la lista degli acquirenti nel bean nella combo
+        // La gestione della ComboBox è affidata alla classe padre
+        super.loadAccountsComboBox(combo, accountsBean);
     }
 
 
-    protected void retrieveCourses(CoursesListBean bean) {
+    /**
+     * Ritorna la lista dei corsi presenti nel sistema
+     * @param bean Contiene la lista dei corsi
+     */
+    protected void retrieveCourses(@NotNull CoursesListBean bean) {
         manageSellableBookFacade.retrieveCourses(bean);
     }
-    protected void retrieveBooksByCourse(BooksListBean bean) throws CourseException {
+
+    /**
+     * Ritorna la lista dei libri associati a un corso
+     * @param bean Deve contenere il codice del corso.
+     *             Contiene la lista dei corsi
+     * @throws CourseException Viene sollevata se il corso non viene trovato
+     */
+    protected void retrieveBooksByCourse(@NotNull BooksListBean bean) throws CourseException {
         manageSellableBookFacade.retrieveBooksByCourse(bean);
     }
-    protected void retrieveSellableBooksBySession(SellableBooksListBean bean) throws SessionException {
+
+    /**
+     * Carica nel bean la lista dei libri in vendita dell'utente loggato
+     * @param bean Deve contenere il codice della sessione corrente. Contiene la lista dei libri in vendita collegati
+     * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
+     */
+    protected void retrieveSellableBooksBySession(@NotNull SellableBooksListBean bean) throws SessionException {
         manageSellableBookFacade.retrieveSellableBooksBySession(bean);
     }
-    protected SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) {
+
+    /**
+     * Ritorna la lista dei libri in vendita cercandoli tramite ISBN
+     * @param bean Deve contenere l'ISBN
+     * @return Bean contenente la lista dei libri in vendita con l'ISBN fornito
+     */
+    protected SellableBooksListBean retrieveSellableBooksByIsbn(@NotNull BookBean bean) {
         return manageSellableBookFacade.retrieveSellableBooksByIsbn(bean);
     }
-    protected SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseException {
+
+    /**
+     * Ritorna la lista dei libri in vendita collegati al corso
+     * @param bean Deve contenere il codice del corso
+     * @return Bean contenente la lista dei libri in vendita collegati al corso fornito
+     * @throws CourseException Viene sollevata se il corso non viene trovato
+     */
+    protected SellableBooksListBean retrieveSellableBooksByCourse(@NotNull CourseBean bean) throws CourseException {
         return manageSellableBookFacade.retrieveSellableBooksByCourse(bean);
     }
+
+    /**
+     * Carica nel bean la lista dei libri che l'utente loggato è interessato ad acquistare
+     * @param bean Deve contenere il codice della sessione corrente. Contiene la lista dei libri in vendita
+     * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
+     */
     public void retrieveSellableBooksByActiveNegotiationOfSession(@NotNull SellableBooksListBean bean) throws SessionException {
         manageSellableBookFacade.retrieveSellableBooksByActiveNegotiationOfSession(bean);
     }
-    protected AccountsListBean retrieveActiveNegotiationBySellableBook(SellableBookBean bean) throws SellableBookException {
+
+    /**
+     * Ritorna la lista degli acquirenti collegati al libro in vendita
+     * @param bean Deve contenere il codice del corso
+     * @return Bean contenente i libri in vendita collegati al corso
+     * @throws SellableBookException Viene sollevata se il libro in vendita non viene trovato
+     */
+    protected AccountsListBean retrieveActiveNegotiationBySellableBook(@NotNull SellableBookBean bean) throws SellableBookException {
         return manageSellableBookFacade.retrieveActiveNegotiationBySellableBook(bean);
     }
 

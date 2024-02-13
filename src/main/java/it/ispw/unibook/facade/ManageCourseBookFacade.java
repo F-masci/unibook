@@ -25,9 +25,9 @@ public class ManageCourseBookFacade {
     private final CourseController courseController = new CourseController();
     // Controller per ottenere l'informazione dei libri
     private final BookController bookController = new BookController();
-    // Controller per ottenere il caso d'uso <i>Inserisci libro in un corso</i>
+    // Controller per eseguire il caso d'uso <i>Inserisci libro in un corso</i>
     private final InsertCourseBookController insertCourseBookController = new InsertCourseBookController();
-    // Controller per ottenere il caso d'uso <i>Rimuovi libro in vendita</i>
+    // Controller per eseguire il caso d'uso <i>Rimuovi libro da un corso</i>
     private final RemoveCourseBookController removeCourseBookController = new RemoveCourseBookController();
 
     /**

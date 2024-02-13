@@ -20,7 +20,7 @@ public abstract class ManageBookGUI extends GenericGUI {
     }
 
     // Facade per l'accesso al sottosistema di gestione dei corsi e dei libri
-    ManageCourseBookFacade manageCourseBookFacade = new ManageCourseBookFacade();
+    private final ManageCourseBookFacade manageCourseBookFacade = new ManageCourseBookFacade();
 
     /**
      * Carica nella combo i corsi collegati all'utente loggato
