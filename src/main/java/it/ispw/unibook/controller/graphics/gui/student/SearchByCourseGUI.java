@@ -51,12 +51,12 @@ public class SearchByCourseGUI extends ManageSellableBookGUI implements Initiali
     public void onCourseSelected(ActionEvent event) {
         try {
             // Controlla che il corso selezionato sia cambiato
-            int selected = super.getCourseSelectedFromComboBox(coursesCombo);
-            if (selected == courseSelected) return;
+            int course = super.getCourseSelectedFromComboBox(coursesCombo);
+            if (course == courseSelected) return;
             // In caso sia cambiato viene aggiornato il valore del corso correntemente selezionato
-            courseSelected = selected;
+            courseSelected = course;
             // Viene caricata la combo con i libri in vendita del corso selezionato
-            super.loadCourseSellableBooks(sellableBooksCombo, selected);
+            super.loadCourseSellableBooks(sellableBooksCombo, courseSelected);
 
             sellableBooksCombo.setDisable(false);
             purchaseBookButton.setDisable(false);
