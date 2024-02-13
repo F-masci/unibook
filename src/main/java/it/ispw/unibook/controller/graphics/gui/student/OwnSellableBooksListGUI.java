@@ -37,13 +37,13 @@ public class OwnSellableBooksListGUI extends ManageSellableBookGUI implements In
     public void onSellableBookSelected(ActionEvent event) {
         try {
             // Controlla che il libro in vendita selezionato sia cambiato
-            int selected = super.getSellableBookSelectedFromComboBox(sellableBooksCombo);
-            if (selected == sellableBookSelected) return;
+            int sellableBook = super.getSellableBookSelectedFromComboBox(sellableBooksCombo);
+            if (sellableBook == sellableBookSelected) return;
             // In caso sia cambiato viene aggiornato il valore del libro in vendita correntemente selezionato
-            sellableBookSelected = selected;
+            sellableBookSelected = sellableBook;
 
             // Viene istanziato il bean contenente il codice del libro in vendita selezionato
-            SellableBookBean sellableBookBean = new SellableBookBean(selected);
+            SellableBookBean sellableBookBean = new SellableBookBean(sellableBookSelected);
             // Viene richiesto al padre il bean contenente gli acquirenti del libro in vendita selezionato
             AccountsListBean accountsBean = super.retrieveActiveNegotiationBySellableBook(sellableBookBean);
             // Viene estratta dal bean la lista degli acquirenti del libro in vendita
