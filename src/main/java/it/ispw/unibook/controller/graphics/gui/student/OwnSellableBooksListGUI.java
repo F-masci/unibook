@@ -3,8 +3,6 @@ package it.ispw.unibook.controller.graphics.gui.student;
 import it.ispw.unibook.bean.AccountBean;
 import it.ispw.unibook.bean.AccountsListBean;
 import it.ispw.unibook.bean.SellableBookBean;
-import it.ispw.unibook.exceptions.FieldNotValidException;
-import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.utils.Printer;
