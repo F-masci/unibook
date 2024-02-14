@@ -2,11 +2,13 @@ package it.ispw.unibook.exceptions.book.sellable;
 
 public class SellableBookException extends Exception {
 
+    private static final String DEFAULT_MSG = "Errore";
+
     public SellableBookException() {
-        this("Errore");
+        this(DEFAULT_MSG);
     }
     public SellableBookException(Throwable cause) {
-        this("Errore", cause);
+        this(DEFAULT_MSG, cause);
     }
 
     public SellableBookException(String msg) {

@@ -2,18 +2,20 @@ package it.ispw.unibook.exceptions.negotiation;
 
 public class BuyerAlreadyInNegotiationException extends NegotiationException {
 
+    private static final String DEFAULT_MSG = "Acquirente già presente";
+
     public BuyerAlreadyInNegotiationException() {
-        this("Acquirente già presente");
+        this(DEFAULT_MSG);
     }
-    public BuyerAlreadyInNegotiationException(Throwable e) {
-        this("Acquirente già presente", e);
+    public BuyerAlreadyInNegotiationException(Throwable cause) {
+        this(DEFAULT_MSG, cause);
     }
 
     public BuyerAlreadyInNegotiationException(String msg) {
         super(msg);
     }
-    public BuyerAlreadyInNegotiationException(String msg, Throwable e) {
-        super(msg, e);
+    public BuyerAlreadyInNegotiationException(String msg, Throwable cause) {
+        super(msg, cause);
     }
 
 }

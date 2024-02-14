@@ -14,8 +14,22 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.sql.Connection;
 
 public class LibraryDaoOL implements LibraryDao {
+
+    // Unica istanza di factory per il DAO universitario
+    private static LibraryDaoOL instance = null;
+
+    private Connection connection = null;
+
+    private LibraryDaoOL() {}
+
+    public static LibraryDaoOL getInstance() {
+        if(instance == null) instance = new LibraryDaoOL();
+        return instance;
+    }
+
     @Override
     public BookEntity searchBookByISBN(String isbn) throws BookNotFoundException {
 

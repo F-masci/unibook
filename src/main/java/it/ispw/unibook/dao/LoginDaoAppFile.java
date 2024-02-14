@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class LoginDaoAppFile implements LoginDao {
 
-    // Unica istanza nel sistema del DAO
+    // Unica istanza di DAO di login che sfrutta il file system
     private static LoginDaoAppFile instance = null;
     // Nome del file dove vengono salvate le informazioni
     private static final String FILE_NAME = "account.csv";
@@ -24,6 +24,7 @@ public class LoginDaoAppFile implements LoginDao {
     // Descrittore del file
     private File fd;
 
+    // Il costruttore è reso privato per applicate il pattern Singleton
     private LoginDaoAppFile() {
         try {
             // Istanzia il descrittore del file relativo al file
@@ -36,7 +37,12 @@ public class LoginDaoAppFile implements LoginDao {
         }
     }
 
+    /**
+     * Permette di ottenere l'unica istanza di factory per il DAO di login che sfrutta file system
+     * @return DAO di login che utilizza il file system
+     */
     public static LoginDaoAppFile getInstance() {
+        // Se l'istanza non è presente viene creata
         if(instance == null) instance = new LoginDaoAppFile();
         return instance;
     }

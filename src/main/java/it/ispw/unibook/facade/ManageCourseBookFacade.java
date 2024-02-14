@@ -15,9 +15,9 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Applicazione del pattern <i>façade</i> per fornire un accesso unico al sottosistema per il reperimento
- * dei dati dei corsi e dei libri associati.
- * La classe espone i metodi per ottenere dalla persistenza i corsi e i libri a essi associati
- * necessari alla View
+ * dei dati dei corsi e dei libri associati.<br>
+ * La classe espone i metodi per gestire sulla persistenza i corsi e i libri a essi associati
+ * necessari alle View
  */
 public class ManageCourseBookFacade {
 

@@ -17,10 +17,17 @@ import java.util.List;
 
 public class SellableBookDaoAppJDBC implements SellableBookDao {
 
+    private static SellableBookDaoAppJDBC instance = null;
+
     private Connection connection = null;
 
-    public SellableBookDaoAppJDBC() {
+    private SellableBookDaoAppJDBC() {
         connection = ConnectionAppJDBC.getInstance();
+    }
+
+    public static SellableBookDaoAppJDBC getInstance() {
+        if(instance == null) instance = new SellableBookDaoAppJDBC();
+        return instance;
     }
 
     @Override

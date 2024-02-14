@@ -2,18 +2,20 @@ package it.ispw.unibook.exceptions.login;
 
 public class SessionException extends Exception {
 
+    private static final String DEFAULT_MSG = "Errore";
+
     public SessionException() {
-        this("Errore");
+        this(DEFAULT_MSG);
     }
-    public SessionException(Exception e) {
-        this("Errore", e);
+    public SessionException(Throwable cause) {
+        this(DEFAULT_MSG, cause);
     }
 
     public SessionException(String msg) {
         super(msg);
     }
-    public SessionException(String msg, Exception e) {
-        super(msg, e);
+    public SessionException(String msg, Throwable cause) {
+        super(msg, cause);
     }
 
 }

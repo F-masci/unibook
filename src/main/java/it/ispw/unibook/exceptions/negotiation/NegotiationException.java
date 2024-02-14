@@ -2,18 +2,20 @@ package it.ispw.unibook.exceptions.negotiation;
 
 public class NegotiationException extends Exception {
 
+    private static final String DEFAULT_MSG = "Erorre";
+
     public NegotiationException() {
-        this("Erorre");
+        this(DEFAULT_MSG);
     }
-    public NegotiationException(Throwable e) {
-        this("Erorre", e);
+    public NegotiationException(Throwable cause) {
+        this(DEFAULT_MSG, cause);
     }
 
     public NegotiationException(String msg) {
         super(msg);
     }
-    public NegotiationException(String msg, Throwable e) {
-        super(msg, e);
+    public NegotiationException(String msg, Throwable cause) {
+        super(msg, cause);
     }
 
 

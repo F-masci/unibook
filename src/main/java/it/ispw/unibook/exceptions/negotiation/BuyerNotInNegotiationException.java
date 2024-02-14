@@ -2,11 +2,13 @@ package it.ispw.unibook.exceptions.negotiation;
 
 public class BuyerNotInNegotiationException extends NegotiationException {
 
+    private static final String DEFAULT_MSG = "Acquirente non presente";
+
     public BuyerNotInNegotiationException() {
-        this("Acquirente non presente");
+        this(DEFAULT_MSG);
     }
     public BuyerNotInNegotiationException(Throwable cause) {
-        this("Acquirente non presente", cause);
+        this(DEFAULT_MSG, cause);
     }
 
     public BuyerNotInNegotiationException(String msg) {

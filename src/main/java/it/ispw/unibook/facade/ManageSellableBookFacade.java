@@ -9,6 +9,11 @@ import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Applicazione del pattern <i>façade</i> per fornire un accesso unico al sottosistema per il reperimento
+ * dei dati dei libri in vendita.<br>
+ * La classe espone i metodi per gestire sulla persistenza i libri in vendita necessari alle View
+ */
 public class ManageSellableBookFacade {
 
     // Controller per ottenere le informazioni dei corsi

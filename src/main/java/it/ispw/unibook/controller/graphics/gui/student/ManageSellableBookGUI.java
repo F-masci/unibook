@@ -32,7 +32,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
         CoursesListBean bean = new CoursesListBean();
         // Viene caricata la lista dei corsi nel bean
         this.retrieveCourses(bean);
-        // Viene carica la lista dei corsi nel bean nella combo
+        // Viene caricata la lista dei corsi nel bean nella combo
         // La gestione della ComboBox è affidata alla classe padre
         super.loadCoursesComboBox(combo, bean);
     }
@@ -48,7 +48,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
         BooksListBean bean = new BooksListBean(course);
         // Viene caricata la lista dei libri nel bean
         this.retrieveBooksByCourse(bean);
-        // Viene carica la lista dei libri nel bean nella combo
+        // Viene caricata la lista dei libri nel bean nella combo
         // La gestione della ComboBox è affidata alla classe padre
         super.loadCourseBooksComboBox(combo, bean);
     }
@@ -64,7 +64,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
         CourseBean courseBean = new CourseBean(course);
         // Viene ritornata la lista dei libri in vendita per il corso
         SellableBooksListBean sellableBooksBean =  this.retrieveSellableBooksByCourse(courseBean);
-        // Viene carica la lista dei libri in vendita nel bean nella combo
+        // Viene caricata la lista dei libri in vendita nel bean nella combo
         // La gestione della ComboBox è affidata alla classe padre
         super.loadSellableBooksComboBox(combo, sellableBooksBean);
     }
@@ -80,7 +80,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
         BookBean bookBean = new BookBean(isbn);
         // Viene ritornata la lista dei libri in vendita con l'isbn fornito
         SellableBooksListBean sellableBooksBean = this.retrieveSellableBooksByIsbn(bookBean);
-        // Viene carica la lista dei libri in vendita nel bean nella combo
+        // Viene caricata la lista dei libri in vendita nel bean nella combo
         // La gestione della ComboBox è affidata alla classe padre
         super.loadSellableBooksComboBox(combo, sellableBooksBean);
     }
@@ -95,7 +95,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
             SellableBooksListBean bean = new SellableBooksListBean();
             // Viene caricata la lista dei libri in vendita nel bean
             this.retrieveSellableBooksBySession(bean);
-            // Viene carica la lista dei libri in vendita nel bean nella combo
+            // Viene caricata la lista dei libri in vendita nel bean nella combo
             // La gestione della ComboBox è affidata alla classe padre
             super.loadSellableBooksComboBox(combo, bean);
         } catch (SessionException e) {
@@ -115,7 +115,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
         SellableBookBean sellableBookBean = new SellableBookBean(sellableBook);
         // Viene ritornata la lista degli acquirenti del libro in vendita
         AccountsListBean accountsBean = this.retrieveActiveNegotiationBySellableBook(sellableBookBean);
-        // Viene carica la lista degli acquirenti nel bean nella combo
+        // Viene caricata la lista degli acquirenti nel bean nella combo
         // La gestione della ComboBox è affidata alla classe padre
         super.loadAccountsComboBox(combo, accountsBean);
     }

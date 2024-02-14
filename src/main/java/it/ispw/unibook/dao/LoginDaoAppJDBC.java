@@ -14,11 +14,25 @@ import java.sql.SQLException;
 
 public class LoginDaoAppJDBC implements LoginDao {
 
-    // Connessione al database
+    // Unica istanza di factory per il DAO di login che sfrutta JDBC
+    private static LoginDaoAppJDBC instance = null;
+
+    // Connessione al database del sistema
     private Connection connection = null;
 
-    public LoginDaoAppJDBC() {
+    // Il costruttore è reso privato per applicate il pattern Singleton
+    private LoginDaoAppJDBC() {
         connection = ConnectionAppJDBC.getInstance();
+    }
+
+    /**
+     * Permette di ottenere l'unica istanza di factory per il DAO di login che sfrutta JDBC
+     * @return DAO di login che utilizza JDBC
+     */
+    public static LoginDaoAppJDBC getInstance() {
+        // Se l'istanza non è presente viene creata
+        if(instance == null) instance = new LoginDaoAppJDBC();
+        return instance;
     }
 
     @Override
@@ -36,7 +50,7 @@ public class LoginDaoAppJDBC implements LoginDao {
             // Viene eseguita la QUERY
             ResultSet res = stm.executeQuery();
 
-            // Controllo che ci sia almeno un risultato
+            // Controlla che ci sia almeno un risultato
             if (!res.first()) {
                 // Nel caso in cui non sia stato trovato nessun risultato, viene controllato se esiste almeno un account con la mail inserita
                 stmError.setString(1, email);
