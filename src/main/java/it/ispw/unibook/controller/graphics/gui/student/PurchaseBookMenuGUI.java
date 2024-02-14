@@ -1,10 +1,9 @@
 package it.ispw.unibook.controller.graphics.gui.student;
 
-import it.ispw.unibook.controller.graphics.gui.GenericGUI;
 import it.ispw.unibook.controller.graphics.gui.PagesGUI;
 import javafx.fxml.FXML;
 
-public class PurchaseBookMenuGUI extends GenericGUI {
+public class PurchaseBookMenuGUI extends ManageSellableBookGUI {
 
     /**
      * Mostra la pagina per cercare un libro nel sistema tramite ISBN

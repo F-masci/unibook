@@ -26,7 +26,7 @@ public class SellableBookDaoAppFile implements SellableBookDao {
     // Nome del file dove vengono salvate le informazioni dei libri in vendita
     private static final String SELLABLE_BOOK_FILE_NAME = "sellableBook.csv";
     // Nome del file dove vengono salvate le informazioni degli acquirenti di un libro
-    private static final String NEGOTIATION_FILE_NAME = "sellableBook.csv";
+    private static final String NEGOTIATION_FILE_NAME = "negotiation.csv";
 
     // Descrittore del file dei libri in vendita
     private File fdSellableBook;

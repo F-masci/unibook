@@ -43,6 +43,7 @@ public class GlobalSearchGUI extends ManageSellableBookGUI {
 
     @FXML
     public void searchBook() {
+        errorLabel.setText("");
         try {
             // Controlla che il libro cercato sia cambiato
             String isbn = isbnField.getText();

@@ -5,7 +5,6 @@ import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.BookNotFoundException;
-import it.ispw.unibook.exceptions.ISBNNotValidException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.facade.ManageCourseBookFacade;
@@ -87,15 +86,14 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
         try {
             // Viene istanziato il bean contenente il libro da salvare
             BookBean bean = new BookBean(isbnField.getText());
-            // Vengono visualizzati i pulsanti per eseguire le azioni
-            searchBookButton.setVisible(false);
-            isbnField.setDisable(true);
             // Viene cercato il libro tramite l'ISBN inserito
             facade.getBookInformation(bean);
 
             // Il libro è stato trovato e il nome viene visualizzato nell'apposito campo
             titleField.setText(bean.getName());
             // Vengono visualizzati i pulsanti per eseguire le azioni
+            searchBookButton.setVisible(false);
+            isbnField.setDisable(true);
             confirmButton.setVisible(true);
             errorButton.setVisible(true);
         } catch (BookException e) {
@@ -103,12 +101,14 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
             errorLabel.setText(e.getMessage());
             // Ottiene la causa che ha scatenato l'errore
             Throwable cause = e.getCause();
-            if(cause.getClass() == ISBNNotValidException.class) {               // ISBN non valido
-                searchBookButton.setVisible(true);
-            } else if(cause.getClass() == BookNotFoundException.class) {        // Libro non trovato
+            if(cause.getClass() == BookNotFoundException.class) {        // Libro non trovato
+                searchBookButton.setVisible(false);
                 retryButton.setVisible(true);
                 insertManualButton.setVisible(true);
             }
+        } catch (FieldNotValidException e) {
+            // Imposta il messaggio di errore
+            errorLabel.setText(e.getMessage());
         }
     }
 

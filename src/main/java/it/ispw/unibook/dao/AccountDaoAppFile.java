@@ -73,7 +73,9 @@ public class AccountDaoAppFile implements AccountDao {
                     return new AccountEntity(
                             Integer.parseInt(tuple[AccountAttributesOrder.CODE.getIndex()]),
                             tuple[AccountAttributesOrder.EMAIL.getIndex()],
-                            type
+                            type,
+                            tuple[AccountAttributesOrder.NAME.getIndex()],
+                            tuple[AccountAttributesOrder.SURNAME.getIndex()]
                     );
                 }
             }
@@ -101,7 +103,8 @@ public class AccountDaoAppFile implements AccountDao {
             // Scorre i record all'interno del file
             while ((tuple = csvReader.readNext()) != null) {
                 // Viene cercata l'entità relativa all'account e viene aggiunta alla lista
-                buyers.add(this.retrieveAccountByCode(Integer.parseInt(tuple[NegotiationAttributesOrder.STUDENT.getIndex()])));
+                if(Integer.parseInt(tuple[NegotiationAttributesOrder.BOOK.getIndex()]) == sellableBook.getCode())
+                    buyers.add(this.retrieveAccountByCode(Integer.parseInt(tuple[NegotiationAttributesOrder.STUDENT.getIndex()])));
             }
 
         } catch (IOException | CsvValidationException e) {
