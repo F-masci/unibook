@@ -54,7 +54,7 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
             // In caso sia cambiato viene aggiornato il valore del corso correntemente selezionato
             courseSelected = selected;
             // Viene caricata la combo dei libri collegati al corso
-            super.loadCourseBooks(booksCombo, selected);
+            super.loadCourseBooks(booksCombo, courseSelected);
             // Vengono abilitati i campi per l'inserimento
             booksCombo.setDisable(false);
         } catch (ComboSelectionNotValidException | CourseException e) {
