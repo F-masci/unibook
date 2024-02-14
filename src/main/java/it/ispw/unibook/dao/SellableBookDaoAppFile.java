@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class SellableBookDaoAppFile implements SellableBookDao {
 
-    // Unica istanza nel sistema del DAO
+    // Unica istanza di DAO dei libri in vendita che sfrutta il file system
     private static SellableBookDaoAppFile instance = null;
     // Nome del file dove vengono salvate le informazioni dei libri in vendita
     private static final String SELLABLE_BOOK_FILE_NAME = "sellableBook.csv";
@@ -30,7 +30,7 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
     // Descrittore del file dei libri in vendita
     private File fdSellableBook;
-    // Descrittore del file
+    // Descrittore del file degli acquirenti dei libri
     private File fdNegotiation;
 
     private SellableBookDaoAppFile() {
@@ -40,7 +40,7 @@ public class SellableBookDaoAppFile implements SellableBookDao {
             // Se il file non esiste Viene istanziato
             if (!fdSellableBook.exists() && !fdSellableBook.createNewFile()) throw new IOException();
             // Istanzia il descrittore del file relativo al file degli acquirenti dei libri
-            fdSellableBook = new File("csv/" + NEGOTIATION_FILE_NAME);
+            fdNegotiation = new File("csv/" + NEGOTIATION_FILE_NAME);
             // Se il file non esiste Viene istanziato
             if (!fdNegotiation.exists() && !fdNegotiation.createNewFile()) throw new IOException();
         } catch (IOException | NullPointerException e) {
@@ -49,21 +49,28 @@ public class SellableBookDaoAppFile implements SellableBookDao {
         }
     }
 
+    /**
+     * Permette di ottenere l'unica istanza di DAO dei libri in vendita che sfrutta il file system
+     * @return DAO dei libri in vendita che utilizza il file system
+     */
     public static SellableBookDaoAppFile getInstance() {
+        // Se l'istanza non è presente viene creata
         if(instance == null) instance = new SellableBookDaoAppFile();
         return instance;
     }
 
     @Override
     public SellableBookEntity retrieveSellableBookByCode(int code) throws SellableBookNotFoundException {
+        // Apre il file in lettura
         try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdSellableBook)))) {
 
             // Contiene i campi della riga letta
             String[] tuple;
 
-            // Scorre i record all'interno del file
+            // Scorre i record all'interno del file per cercare quello richiesto
             while ((tuple = csvReader.readNext()) != null) {
                 if(Integer.parseInt(tuple[SellableBookAttributesOrder.CODE.getIndex()]) == code)
+                    // Sfrutta la funzione ausiliare per creare l'entità a partire dalla tupla
                     return createEntityFromTuple(tuple);
             }
 
@@ -71,6 +78,7 @@ public class SellableBookDaoAppFile implements SellableBookDao {
             Printer.error(e);
             System.exit(-1);
         }
+        // Viene sollevata se il libro in vendita non è stato trovato
         throw new SellableBookNotFoundException();
     }
 

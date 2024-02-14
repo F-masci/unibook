@@ -33,7 +33,7 @@ public class ApplicationDaoFactoryJDBC extends ApplicationDaoFactory {
 
     @Override
     public CourseDao getCourseDao() {
-        return new CourseDaoAppJDBC();
+        return CourseDaoAppJDBC.getInstance();
     }
 
     @Override

@@ -154,7 +154,7 @@ public class UniversityDaoJDBC implements UniversityDao {
                 res.getInt(labels[0]),
                 res.getString(labels[1]),
                 res.getInt(labels[2]),
-                res.getInt(labels[4])
+                res.getInt(labels[3])
         );
     }
 
