@@ -13,7 +13,7 @@ public class LibraryDaoFactory {
 
     /**
      * Permette di ottenere l'unica istanza di factory per il DAO della libreria
-     * @return DAO universitario
+     * @return DAO della libreria
      */
     public static LibraryDaoFactory getInstance() {
         // Se l'istanza non è presente viene creata

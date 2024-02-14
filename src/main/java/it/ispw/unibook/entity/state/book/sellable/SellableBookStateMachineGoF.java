@@ -4,14 +4,27 @@ import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookAlreadySoldException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotSoldExceptions;
 
+/**
+ * Implementazione della macchina a stati per rappresentare lo stato interno di un libro in vendita
+ * che utilizza il pattern GoF State
+ */
 public class SellableBookStateMachineGoF implements SellableBookStateMachine {
 
+    // Stato corrente della macchina
     private SellableBookAbstractState current;
 
+    /**
+     * Costruttore di default.<br>
+     * Lo stato iniziale è quello 'In vendita'
+     */
     public SellableBookStateMachineGoF() {
         current = SellableBookAbstractState.getInitialState();
     }
 
+    /**
+     * Modifica lo stato corrente della macchina
+     * @param state Nuovo stato da impostare
+     */
     public void setState(SellableBookAbstractState state) {
         this.current = state;
     }

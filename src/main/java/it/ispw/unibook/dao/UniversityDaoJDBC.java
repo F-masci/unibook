@@ -39,6 +39,8 @@ public class UniversityDaoJDBC implements UniversityDao {
 
     @Override
     public CourseEntity retrieveCourseByCode(int code) throws CourseNotFoundException {
+        // Corso da restituire
+        CourseEntity course = null;
         // Viene istanziato lo statement per eseguire le QUERY al database
         try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course WHERE code=? ORDER BY startYear DESC, endYear DESC, name")){
             // Viene impostato il parametro al posto del placeholder nello statement
@@ -49,7 +51,7 @@ public class UniversityDaoJDBC implements UniversityDao {
             // Controlla che ci sia almeno un risultato
             if(res.first()) {
                 // Sfrutta la funzione ausiliare per creare l'entità a partire dal Resul Set
-                return createEntityFromViewCourseResultSet(res);
+                course = createEntityFromViewCourseResultSet(res);
             } else {
                 // Se non ci sono risultati viene sollevata l'eccezione
                 throw new CourseNotFoundException();
@@ -58,7 +60,7 @@ public class UniversityDaoJDBC implements UniversityDao {
             Printer.error(e);
             System.exit(-1);
         }
-        return null;
+        return course;
     }
 
     @Override

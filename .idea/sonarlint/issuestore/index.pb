@@ -336,3 +336,5 @@ C
 csv/negotiation.csv,6\7\67a5a0fdc10dc66315bc87c4dd3e3d48cad0f612
 q
 Asrc/main/java/it/ispw/unibook/dao/NegotiationAttributesOrder.java,b\f\bf4a855f45e74ba380c54b8ed798fb3e6fdb84fb
+t
+Dsrc/main/java/it/ispw/unibook/factory/ApplicationDaoFactoryJDBC.java,4\f\4ff7354b750e899b140ddafe9621c110466fca07
