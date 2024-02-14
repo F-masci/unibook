@@ -15,7 +15,7 @@ import java.util.List;
 
 public class BookDaoAppFile implements BookDao {
 
-    // Unica istanza nel sistema del DAO
+    // Unica istanza nel sistema del DAO dei libri
     private static BookDaoAppFile instance = null;
     // Nome del file dove vengono salvate le informazioni sui libri
     private static final String BOOK_FILE_NAME = "book.csv";
@@ -35,7 +35,12 @@ public class BookDaoAppFile implements BookDao {
         }
     }
 
+    /**
+     * Permette di ottenere l'unica istanza di DAO dei libri che sfrutta il file system
+     * @return DAO di login che utilizza JDBC
+     */
     public static BookDaoAppFile getInstance() {
+        // Se l'istanza non è presente viene creata
         if(instance == null) instance = new BookDaoAppFile();
         return instance;
     }
@@ -51,6 +56,7 @@ public class BookDaoAppFile implements BookDao {
             // Scorre i record all'interno del file
             while ((tuple = csvReader.readNext()) != null) {
                 if(Integer.parseInt(tuple[BookAttributesOrder.COURSE.getIndex()]) == course.getCode())
+                    // Viene istanziata l'entità relativa al libro e viene aggiunta alla lista
                     books.add( new BookEntity(
                         tuple[BookAttributesOrder.ISBN.getIndex()],
                         tuple[BookAttributesOrder.TITLE.getIndex()]

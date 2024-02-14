@@ -14,37 +14,47 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.sql.Connection;
 
 public class LibraryDaoOL implements LibraryDao {
 
-    // Unica istanza di factory per il DAO universitario
+    // Unica istanza di DAO di libreria che sfrutta JDBC
     private static LibraryDaoOL instance = null;
 
-    private Connection connection = null;
-
+    // Il costruttore è reso privato per applicate il pattern Singleton
     private LibraryDaoOL() {}
 
+    /**
+     * Permette di ottenere l'unica istanza di DAO di libreria che sfrutta JDBC
+     * @return DAO di libreria che utilizza JDBC
+     */
     public static LibraryDaoOL getInstance() {
+        // Se l'istanza non è presente viene creata
         if(instance == null) instance = new LibraryDaoOL();
         return instance;
     }
 
     @Override
     public BookEntity searchBookByISBN(String isbn) throws BookNotFoundException {
-
         try {
-            
+            // Viene costruito l'endpoint a ui effettuare la richiesta
             String endpoint = "https://openlibrary.org/isbn/" + isbn + ".json";
+            // Viene istanziato il client per eseguire la richiesta
             HttpClient client = HttpClientBuilder.create().build();
+            // Viene istanziata la richiesta da esseguire tramite metodo GET all'endpoint costruito
             HttpGet getRequest = new HttpGet(endpoint);
+            // Viene eseguita la richiesta
             HttpResponse response = client.execute(getRequest);
+            // Si controlla lo status della risposta
+            // Se lo stato è diverso da 200 il libro non è stato trovato
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == 200) {
+                // Si utilizzano delle classi ausiliare per leggere la risposta ed estrarre le informazioni del libro
                 StringReader stringReader = new StringReader(EntityUtils.toString(response.getEntity()));
                 try(JsonReader jsonReader = Json.createReader(stringReader)) {
                     JsonObject json = jsonReader.readObject();
+                    // Si estraggono dalla risposta le informazioni necessarie
                     String name = json.getString("title");
+                    // Viene ritornata l'entità con le informazioni trovate
                     return new BookEntity(isbn, name);
                 }
             } else {

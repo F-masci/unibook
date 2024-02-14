@@ -17,7 +17,7 @@ import java.util.List;
 
 public class AccountDaoAppFile implements AccountDao {
 
-    // Unica istanza nel sistema del DAO
+    // Unica istanza nel sistema del DAO degli account che sfrutta il file system
     private static AccountDaoAppFile instance = null;
     // Nome del file dove vengono salvate le informazioni sugli account
     private static final String ACCOUNT_FILE_NAME = "account.csv";
@@ -45,7 +45,12 @@ public class AccountDaoAppFile implements AccountDao {
         }
     }
 
+    /**
+     * Permette di ottenere l'unica istanza di DAO di account che sfrutta il file system
+     * @return DAO degli account che utilizza il file system
+     */
     public static AccountDaoAppFile getInstance() {
+        // Se l'istanza non è presente viene creata
         if(instance == null) instance = new AccountDaoAppFile();
         return instance;
     }
@@ -95,6 +100,7 @@ public class AccountDaoAppFile implements AccountDao {
 
             // Scorre i record all'interno del file
             while ((tuple = csvReader.readNext()) != null) {
+                // Viene cercata l'entità relativa all'account e viene aggiunta alla lista
                 buyers.add(this.retrieveAccountByCode(Integer.parseInt(tuple[NegotiationAttributesOrder.STUDENT.getIndex()])));
             }
 

@@ -2,7 +2,6 @@ package it.ispw.unibook.dao;
 
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.CourseEntity;
-import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
 import it.ispw.unibook.utils.ConnectionUniJDBC;
 import it.ispw.unibook.utils.Printer;
@@ -39,8 +38,6 @@ public class UniversityDaoJDBC implements UniversityDao {
 
     @Override
     public CourseEntity retrieveCourseByCode(int code) throws CourseNotFoundException {
-        // Corso da restituire
-        CourseEntity course = null;
         // Viene istanziato lo statement per eseguire le QUERY al database
         try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course WHERE code=? ORDER BY startYear DESC, endYear DESC, name")){
             // Viene impostato il parametro al posto del placeholder nello statement
@@ -51,7 +48,7 @@ public class UniversityDaoJDBC implements UniversityDao {
             // Controlla che ci sia almeno un risultato
             if(res.first()) {
                 // Sfrutta la funzione ausiliare per creare l'entità a partire dal Resul Set
-                course = createEntityFromViewCourseResultSet(res);
+                return createEntityFromViewCourseResultSet(res);
             } else {
                 // Se non ci sono risultati viene sollevata l'eccezione
                 throw new CourseNotFoundException();
@@ -60,7 +57,7 @@ public class UniversityDaoJDBC implements UniversityDao {
             Printer.error(e);
             System.exit(-1);
         }
-        return course;
+        return null;
     }
 
     @Override
@@ -70,9 +67,9 @@ public class UniversityDaoJDBC implements UniversityDao {
         List<CourseEntity> coursesList = new ArrayList<>();
 
         // Viene istanziato lo statement per eseguire le QUERY al database
-        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_professor_course WHERE professoreCode=? ORDER BY courseStartYear DESC, courseEndYear DESC, courseName")) {
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_professor_course WHERE professorEmail=? ORDER BY courseStartYear DESC, courseEndYear DESC, courseName")) {
             // Viene impostato il parametro al posto del placeholder nello statement
-            stm.setInt(1, professor.getCode());
+            stm.setString(1, professor.getEmail());
             // Viene eseguita la QUERY
             ResultSet res = stm.executeQuery();
 
@@ -96,42 +93,22 @@ public class UniversityDaoJDBC implements UniversityDao {
     }
 
     @Override
-    public CourseEntity retrieveCourseBySellableBook(SellableBookEntity sellableBook, AccountEntity seller) throws CourseNotFoundException {
+    public List<CourseEntity> retrieveCourses() {
+
+        // Lista dei corsi da restituire
+        List<CourseEntity> coursesList = new ArrayList<>();
+
         // Viene istanziato lo statement per eseguire le QUERY al database
-        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course WHERE code = (SELECT course FROM sellable_book WHERE code=? AND seller=?) LIMIT 1")) {
-            // Vengono impostati i parametri al posto dei placeholder nello statement
-            stm.setInt(1, sellableBook.getCode());
-            stm.setInt(2, seller.getCode());
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course ORDER BY startYear DESC, endYear DESC, name")) {
             // Viene eseguita la QUERY
             ResultSet res = stm.executeQuery();
 
             // Controlla che ci sia almeno un risultato
             if(res.first()) {
-                // Sfrutta la funzione ausiliare per creare l'entità a partire dal Resul Set
-                return createEntityFromViewCourseResultSet(res);
-            } else {
-                // Se non ci sono risultati viene sollevata l'eccezione
-                throw new CourseNotFoundException();
-            }
-        } catch (SQLException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
-        return null;
-    }
-
-    @Override
-    public List<CourseEntity> retrieveCourses() {
-
-        List<CourseEntity> coursesList = new ArrayList<>();
-
-        // Cerco i corsi
-        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM view_course ORDER BY startYear DESC, endYear DESC, name")) {
-            ResultSet res = stm.executeQuery();
-
-            if(res.first()) {
                 do {
+                    // Sfrutta la funzione ausiliare per creare l'entità a partire dal Resul Set
                     CourseEntity course = createEntityFromViewCourseResultSet(res);
+                    // L'entità creata viene aggiunta alla lista
                     coursesList.add(course);
                 } while(res.next());
             }
@@ -140,6 +117,7 @@ public class UniversityDaoJDBC implements UniversityDao {
             System.exit(-1);
         }
 
+        // Viene ritornata la lista
         return coursesList;
 
     }

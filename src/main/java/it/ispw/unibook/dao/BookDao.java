@@ -7,6 +7,11 @@ import java.util.List;
 
 public interface BookDao {
 
-    public List<BookEntity> retrieveCourseBooks(CourseEntity course);
+    /**
+     * Cerca la lista dei libri di un corso
+     * @param course Corso
+     * @return Lista dei libri del corso
+     */
+    List<BookEntity> retrieveCourseBooks(CourseEntity course);
 
 }

@@ -168,8 +168,6 @@ w
 Gsrc/main/java/it/ispw/unibook/view/cli/professor/PageInsertBookCLI.java,4\9\491b71c229226bb7a0b5875dd58baa0f82b88522
 p
 @src/main/java/it/ispw/unibook/factory/ApplicationDaoFactory.java,c\9\c94bf5a52aaa4d4bd4f5c45f0c7b5dad1d03d269
-s
-Csrc/main/java/it/ispw/unibook/factory/ApplicatonDaoFactoryJDBC.java,c\b\cb2af95ffa8615276c2bb796c6c6376e4cbfc0e7
 n
 >src/main/java/it/ispw/unibook/utils/ApplicationProperties.java,d\3\d3e46080e5ea0f06e80e37161ec9430977201201
 ‚
