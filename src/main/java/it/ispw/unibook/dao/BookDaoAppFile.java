@@ -47,7 +47,11 @@ public class BookDaoAppFile implements BookDao {
 
     @Override
     public List<BookEntity> retrieveCourseBooks(CourseEntity course) {
+
+        // Lista dei libri da restituire
         List<BookEntity> books = new ArrayList<>();
+
+        // Apre il file in lettura
         try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fd)))) {
 
             // Contiene i campi della riga letta
@@ -67,6 +71,7 @@ public class BookDaoAppFile implements BookDao {
             Printer.error(e);
             System.exit(-1);
         }
+        // Viene ritornata la lista
         return books;
     }
 

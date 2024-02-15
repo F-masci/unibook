@@ -92,6 +92,8 @@ public class AccountDaoAppFile implements AccountDao {
 
     @Override
     public List<AccountEntity> retrieveBuyersBySellableBook(SellableBookEntity sellableBook) {
+
+
         List<AccountEntity> buyers = new ArrayList<>();
 
         // Apre il file CSV
@@ -113,7 +115,7 @@ public class AccountDaoAppFile implements AccountDao {
         } catch (AccountNotFoundException ignored) {
             // Se non c'è nessun account relativo al codice viene ignorato
         }
-
+        // Viene ritornata la lista
         return buyers;
     }
 }

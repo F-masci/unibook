@@ -84,7 +84,11 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
     @Override
     public List<SellableBookEntity> retrieveSellableBooksByIsbn(String isbn) {
+
+        // Lista dei libri in vendita da restituire
         List<SellableBookEntity> sellableBooks = new ArrayList<>();
+
+        // Apre il file in lettura
         try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdSellableBook)))) {
 
             // Contiene i campi della riga letta
@@ -92,6 +96,8 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
             // Scorre i record all'interno del file
             while ((tuple = csvReader.readNext()) != null) {
+                // Controlla se il record è relativo a un libro in vendita che è una copia del libro avente l'ISBN fornito
+                // In caso lo sia viene aggiunto alla lista
                 if(Objects.equals(tuple[SellableBookAttributesOrder.ISBN.getIndex()], isbn))
                     sellableBooks.add(createEntityFromTuple(tuple));
             }
@@ -100,12 +106,17 @@ public class SellableBookDaoAppFile implements SellableBookDao {
             Printer.error(e);
             System.exit(-1);
         }
+        // Viene ritornata la lista
         return sellableBooks;
     }
 
     @Override
     public List<SellableBookEntity> retrieveSellableBooksBySeller(AccountEntity seller) {
+
+        // Lista dei libri in vendita da restituire
         List<SellableBookEntity> sellableBooks = new ArrayList<>();
+
+        // Apre il file in lettura
         try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdSellableBook)))) {
 
             // Contiene i campi della riga letta
@@ -113,6 +124,8 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
             // Scorre i record all'interno del file
             while ((tuple = csvReader.readNext()) != null) {
+                // Controlla se il record è relativo a un libro in vendita del venditore fornito
+                // In caso lo sia viene aggiunto alla lista
                 if(Integer.parseInt(tuple[SellableBookAttributesOrder.SELLER.getIndex()]) == seller.getCode())
                     sellableBooks.add(createEntityFromTuple(tuple));
             }
@@ -121,12 +134,17 @@ public class SellableBookDaoAppFile implements SellableBookDao {
             Printer.error(e);
             System.exit(-1);
         }
+        // Viene ritornata la lista
         return sellableBooks;
     }
 
     @Override
     public List<SellableBookEntity> retrieveSellableBooksByNegotiation(AccountEntity negotiationBuyer) {
+
+        // Lista dei libri in vendita da restituire
         List<SellableBookEntity> sellableBooks = new ArrayList<>();
+
+        // Apre il file in lettura
         try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdNegotiation)))) {
 
             // Contiene i campi della riga letta
@@ -134,6 +152,8 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
             // Scorre i record all'interno del file
             while ((tuple = csvReader.readNext()) != null) {
+                // Controlla se il record è relativo a un libro che l'acquirente è intenzionato ad acquistare
+                // In caso lo sia viene aggiunto alla lista
                 if(Integer.parseInt(tuple[NegotiationAttributesOrder.STUDENT.getIndex()]) == negotiationBuyer.getCode())
                     sellableBooks.add(retrieveSellableBookByCode(Integer.parseInt(tuple[NegotiationAttributesOrder.BOOK.getIndex()])));
             }
@@ -142,14 +162,19 @@ public class SellableBookDaoAppFile implements SellableBookDao {
             Printer.error(e);
             System.exit(-1);
         } catch (SellableBookNotFoundException e) {
-            // Ignorata
+            // Ignorata poiché il libro esiste sicuramente
         }
+        // Viene ritornata la lista
         return sellableBooks;
     }
 
     @Override
     public List<SellableBookEntity> retrieveCourseSellableBooks(CourseEntity course) {
+
+        // Lista dei libri in vendita da restituire
         List<SellableBookEntity> sellableBooks = new ArrayList<>();
+
+        // Apre il file in lettura
         try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdSellableBook)))) {
 
             // Contiene i campi della riga letta
@@ -157,6 +182,8 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
             // Scorre i record all'interno del file
             while ((tuple = csvReader.readNext()) != null) {
+                // Controlla se il record è relativo a un libro in vendita nel corso fornito
+                // In caso lo sia viene aggiunto alla lista
                 if(Integer.parseInt(tuple[SellableBookAttributesOrder.COURSE.getIndex()]) == course.getCode())
                     sellableBooks.add(createEntityFromTuple(tuple));
             }
@@ -165,12 +192,15 @@ public class SellableBookDaoAppFile implements SellableBookDao {
             Printer.error(e);
             System.exit(-1);
         }
+        // Viene ritornata la lista
         return sellableBooks;
     }
 
     @Override
     public void addBuyerToSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer) {
+        // Apre il file in scrittura in modalità append
         try(CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(fdNegotiation, true)))) {
+            // Scrive la nuova tupla a partire dall'entità
             csvWriter.writeNext(new String[] {
                     String.valueOf(sellableBook.getCode()),
                     String.valueOf(buyer.getCode())
@@ -183,7 +213,9 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
     @Override
     public void removeBuyerFromSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer) {
+        // Contiene tutti i record attualmente presenti nel file
         List<String[]> records = new ArrayList<>();
+        // Apre il file in lettura
         try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdNegotiation)))) {
 
             // Contiene i campi della riga letta
@@ -191,6 +223,7 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
             // Scorre i record all'interno del file
             while ((tuple = csvReader.readNext()) != null) {
+                // Se il record è differente dall'associazione che si vuole eliminare viene aggiunto alla lista
                 if(Integer.parseInt(tuple[NegotiationAttributesOrder.BOOK.getIndex()]) == sellableBook.getCode() &&
                         Integer.parseInt(tuple[NegotiationAttributesOrder.STUDENT.getIndex()]) == buyer.getCode()) continue;
                 records.add(tuple);
@@ -200,7 +233,9 @@ public class SellableBookDaoAppFile implements SellableBookDao {
             Printer.error(e);
             System.exit(-1);
         }
+        // Apre il file in scrittura
         try(CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(fdNegotiation)))) {
+            // I record vengono riscritti sul file escludendo quello che deve essere eliminato
             csvWriter.writeAll(records);
         } catch (IOException e) {
             Printer.error(e);
@@ -210,7 +245,9 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
     @Override
     public void setBuyerToSellableBook(SellableBookEntity sellableBook, AccountEntity buyer) {
+        // Contiene tutti i record attualmente presenti nel file
         List<String[]> records = new ArrayList<>();
+        // Apre il file in lettura
         try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdSellableBook)))) {
 
             // Contiene i campi della riga letta
@@ -218,6 +255,8 @@ public class SellableBookDaoAppFile implements SellableBookDao {
 
             // Scorre i record all'interno del file
             while ((tuple = csvReader.readNext()) != null) {
+                // Viene cercato il record da modificare e, una volta modificato, viene aggiunto alla lista
+                // Tutti gli altri record vengono aggiunti senza modifiche
                 if(Integer.parseInt(tuple[SellableBookAttributesOrder.CODE.getIndex()]) == sellableBook.getCode())
                     tuple[SellableBookAttributesOrder.BUYER.getIndex()] = String.valueOf(buyer.getCode());
                 records.add(tuple);
@@ -227,7 +266,9 @@ public class SellableBookDaoAppFile implements SellableBookDao {
             Printer.error(e);
             System.exit(-1);
         }
+        // Apre il file in scrittura
         try(CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(fdSellableBook)))) {
+            // I record vengono riscritti sul file tenendo conto della modifica
             csvWriter.writeAll(records);
         } catch (IOException e) {
             Printer.error(e);
@@ -235,27 +276,45 @@ public class SellableBookDaoAppFile implements SellableBookDao {
         }
     }
 
+    /**
+     * Funzione ausiliare per istanziare un'entità a partire da una tupla di libro in vendita
+     * @param tuple Tupla da cui estrarre i dati
+     * @return Entità con i dati presenti nella tupla
+     */
     private SellableBookEntity createEntityFromTuple(String[] tuple) {
+        // Entità da restituire
         SellableBookEntity sellableBook = null;
         try {
+            // Viene istanziato il DAO relativo agli account per ottenere le informazioni su venditore e acquirente effettivo
             AccountDao accountDao = ApplicationDaoFactoryFile.getInstance().getAccountDao();
 
+            // Viene estratto il codice dell'account del venditore
             int sellerCode = Integer.parseInt(tuple[SellableBookAttributesOrder.SELLER.getIndex()]);
+            // Viene cercato sulla persistenza l'account del venditore
             AccountEntity seller = accountDao.retrieveAccountByCode(sellerCode);
 
+            // Viene estratto il codice dell'account dell'acquirente effettivo
             int buyerCode = Integer.parseInt(tuple[SellableBookAttributesOrder.BUYER.getIndex()]);
             AccountEntity buyer = null;
+            // Se il codice è diverso da 0 il venditore è effettivamente presente
             if (buyerCode != 0) {
+                // Viene cercato sulla persistenza l'account dell'acquirente effettivamente presente
                 buyer = accountDao.retrieveAccountByCode(buyerCode);
             }
 
+            // Viene estratto l'ISBN del libro di cui quello in vendita è una copia per cercare sulla persistenza il libro
             String isbn = tuple[SellableBookAttributesOrder.ISBN.getIndex()];
 
+            // Viene istanziato il DAO per ottenere il corso a cui il libro in vendita appartiene
             UniversityDao universityDao = UniversityDaoFactory.getInstance().getDao();
+            // Viene cercato sulla persistenza il corso a cui il libro in vendita appartiene
             CourseEntity course = universityDao.retrieveCourseByCode(Integer.parseInt(tuple[SellableBookAttributesOrder.COURSE.getIndex()]));
+            // Viene estratta la lista dei libri
             List<BookEntity> books = course.getBooks();
+            // Viene ottenuto, dalla lista dei libri, quello di cui il libro in vendita è una copia
             BookEntity book = books.get(books.indexOf(new BookEntity(isbn)));
 
+            // Viene istanziata l'entità del libro in vendita
             sellableBook = new SellableBookEntity(
                     Integer.parseInt(tuple[SellableBookAttributesOrder.CODE.getIndex()]),
                     book.getIsbn(),
@@ -266,8 +325,9 @@ public class SellableBookDaoAppFile implements SellableBookDao {
                     Integer.parseInt(tuple[SellableBookAttributesOrder.COURSE.getIndex()])
             );
         } catch (AccountNotFoundException | CourseNotFoundException ignored) {
-            // Ignorata
+            // Ignorate poiché non potranno mai essere sollevate
         }
+        // Viene resituita l'entità
         return sellableBook;
     }
 }
