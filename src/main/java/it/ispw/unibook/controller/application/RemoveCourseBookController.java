@@ -6,7 +6,6 @@ import it.ispw.unibook.dao.UniversityDao;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.BookEntity;
 import it.ispw.unibook.entity.CourseEntity;
-import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.BookNotInCourseException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
@@ -28,10 +27,9 @@ public class RemoveCourseBookController {
      * Rimuove il libro dal corso completando il caso d'uso
      * @param courseBean Deve contenere il codice del corso in cui inserire il libro
      * @param bookBean Deve contenere il codice del libro da rimuovere
-     * @throws BookException Viene sollevata se il libro non è presente nel corso
-     * @throws CourseException Viene sollevata se il corso non è stato trovato
+     * @throws CourseException Viene sollevata se il corso non è stato trovato, il libro non è presente nel corso o il professore non è il proprietario del corso
      */
-    public void removeBookFromCourse(@NotNull CourseBean courseBean, @NotNull BookBean bookBean) throws BookException, CourseException, SessionException {
+    public void removeBookFromCourse(@NotNull CourseBean courseBean, @NotNull BookBean bookBean) throws CourseException, SessionException {
         try {
             // Viene istanziata l'entità del libro da rimuovere
             BookEntity book = new BookEntity(bookBean.getISBN());
@@ -47,9 +45,7 @@ public class RemoveCourseBookController {
             // Viene rimosso il libro al corso
             // Il salvataggio in persistenza è gestito dall'entità
             course.removeBook(book);
-        } catch(BookNotInCourseException e) {
-            throw new BookException(e.getMessage(), e);
-        } catch (CourseNotFoundException | CourseNotOwnedException e) {
+        }catch (CourseNotFoundException | CourseNotOwnedException | BookNotInCourseException e) {
             throw new CourseException(e.getMessage(), e);
         } catch (SessionNotFoundException e) {
             throw new SessionException(e.getMessage(), e);

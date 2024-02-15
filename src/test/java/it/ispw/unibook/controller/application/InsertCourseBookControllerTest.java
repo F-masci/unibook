@@ -92,7 +92,7 @@ class InsertCourseBookControllerTest {
      * con un libro non ancora presente in un corso non esistente
      */
     @Test
-    void testInsertBookInCourseWithCourseNotPresent() {
+    void testInsertBookInCourseWithCourseNotPresent() throws SessionException, LoginException {
         try {
             // Viene eseguito il login del professore
             LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
@@ -109,7 +109,7 @@ class InsertCourseBookControllerTest {
             // Se non vengono sollevate eccezioni l'inserimento è stato effettuato correttamente
             controller.insertBookInCourse(courseBean, bookBean);
             Assertions.fail("Il libro viene inserito correttamente");
-        } catch (CourseException | SessionException | LoginException e) {
+        } catch (CourseException e) {
             // Il metodo solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura per inserire il libro nel corso
 
@@ -125,7 +125,7 @@ class InsertCourseBookControllerTest {
      * con un libro già presente in un corso esistente
      */
     @Test
-    void testInsertBookInCourseWithBookAlreadyPresent() {
+    void testInsertBookInCourseWithBookAlreadyPresent() throws SessionException, LoginException {
         try {
             // Viene eseguito il login del professore
             LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
@@ -142,7 +142,7 @@ class InsertCourseBookControllerTest {
             // Se non vengono sollevate eccezioni l'inserimento è stato effettuato correttamente
             controller.insertBookInCourse(courseBean, bookBean);
             Assertions.fail("Il libro viene inserito correttamente");
-        } catch (CourseException | SessionException | LoginException e) {
+        } catch (CourseException e) {
             // Il metodo solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura per inserire il libro nel corso
 
@@ -158,7 +158,7 @@ class InsertCourseBookControllerTest {
      * di cui il professore non è effettivamente proprietario
      */
     @Test
-    void testInsertBookInCourseNotOwnedByProfessor() {
+    void testInsertBookInCourseNotOwnedByProfessor() throws SessionException, LoginException {
         try {
             // Viene eseguito il login del professore
             LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
@@ -175,7 +175,7 @@ class InsertCourseBookControllerTest {
             // Se non vengono sollevate eccezioni l'inserimento è stato effettuato correttamente
             controller.insertBookInCourse(courseBean, bookBean);
             Assertions.fail("Il libro viene inserito correttamente");
-        } catch (CourseException | SessionException | LoginException e) {
+        } catch (CourseException e) {
             // Il metodo solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura per inserire il libro nel corso
 

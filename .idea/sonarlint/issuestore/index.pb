@@ -338,3 +338,7 @@ t
 Dsrc/main/java/it/ispw/unibook/factory/ApplicationDaoFactoryJDBC.java,4\f\4ff7354b750e899b140ddafe9621c110466fca07
 |
 Lsrc/main/java/it/ispw/unibook/exceptions/course/CourseNotOwnedException.java,4\7\474c45ef924eb25f36e6fca0a52586348a5c788f
+r
+Bsrc/main/java/it/ispw/unibook/utils/LambdaPrinterSellableBook.java,7\a\7a97cf19f4d4234005f2b39f8886fdae313d59f6
+ê
+`src/main/java/it/ispw/unibook/exceptions/book/sellable/BuyerNotFoundInSellableBookException.java,2\2\2218b0e363f3ea7d3417d1e4b491643eefdde365

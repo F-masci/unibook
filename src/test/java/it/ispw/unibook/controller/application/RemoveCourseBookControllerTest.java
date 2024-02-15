@@ -3,7 +3,6 @@ package it.ispw.unibook.controller.application;
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.bean.LoginBean;
-import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.BookNotInCourseException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
@@ -47,7 +46,7 @@ class RemoveCourseBookControllerTest {
      * con un libro in un corso non esistente
      */
     @Test
-    void testRemoveBookFromCourseWithCourseNotPresent() {
+    void testRemoveBookFromCourseWithCourseNotPresent() throws SessionException, LoginException {
         try {
             // Viene eseguito il login del professore
             LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
@@ -64,7 +63,7 @@ class RemoveCourseBookControllerTest {
             // Se non vengono sollevate eccezioni la rimozione è stata effettuata correttamente
             controller.removeBookFromCourse(courseBean, bookBean);
             Assertions.fail("Il libro viene rimosso correttamente");
-        } catch(CourseException | SessionException | BookException | LoginException e) {
+        } catch(CourseException e) {
             // Il metodo solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura per rimuovere il libro dal corso
 
@@ -80,7 +79,7 @@ class RemoveCourseBookControllerTest {
      * con un libro non presente in un corso esistente
      */
     @Test
-    void testRemoveBookFromCourseWithBookNotInCourse() {
+    void testRemoveBookFromCourseWithBookNotInCourse() throws SessionException, LoginException {
         try {
             // Viene eseguito il login del professore
             LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
@@ -97,7 +96,7 @@ class RemoveCourseBookControllerTest {
             // Se non vengono sollevate eccezioni la rimozione è stata effettuata correttamente
             controller.removeBookFromCourse(courseBean, bookBean);
             Assertions.fail("Il libro viene rimosso correttamente");
-        } catch (BookException | CourseException | SessionException | LoginException e) {
+        } catch (CourseException e) {
             // Il metodo solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura per rimuovere il libro dal corso
 
@@ -113,7 +112,7 @@ class RemoveCourseBookControllerTest {
      * con un libro non presente in un corso esistente
      */
     @Test
-    void testRemoveBookFromCourseNotOwnedByProfessor() throws CourseException {
+    void testRemoveBookFromCourseNotOwnedByProfessor() throws SessionException, LoginException {
         try {
             // Viene eseguito il login del professore
             LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
@@ -130,7 +129,7 @@ class RemoveCourseBookControllerTest {
             // Se non vengono sollevate eccezioni la rimozione è stata effettuata correttamente
             controller.removeBookFromCourse(courseBean, bookBean);
             Assertions.fail("Il libro viene rimosso correttamente");
-        } catch (BookException | CourseException | SessionException | LoginException e) {
+        } catch (CourseException e) {
             // Il metodo solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura per rimuovere il libro dal corso
 

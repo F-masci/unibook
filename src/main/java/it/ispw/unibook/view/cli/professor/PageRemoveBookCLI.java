@@ -3,7 +3,6 @@ package it.ispw.unibook.view.cli.professor;
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.controller.graphics.cli.professor.RemoveBookCLI;
-import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -58,7 +57,7 @@ public class PageRemoveBookCLI extends GenericPageManageBookCLI implements PageC
 
                 return;
 
-            } catch (BookException | CourseException e) {
+            } catch (CourseException e) {
                 showErrorMessage(e);
             } catch (EscCliException e) {
                 return;

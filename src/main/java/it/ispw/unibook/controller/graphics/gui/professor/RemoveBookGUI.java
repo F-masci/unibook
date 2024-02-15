@@ -2,7 +2,6 @@ package it.ispw.unibook.controller.graphics.gui.professor;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.CourseBean;
-import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.exceptions.login.SessionException;
@@ -93,7 +92,7 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
             removeBookButton.setVisible(false);
             // Viene impostato il messaggio di conferma dell'operazione
             successLabel.setText(SUCCESS_MESSAGE_TEXT);
-        } catch (BookException | CourseException e) {
+        } catch (CourseException e) {
             errorLabel.setText(e.getMessage());
         } catch (SessionException e) {
             Printer.error(e);
