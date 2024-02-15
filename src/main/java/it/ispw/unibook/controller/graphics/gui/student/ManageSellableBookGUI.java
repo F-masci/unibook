@@ -7,6 +7,7 @@ import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
+import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 import it.ispw.unibook.facade.ManageSellableBookFacade;
 import it.ispw.unibook.utils.Printer;
 import javafx.fxml.FXML;
@@ -59,7 +60,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
      * @param course Codice del corso
      * @throws CourseException Viene sollevata se il corso non è stato trovato
      */
-    protected void loadCourseSellableBooks(@NotNull ComboBox<String> combo, int course) throws CourseException {
+    protected void loadCourseSellableBooks(@NotNull ComboBox<String> combo, int course) throws CourseException, SessionNotFoundException {
         // Viene istanziato il bean che contiene il codice del corso
         CourseBean courseBean = new CourseBean(course);
         // Viene ritornata la lista dei libri in vendita per il corso
@@ -75,7 +76,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
      * @param isbn ISBN del libro di cui si vogliono cercare le copie in vendita
      * @throws FieldNotValidException Viene sollevata se l'ISBN non ha un formato valido
      */
-    protected void loadIsbnSellableBooks(@NotNull ComboBox<String> combo, String isbn) throws FieldNotValidException {
+    protected void loadIsbnSellableBooks(@NotNull ComboBox<String> combo, String isbn) throws FieldNotValidException, SessionNotFoundException {
         // Viene istanziato il bean che contiene l'isbn del libro
         BookBean bookBean = new BookBean(isbn);
         // Viene ritornata la lista dei libri in vendita con l'isbn fornito
@@ -153,7 +154,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
      * @param bean Deve contenere l'ISBN
      * @return Bean contenente la lista dei libri in vendita con l'ISBN fornito
      */
-    protected SellableBooksListBean retrieveSellableBooksByIsbn(@NotNull BookBean bean) {
+    protected SellableBooksListBean retrieveSellableBooksByIsbn(@NotNull BookBean bean) throws SessionNotFoundException {
         return manageSellableBookFacade.retrieveSellableBooksByIsbn(bean);
     }
 
@@ -163,7 +164,7 @@ public abstract class ManageSellableBookGUI extends GenericGUI {
      * @return Bean contenente la lista dei libri in vendita collegati al corso fornito
      * @throws CourseException Viene sollevata se il corso non viene trovato
      */
-    protected SellableBooksListBean retrieveSellableBooksByCourse(@NotNull CourseBean bean) throws CourseException {
+    protected SellableBooksListBean retrieveSellableBooksByCourse(@NotNull CourseBean bean) throws CourseException, SessionNotFoundException {
         return manageSellableBookFacade.retrieveSellableBooksByCourse(bean);
     }
 

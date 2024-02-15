@@ -5,7 +5,9 @@ import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.facade.ManageCourseBookFacade;
+import it.ispw.unibook.utils.Printer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -93,6 +95,9 @@ public class RemoveBookGUI extends ManageBookGUI implements Initializable {
             successLabel.setText(SUCCESS_MESSAGE_TEXT);
         } catch (BookException | CourseException e) {
             errorLabel.setText(e.getMessage());
+        } catch (SessionException e) {
+            Printer.error(e);
+            System.exit(-1);
         }
     }
 

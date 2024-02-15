@@ -5,7 +5,6 @@ import it.ispw.unibook.bean.CourseBean;
 import it.ispw.unibook.controller.graphics.cli.professor.InsertBookCLI;
 import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.BookException;
-import it.ispw.unibook.exceptions.ISBNNotValidException;
 import it.ispw.unibook.exceptions.book.WrongBookException;
 import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
@@ -46,8 +45,8 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
                 insertBookAuto();
                 return;
             } catch (SessionException e) {
-                showErrorMessage(e);
-                return;
+                Printer.error(e);
+                System.exit(-1);
             } catch (EscCliException ignored) {
                 return;
             } catch (CourseException e) {
@@ -63,11 +62,12 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
      * In caso non venga trovato i dati relativi potranno essere inseriti manualmente
      * @throws CourseException Viene sollevata nel caso in cui il corso non sia stato trovato
      * @throws EscCliException Viene sollevata nel caso in cui l'utente digita esc per tornare alla home
+     * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
      */
-    private void insertBookAuto() throws CourseException, EscCliException {
+    private void insertBookAuto() throws CourseException, EscCliException, SessionException {
 
         Printer.clear();
-        Printer.println("--- INSERIMENTO AUTOMATICO LIBRO ---");
+        Printer.println("\n--- INSERIMENTO AUTOMATICO LIBRO ---\n");
 
         while(true) {
             try {
@@ -86,7 +86,7 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
                 String tmp = requestString();
                 // In caso i dati non siano confermati viene sollevata l'eccezione
                 // per chiedere all'utente come continuare
-                if(!tmp.equals("S")) throw new WrongBookException();
+                if (!tmp.equals("S")) throw new WrongBookException();
 
                 // Vengono inviati i bean contenenti i dati del libro e del corso al controller grafico
                 controller.insertBookInCourse(courseBean, bookBean);
@@ -99,17 +99,17 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
                 return;
 
             } catch (BookException e) {
+                showErrorMessage(e);
+                // In caso di errore, se l'errore non è stato causato dalla formattazione errata dell'ISBN
+                // viene eseguita la gestione di logica dell'errore tramite la relativa funzione
+                if (wrongBookHandler()) continue;
+                // A seguito della gestione dell'errore il libro è stato inserito
+                return;
+            } catch (FieldNotValidException e) {
+                showErrorMessage(e);
+            } catch (SessionException e) {
                 Printer.error(e);
-                Throwable cause = e.getCause();
-                if(cause != null) {
-
-                    // In caso di errore, se l'errore non è stato causato dalla formattazione errata dell'ISBN
-                    // viene eseguita la gestione di logica dell'errore tramite la relativa funzione
-                    if(cause.getClass() == ISBNNotValidException.class || wrongBookHandler()) continue;
-                    // A seguito della gestione dell'errore il libro è stato inserito
-                    return;
-
-                }
+                System.exit(-1);
             }
         }
     }
@@ -119,11 +119,12 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
      * I dati del libro vengono immessi manualmente dall'utente
      * @throws CourseException Viene sollevata nel caso in cui il corso non sia stato trovato
      * @throws EscCliException Viene sollevata nel caso in cui l'utente digita esc per tornare alla home
+     * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
      */
-    private void insertBookManual() throws CourseException, EscCliException {
+    private void insertBookManual() throws CourseException, EscCliException, SessionException {
 
         Printer.clear();
-        Printer.println("--- INSERIMENTO MANUALE LIBRO ---");
+        Printer.println("\n--- INSERIMENTO MANUALE LIBRO ---\n");
 
         while(true) {
             try {
@@ -186,6 +187,9 @@ public class PageInsertBookCLI extends GenericPageManageBookCLI implements PageC
 
             } catch (SelectionNotValidException exception) {
                 showErrorMessage(exception);
+            } catch (SessionException e) {
+                Printer.error(e);
+                System.exit(-1);
             }
         }
     }

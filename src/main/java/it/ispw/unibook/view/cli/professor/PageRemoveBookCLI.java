@@ -30,16 +30,11 @@ public class PageRemoveBookCLI extends GenericPageManageBookCLI implements PageC
         Printer.clear();
         Printer.println("\n--- PAGINA RIMOZIONE LIBRO DA UN CORSO ---");
 
-        try {
-            // Stampa la lista dei corsi collegati all'utente loggato
-            super.printSessionCoursesList(controller);
-        } catch (SessionException e) {
-            showErrorMessage(e);
-            System.exit(-1);
-        }
-
         while(true) {
             try {
+
+                // Stampa la lista dei corsi collegati all'utente loggato
+                super.printSessionCoursesList(controller);
 
                 // Richiede il codice del corso all'utente
                 int courseCode = requestCourseCode(COURSE_CODE_REQUEST_TEXT);
@@ -67,6 +62,9 @@ public class PageRemoveBookCLI extends GenericPageManageBookCLI implements PageC
                 showErrorMessage(e);
             } catch (EscCliException e) {
                 return;
+            } catch (SessionException e) {
+                Printer.error(e);
+                System.exit(-1);
             }
         }
 

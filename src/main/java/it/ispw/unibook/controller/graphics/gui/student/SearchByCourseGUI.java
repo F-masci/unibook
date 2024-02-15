@@ -60,11 +60,11 @@ public class SearchByCourseGUI extends ManageSellableBookGUI implements Initiali
 
             sellableBooksCombo.setDisable(false);
             purchaseBookButton.setDisable(false);
-        } catch (CourseException e) {
+        } catch (CourseException | ComboSelectionNotValidException e) {
             sellableBooksCombo.setDisable(true);
             purchaseBookButton.setDisable(true);
             errorLabel.setText(e.getMessage());
-        } catch(ComboSelectionNotValidException e) {
+        } catch(SessionException e) {
             Printer.error(e);
             System.exit(-1);
         }

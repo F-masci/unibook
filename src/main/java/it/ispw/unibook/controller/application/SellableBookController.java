@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Controller applicativo per l'implementazione delle operazioni comuni
@@ -71,12 +72,15 @@ public class SellableBookController {
      * @param bean Deve contenere l'ISBN
      * @return Bean contenente la lista dei libri in vendita con l'ISBN fornito
      */
-    public SellableBooksListBean retrieveSellableBooksByIsbn(@NotNull BookBean bean) {
+    public SellableBooksListBean retrieveSellableBooksByIsbn(@NotNull BookBean bean) throws SessionNotFoundException {
         // Si carica il dao per la comunicazione con la persistenza
         SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
-        // Viene usato il dao per ottenere dallo strato di persistenza tutti i libri in vendita con
-        // l'ISBN fornito
+        // Viene usato il dao per ottenere dallo strato di persistenza tutti i libri in vendita con l'ISBN fornito
         List<SellableBookEntity> sellableBooks = dao.retrieveSellableBooksByIsbn(bean.getISBN());
+        // Account dell'utente loggato
+        AccountEntity loggedUser = SessionManager.getAccountBySessionID(bean.getSessionId());
+        // Vengono filtrati i libri e vengono restituiti quelli in vendita da venditori che non sono l'utente loggato
+        sellableBooks.removeIf(sellableBook -> !Objects.equals(sellableBook.getSeller(), loggedUser));
         // Viene istanziato il bean da restituire al chiamante
         SellableBooksListBean resBean = new SellableBooksListBean();
         // Si carica la lista dei libri in vendita all'interno del bean
@@ -90,7 +94,7 @@ public class SellableBookController {
      * @return Bean contenente la lista dei libri in vendita collegati al corso fornito
      * @throws CourseException Viene sollevata se il corso non viene trovato
      */
-    public SellableBooksListBean retrieveSellableBooksByCourse(@NotNull CourseBean bean) throws CourseException {
+    public SellableBooksListBean retrieveSellableBooksByCourse(@NotNull CourseBean bean) throws CourseException, SessionNotFoundException {
         // Si carica il dao per la comunicazione con la persistenza
         UniversityDao dao = UniversityDaoFactory.getInstance().getDao();
         // Viene cercato sulla persistenza il corso corrispondete al codice fornito
@@ -98,6 +102,10 @@ public class SellableBookController {
         CourseEntity course = dao.retrieveCourseByCode(bean.getCode());
         // Viene ottenuta la lista dei libri in vendita collegati al corso
         List<SellableBookEntity> sellableBooks = course.getSellableBooks();
+        // Account dell'utente loggato
+        AccountEntity loggedUser = SessionManager.getAccountBySessionID(bean.getSessionId());
+        // Vengono filtrati i libri e vengono restituiti quelli in vendita da venditori che non sono l'utente loggato
+        sellableBooks.removeIf(sellableBook -> !Objects.equals(sellableBook.getSeller(), loggedUser));
         // Viene istanziato il bean da restituire al chiamante
         SellableBooksListBean resBean = new SellableBooksListBean();
         // Si carica la lista dei libri in vendita all'interno del bean

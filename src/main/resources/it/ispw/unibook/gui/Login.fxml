@@ -23,12 +23,12 @@
             <String fx:value="card" />
          </styleClass>
          <children>
-            <TextField fx:id="emailField" layoutX="40.0" layoutY="57.0" prefHeight="25.0" prefWidth="390.0" promptText="Email..." stylesheets="@../style/components/textField.css" text="studente@students.uniroma2.eu" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="50.0">
+            <TextField fx:id="emailField" layoutX="40.0" layoutY="57.0" prefHeight="25.0" prefWidth="390.0" promptText="Email..." stylesheets="@../style/components/textField.css" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="50.0">
                <styleClass>
                   <String fx:value="login" />
                   <String fx:value="text" />
                </styleClass></TextField>
-            <PasswordField fx:id="passwordField" layoutX="156.0" layoutY="148.0" promptText="Password..." stylesheets="@../style/components/textField.css" text="studente" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="130.0">
+            <PasswordField fx:id="passwordField" layoutX="156.0" layoutY="148.0" promptText="Password..." stylesheets="@../style/components/textField.css" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="130.0">
                <styleClass>
                   <String fx:value="text" />
                   <String fx:value="login" />

@@ -6,6 +6,7 @@ import it.ispw.unibook.exceptions.account.AccountNotFoundException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
+import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
 import org.jetbrains.annotations.NotNull;
 
@@ -72,7 +73,7 @@ public class ManageSellableBookFacade {
      * @param bean Deve contenere l'ISBN
      * @return Bean contenente la lista dei libri in vendita con l'ISBN fornito
      */
-    public SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) {
+    public SellableBooksListBean retrieveSellableBooksByIsbn(BookBean bean) throws SessionNotFoundException {
         return sellableBookController.retrieveSellableBooksByIsbn(bean);
     }
 
@@ -82,7 +83,7 @@ public class ManageSellableBookFacade {
      * @return Bean contenente la lista dei libri in vendita collegati al corso fornito
      * @throws CourseException Viene sollevata se il corso non viene trovato
      */
-    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseException {
+    public SellableBooksListBean retrieveSellableBooksByCourse(CourseBean bean) throws CourseException, SessionNotFoundException {
         return sellableBookController.retrieveSellableBooksByCourse(bean);
     }
 

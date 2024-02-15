@@ -5,6 +5,7 @@ import it.ispw.unibook.exceptions.FieldNotValidException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
 import it.ispw.unibook.exceptions.login.SessionException;
+import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 import it.ispw.unibook.exceptions.negotiation.NegotiationException;
 import it.ispw.unibook.facade.ManageSellableBookFacade;
 import javafx.fxml.FXML;
@@ -55,7 +56,7 @@ public class GlobalSearchGUI extends ManageSellableBookGUI {
 
             sellableBooksCombo.setDisable(false);
             purchaseBookButton.setDisable(false);
-        } catch (FieldNotValidException e) {
+        } catch (FieldNotValidException | SessionNotFoundException e) {
             sellableBooksCombo.setDisable(true);
             purchaseBookButton.setDisable(true);
             errorLabel.setText(e.getMessage());

@@ -1,6 +1,6 @@
 package it.ispw.unibook.bean;
 
-public class CourseBean {
+public class CourseBean extends Bean {
 
     private final int code;
     private final String name;

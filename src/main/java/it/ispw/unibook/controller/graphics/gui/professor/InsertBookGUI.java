@@ -7,7 +7,9 @@ import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.BookNotFoundException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.facade.ManageCourseBookFacade;
+import it.ispw.unibook.utils.Printer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -179,6 +181,9 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
             errorLabel.setText(e.getMessage());
             retryButton.setVisible(true);
             insertManualButton.setVisible(true);
+        } catch (SessionException e) {
+            Printer.error(e);
+            System.exit(-1);
         }
 
 
