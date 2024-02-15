@@ -22,7 +22,7 @@ class RemoveCourseBookControllerTest {
      * con un libro presente in un corso esistente
      */
     @Test
-    void testRemoveBookFromCourseWithValivRemove() {
+    void testRemoveBookFromCourseWithValidRemove() {
         // Viene eseguito il login del professore
         LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
         LoginController loginController = new LoginController();
