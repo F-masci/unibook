@@ -80,7 +80,7 @@ public class SellableBookController {
         // Account dell'utente loggato
         AccountEntity loggedUser = SessionManager.getAccountBySessionID(bean.getSessionId());
         // Vengono filtrati i libri e vengono restituiti quelli in vendita da venditori che non sono l'utente loggato
-        sellableBooks.removeIf(sellableBook -> !Objects.equals(sellableBook.getSeller(), loggedUser));
+        sellableBooks.removeIf(sellableBook -> Objects.equals(sellableBook.getSeller(), loggedUser));
         // Viene istanziato il bean da restituire al chiamante
         SellableBooksListBean resBean = new SellableBooksListBean();
         // Si carica la lista dei libri in vendita all'interno del bean
@@ -105,7 +105,7 @@ public class SellableBookController {
         // Account dell'utente loggato
         AccountEntity loggedUser = SessionManager.getAccountBySessionID(bean.getSessionId());
         // Vengono filtrati i libri e vengono restituiti quelli in vendita da venditori che non sono l'utente loggato
-        sellableBooks.removeIf(sellableBook -> !Objects.equals(sellableBook.getSeller(), loggedUser));
+        sellableBooks.removeIf(sellableBook -> Objects.equals(sellableBook.getSeller(), loggedUser));
         // Viene istanziato il bean da restituire al chiamante
         SellableBooksListBean resBean = new SellableBooksListBean();
         // Si carica la lista dei libri in vendita all'interno del bean
@@ -163,7 +163,8 @@ public class SellableBookController {
                     b.getCode(),
                     b.getIsbn(),
                     b.getTitle(),
-                    b.getPrice()
+                    b.getPrice(),
+                    b.getSeller().getEmail()
             );
             // Si aggiunge il bean alla lista
             list.add(sellableBook);

@@ -5,7 +5,9 @@ import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.exceptions.account.AccountNotFoundException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.facade.ManageSellableBookFacade;
+import it.ispw.unibook.utils.Printer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -80,6 +82,9 @@ public class MarksSellableBookSoldGUI extends ManageSellableBookGUI implements I
             successLabel.setText(SUCCESS_MESSAGE_TEXT);
         } catch (ComboSelectionNotValidException | SellableBookException | AccountNotFoundException e) {
             errorLabel.setText(e.getMessage());
+        } catch (SessionException e) {
+            Printer.error(e);
+            System.exit(-1);
         }
     }
 

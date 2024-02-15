@@ -50,10 +50,13 @@ public class PageMarkSellableBookSoldCLI extends GenericPageManageSellableBookCL
 
                 return;
 
-            } catch (SellableBookException | SessionException | AccountNotFoundException e) {
+            } catch (SellableBookException | AccountNotFoundException e) {
                 showErrorMessage(e);
             } catch(EscCliException e) {
                 return;
+            } catch(SessionException e) {
+                Printer.error(e);
+                System.exit(-1);
             }
         }
 

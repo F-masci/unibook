@@ -2,6 +2,7 @@ package it.ispw.unibook.view.cli;
 
 import it.ispw.unibook.bean.*;
 import it.ispw.unibook.exceptions.cli.EscCliException;
+import it.ispw.unibook.utils.LambdaPrinterSellableBook;
 import it.ispw.unibook.utils.Printer;
 import org.jetbrains.annotations.NotNull;
 
@@ -243,16 +244,26 @@ public abstract class GenericPageCLI {
      * Metodo ausiliare per stampare la lista dei libri in vendita in un bean
      * @param bean Deve contenere la lista dei libri
      * @param msg Messaggio da stampare prima della lista
+     * @param lambda Funzione per formattare la stringa da stampare
      */
-    protected void printSellableBooksListBean(@NotNull SellableBooksListBean bean, String msg) {
+    protected void printSellableBooksListBean(@NotNull SellableBooksListBean bean, String msg, LambdaPrinterSellableBook lambda) {
         // Viene estratta la lista dei libri
         List<SellableBookBean> sellableBooks = bean.getList();
         if(msg != null) Printer.println("\n" + TITLE_SEPARATOR + msg + TITLE_SEPARATOR);
-        // Vengono stampati i libri utilizzando il metodo <i>toString</i> del bean
+        // Vengono stampati i libri utilizzando il metodo la funzione lambda
         for (SellableBookBean b : sellableBooks) {
-            Printer.println("[" + b.getCode() + "] " + b);
+            Printer.println(lambda.stringFormat(b));
         }
         Printer.println("");
+    }
+
+    /**
+     * Metodo ausiliare per stampare la lista dei libri in vendita in un bean
+     * @param bean Deve contenere la lista dei libri
+     * @param msg Messaggio da stampare prima della lista
+     */
+    protected void printSellableBooksListBean(@NotNull SellableBooksListBean bean, String msg) {
+        this.printSellableBooksListBean(bean, msg, b -> "[" + b.getCode() + "] " + b);
     }
 
     /**

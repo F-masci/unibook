@@ -30,7 +30,7 @@ public class ActiveNegotiationListGUI extends ManageSellableBookGUI implements I
 
             // Viene mostrata la lista libri in vendita
             for (SellableBookBean s : sellableBooks) {
-                String text = s.getCode() + " - " + s;
+                String text = s.getCode() + " - " + s + " - " + s.getEmailSeller();
                 Label label = new Label(text);
                 label.getStyleClass().add("sellable-book");
                 sellableBooksList.getChildren().add(label);

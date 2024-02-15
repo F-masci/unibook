@@ -49,7 +49,7 @@ public class RemoveCourseBookController {
             course.removeBook(book);
         } catch(BookNotInCourseException e) {
             throw new BookException(e.getMessage(), e);
-        } catch (CourseNotFoundException e) {
+        } catch (CourseNotFoundException | CourseNotOwnedException e) {
             throw new CourseException(e.getMessage(), e);
         } catch (SessionNotFoundException e) {
             throw new SessionException(e.getMessage(), e);

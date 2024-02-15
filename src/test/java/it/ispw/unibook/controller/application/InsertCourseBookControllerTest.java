@@ -2,11 +2,15 @@ package it.ispw.unibook.controller.application;
 
 import it.ispw.unibook.bean.BookBean;
 import it.ispw.unibook.bean.CourseBean;
+import it.ispw.unibook.bean.LoginBean;
 import it.ispw.unibook.exceptions.book.BookException;
 import it.ispw.unibook.exceptions.book.BookNotFoundException;
 import it.ispw.unibook.exceptions.course.BookAlreadyInCourseException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
+import it.ispw.unibook.exceptions.course.CourseNotOwnedException;
+import it.ispw.unibook.exceptions.login.LoginException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -65,15 +69,22 @@ class InsertCourseBookControllerTest {
      */
     @Test
     void testInsertBookInCourseWithValidInsert() {
+        // Viene eseguito il login del professore
+        LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
+        LoginController loginController = new LoginController();
+
         // Viene istanziato il controller applicativo per eseguire il metodo
         InsertCourseBookController controller = new InsertCourseBookController();
         // Viene istanziato il bean contenente il codice del corso
-        CourseBean courseBean = new CourseBean(1);
+        CourseBean courseBean = new CourseBean(2);
         // Viene istanziato il bean contenente i dati del libro
         BookBean bookBean = new BookBean(VALID_ISBN, VALID_TITLE);
         // Viene inserito il libro nel corso
         // Se non vengono sollevate eccezioni l'inserimento è stato effettuato correttamente
-        Assertions.assertDoesNotThrow(() -> controller.insertBookInCourse(courseBean, bookBean));
+        Assertions.assertDoesNotThrow(() -> {
+            loginController.login(loginBean);
+            controller.insertBookInCourse(courseBean, bookBean);
+        });
     }
 
     /**
@@ -83,6 +94,11 @@ class InsertCourseBookControllerTest {
     @Test
     void testInsertBookInCourseWithCourseNotPresent() {
         try {
+            // Viene eseguito il login del professore
+            LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
+            LoginController loginController = new LoginController();
+            loginController.login(loginBean);
+
             // Viene istanziato il controller applicativo per eseguire il metodo
             InsertCourseBookController controller = new InsertCourseBookController();
             // Viene istanziato il bean contenente il codice del corso
@@ -93,7 +109,7 @@ class InsertCourseBookControllerTest {
             // Se non vengono sollevate eccezioni l'inserimento è stato effettuato correttamente
             controller.insertBookInCourse(courseBean, bookBean);
             Assertions.fail("Il libro viene inserito correttamente");
-        } catch (CourseException e) {
+        } catch (CourseException | SessionException | LoginException e) {
             // Il metodo solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura per inserire il libro nel corso
 
@@ -111,17 +127,22 @@ class InsertCourseBookControllerTest {
     @Test
     void testInsertBookInCourseWithBookAlreadyPresent() {
         try {
+            // Viene eseguito il login del professore
+            LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
+            LoginController loginController = new LoginController();
+            loginController.login(loginBean);
+
             // Viene istanziato il controller applicativo per eseguire il metodo
             InsertCourseBookController controller = new InsertCourseBookController();
             // Viene istanziato il bean contenente il codice del corso
-            CourseBean courseBean = new CourseBean(1);
+            CourseBean courseBean = new CourseBean(2);
             // Viene istanziato il bean contenente i dati del libro
             BookBean bookBean = new BookBean("9788891904591", "Applicare UML e i pattern: analisi e progettazione orientata agli oggetti");
             // Viene inserito il libro nel corso
             // Se non vengono sollevate eccezioni l'inserimento è stato effettuato correttamente
             controller.insertBookInCourse(courseBean, bookBean);
             Assertions.fail("Il libro viene inserito correttamente");
-        } catch (CourseException e) {
+        } catch (CourseException | SessionException | LoginException e) {
             // Il metodo solleva quest'eccezione nel caso in cui ci sia un errore durante la
             // procedura per inserire il libro nel corso
 
@@ -129,6 +150,39 @@ class InsertCourseBookControllerTest {
             // Il test fallisce se a scatenare l'eccezione non é stata
             // la presenza del libro nel corso da prima dell'inserimento
             Assertions.assertEquals(BookAlreadyInCourseException.class, e.getCause().getClass());
+        }
+    }
+
+    /**
+     * Viene testato il metodo per inserire un libro in un corso
+     * di cui il professore non è effettivamente proprietario
+     */
+    @Test
+    void testInsertBookInCourseNotOwnedByProfessor() {
+        try {
+            // Viene eseguito il login del professore
+            LoginBean loginBean = new LoginBean("professore@uniroma2.eu", "professore");
+            LoginController loginController = new LoginController();
+            loginController.login(loginBean);
+
+            // Viene istanziato il controller applicativo per eseguire il metodo
+            InsertCourseBookController controller = new InsertCourseBookController();
+            // Viene istanziato il bean contenente il codice del corso
+            CourseBean courseBean = new CourseBean(1);
+            // Viene istanziato il bean contenente i dati del libro
+            BookBean bookBean = new BookBean(VALID_ISBN, VALID_TITLE);
+            // Viene inserito il libro nel corso
+            // Se non vengono sollevate eccezioni l'inserimento è stato effettuato correttamente
+            controller.insertBookInCourse(courseBean, bookBean);
+            Assertions.fail("Il libro viene inserito correttamente");
+        } catch (CourseException | SessionException | LoginException e) {
+            // Il metodo solleva quest'eccezione nel caso in cui ci sia un errore durante la
+            // procedura per inserire il libro nel corso
+
+            // Viene controllata la causa che ha generato l'eccezione
+            // Il test fallisce se a scatenare l'eccezione non é stata
+            // la presenza del libro nel corso da prima dell'inserimento
+            Assertions.assertEquals(CourseNotOwnedException.class, e.getCause().getClass());
         }
     }
 

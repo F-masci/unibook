@@ -141,8 +141,9 @@ public class ManageSellableBookFacade {
      * @param sellableBookBean Deve contenere il codice del libro in vendita
      * @param buyerBean Deve contenere il codice dell'account dell'acquirente
      * @throws SellableBookException Viene sollevata se il libro in vendita non è stato trovato o è stato già venduto
+     * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
      */
-    public void markSellableBookSold(@NotNull SellableBookBean sellableBookBean, @NotNull AccountBean buyerBean) throws SellableBookException, AccountNotFoundException {
+    public void markSellableBookSold(@NotNull SellableBookBean sellableBookBean, @NotNull AccountBean buyerBean) throws SellableBookException, AccountNotFoundException, SessionException {
         markSellableBookSoldController.markSellableBookSold(sellableBookBean, buyerBean);
     }
 
