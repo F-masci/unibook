@@ -10,7 +10,7 @@ import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.exceptions.account.AccountNotFoundException;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.exceptions.course.CourseNotFoundException;
-import it.ispw.unibook.factory.ApplicationDaoFactoryFile;
+import it.ispw.unibook.factory.ApplicationDaoFactory;
 import it.ispw.unibook.factory.UniversityDaoFactory;
 import it.ispw.unibook.utils.Printer;
 
@@ -322,7 +322,7 @@ public class SellableBookDaoAppFile implements SellableBookDao {
         SellableBookEntity sellableBook = null;
         try {
             // Viene istanziato il DAO relativo agli account per ottenere le informazioni su venditore e acquirente effettivo
-            AccountDao accountDao = ApplicationDaoFactoryFile.getInstance().getAccountDao();
+            AccountDao accountDao = ApplicationDaoFactory.getInstance().getAccountDao();
 
             // Viene estratto il codice dell'account del venditore
             int sellerCode = Integer.parseInt(tuple[SellableBookAttributesOrder.SELLER.getIndex()]);
