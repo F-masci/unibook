@@ -21,9 +21,7 @@ public class PageLoginCLI extends GenericPageCLI implements PageCLI {
             Printer.println("Eseguite l'accesso per entrare nel sistema oppure digitate esc per uscire");
 
             // Richiede le credenziali di accesso al sistema
-            if(requestCredentials()) continue;
-
-            break;
+            if(!requestCredentials()) break;
         }
 
     }
