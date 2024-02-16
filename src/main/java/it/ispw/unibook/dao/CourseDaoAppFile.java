@@ -3,15 +3,10 @@ package it.ispw.unibook.dao;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
-import it.ispw.unibook.entity.BookEntity;
-import it.ispw.unibook.entity.CourseEntity;
-import it.ispw.unibook.entity.SellableBookEntity;
 import it.ispw.unibook.utils.Printer;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CourseDaoAppFile implements CourseDao {
 
@@ -56,93 +51,9 @@ public class CourseDaoAppFile implements CourseDao {
         return instance;
     }
 
-    @Override
-    public void addBookToCourse(CourseEntity course, BookEntity book) {
-        // Apre il file in scrittura in modalità append
-        try(CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(fdBook, true)))) {
-            // Scrive la nuova tupla a partire dall'entità
-            csvWriter.writeNext(new String[] {
-                    String.valueOf(course.getCode()),
-                    book.getIsbn(),
-                    book.getTitle()
-            });
-        } catch (IOException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
-    }
 
-    @Override
-    public void removeBookFromCourse(CourseEntity course, BookEntity book) {
-        // Contiene tutti i record attualmente presenti nel file
-        List<String[]> records = new ArrayList<>();
-        // Apre il file in lettura
-        try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdBook)))) {
 
-            // Contiene i campi della riga letta
-            String[] tuple;
 
-            // Scorre i record all'interno del file
-            while ((tuple = csvReader.readNext()) != null) {
-                // Se il record è differente dall'associazione che si vuole eliminare viene aggiunto alla lista
-                if(Integer.parseInt(tuple[BookAttributesOrder.COURSE.getIndex()]) == course.getCode() &&
-                        Objects.equals(tuple[BookAttributesOrder.ISBN.getIndex()], book.getIsbn())) continue;
-                records.add(tuple);
-            }
-
-        } catch (IOException | CsvValidationException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
-        // I record vengono riscritti sul file escludendo quello che deve essere eliminato
-        rewriteFile(fdBook, records);
-    }
-
-    @Override
-    public void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook) {
-        // Viene caricato il prossimo codice da usare
-        loadAutoIncrement();
-        // Apre il file in scrittura in modalità append
-        try(CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(fdSellableBook, true)))) {
-            // Scrive la nuova tupla a partire dall'entità
-            csvWriter.writeNext(new String[] {
-                    String.valueOf(autoIncrement),
-                    String.valueOf(course.getCode()),
-                    sellableBook.getIsbn(),
-                    String.valueOf(sellableBook.getSeller().getCode()),
-                    String.valueOf(sellableBook.getPrice()),
-                    "0"
-            });
-        } catch (IOException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
-    }
-
-    @Override
-    public void removeSellableBookFromCourse(CourseEntity course, SellableBookEntity sellableBook) {
-        // Contiene tutti i record attualmente presenti nel file
-        List<String[]> records = new ArrayList<>();
-        // Apre il file in lettura
-        try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdSellableBook)))) {
-
-            // Contiene i campi della riga letta
-            String[] tuple;
-
-            // Scorre i record all'interno del file
-            while ((tuple = csvReader.readNext()) != null) {
-                // Se il record è differente dall'associazione che si vuole eliminare viene aggiunto alla lista
-                if(Integer.parseInt(tuple[SellableBookAttributesOrder.CODE.getIndex()]) == sellableBook.getCode()) continue;
-                records.add(tuple);
-            }
-
-        } catch (IOException | CsvValidationException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
-        // I record vengono riscritti sul file escludendo quello che deve essere eliminato
-        rewriteFile(fdSellableBook, records);
-    }
 
     /**
      * Funzione ausiliare per calcolare il prossimo codice per il libro in vendita

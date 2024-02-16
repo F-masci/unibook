@@ -71,4 +71,35 @@ public class BookDaoAppJDBC implements BookDao {
 
     }
 
+    @Override
+    public void addBookToCourse(CourseEntity course, BookEntity book) {
+        // Viene istanziato lo statement per eseguire le QUERY al database
+        try (PreparedStatement stm = connection.prepareStatement("INSERT INTO book(course, isbn, title) VALUES(?, ?, ?);")) {
+            // Vengono impostati i parametri al posto dei placeholder nello statement
+            stm.setInt(1, course.getCode());
+            stm.setString(2, book.getIsbn());
+            stm.setString(3, book.getTitle());
+            // Viene eseguita la QUERY
+            stm.execute();
+        } catch(SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
+    @Override
+    public void removeBookFromCourse(CourseEntity course, BookEntity book) {
+        // Viene istanziato lo statement per eseguire le QUERY al database
+        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM book WHERE course = ? AND isbn = ?;")) {
+            // Vengono impostati i parametri al posto dei placeholder nello statement
+            stm.setInt(1, course.getCode());
+            stm.setString(2, book.getIsbn());
+            // Viene eseguita la QUERY
+            stm.execute();
+        } catch(SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
 }

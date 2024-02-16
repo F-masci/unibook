@@ -27,7 +27,7 @@ public class ManageSellableBookFacade {
     private final InsertSellableBookController insertSellableBookController = new InsertSellableBookController();
     // Controller per eseguire il caso d'uso <i>Rimuovi libro in vendita</i>
     private final RemoveSellableBookController removeSellableBookController = new RemoveSellableBookController();
-    // Controller per eseguire il caso d'uso <i>Acquista libro</i>
+    // Controller per eseguire il caso d'uso <i>Notifica di voler acquistare un libro</i>
     private final PurchaseBookController purchaseBookController = new PurchaseBookController();
     // Controller per eseguire il caso d'uso <i>Segna libro come venduto</i>
     private final MarkSellableBookSoldController markSellableBookSoldController = new MarkSellableBookSoldController();

@@ -46,6 +46,20 @@ public interface SellableBookDao {
     List<SellableBookEntity> retrieveCourseSellableBooks(CourseEntity course);
 
     /**
+     * Aggiunge un libro in vendita a un corso
+     * @param course Corso a cui aggiungere il libro in vendita
+     * @param sellableBook Libro in vendita da aggiungere
+     */
+    void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook);
+
+    /**
+     * Rimuove un libro in vendita da un corso
+     * @param course Corso da cui rimuovere il libro in vendita
+     * @param sellableBook Libro in vendita da rimuovere
+     */
+    void removeSellableBookFromCourse(CourseEntity course, SellableBookEntity sellableBook);
+
+    /**
      * Aggiunge un acquirente a un libro in vendita
      * @param sellableBook Libro in vendita
      * @param buyer Acquirente

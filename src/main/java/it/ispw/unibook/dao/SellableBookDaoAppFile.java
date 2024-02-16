@@ -28,6 +28,8 @@ public class SellableBookDaoAppFile implements SellableBookDao {
     // Nome del file dove vengono salvate le informazioni degli acquirenti di un libro
     private static final String NEGOTIATION_FILE_NAME = "negotiation.csv";
 
+    private int autoIncrement = 0;
+
     // Descrittore del file dei libri in vendita
     private File fdSellableBook;
     // Descrittore del file degli acquirenti dei libri
@@ -197,6 +199,52 @@ public class SellableBookDaoAppFile implements SellableBookDao {
     }
 
     @Override
+    public void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook) {
+        // Viene caricato il prossimo codice da usare
+        loadAutoIncrement();
+        // Apre il file in scrittura in modalità append
+        try(CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(fdSellableBook, true)))) {
+            // Scrive la nuova tupla a partire dall'entità
+            csvWriter.writeNext(new String[] {
+                    String.valueOf(autoIncrement),
+                    String.valueOf(course.getCode()),
+                    sellableBook.getIsbn(),
+                    String.valueOf(sellableBook.getSeller().getCode()),
+                    String.valueOf(sellableBook.getPrice()),
+                    "0"
+            });
+        } catch (IOException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
+    @Override
+    public void removeSellableBookFromCourse(CourseEntity course, SellableBookEntity sellableBook) {
+        // Contiene tutti i record attualmente presenti nel file
+        List<String[]> records = new ArrayList<>();
+        // Apre il file in lettura
+        try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdSellableBook)))) {
+
+            // Contiene i campi della riga letta
+            String[] tuple;
+
+            // Scorre i record all'interno del file
+            while ((tuple = csvReader.readNext()) != null) {
+                // Se il record è differente dall'associazione che si vuole eliminare viene aggiunto alla lista
+                if(Integer.parseInt(tuple[SellableBookAttributesOrder.CODE.getIndex()]) == sellableBook.getCode()) continue;
+                records.add(tuple);
+            }
+
+        } catch (IOException | CsvValidationException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+        // I record vengono riscritti sul file escludendo quello che deve essere eliminato
+        rewriteFile(fdSellableBook, records);
+    }
+
+    @Override
     public void addBuyerToSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer) {
         // Apre il file in scrittura in modalità append
         try(CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(fdNegotiation, true)))) {
@@ -233,14 +281,8 @@ public class SellableBookDaoAppFile implements SellableBookDao {
             Printer.error(e);
             System.exit(-1);
         }
-        // Apre il file in scrittura
-        try(CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(fdNegotiation)))) {
-            // I record vengono riscritti sul file escludendo quello che deve essere eliminato
-            csvWriter.writeAll(records);
-        } catch (IOException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
+        // I record vengono riscritti sul file tenendo conto della modifica
+        rewriteFile(fdNegotiation, records);
     }
 
     @Override
@@ -266,14 +308,8 @@ public class SellableBookDaoAppFile implements SellableBookDao {
             Printer.error(e);
             System.exit(-1);
         }
-        // Apre il file in scrittura
-        try(CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(fdSellableBook)))) {
-            // I record vengono riscritti sul file tenendo conto della modifica
-            csvWriter.writeAll(records);
-        } catch (IOException e) {
-            Printer.error(e);
-            System.exit(-1);
-        }
+        // I record vengono riscritti sul file tenendo conto della modifica
+        rewriteFile(fdSellableBook, records);
     }
 
     /**
@@ -330,4 +366,37 @@ public class SellableBookDaoAppFile implements SellableBookDao {
         // Viene resituita l'entità
         return sellableBook;
     }
+
+    /**
+     * Funzione ausiliare per calcolare il prossimo codice per il libro in vendita
+     */
+    private void loadAutoIncrement() {
+        // Apre il file in lettura
+        try(CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fdSellableBook)))) {
+            String[] tuple;
+            // Legge i codici presenti e imposta il prossimo codice al successivo
+            while ((tuple = csvReader.readNext()) != null) autoIncrement = Integer.parseInt(tuple[SellableBookAttributesOrder.CODE.getIndex()]);
+            autoIncrement++;
+        } catch(IOException | CsvValidationException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
+    /**
+     * Riscrive l'intero file a partire dalle tuple fornite
+     * @param f File da riscrivere
+     * @param records Lista dei records
+     */
+    private void rewriteFile(File f, List<String[]> records) {
+        // Apre il file in scrittura
+        try(CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(f)))) {
+            // Scrive tutto il file
+            csvWriter.writeAll(records);
+        } catch (IOException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
 }

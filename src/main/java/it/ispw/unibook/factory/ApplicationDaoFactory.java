@@ -29,8 +29,9 @@ public abstract class ApplicationDaoFactory {
                 // Viene letta la configurazione relativa alla persistenza
                 // A seconda del valore viene istanziata una factory per una famiglia di DAO specifica
                 switch (config.getProperty("persistence")) {
-                    case "jdbc" -> instance = ApplicationDaoFactoryJDBC.getInstance();
-                    case "file" -> instance = ApplicationDaoFactoryFile.getInstance();
+                    case "jdbc" -> instance = new ApplicationDaoFactoryJDBC();
+                    case "file" -> instance = new ApplicationDaoFactoryFile();
+
                     default -> throw new PersistenceNotValidException();
                 }
             }
@@ -52,12 +53,6 @@ public abstract class ApplicationDaoFactory {
      * @return DAO degli account
      */
     public abstract AccountDao getAccountDao();
-
-    /**
-     * Permette di ottenere l'istanza del DAO dei corsi
-     * @return DAO dei corsi
-     */
-    public abstract CourseDao getCourseDao();
 
     /**
      * Permette di ottenere l'istanza del DAO dei libri

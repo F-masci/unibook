@@ -10,22 +10,6 @@ import it.ispw.unibook.dao.*;
  */
 public class ApplicationDaoFactoryFile extends ApplicationDaoFactory {
 
-    // Unica istanza di factory per la famiglia dei DAO che utilizzano il file system
-    private static ApplicationDaoFactoryFile instance = null;
-
-    // Il costruttore è reso privato per applicate il pattern Singleton
-    private ApplicationDaoFactoryFile() {}
-
-    /**
-     * Permette di ottenere l'unica istanza di factory per la famiglia dei DAO che utilizzano il file system
-     * @return Factory per i DAO
-     */
-    public static ApplicationDaoFactoryFile getInstance() {
-        // Se l'istanza non è presente viene creata
-        if(instance == null) instance = new ApplicationDaoFactoryFile();
-        return instance;
-    }
-
     @Override
     public LoginDao getLoginDao() {
         return LoginDaoAppFile.getInstance();
@@ -34,11 +18,6 @@ public class ApplicationDaoFactoryFile extends ApplicationDaoFactory {
     @Override
     public AccountDao getAccountDao() {
         return AccountDaoAppFile.getInstance();
-    }
-
-    @Override
-    public CourseDao getCourseDao() {
-        return CourseDaoAppFile.getInstance();
     }
 
     @Override

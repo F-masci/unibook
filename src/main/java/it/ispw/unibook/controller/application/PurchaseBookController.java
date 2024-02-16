@@ -15,7 +15,7 @@ import it.ispw.unibook.utils.SessionManager;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Controller applicativo del caso d'uso <i>Acquista libro</i>
+ * Controller applicativo del caso d'uso <i>Notifica di voler acquistare un libro</i>
  */
 public class PurchaseBookController {
 

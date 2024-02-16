@@ -1,7 +1,6 @@
 package it.ispw.unibook.entity;
 
 import it.ispw.unibook.dao.BookDao;
-import it.ispw.unibook.dao.CourseDao;
 import it.ispw.unibook.dao.SellableBookDao;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookNotFoundException;
 import it.ispw.unibook.exceptions.book.sellable.UnsellableBookInCourseException;
@@ -116,7 +115,7 @@ public class CourseEntity {
         // Aggiunge il libro alla lista
         books.add(book);
         // Salva in persistenza l'aggiunta del libro
-        CourseDao dao = ApplicationDaoFactory.getInstance().getCourseDao();
+        BookDao dao = ApplicationDaoFactory.getInstance().getBookDao();
         dao.addBookToCourse(this, book);
     }
 
@@ -133,7 +132,7 @@ public class CourseEntity {
         // Rimuove il libro dalla lista
         books.remove(book);
         // Salva in persistenza la rimozione del libro
-        CourseDao dao = ApplicationDaoFactory.getInstance().getCourseDao();
+        BookDao dao = ApplicationDaoFactory.getInstance().getBookDao();
         dao.removeBookFromCourse(this, book);
     }
 
@@ -152,7 +151,7 @@ public class CourseEntity {
         // Aggiunge il libro in vendita al corso
         sellableBooks.add(sellableBook);
         // Salva in persistenza l'aggiunta del libro in vendita
-        CourseDao dao = ApplicationDaoFactory.getInstance().getCourseDao();
+        SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
         dao.addSellableBookToCourse(this, sellableBook);
     }
 
@@ -171,7 +170,7 @@ public class CourseEntity {
         // Rimuove il libro in vendita dalla lista
         sellableBooks.remove(sellableBook);
         // Salva in persistenza la rimozione del libro in vendita
-        CourseDao dao = ApplicationDaoFactory.getInstance().getCourseDao();
+        SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
         dao.removeSellableBookFromCourse(this, sellableBook);
     }
 

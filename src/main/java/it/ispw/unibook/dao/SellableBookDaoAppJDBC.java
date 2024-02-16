@@ -149,6 +149,37 @@ public class SellableBookDaoAppJDBC implements SellableBookDao {
     }
 
     @Override
+    public void addSellableBookToCourse(CourseEntity course, SellableBookEntity sellableBook) {
+        // Viene istanziato lo statement per eseguire le QUERY al database
+        try (PreparedStatement stm = connection.prepareStatement("INSERT INTO sellable_book(course, isbn, seller, price) VALUES(?, ?, ?, ?);")) {
+            // Vengono impostati i parametri al posto dei placeholder nello statement
+            stm.setInt(1, course.getCode());
+            stm.setString(2, sellableBook.getIsbn());
+            stm.setInt(3, sellableBook.getSeller().getCode());
+            stm.setFloat(4, sellableBook.getPrice());
+            // Viene eseguita la QUERY
+            stm.execute();
+        } catch(SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
+    @Override
+    public void removeSellableBookFromCourse(CourseEntity course, SellableBookEntity sellableBook) {
+        // Viene istanziato lo statement per eseguire le QUERY al database
+        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM sellable_book WHERE code=?;")) {
+            // Viene impostato il parametro al posto del placeholder nello statement
+            stm.setInt(1, sellableBook.getCode());
+            // Viene eseguita la QUERY
+            stm.execute();
+        } catch(SQLException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
+
+    @Override
     public void addBuyerToSellableBookNegotiation(SellableBookEntity sellableBook, AccountEntity buyer) {
         // Viene istanziato lo statement per eseguire le QUERY al database
         try (PreparedStatement stm = connection.prepareStatement("INSERT INTO negotiation(book, student) VALUES(?, ?);")) {
