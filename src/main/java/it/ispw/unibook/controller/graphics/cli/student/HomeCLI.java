@@ -1,9 +1,20 @@
 package it.ispw.unibook.controller.graphics.cli.student;
 
+import it.ispw.unibook.bean.Bean;
+import it.ispw.unibook.controller.application.LogoutController;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.view.cli.PageCLI;
 import it.ispw.unibook.view.cli.student.*;
 
 public class HomeCLI {
+
+    /**
+     * Permette di eseguire il logout dal sistema
+     */
+    public void logout() throws SessionException {
+        LogoutController controller = new LogoutController();
+        controller.logout(new Bean());
+    }
 
     /**
      * Mostra la pagina con la lista dei corsi

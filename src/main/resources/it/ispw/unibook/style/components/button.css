@@ -12,3 +12,17 @@
     -fx-padding: 0px;
     -fx-background-radius: 0px;
 }
+
+.logout-button {
+    -fx-padding: 0px;
+    -fx-background-radius: 0px;
+    -fx-text-fill: black!important;
+    -fx-font-size: 18pt;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-border-radius: 5em;
+}
+
+.logout-button:hover {
+    -fx-font-size: 22px;
+}

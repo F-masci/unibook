@@ -40,8 +40,6 @@ s
 Csrc/main/java/it/ispw/unibook/controller/graphics/gui/PagesGUI.java,6\e\6e8ef04096a1389db6f2d9929bd738144f747c01
 |
 Lsrc/main/java/it/ispw/unibook/controller/graphics/gui/professor/HomeGUI.java,a\2\a2c006e15c1fc1a0914fcc0a4ca148fdd738d7d4
-`
-0src/main/java/it/ispw/unibook/dao/CourseDao.java,b\4\b4dda437e55c6589c3b7f58a4a2476d930fb0d5d
 f
 6src/main/java/it/ispw/unibook/entity/CourseEntity.java,3\a\3a4dc00d5aadf3fc56f152f647c53da1729c9059
 d
@@ -264,8 +262,6 @@ o
 ?src/main/java/it/ispw/unibook/factory/UniversityDaoFactory.java,6\0\60da54710feb978a873ead9e327596a97c8b3cec
 ‚
 Rsrc/main/java/it/ispw/unibook/controller/graphics/gui/student/GlobalSearchGUI.java,a\4\a474426fda1a5103234494177769424b52eb1e84
-g
-7src/main/java/it/ispw/unibook/dao/CourseDaoAppJDBC.java,d\c\dcbabdc4b1dda33c3db8b796227b7d24feac20e7
 z
 Jsrc/main/java/it/ispw/unibook/controller/graphics/gui/student/HomeGUI.java,0\f\0f76f57b7f94f326d95713619a4dc65765f748ce
 ˆ
@@ -316,22 +312,14 @@ Xsrc/test/java/it/ispw/unibook/controller/application/InsertCourseBookController
 Xsrc/test/java/it/ispw/unibook/controller/application/RemoveCourseBookControllerTest.java,0\e\0e748562335c345dcc28d5020c24b5f1278e98dc
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
-g
-7src/main/java/it/ispw/unibook/dao/CourseDaoAppFile.java,5\a\5ad5c778c898b39838dee57dab236d0821f9ba72
-<
-csv/book.csv,8\5\858c7d90ce5ebb7e46d3caef5876584d680fb3e0
 j
 :src/main/java/it/ispw/unibook/dao/BookAttributesOrder.java,b\7\b73f4b2fceea8e127ef8b761ae07cd609dbd88c0
 m
 =src/main/java/it/ispw/unibook/dao/SellableBookDaoAppFile.java,c\7\c7b5663c30f0cd546b91c0836d0fbee54800b817
-D
-csv/sellableBook.csv,7\7\77a0529966ee641eb69b081b367b7e6bd619404e
 r
 Bsrc/main/java/it/ispw/unibook/dao/SellableBookAttributesOrder.java,0\1\01bcf693e21f4b0d5a75919a7b50f316761d997e
 h
 8src/main/java/it/ispw/unibook/dao/AccountDaoAppFile.java,c\b\cbeb9112ec5a4e4adbc4a59dd77f478aa13af0f7
-C
-csv/negotiation.csv,6\7\67a5a0fdc10dc66315bc87c4dd3e3d48cad0f612
 q
 Asrc/main/java/it/ispw/unibook/dao/NegotiationAttributesOrder.java,b\f\bf4a855f45e74ba380c54b8ed798fb3e6fdb84fb
 t
@@ -342,3 +330,5 @@ r
 Bsrc/main/java/it/ispw/unibook/utils/LambdaPrinterSellableBook.java,7\a\7a97cf19f4d4234005f2b39f8886fdae313d59f6
 
 `src/main/java/it/ispw/unibook/exceptions/book/sellable/BuyerNotFoundInSellableBookException.java,2\2\2218b0e363f3ea7d3417d1e4b491643eefdde365
+z
+Jsrc/main/java/it/ispw/unibook/controller/application/LogoutController.java,2\2\2230a7874a886cca42afd50c9daef2e74c3e1af7

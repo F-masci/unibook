@@ -1,9 +1,13 @@
 package it.ispw.unibook.controller.graphics.gui;
 
 import it.ispw.unibook.bean.*;
+import it.ispw.unibook.controller.application.LogoutController;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
+import it.ispw.unibook.exceptions.login.SessionException;
+import it.ispw.unibook.utils.Printer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
+import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -21,6 +25,21 @@ public abstract class GenericGUI {
     private final ObservableMap<String, Integer> sellableBooksCombo = FXCollections.observableHashMap();
     // Contiene l'associazione tra testo di una combo box e il suo valore
     private final ObservableMap<String, Integer> accountsCombo = FXCollections.observableHashMap();
+
+    @FXML
+    public void logout() {
+        try {
+            // Controller applicativo per eseguire il logout dal sistema
+            LogoutController controller = new LogoutController();
+            // Esegue il logout
+            controller.logout(new Bean());
+            // Torna alla pagina di login
+            changePage(PagesGUI.LOGIN);
+        } catch(SessionException e) {
+            Printer.error(e);
+            System.exit(-1);
+        }
+    }
 
     /**
      * Carica una lista di corsi da un bean a una ComboBox

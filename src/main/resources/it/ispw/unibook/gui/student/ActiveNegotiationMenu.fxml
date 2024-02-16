@@ -37,6 +37,22 @@
          <font>
             <Font size="18.0" />
          </font></Label>
+        <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+            <children>
+                <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="65.0" prefWidth="150.0" styleClass="logout-button" stylesheets="@../../style/components/button.css" text="ESCI">
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/logout.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
     </HBox>
    <Button layoutX="300.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#showOwnSellableBooks" prefHeight="100.0" text="I tuoi libri in vendita" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="200.0">
       <font>

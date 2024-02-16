@@ -3,6 +3,7 @@ package it.ispw.unibook.view.cli.professor;
 import it.ispw.unibook.controller.graphics.cli.professor.HomeCLI;
 import it.ispw.unibook.exceptions.cli.EscCliException;
 import it.ispw.unibook.exceptions.cli.SelectionNotValidException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import it.ispw.unibook.view.cli.GenericPageCLI;
 import it.ispw.unibook.view.cli.PageCLI;
@@ -35,7 +36,10 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
                 // Si chiede all'utente di scegliere cosa fare dal menù
                 int selection = requestInt("Selezione (oppure esc per uscire): ");
                 switch (selection) {
-                    case 0 -> { return; }
+                    case 0 -> {
+                        controller.logout();
+                        return;
+                    }
                     case 1 -> controller.showBooks();
                     case 2 -> controller.addBook();
                     case 3 -> controller.deleteBook();
@@ -49,6 +53,9 @@ public class PageHomeCLI extends GenericPageCLI implements PageCLI {
                 showErrorMessage(e);
             } catch (EscCliException e) {
                 return;
+            } catch (SessionException e) {
+                Printer.error(e);
+                System.exit(-1);
             }
         }
     }

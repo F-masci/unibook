@@ -39,6 +39,22 @@
          <font>
             <Font size="18.0" />
          </font></Label>
+            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                <children>
+                    <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="65.0" prefWidth="150.0" styleClass="logout-button" stylesheets="@../../style/components/button.css" text="ESCI">
+                        <graphic>
+                            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../images/logout.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </Button>
+                </children>
+            </HBox>
         </HBox>
         <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="210.0" layoutY="76.0" prefHeight="455.0" prefWidth="920.0" stylesheets="@../../style/components/scrollPane.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="76.0">
             <VBox fx:id="coursesList" alignment="TOP_CENTER" prefHeight="304.0" prefWidth="918.0" styleClass="courses-list">

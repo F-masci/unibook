@@ -16,6 +16,10 @@ public class SessionManager {
         sessions.add(account);
     }
 
+    public static void removeSessione(AccountEntity account) {
+        sessions.remove(account);
+    }
+
     public static AccountEntity getAccountBySessionID(int code) throws SessionNotFoundException {
         for(AccountEntity a: sessions) {
             if(a.getCode() == code) return a;

@@ -9,28 +9,36 @@ import it.ispw.unibook.utils.Printer;
 
 public class PageLoginCLI extends GenericPageCLI implements PageCLI {
 
+    // Controller grafico relativo alla View
     private final LoginCLI controller = new LoginCLI();
 
     @Override
     public void display() {
-        Printer.clear();
+        while(true) {
+            Printer.clear();
 
-        Printer.println("Benevenuti su Unibook!");
-        Printer.println("Eseguite l'accesso per entrare nel sistema");
+            Printer.println("Benevenuti su Unibook!");
+            Printer.println("Eseguite l'accesso per entrare nel sistema oppure digitate esc per uscire");
 
-        requestCredentials();
+            // Richiede le credenziali di accesso al sistema
+            if(requestCredentials()) continue;
+
+            break;
+        }
 
     }
 
-    private void requestCredentials() {
+    private boolean requestCredentials() {
 
         while(true) {
 
             try {
 
+                // Richiede le credenziali all'utente
                 String email = requestString("Email: ");
                 String password = requestString("Password: ");
 
+                // Effettua il login
                 LoginBean bean = new LoginBean(email, password);
                 controller.login(bean);
                 break;
@@ -38,9 +46,11 @@ public class PageLoginCLI extends GenericPageCLI implements PageCLI {
             } catch (LoginException | FieldNotValidException e) {
                 showErrorMessage(e);
             } catch (EscCliException e) {
-                return;
+                return false;
             }
         }
+
+        return true;
 
     }
 

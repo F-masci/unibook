@@ -39,6 +39,22 @@
          <font>
             <Font size="18.0" />
          </font></Label>
+        <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+            <children>
+                <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="65.0" prefWidth="150.0" styleClass="logout-button" stylesheets="@../../style/components/button.css" text="ESCI">
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/logout.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
     </HBox>
    <ComboBox fx:id="coursesCombo" layoutX="200.0" layoutY="111.0" onAction="#onCourseSelected" prefHeight="65.0" prefWidth="880.0" promptText="Seleziona un corso..." styleClass="legacy-combo-box" stylesheets="@../../style/components/comboBox.css" />
    <ComboBox fx:id="booksCombo" disable="true" layoutX="199.0" layoutY="229.0" onAction="#onCourseSelected" prefHeight="65.0" prefWidth="880.0" promptText="Seleziona un libro..." styleClass="legacy-combo-box" stylesheets="@../../style/components/comboBox.css" />
