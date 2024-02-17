@@ -206,7 +206,7 @@ public class CourseEntity {
         // Scorre la lista e rimuove il libro in vendita sulla lista dell'entità
         for(SellableBookEntity s: sellableBookCopy) {
             try {
-                this.removeSellableBook(s);
+                if(Objects.equals(s.getIsbn(), isbn)) this.removeSellableBook(s);
             } catch(SellableBookNotFoundException ignored) {
                 // Quest'eccezione non viene mai sollevata
             }
