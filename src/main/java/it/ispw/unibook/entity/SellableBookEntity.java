@@ -126,7 +126,7 @@ public class SellableBookEntity extends BookEntity {
     public void clearBuyers() {
         // Crea un copia locale della lista degli acquirenti
         List<AccountEntity> buyersCopy = new ArrayList<>(this.getBuyers());
-        // Scorre la lista e rimuove il libro sulla lista dell'entità
+        // Scorre la lista e rimuove l'acquirente sulla lista dell'entità
         for(AccountEntity b: buyersCopy) {
             try {
                 this.removeBuyer(b);

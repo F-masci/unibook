@@ -72,6 +72,9 @@ public class SearchByCourseGUI extends ManageSellableBookGUI implements Initiali
 
     @FXML
     public void purchaseBook() {
+        // Viene resettato il messaggio di errore
+        errorLabel.setText("");
+
         try {
             // Viene istanziato il bean contenete il libro in vendita selezionato
             int selected = super.getSellableBookSelectedFromComboBox(sellableBooksCombo);

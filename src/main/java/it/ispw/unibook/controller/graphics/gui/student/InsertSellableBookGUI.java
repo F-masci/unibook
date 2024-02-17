@@ -70,6 +70,7 @@ public class InsertSellableBookGUI extends ManageSellableBookGUI implements Init
 
     @FXML
     public void insertSellableBook() {
+        // Viene resettato il messaggio di errore
         errorLabel.setText("");
 
         try {

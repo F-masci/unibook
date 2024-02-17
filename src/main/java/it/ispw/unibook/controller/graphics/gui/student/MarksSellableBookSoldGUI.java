@@ -66,6 +66,7 @@ public class MarksSellableBookSoldGUI extends ManageSellableBookGUI implements I
 
     @FXML
     public void markSellableBookSold() {
+        // Viene resettato il messaggio di errore
         errorLabel.setText("");
 
         try {

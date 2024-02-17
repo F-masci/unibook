@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Point3D?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.unibook.controller.graphics.gui.student.HomeGUI">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.unibook.controller.graphics.gui.student.HomeGUI">
     <HBox styleClass="topbar" stylesheets="@../../style/components/topbar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" stylesheets="@../../style/components/button.css" textFill="WHITE">
             <styleClass>
@@ -89,7 +85,7 @@
          <URL value="@../../style/pages/professor/Home.css" />
       </stylesheets>
    </Button>
-   <Button layoutX="173.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#showPurchaseBookMenu" prefHeight="70.0" text="Compra libro" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="350.0">
+   <Button layoutX="173.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#showPurchaseBookMenu" prefHeight="70.0" text="Acquista libro" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="350.0">
       <font>
          <Font size="24.0" />
       </font>

@@ -43,6 +43,7 @@ public class RemoveSellableBookGUI extends ManageSellableBookGUI implements Init
 
     @FXML
     public void removeSellableBook() {
+        // Viene resettato il messaggio di errore
         errorLabel.setText("");
 
         try {

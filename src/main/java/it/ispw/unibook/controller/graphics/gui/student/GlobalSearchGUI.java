@@ -44,6 +44,7 @@ public class GlobalSearchGUI extends ManageSellableBookGUI {
 
     @FXML
     public void searchBook() {
+        // Viene resettato il messaggio di errore
         errorLabel.setText("");
         try {
             // Controlla che il libro cercato sia cambiato
@@ -65,6 +66,7 @@ public class GlobalSearchGUI extends ManageSellableBookGUI {
 
     @FXML
     public void purchaseBook() {
+        // Viene resettato il messaggio di errore
         errorLabel.setText("");
         try {
             // Viene istanziato il bean con il libro in vendita selezionato

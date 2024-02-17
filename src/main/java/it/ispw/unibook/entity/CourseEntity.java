@@ -9,6 +9,7 @@ import it.ispw.unibook.exceptions.course.BookNotInCourseException;
 import it.ispw.unibook.factory.ApplicationDaoFactory;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -129,6 +130,8 @@ public class CourseEntity {
         loadBooks();
         // Viene controllato se il libro è effettivamente presente nel corso
         if(!books.contains(book)) throw new BookNotInCourseException();
+        // Rimuove i libri in vendita collegati
+        clearSellableBooksByIsbn(book.getIsbn());
         // Rimuove il libro dalla lista
         books.remove(book);
         // Salva in persistenza la rimozione del libro
@@ -191,6 +194,22 @@ public class CourseEntity {
         if(sellableBooks == null) {
             SellableBookDao dao = ApplicationDaoFactory.getInstance().getSellableBookDao();
             sellableBooks = dao.retrieveCourseSellableBooks(this);
+        }
+    }
+
+    /**
+     * Elimina i libri in vendita nel corso con uno specifico ISBN
+     */
+    private void clearSellableBooksByIsbn(String isbn) {
+        // Crea un copia locale della lista dei libri in vendita
+        List<SellableBookEntity> sellableBookCopy = new ArrayList<>(this.getSellableBooks());
+        // Scorre la lista e rimuove il libro in vendita sulla lista dell'entità
+        for(SellableBookEntity s: sellableBookCopy) {
+            try {
+                this.removeSellableBook(s);
+            } catch(SellableBookNotFoundException ignored) {
+                // Quest'eccezione non viene mai sollevata
+            }
         }
     }
 
