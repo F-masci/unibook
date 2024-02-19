@@ -332,3 +332,11 @@ Bsrc/main/java/it/ispw/unibook/utils/LambdaPrinterSellableBook.java,7\a\7a97cf1
 `src/main/java/it/ispw/unibook/exceptions/book/sellable/BuyerNotFoundInSellableBookException.java,2\2\2218b0e363f3ea7d3417d1e4b491643eefdde365
 z
 Jsrc/main/java/it/ispw/unibook/controller/application/LogoutController.java,2\2\2230a7874a886cca42afd50c9daef2e74c3e1af7
+<
+csv/book.csv,8\5\858c7d90ce5ebb7e46d3caef5876584d680fb3e0
+D
+csv/sellableBook.csv,7\7\77a0529966ee641eb69b081b367b7e6bd619404e
+C
+csv/negotiation.csv,6\7\67a5a0fdc10dc66315bc87c4dd3e3d48cad0f612
+6
+db.sql,2\1\217da5343dc709466933fc0497ae38d92f937136

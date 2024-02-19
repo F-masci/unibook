@@ -1,9 +1,11 @@
 package it.ispw.unibook.factory;
 
-import it.ispw.unibook.dao.*;
+import it.ispw.unibook.dao.AccountDao;
+import it.ispw.unibook.dao.BookDao;
+import it.ispw.unibook.dao.LoginDao;
+import it.ispw.unibook.dao.SellableBookDao;
 import it.ispw.unibook.exceptions.PersistenceNotValidException;
 import it.ispw.unibook.utils.ApplicationProperties;
-import it.ispw.unibook.utils.Printer;
 
 import java.util.Properties;
 
@@ -36,8 +38,9 @@ public abstract class ApplicationDaoFactory {
                 }
             }
         } catch(PersistenceNotValidException e) {
-            Printer.error(e);
-            System.exit(-1);
+            // Nel caso la persistenza selezionata non si valida viene impostata
+            // di default quella del file system
+            instance = new ApplicationDaoFactoryFile();
         }
         return instance;
     }
