@@ -38,7 +38,7 @@ public abstract class ApplicationDaoFactory {
                 }
             }
         } catch(PersistenceNotValidException e) {
-            // Nel caso la persistenza selezionata non si valida viene impostata
+            // Nel caso la persistenza selezionata non sia valida viene impostata
             // di default quella del file system
             instance = new ApplicationDaoFactoryFile();
         }
