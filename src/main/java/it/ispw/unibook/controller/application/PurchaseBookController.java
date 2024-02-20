@@ -1,7 +1,6 @@
 package it.ispw.unibook.controller.application;
 
 import it.ispw.unibook.bean.SellableBookBean;
-import it.ispw.unibook.dao.AccountDao;
 import it.ispw.unibook.dao.SellableBookDao;
 import it.ispw.unibook.entity.AccountEntity;
 import it.ispw.unibook.entity.SellableBookEntity;
@@ -41,8 +40,6 @@ public class PurchaseBookController {
             // Si controlla che l'account che ha inviato il messaggio non sia il venditore del libro
             AccountEntity loggedUser = SessionManager.getAccountBySessionID(bean.getSessionId());
             if(sellableBook.getSeller().equals(loggedUser)) throw new BuyerIsSellerException();
-            // Viene istanziato il DAO tramite factory per cercare l'acquirente
-            AccountDao accountDao = ApplicationDaoFactory.getInstance().getAccountDao();
             // Si cerca l'account collegato alla sessione che ha inviato il messaggio
             AccountEntity buyer = SessionManager.getAccountBySessionID(bean.getSessionId());
             // L'account viene aggiunto tra gli acquirenti
