@@ -5,6 +5,7 @@ import it.ispw.unibook.bean.AccountsListBean;
 import it.ispw.unibook.bean.SellableBookBean;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.gui.ComboSelectionNotValidException;
+import it.ispw.unibook.exceptions.login.SessionException;
 import it.ispw.unibook.utils.Printer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,7 +58,7 @@ public class OwnSellableBooksListGUI extends ManageSellableBookGUI implements In
                 label.getStyleClass().add("buyer");
                 buyersList.getChildren().add(label);
             }
-        } catch (ComboSelectionNotValidException | SellableBookException e) {
+        } catch (ComboSelectionNotValidException | SellableBookException | SessionException e) {
             Printer.error(e);
             System.exit(-1);
         }

@@ -30,7 +30,7 @@ public class PagePurchaseBookCLI extends GenericPageManageSellableBookCLI implem
     private static final String SUCCESS_MESSAGE_TEXT = "Acquisto avviato correttamente";
 
     // Controller grafico relativo alla View
-    PurchaseBookCLI controller = new PurchaseBookCLI();
+    private final PurchaseBookCLI controller = new PurchaseBookCLI();
 
     @Override
     public void display() {
@@ -107,7 +107,6 @@ public class PagePurchaseBookCLI extends GenericPageManageSellableBookCLI implem
      * @throws SessionException Viene sollevata se la sessione non è stata trovata
      * @throws EscCliException Viene sollevata se l'utente immette esc come input per tornare alla home
      * @throws SellableBookException Viene sollevata se il libro in vendita non è stato trovato
-     * @throws BookException Viene sollevata se
      */
     private void purchaseBook(@NotNull SellableBooksListBean sellableBooksListBean) throws NegotiationException, SessionException, EscCliException, SellableBookException {
         // Stampa i libri in vendita

@@ -34,7 +34,7 @@ public class MarkSellableBookSoldController {
             SellableBookEntity sellableBook = sellableBookDao.retrieveSellableBookByCode(sellableBookBean.getCode());
             // Si cerca l'account collegato alla sessione che ha inviato il messaggio
             AccountEntity seller = SessionManager.getAccountBySessionID(sellableBookBean.getSessionId());
-            // Si controlla che l'account che ha inviato il messaggio sia effettivamente il vednitore del libro
+            // Si controlla che l'account che ha inviato il messaggio sia effettivamente il venditore del libro
             if(!sellableBook.getSeller().equals(seller)) throw new SellableBookNotOwnedException();
             // Viene istanziato il DAO tramite factory per cercare l'acquirente
             AccountDao accountDao = ApplicationDaoFactory.getInstance().getAccountDao();

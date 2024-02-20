@@ -61,6 +61,9 @@ public class MarksSellableBookSoldGUI extends ManageSellableBookGUI implements I
             buyersCombo.setDisable(false);
         } catch(ComboSelectionNotValidException | SellableBookException e) {
             errorLabel.setText(e.getMessage());
+        } catch (SessionException e) {
+            Printer.error(e);
+            System.exit(-1);
         }
     }
 

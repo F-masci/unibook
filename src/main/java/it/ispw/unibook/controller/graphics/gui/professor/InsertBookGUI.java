@@ -179,8 +179,6 @@ public class InsertBookGUI extends ManageBookGUI implements Initializable {
             saveBookButton.setVisible(true);
         } catch (CourseException e) {
             errorLabel.setText(e.getMessage());
-            retryButton.setVisible(true);
-            insertManualButton.setVisible(true);
         } catch (SessionException e) {
             Printer.error(e);
             System.exit(-1);

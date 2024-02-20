@@ -4,7 +4,6 @@ import it.ispw.unibook.bean.*;
 import it.ispw.unibook.exceptions.book.sellable.SellableBookException;
 import it.ispw.unibook.exceptions.course.CourseException;
 import it.ispw.unibook.exceptions.login.SessionException;
-import it.ispw.unibook.exceptions.login.SessionNotFoundException;
 import it.ispw.unibook.facade.ManageSellableBookFacade;
 import org.jetbrains.annotations.NotNull;
 
@@ -53,8 +52,9 @@ public abstract class ManageSellableBookCLI {
      * Ritorna la lista dei libri in vendita cercandoli tramite ISBN
      * @param bean Deve contenere l'ISBN
      * @return Bean contenente la lista dei libri in vendita con l'ISBN fornito
+     * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
      */
-    public SellableBooksListBean retrieveSellableBooksByIsbn(@NotNull BookBean bean) throws SessionNotFoundException {
+    public SellableBooksListBean retrieveSellableBooksByIsbn(@NotNull BookBean bean) throws SessionException {
         return manageSellableBookFacade.retrieveSellableBooksByIsbn(bean);
     }
 
@@ -63,8 +63,9 @@ public abstract class ManageSellableBookCLI {
      * @param bean Deve contenere il codice del corso
      * @return Bean contenente la lista dei libri in vendita collegati al corso fornito
      * @throws CourseException Viene sollevata se il corso non viene trovato
+     * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
      */
-    public SellableBooksListBean retrieveSellableBooksByCourse(@NotNull CourseBean bean) throws CourseException, SessionNotFoundException {
+    public SellableBooksListBean retrieveSellableBooksByCourse(@NotNull CourseBean bean) throws CourseException, SessionException {
         return manageSellableBookFacade.retrieveSellableBooksByCourse(bean);
     }
 
@@ -73,8 +74,9 @@ public abstract class ManageSellableBookCLI {
      * @param bean Deve contenere il codice del corso
      * @return Bean contenente i libri in vendita collegati al corso
      * @throws SellableBookException Viene sollevata se il libro in vendita non viene trovato
+     * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
      */
-    public AccountsListBean retrieveActiveNegotiationBySellableBook(@NotNull SellableBookBean bean) throws SellableBookException {
+    public AccountsListBean retrieveActiveNegotiationBySellableBook(@NotNull SellableBookBean bean) throws SellableBookException, SessionException {
         return manageSellableBookFacade.retrieveActiveNegotiationBySellableBook(bean);
     }
 

@@ -70,6 +70,9 @@ public class PageActiveNegotiationCLI extends GenericPageManageSellableBookCLI i
                 showErrorMessage(e);
             } catch (EscCliException e) {
                 return;
+            } catch (SessionException e) {
+                Printer.error(e);
+                System.exit(-1);
             }
         }
     }

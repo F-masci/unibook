@@ -66,7 +66,7 @@ public class ManageCourseBookFacade {
      * Inserisce il libro al corso completando il caso d'uso
      * @param courseBean Deve contenere il codice del corso in cui inserire il libro
      * @param bookBean Deve contenere tutti i dati del libro da inserire
-     * @throws CourseException Viene sollevata se il corso non è stato trovato
+     * @throws CourseException Viene sollevata se il corso non è stato trovato, il libro è già presente o il professore non è il proprietario
      * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
      */
     public void insertBookInCourse(@NotNull CourseBean courseBean, @NotNull BookBean bookBean) throws CourseException, SessionException {
@@ -79,7 +79,7 @@ public class ManageCourseBookFacade {
      * Rimuove il libro dal corso completando il caso d'uso
      * @param courseBean Deve contenere il codice del corso in cui inserire il libro
      * @param bookBean Deve contenere il codice del libro da rimuovere
-     * @throws CourseException Viene sollevata se il corso non è stato trovato
+     * @throws CourseException Viene sollevata se il corso non è stato trovato, il libro non è presente nel corso o il professore non è il proprietario del corso
      * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
      */
     public void removeBookFromCourse(@NotNull CourseBean courseBean, @NotNull BookBean bookBean) throws CourseException, SessionException {

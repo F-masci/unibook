@@ -65,8 +65,9 @@ public abstract class GenericPageManageSellableBookCLI extends GenericPageCLI {
      *                   Tale controller deve essere una classe figlia di <i>ManageSellableBookCLI</i>
      * @param sellableBookCode Codice del libro in vendita
      * @throws SellableBookException Viene lanciata nel caso in cui il libro in vendita non sia stato trovato
+     * @throws SessionException Viene sollevata nel caso in cui il codice della sessione non sia valido
      */
-    protected void printSellableBookActiveNegotiationsList(@NotNull ManageSellableBookCLI controller, int sellableBookCode) throws SellableBookException {
+    protected void printSellableBookActiveNegotiationsList(@NotNull ManageSellableBookCLI controller, int sellableBookCode) throws SellableBookException, SessionException {
         // Viene istanziato il bean per contenere il libro in vendita
         SellableBookBean sellableBookBean = new SellableBookBean(sellableBookCode);
         // Vengono richiesti gli accounts al controller grafico
