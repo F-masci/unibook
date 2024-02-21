@@ -17,7 +17,7 @@ public class ApplicationDaoFactoryJDBC extends ApplicationDaoFactory {
 
     @Override
     public AccountDao getAccountDao() {
-        return new AccountDaoAppJDBC();
+        return AccountDaoAppJDBC.getInstance();
     }
 
     @Override

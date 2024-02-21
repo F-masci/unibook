@@ -86,8 +86,10 @@ public class InsertSellableBookGUI extends ManageSellableBookGUI implements Init
             priceField.setDisable(true);
             insertSellableBookButton.setVisible(false);
             successLabel.setText(SUCCESS_MESSAGE_TEXT);
-        } catch (ComboSelectionNotValidException | SellableBookException | SessionException | CourseException | NumberFormatException | FieldNotValidException e) {
+        } catch (ComboSelectionNotValidException | SellableBookException | SessionException | CourseException | FieldNotValidException e) {
             errorLabel.setText(e.getMessage());
+        } catch(NumberFormatException e) {
+            errorLabel.setText("Il prezzo non valido");
         }
     }
 

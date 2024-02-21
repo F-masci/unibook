@@ -21,8 +21,18 @@ public class AccountDaoAppJDBC implements AccountDao {
     private Connection connection = null;
 
     // Il costruttore è reso privato per applicate il pattern Singleton
-    public AccountDaoAppJDBC() {
+    private AccountDaoAppJDBC() {
         connection = ConnectionAppJDBC.getInstance();
+    }
+
+    /**
+     * Permette di ottenere l'unica istanza di DAO di account che sfrutta JDBC
+     * @return DAO degli account che utilizza JDBC
+     */
+    public static AccountDaoAppJDBC getInstance() {
+        // Se l'istanza non è presente viene creata
+        if(instance == null) instance = new AccountDaoAppJDBC();
+        return instance;
     }
 
     @Override

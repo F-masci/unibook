@@ -340,3 +340,5 @@ C
 csv/negotiation.csv,6\7\67a5a0fdc10dc66315bc87c4dd3e3d48cad0f612
 €
 Psrc/main/java/it/ispw/unibook/exceptions/negotiation/BuyerIsSellerException.java,4\5\4569b548d8f43751d0e621c90bb4fa4e0f09a383
+6
+db.sql,2\1\217da5343dc709466933fc0497ae38d92f937136
